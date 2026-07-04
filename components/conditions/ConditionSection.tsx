@@ -18,30 +18,32 @@ export function ConditionSection({ condition, index }: Props) {
       aria-labelledby={`${condition.id}-heading`}
       className={`border-t border-line ${band}`}
     >
-      <div className="mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 md:grid-cols-2 md:py-20">
-        {condition.videoSrc && condition.posterSrc ? (
-          <Reveal>
-            <ConditionMedia
-              videoSrc={condition.videoSrc}
-              posterSrc={condition.posterSrc}
-              alt={condition.videoAlt}
-            />
-          </Reveal>
-        ) : (
-          <Reveal>
-            <figure className="overflow-hidden rounded-lg border border-line bg-paper-soft">
-              <ConditionMediaPlaceholder />
-              <figcaption className="border-t border-line px-5 py-4">
-                <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
-                  Animation in production
-                </p>
-                <p className="mt-1 text-sm text-ink-mute">{condition.videoAlt}</p>
-              </figcaption>
-            </figure>
-          </Reveal>
-        )}
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-12 md:py-20">
+        <div className="flex w-full items-center justify-center md:justify-center">
+          {condition.videoSrc && condition.posterSrc ? (
+            <Reveal className="w-full max-w-lg">
+              <ConditionMedia
+                videoSrc={condition.videoSrc}
+                posterSrc={condition.posterSrc}
+                alt={condition.videoAlt}
+              />
+            </Reveal>
+          ) : (
+            <Reveal className="w-full max-w-lg">
+              <figure className="overflow-hidden rounded-lg border border-line bg-paper-soft">
+                <ConditionMediaPlaceholder />
+                <figcaption className="border-t border-line px-5 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
+                    Animation in production
+                  </p>
+                  <p className="mt-1 text-sm text-ink-mute">{condition.videoAlt}</p>
+                </figcaption>
+              </figure>
+            </Reveal>
+          )}
+        </div>
 
-        <div>
+        <div className="min-w-0">
           <Reveal delay={90}>
             <h2 id={`${condition.id}-heading`} className="font-serif text-3xl leading-tight md:text-4xl">
               {condition.title}
