@@ -59,3 +59,110 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Map pins and popups */
+@keyframes pin-drop {
+  from {
+    transform: translateY(-14px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.mlafc-map {
+  background: var(--color-night);
+  border-radius: 8px;
+}
+
+.mlafc-pin {
+  animation: pin-drop 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.mlafc-pin svg {
+  filter: drop-shadow(0 8px 12px color-mix(in srgb, var(--color-night) 50%, transparent));
+}
+
+.mlafc-pin circle {
+  fill: var(--color-night);
+}
+
+.mlafc-pin-operated .mlafc-pin-shape,
+.mlafc-legend-dot-operated {
+  fill: var(--color-brass);
+  background: var(--color-brass);
+}
+
+.mlafc-pin-taught .mlafc-pin-shape,
+.mlafc-legend-dot-taught {
+  fill: color-mix(in srgb, var(--color-brass) 55%, var(--color-paper));
+  background: color-mix(in srgb, var(--color-brass) 55%, var(--color-paper));
+}
+
+.mlafc-pin-proctored .mlafc-pin-shape,
+.mlafc-legend-dot-proctored {
+  fill: var(--color-brass-deep);
+  background: var(--color-brass-deep);
+}
+
+.mlafc-pin-active svg {
+  transform: scale(1.15);
+  transform-origin: bottom center;
+  transition: transform 0.25s;
+}
+
+.mlafc-map .leaflet-popup-content-wrapper {
+  background: var(--color-night-soft);
+  color: var(--color-paper);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 8px;
+}
+
+.mlafc-map .leaflet-popup-tip {
+  background: var(--color-night-soft);
+}
+
+.mlafc-popup h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.mlafc-popup p {
+  font-size: 0.85rem;
+  margin: 4px 0;
+}
+
+.mlafc-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--color-brass);
+  color: var(--color-night);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.mlafc-popup-img {
+  border-radius: 4px;
+  margin-top: 6px;
+  max-width: 100%;
+}
+
+.mlafc-popup-more {
+  color: var(--color-brass);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mlafc-pin {
+    animation: none;
+  }
+
+  .mlafc-pin-active svg {
+    transform: none;
+  }
+}
