@@ -31,10 +31,10 @@ export function Footer() {
 
         <nav aria-label="Footer pages">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-brass">Pages</h2>
-          <ul className="space-y-2 text-sm">
+          <ul className="text-sm">
             {pageLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-brass">
+                <Link href={link.href} className="block py-2.5 hover:text-brass">
                   {link.label}
                 </Link>
               </li>
@@ -44,10 +44,10 @@ export function Footer() {
 
         <nav aria-label="Footer patient information">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-brass">Patients</h2>
-          <ul className="space-y-2 text-sm">
+          <ul className="text-sm">
             {patientLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-brass">
+                <Link href={link.href} className="block py-2.5 hover:text-brass">
                   {link.label}
                 </Link>
               </li>

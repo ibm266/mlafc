@@ -36,24 +36,24 @@ export default function BookPage() {
           <div className="space-y-6">
             <Reveal delay={100} className="rounded-lg border border-line bg-paper-soft p-8">
               <h2 className="font-serif text-2xl">Prefer to talk directly?</h2>
-              <ul className="mt-5 space-y-4">
+              <ul className="mt-5">
                 <li>
                   <a
                     href={site.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-brass-deep hover:underline"
+                    className="inline-block py-2.5 font-semibold text-brass-deep hover:underline"
                   >
                     Message on WhatsApp →
                   </a>
                 </li>
                 <li>
-                  <a href={`tel:${site.phone}`} className="font-semibold text-brass-deep hover:underline">
+                  <a href={`tel:${site.phone}`} className="inline-block py-2.5 font-semibold text-brass-deep hover:underline">
                     {site.phone}
                   </a>
                 </li>
                 <li>
-                  <a href={`mailto:${site.email}`} className="font-semibold text-brass-deep hover:underline">
+                  <a href={`mailto:${site.email}`} className="inline-block py-2.5 font-semibold text-brass-deep hover:underline">
                     {site.email}
                   </a>
                 </li>

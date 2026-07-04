@@ -82,7 +82,7 @@ export function EvidenceChart() {
             );
           })}
         </svg>
-        <figcaption className="mt-6 text-center text-sm text-ink-mute">
+        <figcaption className="mt-6 text-center text-sm text-ink-soft">
           Major complication rates after AF ablation, by centre volume.
           <sup>2, 4</sup> Published research consistently finds lower complication rates where
           more of these procedures are done. [CITATION — verify]
