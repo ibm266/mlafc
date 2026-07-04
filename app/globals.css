@@ -60,6 +60,21 @@ body {
   }
 }
 
+@keyframes arc-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mlafc-arc {
+  animation: arc-fade 2.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mlafc-arc {
+    animation: none;
+  }
+}
+
 /* Map pins and popups */
 @keyframes pin-drop {
   from {
