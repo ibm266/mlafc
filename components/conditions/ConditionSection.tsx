@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ConditionMedia } from '@/components/conditions/ConditionMedia';
+import { ConditionMediaPlaceholder } from '@/components/conditions/ConditionMediaPlaceholder';
 import { Reveal } from '@/components/Reveal';
 import type { Condition } from '@/data/types';
 
@@ -26,9 +27,21 @@ export function ConditionSection({ condition, index }: Props) {
               alt={condition.videoAlt}
             />
           </Reveal>
-        ) : null}
+        ) : (
+          <Reveal>
+            <figure className="overflow-hidden rounded-lg border border-line bg-paper-soft">
+              <ConditionMediaPlaceholder />
+              <figcaption className="border-t border-line px-5 py-4">
+                <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
+                  Animation in production
+                </p>
+                <p className="mt-1 text-sm text-ink-mute">{condition.videoAlt}</p>
+              </figcaption>
+            </figure>
+          </Reveal>
+        )}
 
-        <div className={condition.videoSrc ? '' : 'md:col-span-2'}>
+        <div>
           <Reveal delay={90}>
             <h2 id={`${condition.id}-heading`} className="font-serif text-3xl leading-tight md:text-4xl">
               {condition.title}

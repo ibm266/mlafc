@@ -16,3 +16,10 @@ test('conditions page renders AF section with poster fallback', () => {
   expect(screen.getByRole('heading', { name: af.title })).toBeInTheDocument();
   expect(screen.getByAltText(af.videoAlt)).toBeInTheDocument();
 });
+
+test('conditions page renders atrial flutter section with poster fallback', () => {
+  render(<ConditionsPage />);
+  const flutter = conditions.find((c) => c.id === 'atrial-flutter')!;
+  expect(screen.getByRole('heading', { name: flutter.title })).toBeInTheDocument();
+  expect(screen.getByAltText(flutter.videoAlt)).toBeInTheDocument();
+});
