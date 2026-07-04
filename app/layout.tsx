@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Newsreader, Archivo } from 'next/font/google';
+import { Footer } from '@/components/Footer';
+import { Nav } from '@/components/Nav';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 import './globals.css';
 
 const newsreader = Newsreader({
@@ -24,7 +27,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${newsreader.variable} ${archivo.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+        >
+          Skip to content
+        </a>
+        <Nav />
+        {children}
+        <Footer />
+        <WhatsAppFab />
+      </body>
     </html>
   );
 }

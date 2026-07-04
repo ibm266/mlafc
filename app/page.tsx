@@ -1,3 +1,7 @@
 export default function Home() {
-  return <main className="min-h-screen bg-paper text-ink p-10 font-serif text-3xl">Mumbai London AF Clinic</main>;
+  return (
+    <main id="main" className="min-h-screen bg-paper p-10 font-serif text-3xl text-ink">
+      Mumbai London AF Clinic
+    </main>
+  );
 }
