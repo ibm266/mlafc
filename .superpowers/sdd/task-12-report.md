@@ -30,3 +30,13 @@ Implemented the Journey page with a sticky desktop photo panel, scrolling milest
 
 - The final combined test/build run included unrelated untracked testimonials files that are not part of this Task 12 commit.
 - Manual browser QA was not run; automated journey coverage and production build passed.
+
+## Fix (2026-07-04)
+
+Replaced `CtaBand` on `/journey` with the brief's explicit final section: `Link href="/book"` labeled "Book a consultation", styled with design tokens (`bg-ink`, `text-paper`, `hover:bg-night`, `rounded-full`).
+
+### Verification (fix)
+
+- `npm test -- test/journey.test.tsx`: 1 file, 1 test passed.
+- `npm test`: 13 files, 32 tests passed.
+- `npm run build`: PASS — `/journey` generated successfully.

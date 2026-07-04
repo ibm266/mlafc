@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CtaBand } from '@/components/CtaBand';
+import Link from 'next/link';
 import { JourneyTimeline } from '@/components/JourneyTimeline';
 import { Reveal } from '@/components/Reveal';
 import { milestones } from '@/data/milestones';
@@ -26,7 +26,14 @@ export default function JourneyPage() {
       <section className="py-10">
         <JourneyTimeline milestones={milestones} />
       </section>
-      <CtaBand />
+      <section className="mx-auto max-w-6xl px-5 pb-20">
+        <Link
+          href="/book"
+          className="inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
+        >
+          Book a consultation
+        </Link>
+      </section>
     </main>
   );
 }
