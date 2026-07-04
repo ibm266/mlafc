@@ -45,7 +45,7 @@ export type Testimonial = {
 export type Milestone = {
   markerYear: string; // "1988"
   markerSub: string; // "The beginning"
-  yearLabel: string; // "1988 — 1994"
+  yearLabel: string; // "1988 - 1994"
   tag: string; // "Foundation"
   title: string;
   body: string;

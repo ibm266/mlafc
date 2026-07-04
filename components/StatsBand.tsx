@@ -4,11 +4,11 @@ import { Reveal } from '@/components/Reveal';
 const STATS = [
   {
     node: <CountUp to={5000} suffix="+" />,
-    label: 'AF ablation procedures performed — placing him among the highest-volume operators in the world',
+    label: 'AF ablation procedures performed - placing him among the highest-volume operators in the world',
   },
   {
     node: <CountUp to={1} prefix="<" suffix="%" />,
-    label: "Complication rate — published in peer-reviewed journals, on par with the world's best",
+    label: "Complication rate - published in peer-reviewed journals, on par with the world's best",
   },
   {
     node: <CountUp to={18} suffix="+" />,

@@ -2,7 +2,7 @@
   {
     "id": "hosp1",
     "category": "hospital",
-    "quote": "Among the most reliable and skilled electrophysiologists we have worked with — patient outcomes consistently above the regional benchmark.",
+    "quote": "Among the most reliable and skilled electrophysiologists we have worked with - patient outcomes consistently above the regional benchmark.",
     "attribution": "Liverpool Heart and Chest Hospital",
     "detail": "Medical Director",
     "letter": {
@@ -32,7 +32,7 @@
       "date": "Issued 2023",
       "body": [
         "Professor Gupta heads the arrhythmia work group of the Institute, a research collaboration between Royal Brompton and Liverpool Heart and Chest. His leadership has set the standard others now measure themselves against.",
-        "In the four years he has chaired the group, the team has published in Heart, JACC, Europace and the European Heart Journal — and has secured grant funding well in excess of three million pounds for arrhythmia research.",
+        "In the four years he has chaired the group, the team has published in Heart, JACC, Europace and the European Heart Journal - and has secured grant funding well in excess of three million pounds for arrhythmia research.",
         "His work on left atrial appendage occlusion is, in my view, the single most important contribution to the field from a UK centre in the last decade."
       ],
       "sigName": "Director",
@@ -62,7 +62,7 @@
   {
     "id": "hosp4",
     "category": "hospital",
-    "quote": "A clinician of rare calibre — operating at the intersection of high-volume practice, rigorous research and patient-centred care.",
+    "quote": "A clinician of rare calibre - operating at the intersection of high-volume practice, rigorous research and patient-centred care.",
     "attribution": "University of Liverpool",
     "detail": "Faculty of Health and Life Sciences",
     "letter": {
@@ -72,7 +72,7 @@
       "date": "Issued 2024",
       "body": [
         "Professor Gupta holds an honorary professorship of cardiology at this university, awarded in recognition of more than three hundred and fifty peer-reviewed scientific publications, citation counts in excess of thirteen thousand, and approximately five million pounds in competitive research grants secured throughout his career.",
-        "He is, in our judgment, a clinician of rare calibre — operating at the intersection of high-volume practice, rigorous research and patient-centred care. The university is proud to count him among its faculty."
+        "He is, in our judgment, a clinician of rare calibre - operating at the intersection of high-volume practice, rigorous research and patient-centred care. The university is proud to count him among its faculty."
       ],
       "sigName": "Dean",
       "sigRole": "Faculty of Health and Life Sciences, University of Liverpool"
@@ -111,7 +111,7 @@
       "date": "Issued 2018, on conclusion of council term",
       "body": [
         "Professor Gupta served on the Council of the British Heart Rhythm Society from 2015 to 2018, a period during which the society significantly expanded its training and quality-assurance remit.",
-        "Professor Gupta's published complication rate places him firmly in the top echelon of UK electrophysiologists. His advocacy on Council was characterised by a relentless focus on procedural quality and patient safety — a focus that has shaped society guidance issued since.",
+        "Professor Gupta's published complication rate places him firmly in the top echelon of UK electrophysiologists. His advocacy on Council was characterised by a relentless focus on procedural quality and patient safety - a focus that has shaped society guidance issued since.",
         "The society is grateful for his service and continues to regard him as a leader in the field."
       ],
       "sigName": "President",
@@ -135,21 +135,21 @@
   {
     "id": "pat3",
     "category": "patient",
-    "quote": "My father is 76 and we were terrified. The professor took an hour with us — an hour. He treated my dad like a person, not a case number.",
+    "quote": "My father is 76 and we were terrified. The professor took an hour with us - an hour. He treated my dad like a person, not a case number.",
     "attribution": "Anonymous, daughter of patient",
     "detail": "Treated 2024"
   },
   {
     "id": "pat4",
     "category": "patient",
-    "quote": "Genuinely the kindest doctor I have ever met. And the best — my flutter is gone after eight years of beta-blockers that never quite worked.",
+    "quote": "Genuinely the kindest doctor I have ever met. And the best - my flutter is gone after eight years of beta-blockers that never quite worked.",
     "attribution": "P. Nair",
     "detail": "Treated 2023"
   },
   {
     "id": "pat5",
     "category": "patient",
-    "quote": "I came from Delhi for my consultation expecting a cold London hospital. Got something completely different — felt like sitting with a family doctor who happens to be world-class.",
+    "quote": "I came from Delhi for my consultation expecting a cold London hospital. Got something completely different - felt like sitting with a family doctor who happens to be world-class.",
     "attribution": "V. Sharma",
     "detail": "Treated 2024"
   },
@@ -163,7 +163,7 @@
   {
     "id": "pat7",
     "category": "patient",
-    "quote": "He spoke to my mother in Hindi and to me in English in the same conversation. That seems like a small thing — until you've spent years translating for an elderly parent in clinics.",
+    "quote": "He spoke to my mother in Hindi and to me in English in the same conversation. That seems like a small thing - until you've spent years translating for an elderly parent in clinics.",
     "attribution": "R. Ahuja",
     "detail": "Treated 2023"
   },
@@ -191,7 +191,7 @@
   {
     "id": "peer3",
     "category": "peer",
-    "quote": "Combines the rigour of a researcher with the calm of a senior surgeon. The patients I send him come back better — and remember the experience.",
+    "quote": "Combines the rigour of a researcher with the calm of a senior surgeon. The patients I send him come back better - and remember the experience.",
     "attribution": "Mr R. Snowdon",
     "detail": "Liverpool Heart and Chest Hospital"
   },
@@ -212,7 +212,7 @@
   {
     "id": "peer6",
     "category": "peer",
-    "quote": "A consummate clinician. The thing that distinguishes Dhiraj is how seriously he takes the question after the question — what really matters to this patient.",
+    "quote": "A consummate clinician. The thing that distinguishes Dhiraj is how seriously he takes the question after the question - what really matters to this patient.",
     "attribution": "Dr J. Waktare",
     "detail": "Liverpool Heart and Chest Hospital"
   },
@@ -232,7 +232,7 @@
     "masthead": "The Tribune",
     "date": "26 March",
     "headline": "UK cardiologist kicks off India tour from PGIMER",
-    "quote": "Performing the costly procedures without taking \"a single paisa\" from patients or hospitals — even bearing his own travel expenses.",
+    "quote": "Performing the costly procedures without taking \"a single paisa\" from patients or hospitals - even bearing his own travel expenses.",
     "attribution": "The Tribune",
     "detail": "Reporting in The Tribune"
   },

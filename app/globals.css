@@ -92,6 +92,76 @@ body {
   border-radius: 8px;
 }
 
+.mlafc-landmass {
+  fill: color-mix(in srgb, var(--color-paper) 92%, var(--color-brass));
+  stroke: var(--color-brass);
+  stroke-width: 0.75;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+
+.mlafc-svg-pin {
+  cursor: pointer;
+}
+
+.mlafc-svg-pin:focus-visible {
+  outline: none;
+}
+
+.mlafc-svg-pin:focus-visible .mlafc-pin-shape {
+  stroke: var(--color-paper);
+  stroke-width: 2;
+}
+
+.mlafc-svg-pin .mlafc-pin-shape {
+  transition: filter 0.2s ease;
+}
+
+.mlafc-svg-pin-active .mlafc-pin-shape {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-brass) 70%, transparent));
+}
+
+.mlafc-pin-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: var(--color-paper);
+  paint-order: stroke;
+  stroke: var(--color-night);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.mlafc-explorer-pin svg {
+  transition: transform 0.2s ease;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mlafc-panel-in {
+  animation: panel-in 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mlafc-panel-in {
+    animation: none;
+  }
+}
+
+.mlafc-explorer-pin-active svg {
+  transform: scale(1.12);
+  transform-origin: bottom center;
+}
+
 .mlafc-pin {
   animation: pin-drop 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }

@@ -1,5 +1,5 @@
 [
   { "id": "visit-1", "month": "[March] 2026", "status": "open", "note": "Consultations and procedures. Limited slots. [placeholder dates]" },
-  { "id": "visit-2", "month": "[June] 2026", "status": "waitlist", "note": "Consultation list full — join the waitlist. [placeholder dates]" },
+  { "id": "visit-2", "month": "[June] 2026", "status": "waitlist", "note": "Consultation list full - join the waitlist. [placeholder dates]" },
   { "id": "visit-3", "month": "[October] 2026", "status": "tbc", "note": "Dates to be confirmed. Register interest. [placeholder dates]" }
 ]

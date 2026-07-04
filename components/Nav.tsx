@@ -70,11 +70,16 @@ export function Nav() {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
+  const headerSurface = open
+    ? 'border-line bg-paper shadow-[0_2px_16px_var(--color-line)]'
+    : scrolled
+      ? 'border-line bg-paper/95 shadow-[0_2px_16px_var(--color-line)]'
+      : 'border-transparent bg-paper/95';
+  const headerPadding = scrolled || open ? 'py-2' : 'py-4';
+
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-paper/95 backdrop-blur transition-all duration-300 ${
-        scrolled ? 'border-line py-2 shadow-[0_2px_16px_var(--color-line)]' : 'border-transparent py-4'
-      }`}
+      className={`sticky top-0 z-50 border-b backdrop-blur transition-all duration-300 md:bg-paper/95 ${headerSurface} ${headerPadding}`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5">
         <Link href="/" aria-label="Mumbai London AF Clinic home" onClick={() => setOpen(false)}>
@@ -93,12 +98,14 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3 md:hidden">
-          <Link
-            href="/book"
-            className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper"
-          >
-            Book a consultation
-          </Link>
+          {!open ? (
+            <Link
+              href="/book"
+              className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper"
+            >
+              Book a consultation
+            </Link>
+          ) : null}
           <button
             ref={menuButtonRef}
             type="button"
@@ -120,18 +127,26 @@ export function Nav() {
           id="mobile-menu"
           ref={mobileMenuRef}
           aria-label="Mobile"
-          className="fixed inset-x-0 bottom-0 top-[72px] border-t border-line bg-paper px-5 py-8 md:hidden"
+          className="border-t border-line bg-paper px-5 py-6 md:hidden"
         >
-          <ul className="flex flex-col gap-6">
+          <ul className="flex flex-col gap-4">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} onClick={() => setOpen(false)} className="font-serif text-3xl text-ink">
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-1 font-serif text-2xl leading-snug text-ink sm:text-3xl"
+                >
                   {link.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/book" onClick={() => setOpen(false)} className="font-serif text-3xl text-ink">
+              <Link
+                href="/book"
+                onClick={() => setOpen(false)}
+                className="block py-1 font-serif text-2xl leading-snug text-ink sm:text-3xl"
+              >
                 Book a consultation
               </Link>
             </li>

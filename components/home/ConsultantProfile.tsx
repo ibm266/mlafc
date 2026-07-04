@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
 
@@ -21,9 +22,15 @@ export function ConsultantProfile() {
     <section aria-labelledby="profile-heading" className="bg-paper-soft">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-[2fr_3fr]">
         <Reveal>
-          <div className="flex aspect-[3/4] items-center justify-center rounded-lg border border-line bg-paper text-sm uppercase tracking-widest text-ink-mute">
-            portrait placeholder
-          </div>
+          <figure className="overflow-hidden rounded-lg border border-line bg-paper shadow-sm">
+            <Image
+              src="/images/professor-gupta.png"
+              alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist"
+              width={573}
+              height={612}
+              className="aspect-[573/612] w-full object-cover object-top"
+            />
+          </figure>
         </Reveal>
         <div>
           <Reveal>
@@ -35,10 +42,10 @@ export function ConsultantProfile() {
           </Reveal>
           <Reveal delay={100}>
             <p className="mt-5 text-ink-soft">
-              Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital &mdash; the United
-              Kingdom&rsquo;s largest specialist cardiothoracic centre &mdash; since 2007. He is honorary Professor of
-              Cardiology at the University of Liverpool, Senior Lecturer at Imperial College London, and a medical
-              advisor to the AF Association, the UK&rsquo;s national charity for arrhythmia patients.
+              Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the United Kingdom&apos;s
+              largest specialist cardiothoracic centre, since 2007. He is honorary Professor of Cardiology at the
+              University of Liverpool, Senior Lecturer at Imperial College London, and a medical advisor to the AF
+              Association, the UK&apos;s national charity for arrhythmia patients.
             </p>
             <p className="mt-4 text-ink-soft">
               He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors
@@ -57,7 +64,7 @@ export function ConsultantProfile() {
           </div>
           <Reveal delay={300}>
             <Link href="/journey" className="mt-8 inline-block font-semibold text-brass-deep hover:underline">
-              Follow the journey, 1988 &mdash; 2026 &rarr;
+              Follow the journey, 1988 - 2026 &rarr;
             </Link>
           </Reveal>
         </div>

@@ -8,9 +8,9 @@ import { citations } from '@/data/citations';
 import { faqs } from '@/data/faqs';
 
 export const metadata: Metadata = {
-  title: 'The Evidence — Mumbai London AF Clinic',
+  title: 'The Evidence - Mumbai London AF Clinic',
   description:
-    'What published research says about PFA, RFA, and why the experience of the operator matters — in plain English, with citations.',
+    'What published research says about PFA, RFA, and why the experience of the operator matters - in plain English, with citations.',
 };
 
 export default function EvidencePage() {
@@ -29,8 +29,8 @@ export default function EvidencePage() {
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 text-lg text-ink-soft">
-              You may have been offered PFA — pulsed field ablation — because it is a newer
-              way to treat atrial fibrillation. RFA — radiofrequency ablation — uses carefully
+              You may have been offered PFA - pulsed field ablation - because it is a newer
+              way to treat atrial fibrillation. RFA - radiofrequency ablation - uses carefully
               controlled heat; PFA uses short electrical pulses instead. Both treat the same
               small areas of heart tissue that trigger AF.
             </p>
@@ -53,7 +53,7 @@ export default function EvidencePage() {
             </h2>
             <p className="mt-4 text-ink-soft">
               Across published studies, one factor shows up again and again: how often the
-              centre — and the doctor — performs the procedure.
+              centre - and the doctor - performs the procedure.
               <sup>
                 <a href="#ref-2">2</a>
               </sup>
@@ -79,7 +79,7 @@ export default function EvidencePage() {
             <h2 className="mt-14 font-serif text-3xl">His numbers, in context.</h2>
             <ul className="mt-5 space-y-3 text-ink-soft">
               <li>
-                200+ ablations a year, every year since 2009 — a high-volume UK operator.
+                200+ ablations a year, every year since 2009 - a high-volume UK operator.
                 <sup>
                   <a href="#ref-3">3</a>
                 </sup>

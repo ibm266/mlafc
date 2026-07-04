@@ -9,7 +9,7 @@ import type { Visit } from '@/data/types';
 const visits = visitsJson as Visit[];
 
 export const metadata: Metadata = {
-  title: 'Book a Consultation — Mumbai London AF Clinic',
+  title: 'Book a Consultation - Mumbai London AF Clinic',
   description:
     'Send an enquiry or message the clinic on WhatsApp to book a consultation with Professor Dhiraj Gupta in Mumbai.',
 };

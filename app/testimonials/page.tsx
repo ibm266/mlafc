@@ -3,7 +3,7 @@ import { Reveal } from '@/components/Reveal';
 import { TestimonialsGrid } from '@/components/TestimonialsGrid';
 
 export const metadata: Metadata = {
-  title: 'Testimonials — Mumbai London AF Clinic',
+  title: 'Testimonials - Mumbai London AF Clinic',
   description:
     'Letters from hospitals, messages from patients, endorsements from peers, and press coverage of Professor Dhiraj Gupta.',
 };

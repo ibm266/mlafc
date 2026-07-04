@@ -70,7 +70,7 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
       <div role="status" className="rounded-lg border border-line bg-paper-soft p-6">
         <p className="font-serif text-2xl">Thank you.</p>
         <p className="mt-2 text-ink-soft">
-          Thank you — the clinic team will contact you within {site.responseDays} working days.
+          Thank you - the clinic team will contact you within {site.responseDays} working days.
         </p>
       </div>
     );

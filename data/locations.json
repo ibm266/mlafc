@@ -6,7 +6,7 @@
     "lat": 53.4287,
     "lng": -2.9044,
     "role": "operated",
-    "years": "2007 — present",
+    "years": "2007 - present",
     "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year.",
     "images": [],
     "readMore": "/journey"
@@ -18,7 +18,7 @@
     "lat": 51.4988,
     "lng": -0.1749,
     "role": "taught",
-    "years": "2011 — present",
+    "years": "2011 - present",
     "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation.",
     "images": []
   },
@@ -29,7 +29,7 @@
     "lat": 53.4631,
     "lng": -2.2339,
     "role": "proctored",
-    "years": "2015 — 2023 [placeholder]",
+    "years": "2015 - 2023 [placeholder]",
     "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service. [placeholder]",
     "images": []
   },
@@ -40,7 +40,7 @@
     "lat": 53.8013,
     "lng": -1.5507,
     "role": "proctored",
-    "years": "2016 — 2022 [placeholder]",
+    "years": "2016 - 2022 [placeholder]",
     "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures. [placeholder]",
     "images": []
   },
@@ -62,7 +62,7 @@
     "lat": 51.2172,
     "lng": 3.2200,
     "role": "taught",
-    "years": "2019 — present [placeholder]",
+    "years": "2019 - present [placeholder]",
     "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial. [placeholder]",
     "images": []
   },
@@ -128,7 +128,7 @@
     "lat": 19.0760,
     "lng": 72.8777,
     "role": "operated",
-    "years": "2026 — present",
+    "years": "2026 - present",
     "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
     "images": []
   }

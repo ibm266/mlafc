@@ -4,7 +4,7 @@ const STEPS = [
   {
     n: 'i.',
     title: 'An unhurried first visit',
-    body: 'A full consultation in Mumbai — your history, your recordings, your questions. In English, Hindi or Punjabi. You leave with a clear plan.',
+    body: 'A full consultation in Mumbai - your history, your recordings, your questions. In English, Hindi or Punjabi. You leave with a clear plan.',
   },
   {
     n: 'ii.',

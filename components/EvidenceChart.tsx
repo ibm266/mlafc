@@ -2,7 +2,7 @@
 
 import { useReveal } from '@/lib/useReveal';
 
-// [CITATION — verify] Placeholder values from the volume-outcome literature.
+// [CITATION - verify] Placeholder values from the volume-outcome literature.
 // Client must confirm figures and sources before launch (see data/citations.ts).
 export const CHART_DATA = [
   { label: 'Lower-volume centres', value: 2.1, colour: 'var(--color-ink-mute)' },
@@ -85,7 +85,7 @@ export function EvidenceChart() {
         <figcaption className="mt-6 text-center text-sm text-ink-soft">
           Major complication rates after AF ablation, by centre volume.
           <sup>2, 4</sup> Published research consistently finds lower complication rates where
-          more of these procedures are done. [CITATION — verify]
+          more of these procedures are done. [CITATION - verify]
         </figcaption>
       </figure>
     </div>
