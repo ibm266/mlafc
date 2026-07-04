@@ -33,7 +33,10 @@ test('visits: 3 entries with valid statuses', () => {
 });
 
 test('site config has contact placeholders', () => {
-  expect(site.whatsappHref).toMatch(/^https:\/\/wa\.me\//);
-  expect(site.email).toContain('@');
+  expect(site.phone).toBe('[placeholder]');
+  expect(site.whatsappNumber).toBe('[placeholder]');
+  expect(site.whatsappHref).toBe('[placeholder]');
+  expect(site.email).toBe('[placeholder]');
+  expect(site.address).toContain('[placeholder]');
   expect(site.gmcLine).toMatch(/GMC/);
 });

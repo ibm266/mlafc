@@ -1,10 +1,10 @@
 export const site = {
   name: 'Mumbai London AF Clinic',
   tagline: 'London expertise. Mumbai care. Continuous follow-up.',
-  phone: '+91 00000 00000 [placeholder]',
-  whatsappNumber: '+91 00000 00000 [placeholder]',
-  whatsappHref: 'https://wa.me/910000000000', // [placeholder — client supplies]
-  email: 'hello@mumbailondonaf.com', // [placeholder — client confirms]
+  phone: '[placeholder]',
+  whatsappNumber: '[placeholder]',
+  whatsappHref: '[placeholder]',
+  email: '[placeholder]',
   address: 'Clinic address, Mumbai [placeholder]',
   gmcLine: 'Professor Dhiraj Gupta is registered with the UK General Medical Council (GMC no. 0000000 [placeholder]).',
   disclaimer:
