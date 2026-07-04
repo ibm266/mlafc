@@ -12,13 +12,13 @@
 
 Every task's requirements implicitly include all of these:
 
-1. **GMC/ASA guardrail (non-negotiable):** Never state RFA is better, safer, or more effective than PFA (or vice versa). All comparisons factual and non-superlative. Every clinical claim on the Evidence page carries a citation. Placeholder citations are marked `[CITATION — verify]`.
+1. **GMC/ASA guardrail (non-negotiable):** Never state RFA is better, safer, or more effective than PFA (or vice versa). All comparisons factual and non-superlative. Every clinical claim on the Evidence page carries a citation. Placeholder citations are marked `[CITATION - verify]`.
 2. **Tone:** clean, professional, very easy to understand. Short sentences, plain English, no jargon without an immediate plain-language explanation. Patients may be older and non-technical.
 3. **Palette:** exactly the 11 tokens from the spec (`--paper #F7F5F1`, `--ink #122B3A`, `--ink-soft #3A5468`, `--ink-mute #6B7F8E`, `--brass #B08D3E`, `--brass-deep #8F7231`, `--paper-soft #EFEBE3`, `--night #0C1F2B`, `--night-soft #16303F`, `--line #D9D3C7`, `--line-dark #2A4254`). Defined once as CSS variables in the Tailwind theme; never hardcode hexes in components.
 4. **Contrast:** all text/background pairs must pass WCAG AA. On dark sections body text is `paper`. `brass` on dark is for accents and large display text only. `ink-mute` is only for text ≥ 19px or non-essential labels; secondary body text on light uses `ink-soft`.
 5. **Dark rhythm:** maximum two `night` (`bg-night`) sections per page. The final CTA band uses `bg-ink` (dark but not "night") and does not count.
 6. **Typography:** Newsreader (display serif, weights 400/500 + italic) and Archivo (sans, weights 400/500/600) via `next/font/google`. Body 17–18px, line-height ≥ 1.6.
-7. **Motion:** every animation gated behind `prefers-reduced-motion: reduce` — when set, everything renders in its final state instantly. Nothing bouncy, no parallax.
+7. **Motion:** every animation gated behind `prefers-reduced-motion: reduce`, when set, everything renders in its final state instantly. Nothing bouncy, no parallax.
 8. **Content as data:** editing content (dates, locations, testimonials, milestones, FAQs, contact details) never requires touching components.
 9. **Placeholders:** client-supplied assets/details use visible placeholder frames or the literal text `[placeholder]`. Contact details live only in `data/site.ts`.
 10. **Commits:** conventional commits (`feat:`, `test:`, `chore:`), one commit per task minimum, run `npm test` and `npm run build` before each commit that touches code.
@@ -48,7 +48,7 @@ git mv "WhatsApp Image 2026-07-04 at 15.51.39.jpeg" reference/logo-original.jpeg
 git commit -m "chore: move existing pages to reference/"
 
 npx create-next-app@latest .scaffold --typescript --tailwind --eslint --app --no-src-dir --import-alias "@/*" --use-npm --yes
-# CRITICAL: exclude .git — create-next-app inits its own repo and rsync would clobber ours
+# CRITICAL: exclude .git, create-next-app inits its own repo and rsync would clobber ours
 rsync -a --exclude='.git' --exclude='node_modules' .scaffold/ ./
 rm -rf .scaffold
 npm install
@@ -168,7 +168,7 @@ test('test harness renders JSX', () => {
 });
 ```
 
-Run: `npm test` — expected: PASS (this validates the harness; if it fails, fix config before continuing).
+Run: `npm test`, expected: PASS (this validates the harness; if it fails, fix config before continuing).
 
 - [ ] **Step 4: Design tokens and fonts**
 
@@ -304,7 +304,7 @@ git commit -m "feat: scaffold Next.js app with Midnight Atlas tokens, fonts, and
 **Interfaces:**
 - Consumes: nothing.
 - Produces:
-  - `data/types.ts` exports `Location`, `Visit`, `Testimonial`, `TestimonialLetter`, `Milestone`, `Faq`, `Citation` (exact shapes below — later tasks import these).
+  - `data/types.ts` exports `Location`, `Visit`, `Testimonial`, `TestimonialLetter`, `Milestone`, `Faq`, `Citation` (exact shapes below, later tasks import these).
   - `data/site.ts` exports `site` object: `{ name, tagline, phone, whatsappNumber, whatsappHref, email, address, gmcLine, disclaimer, responseDays }`.
   - `data/locations.json`: array of 12 `Location` entries.
   - `data/visits.json`: array of 3 `Visit` entries.
@@ -358,7 +358,7 @@ test('site config has contact placeholders', () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test`
-Expected: FAIL — cannot resolve `@/data/locations.json`.
+Expected: FAIL, cannot resolve `@/data/locations.json`.
 
 - [ ] **Step 3: Create the data files**
 
@@ -412,7 +412,7 @@ export type Testimonial = {
 export type Milestone = {
   markerYear: string; // "1988"
   markerSub: string; // "The beginning"
-  yearLabel: string; // "1988 — 1994"
+  yearLabel: string; // "1988 to 1994"
   tag: string; // "Foundation"
   title: string;
   body: string;
@@ -434,8 +434,8 @@ export const site = {
   tagline: 'London expertise. Mumbai care. Continuous follow-up.',
   phone: '+91 00000 00000 [placeholder]',
   whatsappNumber: '+91 00000 00000 [placeholder]',
-  whatsappHref: 'https://wa.me/910000000000', // [placeholder — client supplies]
-  email: 'hello@mumbailondonaf.com', // [placeholder — client confirms]
+  whatsappHref: 'https://wa.me/910000000000', // [placeholder, client supplies]
+  email: 'hello@mumbailondonaf.com', // [placeholder, client confirms]
   address: 'Clinic address, Mumbai [placeholder]',
   gmcLine: 'Professor Dhiraj Gupta is registered with the UK General Medical Council (GMC no. 0000000 [placeholder]).',
   disclaimer:
@@ -455,7 +455,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 53.4287,
     "lng": -2.9044,
     "role": "operated",
-    "years": "2007 — present",
+    "years": "2007 to present",
     "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year.",
     "images": [],
     "readMore": "/journey"
@@ -467,7 +467,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 51.4988,
     "lng": -0.1749,
     "role": "taught",
-    "years": "2011 — present",
+    "years": "2011 to present",
     "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation.",
     "images": []
   },
@@ -478,7 +478,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 53.4631,
     "lng": -2.2339,
     "role": "proctored",
-    "years": "2015 — 2023 [placeholder]",
+    "years": "2015 to 2023 [placeholder]",
     "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service. [placeholder]",
     "images": []
   },
@@ -489,7 +489,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 53.8013,
     "lng": -1.5507,
     "role": "proctored",
-    "years": "2016 — 2022 [placeholder]",
+    "years": "2016 to 2022 [placeholder]",
     "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures. [placeholder]",
     "images": []
   },
@@ -511,7 +511,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 51.2172,
     "lng": 3.2200,
     "role": "taught",
-    "years": "2019 — present [placeholder]",
+    "years": "2019 to present [placeholder]",
     "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial. [placeholder]",
     "images": []
   },
@@ -577,7 +577,7 @@ Create `data/locations.json` (all 12 entries below, complete). JSON does not all
     "lat": 19.0760,
     "lng": 72.8777,
     "role": "operated",
-    "years": "2026 — present",
+    "years": "2026 to present",
     "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
     "images": []
   }
@@ -589,7 +589,7 @@ Create `data/visits.json`:
 ```json
 [
   { "id": "visit-1", "month": "[March] 2026", "status": "open", "note": "Consultations and procedures. Limited slots. [placeholder dates]" },
-  { "id": "visit-2", "month": "[June] 2026", "status": "waitlist", "note": "Consultation list full — join the waitlist. [placeholder dates]" },
+  { "id": "visit-2", "month": "[June] 2026", "status": "waitlist", "note": "Consultation list full, join the waitlist. [placeholder dates]" },
   { "id": "visit-3", "month": "[October] 2026", "status": "tbc", "note": "Dates to be confirmed. Register interest. [placeholder dates]" }
 ]
 ```
@@ -600,7 +600,7 @@ Create `data/README.md`:
 # Content data
 
 Everything a client will ever edit lives here. **All entries marked `[placeholder]`
-must be replaced with real data before launch** — especially `locations.json`
+must be replaced with real data before launch**, especially `locations.json`
 (realistic but unverified entries), `visits.json` (dates), and `site.ts` (contact
 details, GMC number).
 ```
@@ -623,12 +623,12 @@ git commit -m "feat: add content types, site config, locations and visits data"
 
 **Files:**
 - Create: `data/testimonials.json`
-- Read (source of truth): `reference/testimonials.html` — cards at lines 890–1185, full hospital letters in the `letters` JS object at lines ~1259–1340
+- Read (source of truth): `reference/testimonials.html`, cards at lines 890–1185, full hospital letters in the `letters` JS object at lines ~1259–1340
 - Test: `test/data.testimonials.test.ts`
 
 **Interfaces:**
 - Consumes: `Testimonial` type from `data/types.ts` (Task 2).
-- Produces: `data/testimonials.json` — exactly 24 entries: 6 `hospital` (ids `hosp1`–`hosp6`, each with a complete `letter`), 8 `patient` (`pat1`–`pat8`), 6 `peer` (`peer1`–`peer6`), 4 `news` (`news1`–`news4`). Order: hospital, patient, peer, news — same as the reference page.
+- Produces: `data/testimonials.json`, exactly 24 entries: 6 `hospital` (ids `hosp1`–`hosp6`, each with a complete `letter`), 8 `patient` (`pat1`–`pat8`), 6 `peer` (`peer1`–`peer6`), 4 `news` (`news1`–`news4`). Order: hospital, patient, peer, news, same as the reference page.
 
 - [ ] **Step 1: Write failing test**
 
@@ -677,7 +677,7 @@ test('spot-check ported content is verbatim', () => {
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test`
-Expected: FAIL — `data/testimonials.json` does not exist.
+Expected: FAIL, `data/testimonials.json` does not exist.
 
 - [ ] **Step 3: Port the content**
 
@@ -694,7 +694,7 @@ Example of the expected shape (first entry, complete):
 {
   "id": "hosp1",
   "category": "hospital",
-  "quote": "Among the most reliable and skilled electrophysiologists we have worked with — patient outcomes consistently above the regional benchmark.",
+  "quote": "Among the most reliable and skilled electrophysiologists we have worked with, patient outcomes consistently above the regional benchmark.",
   "attribution": "Liverpool Heart and Chest Hospital",
   "detail": "Medical Director",
   "letter": {
@@ -743,15 +743,15 @@ git commit -m "feat: port 24 testimonials with full hospital letters to JSON"
 
 **Files:**
 - Create: `data/milestones.ts`, `data/faqs.ts`, `data/citations.ts`
-- Read (source of truth): `reference/journey.html` — year markers lines ~610–653, photo frames ~655–726, milestone articles ~727 onward
+- Read (source of truth): `reference/journey.html`, year markers lines ~610–653, photo frames ~655–726, milestone articles ~727 onward
 - Test: `test/data.milestones.test.ts`
 
 **Interfaces:**
 - Consumes: `Milestone`, `Faq`, `Citation` types from `data/types.ts`.
 - Produces:
-  - `data/milestones.ts` exports `export const milestones: Milestone[]` — exactly 10 entries, markerYears `["1988","2000","2007","2009","2012","2014","2017","2022","2024","2026"]`. (The reference page merges 1988 and 1994 into one milestone whose `yearLabel` is `"1988 — 1994"` — keep that; the spec's 1994 MB BS point lives inside it as `meta: "MB BS qualified, 1994"`.)
-  - `data/faqs.ts` exports `export const faqs: Faq[]` — the 6 FAQs below, verbatim.
-  - `data/citations.ts` exports `export const citations: Citation[]` — 4 placeholder citations below.
+  - `data/milestones.ts` exports `export const milestones: Milestone[]`, exactly 10 entries, markerYears `["1988","2000","2007","2009","2012","2014","2017","2022","2024","2026"]`. (The reference page merges 1988 and 1994 into one milestone whose `yearLabel` is `"1988 to 1994"`, keep that; the spec's 1994 MB BS point lives inside it as `meta: "MB BS qualified, 1994"`.)
+  - `data/faqs.ts` exports `export const faqs: Faq[]`, the 6 FAQs below, verbatim.
+  - `data/citations.ts` exports `export const citations: Citation[]`, 4 placeholder citations below.
 
 - [ ] **Step 1: Write failing test**
 
@@ -767,7 +767,7 @@ test('10 milestones covering 1988–2026', () => {
   expect(milestones.map((m) => m.markerYear)).toEqual([
     '1988', '2000', '2007', '2009', '2012', '2014', '2017', '2022', '2024', '2026',
   ]);
-  expect(milestones[0].yearLabel).toBe('1988 — 1994');
+  expect(milestones[0].yearLabel).toBe('1988 to 1994');
   expect(milestones[0].meta).toBe('MB BS qualified, 1994');
   for (const m of milestones) {
     expect(m.title.length).toBeGreaterThan(3);
@@ -788,18 +788,18 @@ test('6 plain-language FAQs, none empty', () => {
 test('citations are numbered and marked for verification', () => {
   expect(citations.length).toBeGreaterThanOrEqual(4);
   citations.forEach((c, i) => expect(c.id).toBe(i + 1));
-  for (const c of citations) expect(c.text).toContain('[CITATION — verify]');
+  for (const c of citations) expect(c.text).toContain('[CITATION - verify]');
 });
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `npm test`
-Expected: FAIL — modules not found.
+Expected: FAIL, modules not found.
 
 - [ ] **Step 3: Create the data files**
 
-**`data/milestones.ts`:** port all 10 milestone articles **verbatim** from `reference/journey.html`. Mapping per `<article class="milestone" data-milestone="YYYY">`: `markerYear` ← `data-milestone`; `markerSub` ← the matching `.year-marker .year-sub` text; `yearLabel` ← `.milestone-year`; `tag` ← `.milestone-tag`; `title` ← the `<h2>` text (keep the em-phrase as plain text); `body` ← the `<p>` text (flatten `<strong>` to plain text); `meta` ← the `.milestone-meta` value line if present (e.g. `"MB BS qualified, 1994"`); `photoTitle`/`photoCaption` ← the matching `.photo-frame[data-frame=YYYY]` `.photo-title` and `.photo-caption`. (There is an extra photo frame for 1994 with no article of its own — fold its caption into nothing; it is covered by the 1988 milestone.) First entry, complete and verbatim — port the remaining 9 the same way:
+**`data/milestones.ts`:** port all 10 milestone articles **verbatim** from `reference/journey.html`. Mapping per `<article class="milestone" data-milestone="YYYY">`: `markerYear` ← `data-milestone`; `markerSub` ← the matching `.year-marker .year-sub` text; `yearLabel` ← `.milestone-year`; `tag` ← `.milestone-tag`; `title` ← the `<h2>` text (keep the em-phrase as plain text); `body` ← the `<p>` text (flatten `<strong>` to plain text); `meta` ← the `.milestone-meta` value line if present (e.g. `"MB BS qualified, 1994"`); `photoTitle`/`photoCaption` ← the matching `.photo-frame[data-frame=YYYY]` `.photo-title` and `.photo-caption`. (There is an extra photo frame for 1994 with no article of its own, fold its caption into nothing; it is covered by the 1988 milestone.) First entry, complete and verbatim, port the remaining 9 the same way:
 
 ```ts
 import type { Milestone } from './types';
@@ -808,10 +808,10 @@ export const milestones: Milestone[] = [
   {
     markerYear: '1988',
     markerSub: 'The beginning',
-    yearLabel: '1988 — 1994',
+    yearLabel: '1988 to 1994',
     tag: 'Foundation',
     title: 'A medical student with a destination in mind.',
-    body: 'Professor Gupta begins his MB BS in India in 1988. He set his sights on a career in cardiology early — long before specialisation was supposed to be on his mind — and qualified six years later as a doctor with a clear chosen path.',
+    body: 'Professor Gupta begins his MB BS in India in 1988. He set his sights on a career in cardiology early, long before specialisation was supposed to be on his mind, and qualified six years later as a doctor with a clear chosen path.',
     meta: 'MB BS qualified, 1994',
     photoTitle: 'Medical school',
     photoCaption:
@@ -821,7 +821,7 @@ export const milestones: Milestone[] = [
 ];
 ```
 
-**`data/faqs.ts`** — this copy is final, use verbatim (it has been checked against the GMC guardrail; do not editorialise):
+**`data/faqs.ts`**, this copy is final, use verbatim (it has been checked against the GMC guardrail; do not editorialise):
 
 ```ts
 import type { Faq } from './types';
@@ -838,9 +838,9 @@ export const faqs: Faq[] = [
       'Catheter ablation is a routine, well-established procedure carried out hundreds of thousands of times a year worldwide. Like any procedure it carries some risk, and your doctor will explain those risks for your situation. Published research shows complication rates are lower at centres and with doctors who perform a high volume of these procedures.\u00b2 Professor Gupta\u2019s published complication rate is below 1%.\u00b3',
   },
   {
-    question: 'Which technology will I get — RFA or PFA?',
+    question: 'Which technology will I get, RFA or PFA?',
     answer:
-      'Professor Gupta is trained and experienced in both. Neither is right for every patient. He will assess your heart, your history and your preferences, explain the options in plain language, and recommend the one that suits you — not the one that happens to be available.',
+      'Professor Gupta is trained and experienced in both. Neither is right for every patient. He will assess your heart, your history and your preferences, explain the options in plain language, and recommend the one that suits you, not the one that happens to be available.',
   },
   {
     question: 'How long does recovery take?',
@@ -850,26 +850,26 @@ export const faqs: Faq[] = [
   {
     question: 'Do I need to travel to the UK?',
     answer:
-      'No. Consultations and procedures take place in Mumbai during Professor Gupta\u2019s scheduled visits. Between visits, your follow-up happens locally, coordinated with cardiologists he works with — so you are never without a doctor close to home.',
+      'No. Consultations and procedures take place in Mumbai during Professor Gupta\u2019s scheduled visits. Between visits, your follow-up happens locally, coordinated with cardiologists he works with, so you are never without a doctor close to home.',
   },
   {
     question: 'What happens at the first consultation?',
     answer:
-      'An unhurried conversation. Professor Gupta will review your history, any recordings or scans you have, and explain what is happening in your heart in plain language — in English, Hindi or Punjabi. You will leave with a clear plan, whether or not that plan includes a procedure.',
+      'An unhurried conversation. Professor Gupta will review your history, any recordings or scans you have, and explain what is happening in your heart in plain language, in English, Hindi or Punjabi. You will leave with a clear plan, whether or not that plan includes a procedure.',
   },
 ];
 ```
 
-**`data/citations.ts`** — placeholder citations, clearly marked (real references swapped in by the client before launch):
+**`data/citations.ts`**, placeholder citations, clearly marked (real references swapped in by the client before launch):
 
 ```ts
 import type { Citation } from './types';
 
 export const citations: Citation[] = [
-  { id: 1, text: 'Head-to-head randomised comparison of PFA vs RFA for paroxysmal AF, 2025. [CITATION — verify]' },
-  { id: 2, text: 'Volume–outcome relationship in catheter ablation of atrial fibrillation: systematic review. [CITATION — verify]' },
-  { id: 3, text: 'Published single-operator complication-rate series, Liverpool Heart and Chest Hospital. [CITATION — verify]' },
-  { id: 4, text: 'National registry data on AF ablation complication rates by centre volume. [CITATION — verify]' },
+  { id: 1, text: 'Head-to-head randomised comparison of PFA vs RFA for paroxysmal AF, 2025. [CITATION - verify]' },
+  { id: 2, text: 'Volume–outcome relationship in catheter ablation of atrial fibrillation: systematic review. [CITATION - verify]' },
+  { id: 3, text: 'Published single-operator complication-rate series, Liverpool Heart and Chest Hospital. [CITATION - verify]' },
+  { id: 4, text: 'National registry data on AF ablation complication rates by centre volume. [CITATION - verify]' },
 ];
 ```
 
@@ -887,7 +887,7 @@ git commit -m "feat: port journey milestones; add GMC-checked FAQs and placehold
 
 ---
 
-### Task 5: Animation system — useReveal, Reveal, CountUp
+### Task 5: Animation system, useReveal, Reveal, CountUp
 
 **Files:**
 - Create: `lib/useReveal.ts`, `components/Reveal.tsx`, `components/CountUp.tsx`
@@ -898,8 +898,8 @@ git commit -m "feat: port journey milestones; add GMC-checked FAQs and placehold
 - Produces (used by every later UI task):
   - `useReveal<T extends HTMLElement>(): { ref: RefObject<T | null>; visible: boolean }`
   - `usePrefersReducedMotion(): boolean`
-  - `<Reveal as?: 'div'|'section'|'li'|'span', delay?: number (ms), className?: string>{children}</Reveal>` — client component, wraps children, applies `.reveal`/`.reveal-visible` and `transitionDelay`.
-  - `<CountUp to: number, prefix?: string, suffix?: string, duration?: number />` — animates 0→`to` on first view, renders final value immediately under reduced motion. Formats with `toLocaleString('en-GB')`.
+  - `<Reveal as?: 'div'|'section'|'li'|'span', delay?: number (ms), className?: string>{children}</Reveal>`, client component, wraps children, applies `.reveal`/`.reveal-visible` and `transitionDelay`.
+  - `<CountUp to: number, prefix?: string, suffix?: string, duration?: number />`, animates 0→`to` on first view, renders final value immediately under reduced motion. Formats with `toLocaleString('en-GB')`.
 
 - [ ] **Step 1: Write failing tests**
 
@@ -942,7 +942,7 @@ test('CountUp shows final value immediately under reduced motion', () => {
 - [ ] **Step 2: Run tests to verify they fail**
 
 Run: `npm test`
-Expected: FAIL — components do not exist.
+Expected: FAIL, components do not exist.
 
 - [ ] **Step 3: Implement**
 
@@ -1073,7 +1073,7 @@ git commit -m "feat: shared reveal/count-up animation system with reduced-motion
 
 ---
 
-### Task 6: Global shell — Logo, Nav, Footer, WhatsAppFab, layout
+### Task 6: Global shell, Logo, Nav, Footer, WhatsAppFab, layout
 
 **Files:**
 - Create: `components/Logo.tsx`, `components/Nav.tsx`, `components/Footer.tsx`, `components/WhatsAppFab.tsx`
@@ -1083,10 +1083,10 @@ git commit -m "feat: shared reveal/count-up animation system with reduced-motion
 **Interfaces:**
 - Consumes: `site` from `data/site.ts`.
 - Produces:
-  - `<Logo variant: 'mark' | 'full' | 'dark', className? />` — renders an inline-SVG fallback until Task 15 flips `USE_IMAGE_ASSETS` to `true` (exported const in `Logo.tsx`), after which it renders `/brand/logo-mark.png`, `/brand/logo-full.png`, `/brand/logo-dark.png`.
-  - `<Nav />` — sticky, client component; shrinks + gains shadow after `scrollY > 80`; desktop links Evidence / Journey / Where He Works / Testimonials + dark "Book a consultation" button; mobile hamburger opening a full-screen sheet with the CTA always visible in the bar.
-  - `<Footer />` — full logo, tagline, three link columns, `site.gmcLine`, `site.disclaimer`, contact details.
-  - `<WhatsAppFab />` — fixed bottom-right circular brass button linking to `site.whatsappHref`, `aria-label="Chat on WhatsApp"`.
+  - `<Logo variant: 'mark' | 'full' | 'dark', className? />`, renders an inline-SVG fallback until Task 15 flips `USE_IMAGE_ASSETS` to `true` (exported const in `Logo.tsx`), after which it renders `/brand/logo-mark.png`, `/brand/logo-full.png`, `/brand/logo-dark.png`.
+  - `<Nav />`, sticky, client component; shrinks + gains shadow after `scrollY > 80`; desktop links Evidence / Journey / Where He Works / Testimonials + dark "Book a consultation" button; mobile hamburger opening a full-screen sheet with the CTA always visible in the bar.
+  - `<Footer />`, full logo, tagline, three link columns, `site.gmcLine`, `site.disclaimer`, contact details.
+  - `<WhatsAppFab />`, fixed bottom-right circular brass button linking to `site.whatsappHref`, `aria-label="Chat on WhatsApp"`.
   - `app/layout.tsx` renders skip link → `<Nav />` → `{children}` → `<Footer />` → `<WhatsAppFab />`; children pages must contain `<main id="main">`.
 
 - [ ] **Step 1: Write failing tests**
@@ -1122,7 +1122,7 @@ test('WhatsApp FAB links to wa.me with accessible label', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `npm test` — expected: FAIL, components missing.
+Run: `npm test`, expected: FAIL, components missing.
 
 - [ ] **Step 3: Implement**
 
@@ -1208,7 +1208,7 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5">
-        <Link href="/" aria-label="Mumbai London AF Clinic — home" onClick={() => setOpen(false)}>
+        <Link href="/" aria-label="Mumbai London AF Clinic, home" onClick={() => setOpen(false)}>
           <Logo variant="mark" />
         </Link>
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
@@ -1274,7 +1274,7 @@ export function Footer() {
           <Logo variant="dark" />
           <p className="mt-4 max-w-sm text-sm text-paper/80">{site.tagline}</p>
         </div>
-        <nav aria-label="Footer — pages">
+        <nav aria-label="Footer, pages">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-brass">Pages</h2>
           <ul className="space-y-2 text-sm">
             <li><Link href="/evidence" className="hover:text-brass">The Evidence</Link></li>
@@ -1355,7 +1355,7 @@ Expected: PASS / build OK. Also run `npm run dev` briefly and confirm the nav sh
 
 ```bash
 git add components app/layout.tsx test/shell.test.tsx
-git commit -m "feat: global shell — logo fallback, sticky nav, footer, WhatsApp FAB, skip link"
+git commit -m "feat: global shell, logo fallback, sticky nav, footer, WhatsApp FAB, skip link"
 ```
 
 ---
@@ -1370,8 +1370,8 @@ git commit -m "feat: global shell — logo fallback, sticky nav, footer, WhatsAp
 - Consumes: `visits` from `data/visits.json`, `site` from `data/site.ts`.
 - Produces:
   - `validateEnquiry(fields: EnquiryFields): Partial<Record<keyof EnquiryFields, string>>` with `type EnquiryFields = { name: string; phone: string; email: string; message: string; month: string }`.
-  - Server action `submitEnquiry(formData: FormData): Promise<{ ok: true } | { ok: false; errors: Record<string, string> }>` — validates, logs, returns success. **This is the single wiring point for a real email/form service later.**
-  - `<EnquiryForm compact?: boolean />` — client component. Full variant (Book page): all five fields. Compact variant (homepage CTA band): name, phone, message. Friendly inline error messages, success state: "Thank you — the clinic team will contact you within {site.responseDays} working days."
+  - Server action `submitEnquiry(formData: FormData): Promise<{ ok: true } | { ok: false; errors: Record<string, string> }>`, validates, logs, returns success. **This is the single wiring point for a real email/form service later.**
+  - `<EnquiryForm compact?: boolean />`, client component. Full variant (Book page): all five fields. Compact variant (homepage CTA band): name, phone, message. Friendly inline error messages, success state: "Thank you, the clinic team will contact you within {site.responseDays} working days."
 
 - [ ] **Step 1: Write failing tests**
 
@@ -1418,7 +1418,7 @@ test('submitEnquiry rejects invalid form data', async () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `npm test` — expected: FAIL, modules missing.
+Run: `npm test`, expected: FAIL, modules missing.
 
 - [ ] **Step 3: Implement**
 
@@ -1441,7 +1441,7 @@ export function validateEnquiry(f: EnquiryFields): Partial<Record<keyof EnquiryF
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()))
     errors.email = 'Please enter a valid email address.';
   if (f.message.trim().length < 10)
-    errors.message = 'Please tell us a little about the problem — a sentence or two is perfect.';
+    errors.message = 'Please tell us a little about the problem, a sentence or two is perfect.';
   if (!f.month) errors.month = 'Please choose a preferred month.';
   return errors;
 }
@@ -1603,7 +1603,7 @@ git commit -m "feat: enquiry form with client validation and server action stub"
 
 ---
 
-### Task 8: Shared sections — StatsBand, Steps, VisitDates, TestimonialCard, CtaBand
+### Task 8: Shared sections, StatsBand, Steps, VisitDates, TestimonialCard, CtaBand
 
 **Files:**
 - Create: `components/StatsBand.tsx`, `components/Steps.tsx`, `components/VisitDates.tsx`, `components/TestimonialCard.tsx`, `components/CtaBand.tsx`
@@ -1612,11 +1612,11 @@ git commit -m "feat: enquiry form with client validation and server action stub"
 **Interfaces:**
 - Consumes: `Reveal`, `CountUp` (Task 5); `EnquiryForm` (Task 7); `Testimonial`, `Visit` types; `site`.
 - Produces:
-  - `<StatsBand />` — the four fixed stats with count-up: 5,000+ ablations · <1% complication rate · 18+ years as consultant · 350+ publications (labels verbatim below).
-  - `<Steps />` — the three numbered how-it-works steps.
-  - `<VisitDates visits: Visit[] />` — date cards with status chips (Booking open / Waitlist / TBC).
-  - `<TestimonialCard t: Testimonial, onOpenLetter?: (t: Testimonial) => void />` — renders all four category shapes; hospital cards show a "Read full letter" button when `onOpenLetter` given.
-  - `<CtaBand />` — dark (`bg-ink`, **not** `bg-night`) final band: heading, compact `<EnquiryForm compact />`, WhatsApp link.
+  - `<StatsBand />`, the four fixed stats with count-up: 5,000+ ablations · <1% complication rate · 18+ years as consultant · 350+ publications (labels verbatim below).
+  - `<Steps />`, the three numbered how-it-works steps.
+  - `<VisitDates visits: Visit[] />`, date cards with status chips (Booking open / Waitlist / TBC).
+  - `<TestimonialCard t: Testimonial, onOpenLetter?: (t: Testimonial) => void />`, renders all four category shapes; hospital cards show a "Read full letter" button when `onOpenLetter` given.
+  - `<CtaBand />`, dark (`bg-ink`, **not** `bg-night`) final band: heading, compact `<EnquiryForm compact />`, WhatsApp link.
 
 - [ ] **Step 1: Write failing tests**
 
@@ -1667,7 +1667,7 @@ test('TestimonialCard renders each category shape', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 3: Implement**
 
@@ -1678,8 +1678,8 @@ import { CountUp } from '@/components/CountUp';
 import { Reveal } from '@/components/Reveal';
 
 const STATS = [
-  { node: <CountUp to={5000} suffix="+" />, label: 'AF ablation procedures performed — placing him among the highest-volume operators in the world' },
-  { node: <CountUp to={1} prefix="<" suffix="%" />, label: "Complication rate — published in peer-reviewed journals, on par with the world's best" },
+  { node: <CountUp to={5000} suffix="+" />, label: 'AF ablation procedures performed, placing him among the highest-volume operators in the world' },
+  { node: <CountUp to={1} prefix="<" suffix="%" />, label: "Complication rate, published in peer-reviewed journals, on par with the world's best" },
   { node: <CountUp to={18} suffix="+" />, label: "Years as consultant at Liverpool Heart and Chest Hospital, the UK's largest cardiothoracic centre" },
   { node: <CountUp to={350} suffix="+" />, label: 'Peer-reviewed scientific publications, cited over 13,000 times' },
 ];
@@ -1709,7 +1709,7 @@ const STEPS = [
   {
     n: 'i.',
     title: 'An unhurried first visit',
-    body: 'A full consultation in Mumbai — your history, your recordings, your questions. In English, Hindi or Punjabi. You leave with a clear plan.',
+    body: 'A full consultation in Mumbai, your history, your recordings, your questions. In English, Hindi or Punjabi. You leave with a clear plan.',
   },
   {
     n: 'ii.',
@@ -1867,7 +1867,7 @@ Expected: PASS / build OK.
 
 ```bash
 git add components test/sections.test.tsx
-git commit -m "feat: shared sections — stats band, steps, visit dates, testimonial card, CTA band"
+git commit -m "feat: shared sections, stats band, steps, visit dates, testimonial card, CTA band"
 ```
 
 ---
@@ -1882,8 +1882,8 @@ git commit -m "feat: shared sections — stats band, steps, visit dates, testimo
 **Interfaces:**
 - Consumes: `data/locations.json`, `Location` type, `Reveal`.
 - Produces:
-  - `<LocationsMapLazy locations: Location[], height?: string />` — the only import other tasks use (dynamic, `ssr: false`). Renders CartoDB Dark Matter tiles, brass role-coloured SVG pins with drop-in animation (reduced-motion gated), UK marker clustering, popups (serif name, role chip, years, blurb, lazy images, read-more), hover-open on desktop, "UK" / "India" fly-to buttons above the map, three-item legend.
-  - `<LocationList locations: Location[] />` — plain-text accessible list grouped by country with role labels (the keyboard/screen-reader fallback).
+  - `<LocationsMapLazy locations: Location[], height?: string />`, the only import other tasks use (dynamic, `ssr: false`). Renders CartoDB Dark Matter tiles, brass role-coloured SVG pins with drop-in animation (reduced-motion gated), UK marker clustering, popups (serif name, role chip, years, blurb, lazy images, read-more), hover-open on desktop, "UK" / "India" fly-to buttons above the map, three-item legend.
+  - `<LocationList locations: Location[] />`, plain-text accessible list grouped by country with role labels (the keyboard/screen-reader fallback).
   - `/locations` page: night section with heading + full-height map on top, light section with `<LocationList />` below.
 
 - [ ] **Step 1: Install map dependencies**
@@ -1912,7 +1912,7 @@ test('LocationList renders all 12 locations grouped by country with role labels'
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 3: Implement the map**
 
@@ -1975,7 +1975,7 @@ function Pins({ locations }: { locations: Location[] }) {
       const marker = L.marker([loc.lat, loc.lng], {
         icon: pinIcon(loc.role),
         keyboard: true,
-        alt: `${loc.name} — ${ROLE_META[loc.role].label}`,
+        alt: `${loc.name}, ${ROLE_META[loc.role].label}`,
       });
       marker.bindPopup(popupHtml(loc), { maxWidth: 280 });
       if (hoverable) marker.on('mouseover', () => marker.openPopup());
@@ -2137,7 +2137,7 @@ import type { Location } from '@/data/types';
 const locations = locationsJson as Location[];
 
 export const metadata: Metadata = {
-  title: 'Where He Works — Mumbai London AF Clinic',
+  title: 'Where He Works, Mumbai London AF Clinic',
   description:
     'Hospitals across the UK, Europe, the US and India where Professor Dhiraj Gupta has operated, taught and proctored.',
 };
@@ -2225,7 +2225,7 @@ test('comparison section presents both technologies factually and elevates the o
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement the three home components**
 
@@ -2269,7 +2269,7 @@ export function Hero() {
           <Reveal delay={450}>
             <p className="mt-6 max-w-xl text-lg text-paper/85">
               Professor Dhiraj Gupta has performed more than 5,000 AF ablations at the UK&rsquo;s
-              largest heart centre — using both radiofrequency and pulsed field technology.
+              largest heart centre, using both radiofrequency and pulsed field technology.
               He now sees patients in Mumbai. Whatever the machine, the hands holding it matter more.
             </p>
           </Reveal>
@@ -2287,7 +2287,7 @@ export function Hero() {
         <Reveal delay={700} className="self-center border-l-2 border-brass pl-6">
           <p className="font-serif text-xl italic leading-relaxed text-paper/90">
             “Patients in Mumbai deserve the same standard of arrhythmia care I provide in
-            Liverpool — with the dignity of being treated close to home.”
+            Liverpool, with the dignity of being treated close to home.”
           </p>
           <p className="mt-4 text-sm font-semibold">Professor Dhiraj Gupta</p>
           <p className="text-sm text-paper/70">Consultant cardiologist &amp; electrophysiologist</p>
@@ -2306,7 +2306,7 @@ Add to `app/globals.css` (arc draw animation, reduced-motion gated):
 @media (prefers-reduced-motion: reduce) { .mlafc-arc { animation: none; } }
 ```
 
-Create `components/home/ComparisonCards.tsx` (**copy is final — checked against the GMC guardrail; do not editorialise**):
+Create `components/home/ComparisonCards.tsx` (**copy is final, checked against the GMC guardrail; do not editorialise**):
 
 ```tsx
 import Link from 'next/link';
@@ -2344,8 +2344,7 @@ export function ComparisonCards() {
             <p className="mt-3 text-paper/90">
               Neither technology was clearly superior in those trials. What consistently
               predicts a safe, successful ablation in published research is the experience of
-              the doctor performing it.<sup>2</sup> Professor Gupta offers both RFA and PFA —
-              and recommends the right one for you.
+              the doctor performing it.<sup>2</sup> Professor Gupta offers both RFA and PFA, and recommends the right one for you.
             </p>
             <Link href="/evidence" className="mt-5 inline-block font-semibold text-brass hover:underline">
               See the evidence →
@@ -2388,8 +2387,8 @@ export function ConsultantProfile() {
           </Reveal>
           <Reveal delay={100}>
             <p className="mt-5 text-ink-soft">
-              Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital — the
-              United Kingdom&rsquo;s largest specialist cardiothoracic centre — since 2007. He is
+              Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the
+              United Kingdom&rsquo;s largest specialist cardiothoracic centre, since 2007. He is
               honorary Professor of Cardiology at the University of Liverpool, Senior Lecturer at
               Imperial College London, and a medical advisor to the AF Association, the UK&rsquo;s
               national charity for arrhythmia patients.
@@ -2411,7 +2410,7 @@ export function ConsultantProfile() {
           </div>
           <Reveal delay={300}>
             <Link href="/journey" className="mt-8 inline-block font-semibold text-brass-deep hover:underline">
-              Follow the journey, 1988 — 2026 →
+              Follow the journey, 1988 to 2026 →
             </Link>
           </Reveal>
         </div>
@@ -2473,7 +2472,7 @@ export default function Home() {
       <ComparisonCards />
       <ConsultantProfile />
 
-      {/* Map teaser — second and final night section */}
+      {/* Map teaser, second and final night section */}
       <section aria-labelledby="map-heading" className="bg-night text-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
@@ -2561,7 +2560,7 @@ Expected: PASS / build OK. Manual check on `npm run dev`: hero lines rise after 
 
 ```bash
 git add components/home app/page.tsx app/globals.css test/home.test.tsx
-git commit -m "feat: homepage — hero, comparison, profile, map teaser, and full persuasion spine"
+git commit -m "feat: homepage, hero, comparison, profile, map teaser, and full persuasion spine"
 ```
 
 ---
@@ -2575,8 +2574,8 @@ git commit -m "feat: homepage — hero, comparison, profile, map teaser, and ful
 **Interfaces:**
 - Consumes: `faqs` from `data/faqs.ts`, `citations` from `data/citations.ts`, `Reveal`, `useReveal`.
 - Produces:
-  - `<EvidenceChart />` — accessible SVG bar comparison (low-volume vs high-volume centre complication rates), values printed as text, bars scale up on reveal (reduced-motion gated). Data constants exported as `CHART_DATA` for the test.
-  - `<FaqAccordion faqs: Faq[] />` — client component; one disclosure `<button aria-expanded>` per question (button-based rather than `<details>` so keyboard/AT behaviour is uniform and testable).
+  - `<EvidenceChart />`, accessible SVG bar comparison (low-volume vs high-volume centre complication rates), values printed as text, bars scale up on reveal (reduced-motion gated). Data constants exported as `CHART_DATA` for the test.
+  - `<FaqAccordion faqs: Faq[] />`, client component; one disclosure `<button aria-expanded>` per question (button-based rather than `<details>` so keyboard/AT behaviour is uniform and testable).
   - `/evidence` page with the six spec sections and a numbered references block (`id="references"`, items `id="ref-1"`…).
 
 - [ ] **Step 1: Write failing tests**
@@ -2615,7 +2614,7 @@ test('FAQ accordion expands an item on click', async () => {
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement**
 
@@ -2625,7 +2624,7 @@ Create `components/EvidenceChart.tsx`:
 'use client';
 import { useReveal } from '@/lib/useReveal';
 
-// [CITATION — verify] Placeholder values from the volume–outcome literature.
+// [CITATION - verify] Placeholder values from the volume–outcome literature.
 // Client must confirm figures and sources before launch (see data/citations.ts).
 export const CHART_DATA = [
   { label: 'Lower-volume centres', value: 2.1, colour: 'var(--color-ink-mute)' },
@@ -2659,7 +2658,7 @@ export function EvidenceChart() {
         <figcaption className="mt-6 text-center text-sm text-ink-mute">
           Major complication rates after AF ablation, by centre volume.<sup>2, 4</sup>{' '}
           Published research consistently finds lower complication rates where more of these
-          procedures are done. [CITATION — verify]
+          procedures are done. [CITATION - verify]
         </figcaption>
       </figure>
     </div>
@@ -2709,7 +2708,7 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
 }
 ```
 
-Create `app/evidence/page.tsx` (**copy is final — checked against the GMC guardrail**):
+Create `app/evidence/page.tsx` (**copy is final, checked against the GMC guardrail**):
 
 ```tsx
 import type { Metadata } from 'next';
@@ -2721,9 +2720,9 @@ import { faqs } from '@/data/faqs';
 import { citations } from '@/data/citations';
 
 export const metadata: Metadata = {
-  title: 'The Evidence — Mumbai London AF Clinic',
+  title: 'The Evidence, Mumbai London AF Clinic',
   description:
-    'What published research says about PFA, RFA, and why the experience of the operator matters — in plain English, with citations.',
+    'What published research says about PFA, RFA, and why the experience of the operator matters, in plain English, with citations.',
 };
 
 export default function EvidencePage() {
@@ -2739,8 +2738,8 @@ export default function EvidencePage() {
           </Reveal>
           <Reveal delay={120}>
             <p className="mt-8 text-lg text-ink-soft">
-              You may have been offered PFA — pulsed field ablation — because it is the newest
-              way to treat atrial fibrillation. RFA — radiofrequency ablation — uses carefully
+              You may have been offered PFA, pulsed field ablation, because it is the newest
+              way to treat atrial fibrillation. RFA, radiofrequency ablation, uses carefully
               controlled heat; PFA uses short electrical pulses instead. Both treat the same
               small areas of heart tissue that trigger AF.
             </p>
@@ -2758,7 +2757,7 @@ export default function EvidencePage() {
             <h2 id="volume-heading" className="font-serif text-3xl">The number that does change your outcome.</h2>
             <p className="mt-4 text-ink-soft">
               Across published studies, one factor shows up again and again: how often the
-              centre — and the doctor — performs the procedure.<sup><a href="#ref-2">2</a></sup>
+              centre, and the doctor, performs the procedure.<sup><a href="#ref-2">2</a></sup>
             </p>
           </Reveal>
           <div className="mt-12"><EvidenceChart /></div>
@@ -2778,7 +2777,7 @@ export default function EvidencePage() {
           <Reveal delay={120}>
             <h2 className="mt-14 font-serif text-3xl">His numbers, in context.</h2>
             <ul className="mt-5 space-y-3 text-ink-soft">
-              <li>200+ ablations a year, every year since 2009 — among the highest volumes of any UK operator.<sup><a href="#ref-3">3</a></sup></li>
+              <li>200+ ablations a year, every year since 2009, among the highest volumes of any UK operator.<sup><a href="#ref-3">3</a></sup></li>
               <li>A published complication rate below 1%.<sup><a href="#ref-3">3</a></sup></li>
               <li>More than 5,000 procedures across his career.</li>
             </ul>
@@ -2822,7 +2821,7 @@ Expected: PASS / build OK.
 
 ```bash
 git add components/EvidenceChart.tsx components/FaqAccordion.tsx app/evidence test/evidence.test.tsx
-git commit -m "feat: evidence page — volume-outcome chart, FAQs, numbered citations"
+git commit -m "feat: evidence page, volume-outcome chart, FAQs, numbered citations"
 ```
 
 ---
@@ -2835,7 +2834,7 @@ git commit -m "feat: evidence page — volume-outcome chart, FAQs, numbered cita
 
 **Interfaces:**
 - Consumes: `milestones` from `data/milestones.ts`, `Reveal`.
-- Produces: `/journey` — sticky photo-panel + scrolling milestones (desktop: left column sticky with year markers and the active milestone's photo placeholder frame; right column scrolls through 11 milestone articles; IntersectionObserver switches the active frame). Mobile: photo placeholder inline inside each milestone, sticky panel hidden.
+- Produces: `/journey`, sticky photo-panel + scrolling milestones (desktop: left column sticky with year markers and the active milestone's photo placeholder frame; right column scrolls through 11 milestone articles; IntersectionObserver switches the active frame). Mobile: photo placeholder inline inside each milestone, sticky panel hidden.
 
 - [ ] **Step 1: Write failing test**
 
@@ -2863,7 +2862,7 @@ test('renders all 10 milestones with years and photo placeholders', () => {
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement**
 
@@ -2912,7 +2911,7 @@ export function JourneyTimeline({ milestones }: { milestones: Milestone[] }) {
 
   return (
     <div className="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-[2fr_3fr]">
-      {/* Sticky panel — desktop only */}
+      {/* Sticky panel, desktop only */}
       <div className="hidden lg:block">
         <div className="sticky top-28 space-y-6">
           <ol className="flex flex-wrap gap-x-4 gap-y-2" aria-label="Years">
@@ -2967,9 +2966,9 @@ import { JourneyTimeline } from '@/components/JourneyTimeline';
 import { milestones } from '@/data/milestones';
 
 export const metadata: Metadata = {
-  title: 'The Journey — Mumbai London AF Clinic',
+  title: 'The Journey, Mumbai London AF Clinic',
   description:
-    'From medical school in 1988 to the Mumbai London AF Clinic in 2026 — the journey of Professor Dhiraj Gupta.',
+    'From medical school in 1988 to the Mumbai London AF Clinic in 2026, the journey of Professor Dhiraj Gupta.',
 };
 
 export default function JourneyPage() {
@@ -2977,7 +2976,7 @@ export default function JourneyPage() {
     <main id="main" className="bg-paper">
       <section className="mx-auto max-w-6xl px-5 pb-4 pt-20">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">The journey · 1988 — 2026</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">The journey · 1988 to 2026</p>
           <h1 className="mt-3 max-w-2xl font-serif text-[clamp(2rem,5vw,3.2rem)] leading-tight">
             Thirty-eight years, <em className="text-brass-deep">one specialty</em>.
           </h1>
@@ -3018,7 +3017,7 @@ git commit -m "feat: journey page with sticky photo panel and scrolling mileston
 
 **Interfaces:**
 - Consumes: `data/testimonials.json`, `TestimonialCard` (Task 8).
-- Produces: `/testimonials` — filter pills (All 24 / Hospitals 6 / Patients 8 / Peers 6 / News 4) with live result count, card grid, `<dialog>`-based full-letter modal for hospital cards, empty state.
+- Produces: `/testimonials`, filter pills (All 24 / Hospitals 6 / Patients 8 / Peers 6 / News 4) with live result count, card grid, `<dialog>`-based full-letter modal for hospital cards, empty state.
 
 - [ ] **Step 1: Write failing test**
 
@@ -3049,7 +3048,7 @@ test('opens the full letter dialog from a hospital card', async () => {
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement**
 
@@ -3164,7 +3163,7 @@ import { Reveal } from '@/components/Reveal';
 import { TestimonialsGrid } from '@/components/TestimonialsGrid';
 
 export const metadata: Metadata = {
-  title: 'Testimonials — Mumbai London AF Clinic',
+  title: 'Testimonials, Mumbai London AF Clinic',
   description:
     'Letters from hospitals, messages from patients, endorsements from peers, and press coverage of Professor Dhiraj Gupta.',
 };
@@ -3210,7 +3209,7 @@ git commit -m "feat: filterable testimonials page with full-letter dialog"
 
 **Interfaces:**
 - Consumes: `EnquiryForm` (full variant), `VisitDates`, `site`, `data/visits.json`.
-- Produces: `/book` — enquiry form beside a contact card (WhatsApp deep link, phone, email) and the upcoming visit dates.
+- Produces: `/book`, enquiry form beside a contact card (WhatsApp deep link, phone, email) and the upcoming visit dates.
 
 - [ ] **Step 1: Write failing test**
 
@@ -3237,7 +3236,7 @@ test('book page shows form fields, contact channels and visit dates', () => {
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement `app/book/page.tsx`**
 
@@ -3253,7 +3252,7 @@ import type { Visit } from '@/data/types';
 const visits = visitsJson as Visit[];
 
 export const metadata: Metadata = {
-  title: 'Book a Consultation — Mumbai London AF Clinic',
+  title: 'Book a Consultation, Mumbai London AF Clinic',
   description:
     'Send an enquiry or message the clinic on WhatsApp to book a consultation with Professor Dhiraj Gupta in Mumbai.',
 };
@@ -3328,9 +3327,9 @@ git commit -m "feat: book page with enquiry form, direct contact channels, and v
 
 ---
 
-### Task 15: Brand assets — recoloured logo via Higgsfield MCP
+### Task 15: Brand assets, recoloured logo via Higgsfield MCP
 
-> **Note for the orchestrator:** this task calls Higgsfield MCP tools. If the executing subagent has no MCP access, the orchestrating agent should run the generation steps itself and hand the saved files to the subagent (or run this whole task inline). If image generation fails entirely, skip Steps 1–3, leave `USE_IMAGE_ASSETS = false`, and record the gap — the SVG fallback keeps the site shippable.
+> **Note for the orchestrator:** this task calls Higgsfield MCP tools. If the executing subagent has no MCP access, the orchestrating agent should run the generation steps itself and hand the saved files to the subagent (or run this whole task inline). If image generation fails entirely, skip Steps 1–3, leave `USE_IMAGE_ASSETS = false`, and record the gap, the SVG fallback keeps the site shippable.
 
 **Files:**
 - Create: `public/brand/logo-full.png`, `public/brand/logo-mark.png`, `public/brand/logo-dark.png`, `app/icon.png`
@@ -3343,7 +3342,7 @@ git commit -m "feat: book page with enquiry form, direct contact channels, and v
 
 - [ ] **Step 1: Generate the recoloured full logo**
 
-Use the Higgsfield MCP image edit tool (ChatGPT Image-class edit model — consult `models_explore(action:'recommend')` if unsure), with `reference/logo-original.jpeg` uploaded as the reference image (use `media_upload` / the upload widget as the server instructions require). Edit prompt:
+Use the Higgsfield MCP image edit tool (ChatGPT Image-class edit model, consult `models_explore(action:'recommend')` if unsure), with `reference/logo-original.jpeg` uploaded as the reference image (use `media_upload` / the upload widget as the server instructions require). Edit prompt:
 
 > Recolour this logo. Keep the exact composition: two city skylines (London left, Mumbai right) connected by an ECG heartbeat line with a medical cross. Change the skylines to deep petrol-navy (#122B3A), the ECG line and cross to warm brass (#B08D3E), and make the background fully transparent. Clean vector-flat style, no gradients, no new elements, no text changes.
 
@@ -3351,13 +3350,13 @@ Save the result to `public/brand/logo-full.png` (target ≥ 1600px wide).
 
 - [ ] **Step 2: Generate the dark variant and the compact mark**
 
-Dark variant — same reference, edit prompt:
+Dark variant, same reference, edit prompt:
 
 > Recolour this logo for use on a very dark navy background. Skylines and any text in warm cream (#F7F5F1), ECG line and cross in brass (#B08D3E), fully transparent background. Keep composition identical.
 
 Save to `public/brand/logo-dark.png`.
 
-Compact mark — crop/derive from the full logo: skyline-plus-ECG segment only, square-ish composition, transparent background. Save to `public/brand/logo-mark.png` (≥ 512×512), and copy it to `app/icon.png` (Next.js picks this up as the favicon automatically).
+Compact mark, crop/derive from the full logo: skyline-plus-ECG segment only, square-ish composition, transparent background. Save to `public/brand/logo-mark.png` (≥ 512×512), and copy it to `app/icon.png` (Next.js picks this up as the favicon automatically).
 
 - [ ] **Step 3: Flip the Logo component to image assets**
 
@@ -3369,7 +3368,7 @@ export const USE_IMAGE_ASSETS = true;
 
 - [ ] **Step 4: Verify**
 
-Run: `npm test && npm run build`, then `npm run dev` — confirm the mark renders in the nav, the dark variant in the footer/hero, and the favicon appears. Check the PNGs have real transparency (no cream box on dark sections).
+Run: `npm test && npm run build`, then `npm run dev`, confirm the mark renders in the nav, the dark variant in the footer/hero, and the favicon appears. Check the PNGs have real transparency (no cream box on dark sections).
 
 - [ ] **Step 5: Commit**
 
@@ -3380,7 +3379,7 @@ git commit -m "feat: recoloured Midnight Atlas brand assets and favicon"
 
 ---
 
-### Task 16: SEO — metadata defaults, JSON-LD, sitemap, robots
+### Task 16: SEO, metadata defaults, JSON-LD, sitemap, robots
 
 **Files:**
 - Create: `components/JsonLd.tsx`, `app/sitemap.ts`, `app/robots.ts`
@@ -3415,7 +3414,7 @@ test('sitemap lists all six routes', () => {
 });
 ```
 
-Run: `npm test` — expected: FAIL.
+Run: `npm test`, expected: FAIL.
 
 - [ ] **Step 2: Implement**
 
@@ -3424,7 +3423,7 @@ Create `components/JsonLd.tsx`:
 ```tsx
 import { site } from '@/data/site';
 
-const BASE = 'https://www.mumbailondonaf.com'; // [placeholder — confirm domain]
+const BASE = 'https://www.mumbailondonaf.com'; // [placeholder, confirm domain]
 
 const data = {
   '@context': 'https://schema.org',
@@ -3467,7 +3466,7 @@ Create `app/sitemap.ts`:
 ```ts
 import type { MetadataRoute } from 'next';
 
-const BASE = 'https://www.mumbailondonaf.com'; // [placeholder — confirm domain]
+const BASE = 'https://www.mumbailondonaf.com'; // [placeholder, confirm domain]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return ['/', '/evidence', '/journey', '/locations', '/testimonials', '/book'].map((path) => ({
@@ -3486,7 +3485,7 @@ import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://www.mumbailondonaf.com/sitemap.xml', // [placeholder — confirm domain]
+    sitemap: 'https://www.mumbailondonaf.com/sitemap.xml', // [placeholder, confirm domain]
   };
 }
 ```
@@ -3495,7 +3494,7 @@ In `app/layout.tsx`: add `<JsonLd />` just inside `<body>`, and extend the expor
 
 ```ts
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.mumbailondonaf.com'), // [placeholder — confirm domain]
+  metadataBase: new URL('https://www.mumbailondonaf.com'), // [placeholder, confirm domain]
   title: { default: 'Mumbai London AF Clinic', template: '%s' },
   description:
     'Specialist atrial fibrillation care in Mumbai from Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital.',
@@ -3516,7 +3515,7 @@ Expected: PASS; build output shows `/sitemap.xml` and `/robots.txt` routes.
 
 ```bash
 git add components/JsonLd.tsx app/sitemap.ts app/robots.ts app/layout.tsx test/seo.test.tsx
-git commit -m "feat: SEO — OG defaults, Physician/MedicalClinic JSON-LD, sitemap, robots"
+git commit -m "feat: SEO, OG defaults, Physician/MedicalClinic JSON-LD, sitemap, robots"
 ```
 
 ---
@@ -3554,7 +3553,7 @@ Expected: every score ≥ 95. Fix any flagged issues (common ones: contrast on `
 
 - [ ] **Step 3: Manual accessibility + reduced-motion sweep**
 
-- Keyboard: Tab through every page — skip link appears first; nav, map buttons, map pins, accordion, filter pills, dialog close, and form are all reachable and operable; dialog traps focus (native `<dialog>` behaviour).
+- Keyboard: Tab through every page, skip link appears first; nav, map buttons, map pins, accordion, filter pills, dialog close, and form are all reachable and operable; dialog traps focus (native `<dialog>` behaviour).
 - Enable "Reduce Motion" in macOS System Settings → verify: no hero line rise, stats show final values instantly, no pin drop animation, no map fly (jump-cuts instead), chart bars fully drawn.
 - Check both night sections per page maximum holds on every page.
 
@@ -3562,7 +3561,7 @@ Expected: every score ≥ 95. Fix any flagged issues (common ones: contrast on `
 
 - Homepage answers within one scroll: who he is, why his experience matters, how to book.
 - Comparison and Evidence copy contains no superiority claims (`grep -ri "better than\|safer than\|superior to\|more effective than" app components data` returns nothing clinical).
-- Every clinical claim on `/evidence` carries a numbered citation; all placeholder citations still carry `[CITATION — verify]` (launch blocker list goes to the client).
+- Every clinical claim on `/evidence` carries a numbered citation; all placeholder citations still carry `[CITATION - verify]` (launch blocker list goes to the client).
 - Content edits are data-file-only: confirm `data/` alone drives visits, locations, testimonials, milestones, FAQs, contact details.
 
 - [ ] **Step 5: Delete ported reference pages and commit**
@@ -3579,9 +3578,9 @@ git commit -m "chore: remove ported reference pages after accessibility audit"
 
 ## Launch-blocker checklist (hand to client)
 
-Not tasks — these must be resolved by the client before go-live:
+Not tasks, these must be resolved by the client before go-live:
 
-- Real citations to replace all `[CITATION — verify]` entries (`data/citations.ts`, `components/EvidenceChart.tsx` values).
+- Real citations to replace all `[CITATION - verify]` entries (`data/citations.ts`, `components/EvidenceChart.tsx` values).
 - Real contact details, GMC number, response-time promise (`data/site.ts`).
 - Real visit dates (`data/visits.json`), locations (`data/locations.json`), portrait and milestone photos.
 - Domain confirmation (replace `https://www.mumbailondonaf.com` placeholders in `components/JsonLd.tsx`, `app/sitemap.ts`, `app/robots.ts`, `app/layout.tsx`).

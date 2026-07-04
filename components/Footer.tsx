@@ -4,6 +4,7 @@ import { site } from '@/data/site';
 
 const pageLinks = [
   { href: '/evidence', label: 'The Evidence' },
+  { href: '/conditions', label: 'Conditions We Treat' },
   { href: '/journey', label: 'The Journey' },
   { href: '/locations', label: 'Where He Works' },
   { href: '/testimonials', label: 'Testimonials' },
@@ -11,6 +12,7 @@ const pageLinks = [
 ] as const;
 
 const patientLinks = [
+  { href: '/conditions', label: 'Conditions explained' },
   { href: '/journey', label: 'What to expect' },
   { href: '/evidence#faq-heading', label: 'FAQs' },
   { href: '/book', label: 'Request an appointment' },

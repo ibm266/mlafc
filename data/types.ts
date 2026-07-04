@@ -57,3 +57,15 @@ export type Milestone = {
 export type Faq = { question: string; answer: string };
 
 export type Citation = { id: number; text: string };
+
+export type Condition = {
+  id: string;
+  title: string;
+  feelsLike: string[];
+  happening: string;
+  help: string;
+  videoSrc?: string;
+  posterSrc?: string;
+  videoAlt: string;
+  isSymptom?: boolean;
+};

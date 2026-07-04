@@ -11,7 +11,9 @@ test('JSON-LD declares Physician and MedicalClinic', () => {
   expect(types).toContain('MedicalClinic');
 });
 
-test('sitemap lists all six routes', () => {
+test('sitemap lists all routes', () => {
   const routes = sitemap().map((e) => new URL(e.url).pathname);
-  expect(routes.sort()).toEqual(['/', '/book', '/evidence', '/journey', '/locations', '/testimonials'].sort());
+  expect(routes.sort()).toEqual(
+    ['/', '/book', '/conditions', '/evidence', '/journey', '/locations', '/testimonials'].sort(),
+  );
 });

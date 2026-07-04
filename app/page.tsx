@@ -13,20 +13,14 @@ import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import locationsJson from '@/data/locations.json';
 import visitsJson from '@/data/visits.json';
+import { conditions } from '@/data/conditions';
 import type { Location, Testimonial, Visit } from '@/data/types';
 
 const testimonials = testimonialsJson as Testimonial[];
 const locations = locationsJson as Location[];
 const visits = visitsJson as Visit[];
 
-const CONDITIONS = [
-  'Atrial fibrillation (AF)',
-  'Atrial flutter',
-  'Supraventricular tachycardia (SVT)',
-  'Palpitations & unexplained heart racing',
-  'Unexplained blackouts & dizziness',
-  'Bradycardia (slow heart rhythms)',
-];
+const CONDITION_LINKS = conditions.map((c) => ({ id: c.id, title: c.title }));
 const PROCEDURES = [
   'Catheter ablation for atrial fibrillation',
   'Ablation for SVT and other arrhythmias',
@@ -87,17 +81,25 @@ export default function Home() {
       <section aria-labelledby="services-heading" className="border-y border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <h2 id="services-heading" className="font-serif text-4xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
+              Conditions &amp; treatments
+            </p>
+            <h2 id="services-heading" className="mt-3 font-serif text-4xl">
               What we look after.
             </h2>
+            <p className="mt-4 max-w-xl text-ink-soft">
+              Put your heart in the most experienced hands.
+            </p>
           </Reveal>
           <div className="mt-10 grid gap-10 md:grid-cols-2">
             <Reveal>
               <h3 className="font-semibold text-brass-deep">Conditions we treat</h3>
               <ul className="mt-4 space-y-2 text-ink-soft">
-                {CONDITIONS.map((c) => (
-                  <li key={c} className="border-b border-line pb-2">
-                    {c}
+                {CONDITION_LINKS.map((c) => (
+                  <li key={c.id} className="border-b border-line pb-2">
+                    <Link href={`/conditions#${c.id}`} className="hover:text-ink hover:underline">
+                      {c.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -113,6 +115,11 @@ export default function Home() {
               </ul>
             </Reveal>
           </div>
+          <Reveal delay={120}>
+            <Link href="/conditions" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+              Understand each condition &rarr;
+            </Link>
+          </Reveal>
         </div>
       </section>
 

@@ -1,7 +1,7 @@
-# Mumbai London AF Clinic — Website Design Spec
+# Mumbai London AF Clinic, Website Design Spec
 
 **Date:** 2026-07-04
-**Status:** Approved direction — "Midnight Atlas"
+**Status:** Approved direction, "Midnight Atlas"
 **Scope:** Full site rebuild (6 pages) in Next.js + Tailwind
 
 ---
@@ -17,8 +17,7 @@ enquiry / book an initial consultation.
 
 **The core persuasive message:** patients are being offered PFA (pulsed field
 ablation) because it is newer and widely available. The evidence from the
-largest 2025 head-to-head trials shows PFA and RFA are broadly comparable —
-neither clearly superior. What actually changes a patient's outcome is
+largest 2025 head-to-head trials shows PFA and RFA are broadly comparable, neither clearly superior. What actually changes a patient's outcome is
 **operator experience and volume**, not the machine. The site must move the
 patient's question from "which technology?" to "who is holding the catheter?"
 and position Prof Gupta's 5,000+ ablations, <1% complication rate, and his
@@ -34,7 +33,7 @@ understand. Patients may be older and non-technical. Short sentences, plain
 English, generous whitespace, obvious next steps. No jargon without an
 immediate plain-language explanation.
 
-## 2. Creative direction — "Midnight Atlas"
+## 2. Creative direction, "Midnight Atlas"
 
 The map is the identity. Cartographic motifs: hairline rules, coordinate
 marks, and a dotted Liverpool–Mumbai arc echoing the ECG line in the logo.
@@ -61,9 +60,9 @@ text is `--paper`; brass is reserved for accents and large display text only
 
 ### Typography
 
-- **Display serif:** Newsreader (Google Fonts) — headlines, pull quotes,
+- **Display serif:** Newsreader (Google Fonts), headlines, pull quotes,
   large numerals. Weights 400/500, italic for accent words.
-- **Sans:** Archivo (Google Fonts) — body, UI, labels, buttons.
+- **Sans:** Archivo (Google Fonts), body, UI, labels, buttons.
   Weights 400/500/600.
 - Base body size 17–18px, line-height ≥1.6. Headline scale via `clamp()`.
 
@@ -139,7 +138,7 @@ night sections.
 ## 5. The Evidence page (`/evidence`)
 
 Framing fixed by the client: **regardless of the procedure, it is always
-safer in more experienced hands — as shown by the literature.**
+safer in more experienced hands, as shown by the literature.**
 
 Structure:
 
@@ -150,7 +149,7 @@ Structure:
    bar/dot chart comparing complication rates at low-volume vs high-volume
    centres, built from published literature with visible citations beneath.
    Rendered as an accessible SVG (values in text too), animating in on
-   scroll. Kept deliberately simple — one chart, one message.
+   scroll. Kept deliberately simple, one chart, one message.
 3. **What this means for you.** The right question is "who is holding the
    catheter." Prof Gupta offers both RFA and PFA and chooses per patient.
 4. **His numbers in context.** 200+ ablations/year since 2009; <1% published
@@ -160,7 +159,7 @@ Structure:
 6. **CTA** to book.
 
 Citation handling: numbered superscript references with a references block at
-page end. Placeholder citations clearly marked `[CITATION — verify]` until
+page end. Placeholder citations clearly marked `[CITATION - verify]` until
 real references are supplied; page must not launch with placeholders.
 
 ## 6. Journey, Testimonials, Book pages
@@ -175,13 +174,12 @@ real references are supplied; page must not launch with placeholders.
 - **`/testimonials`:** filterable grid (by category, as the current page has)
   of the 24 existing testimonials, ported into a JSON data file. Teaser
   cards on homepage draw from the same data.
-- **`/book`:** enquiry form — name, phone (with country code), email, brief
+- **`/book`:** enquiry form, name, phone (with country code), email, brief
   description of the problem, preferred visit month (from visit-dates data).
   Client-side validation with friendly messages. Submission goes through a
   single server action stub (logs + returns success) so wiring email/a form
   service later is a one-file change. Success state thanks the user and sets
-  the expectation ("the clinic team will contact you within X working days"
-  — placeholder). Alongside: WhatsApp deep link, phone, email, and the
+  the expectation ("the clinic team will contact you within X working days", placeholder). Alongside: WhatsApp deep link, phone, email, and the
   upcoming visit dates card.
 
 ## 7. Interactive map (shared component)
@@ -205,7 +203,7 @@ real references are supplied; page must not launch with placeholders.
   fit bounds to each region.
 - **Accessibility:** keyboard-focusable pins and buttons; plain-text list of
   all locations below the map (grouped by country, role labelled) as the
-  fallback — this list is the `/locations` page's second half.
+  fallback, this list is the `/locations` page's second half.
 - **Placement:** the map always sits on a night section (homepage teaser and
   the top half of `/locations`) so the dark tiles and brass pins read as one
   composition; the `/locations` text list below is on the light ground.
@@ -219,7 +217,7 @@ real references are supplied; page must not launch with placeholders.
 - Hero headline line rise; logo mark fades first.
 - Map pin drop-in and active-pin pulse.
 - Evidence chart draws in on scroll.
-- **All motion gated behind `prefers-reduced-motion: reduce`** — when set,
+- **All motion gated behind `prefers-reduced-motion: reduce`**, when set,
   everything renders in its final state instantly.
 - Nothing bouncy, no parallax. Motion supports seriousness.
 
@@ -256,7 +254,7 @@ real references are supplied; page must not launch with placeholders.
 | Location images for map popups | Placeholder; client supplies |
 | Real locations list | Placeholder JSON; client supplies |
 | Visit dates | Placeholder `[Month] 2026`; client supplies |
-| Evidence citations | Marked `[CITATION — verify]`; client verifies before launch |
+| Evidence citations | Marked `[CITATION - verify]`; client verifies before launch |
 | Contact details (phone, WhatsApp, email, address) | Placeholder; client supplies |
 
 ## 11. Out of scope

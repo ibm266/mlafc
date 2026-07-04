@@ -33,7 +33,7 @@ export function ComparisonCards() {
               In those trials, both technologies produced broadly comparable results. What consistently predicts a safe,
               successful ablation in published research is the experience of the doctor performing it.<sup>2</sup>{' '}
               Professor Gupta
-              offers both RFA and PFA &mdash; and recommends the right one for you.
+              offers both RFA and PFA, and recommends the right one for you.
             </p>
             <Link href="/evidence" className="interactive mt-5 inline-block font-semibold text-brass hover:underline">
               See the evidence &rarr;
