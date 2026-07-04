@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/Logo';
 
@@ -11,7 +12,18 @@ const LINKS = [
   { href: '/testimonials', label: 'Testimonials' },
 ] as const;
 
+function isActive(href: string, pathname: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function navLinkClass(active: boolean) {
+  return active
+    ? 'interactive border-b-2 border-brass pb-0.5 text-[15px] font-semibold text-ink'
+    : 'interactive text-[15px] font-medium text-ink-soft hover:text-ink';
+}
+
 export function Nav() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -88,24 +100,25 @@ export function Nav() {
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
           {LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="text-[15px] font-medium text-ink-soft hover:text-ink">
+            <Link key={link.href} href={link.href} className={navLinkClass(isActive(link.href, pathname))}>
               {link.label}
             </Link>
           ))}
-          <Link href="/book" className="rounded-full bg-ink px-5 py-2.5 text-[15px] font-semibold text-paper hover:bg-night">
+          <Link
+            href="/book"
+            className="interactive rounded-full bg-ink px-5 py-2.5 text-[15px] font-semibold text-paper hover:bg-night"
+          >
             Book a consultation
           </Link>
         </nav>
 
         <div className="flex items-center gap-3 md:hidden">
-          {!open ? (
-            <Link
-              href="/book"
-              className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper"
-            >
-              Book a consultation
-            </Link>
-          ) : null}
+          <Link
+            href="/book"
+            className="interactive inline-flex min-h-11 items-center rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-paper hover:bg-night"
+          >
+            Book a consultation
+          </Link>
           <button
             ref={menuButtonRef}
             type="button"
@@ -135,7 +148,9 @@ export function Nav() {
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block py-1 font-serif text-2xl leading-snug text-ink sm:text-3xl"
+                  className={`interactive block py-1 font-serif text-2xl leading-snug sm:text-3xl ${
+                    isActive(link.href, pathname) ? 'text-brass-deep' : 'text-ink'
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -145,7 +160,9 @@ export function Nav() {
               <Link
                 href="/book"
                 onClick={() => setOpen(false)}
-                className="block py-1 font-serif text-2xl leading-snug text-ink sm:text-3xl"
+                className={`interactive block py-1 font-serif text-2xl leading-snug sm:text-3xl ${
+                  isActive('/book', pathname) ? 'text-brass-deep' : 'text-ink'
+                }`}
               >
                 Book a consultation
               </Link>

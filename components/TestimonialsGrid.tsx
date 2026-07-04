@@ -49,7 +49,7 @@ export function TestimonialsGrid() {
             type="button"
             aria-pressed={filter === filterOption.id}
             onClick={() => setFilter(filterOption.id)}
-            className={`rounded-full border px-4 py-2 text-sm font-semibold ${
+            className={`interactive rounded-full border px-4 py-2 text-sm font-semibold ${
               filter === filterOption.id
                 ? 'border-ink bg-ink text-paper'
                 : 'border-line bg-white text-ink-soft hover:border-ink-soft'
@@ -91,7 +91,7 @@ export function TestimonialsGrid() {
                 type="button"
                 onClick={closeLetter}
                 aria-label="Close letter"
-                className="rounded-full border border-line px-3 py-1 text-ink-soft hover:text-ink"
+                className="interactive rounded-full border border-line px-3 py-1 text-ink-soft hover:text-ink"
               >
                 &times;
               </button>
@@ -103,6 +103,13 @@ export function TestimonialsGrid() {
             </div>
             <p className="mt-6 font-semibold">{letter.letter.sigName}</p>
             <p className="text-sm text-ink-mute">{letter.letter.sigRole}</p>
+            <button
+              type="button"
+              onClick={closeLetter}
+              className="interactive mt-6 rounded-full bg-ink px-6 py-2.5 text-sm font-semibold text-paper hover:bg-night"
+            >
+              Close
+            </button>
           </div>
         )}
       </dialog>

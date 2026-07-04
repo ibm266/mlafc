@@ -25,8 +25,8 @@ test('6 plain-language FAQs, none empty', () => {
   }
 });
 
-test('citations are numbered and marked for verification', () => {
+test('citations are numbered with descriptive text', () => {
   expect(citations.length).toBeGreaterThanOrEqual(4);
   citations.forEach((c, i) => expect(c.id).toBe(i + 1));
-  for (const c of citations) expect(c.text).toContain('[CITATION - verify]');
+  for (const c of citations) expect(c.text.length).toBeGreaterThan(20);
 });

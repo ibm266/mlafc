@@ -42,18 +42,18 @@ export default function BookPage() {
                     href={site.whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block py-2.5 font-semibold text-brass-deep hover:underline"
+                    className="interactive inline-block py-2.5 font-semibold text-brass-deep hover:underline"
                   >
                     Message on WhatsApp →
                   </a>
                 </li>
                 <li>
-                  <a href={`tel:${site.phone}`} className="inline-block py-2.5 font-semibold text-brass-deep hover:underline">
+                  <a href={`tel:${site.phone}`} className="interactive inline-block py-2.5 font-semibold text-brass-deep hover:underline">
                     {site.phone}
                   </a>
                 </li>
                 <li>
-                  <a href={`mailto:${site.email}`} className="inline-block py-2.5 font-semibold text-brass-deep hover:underline">
+                  <a href={`mailto:${site.email}`} className="interactive inline-block py-2.5 font-semibold text-brass-deep hover:underline">
                     {site.email}
                   </a>
                 </li>

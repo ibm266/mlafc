@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { MilestonePlaceholder } from '@/components/MilestonePlaceholder';
 import type { Milestone } from '@/data/types';
 
 function PhotoFrame({ m }: { m: Milestone }) {
   return (
     <figure className="rounded-lg border border-line bg-paper-soft p-6">
-      <div className="flex aspect-[4/3] items-center justify-center rounded border border-dashed border-line text-xs uppercase tracking-widest text-ink-mute">
-        photograph
-      </div>
+      <MilestonePlaceholder />
       <figcaption className="mt-4">
         <p className="font-serif text-xl">{m.photoTitle}</p>
         <p className="mt-1 text-sm text-ink-soft">{m.photoCaption}</p>

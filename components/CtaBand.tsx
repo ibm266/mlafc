@@ -17,7 +17,7 @@ export function CtaBand() {
             href={site.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-block rounded-full border border-brass px-6 py-3 font-semibold text-brass hover:bg-brass hover:text-night"
+            className="interactive mt-6 inline-block rounded-full border border-brass px-6 py-3 font-semibold text-brass hover:bg-brass hover:text-night"
           >
             Message on WhatsApp
           </a>

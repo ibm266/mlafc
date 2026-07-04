@@ -21,11 +21,12 @@ test('StatsBand shows the four headline numbers', () => {
   expect(screen.getByText(/350/)).toBeInTheDocument();
 });
 
-test('VisitDates renders one card per visit with status', () => {
+test('VisitDates renders one card per visit with status and booking link', () => {
   render(<VisitDates visits={visits as Visit[]} />);
   expect(screen.getByText('Booking open')).toBeInTheDocument();
   expect(screen.getByText('Waitlist')).toBeInTheDocument();
   expect(screen.getByText('TBC')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /request a slot/i })).toHaveAttribute('href', '/book');
 });
 
 test('TestimonialCard renders each category shape', () => {

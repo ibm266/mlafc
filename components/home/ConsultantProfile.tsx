@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
 
@@ -20,54 +19,41 @@ const CREDENTIALS = [
 export function ConsultantProfile() {
   return (
     <section aria-labelledby="profile-heading" className="bg-paper-soft">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-[2fr_3fr]">
+      <div className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
-          <figure className="overflow-hidden rounded-lg border border-line bg-paper shadow-sm">
-            <Image
-              src="/images/professor-gupta.png"
-              alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist"
-              width={573}
-              height={612}
-              className="aspect-[573/612] w-full object-cover object-top"
-            />
-          </figure>
+          <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">Meet your consultant</p>
+          <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
+            Professor Dhiraj Gupta
+          </h2>
+          <p className="mt-1 font-semibold text-ink-soft">MB BS, MD, DM, FRCP (London)</p>
         </Reveal>
-        <div>
-          <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">Meet your consultant</p>
-            <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
-              Professor Dhiraj Gupta
-            </h2>
-            <p className="mt-1 font-semibold text-ink-soft">MB BS, MD, DM, FRCP (London)</p>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-5 text-ink-soft">
-              Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the United Kingdom&apos;s
-              largest specialist cardiothoracic centre, since 2007. He is honorary Professor of Cardiology at the
-              University of Liverpool, Senior Lecturer at Imperial College London, and a medical advisor to the AF
-              Association, the UK&apos;s national charity for arrhythmia patients.
-            </p>
-            <p className="mt-4 text-ink-soft">
-              He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors
-              cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations
-              available in English, Hindi and Punjabi.
-            </p>
-          </Reveal>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {CREDENTIALS.map((c, i) => (
-              <Reveal key={c.n} delay={i * 70}>
-                <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
-                <p className="font-semibold">{c.title}</p>
-                <p className="text-sm text-ink-mute">{c.sub}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={300}>
-            <Link href="/journey" className="mt-8 inline-block font-semibold text-brass-deep hover:underline">
-              Follow the journey, 1988 - 2026 &rarr;
-            </Link>
-          </Reveal>
+        <Reveal delay={100}>
+          <p className="mt-5 max-w-3xl text-ink-soft">
+            Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the United Kingdom&apos;s
+            largest specialist cardiothoracic centre, since 2007. He is honorary Professor of Cardiology at the
+            University of Liverpool, Senior Lecturer at Imperial College London, and a medical advisor to the AF
+            Association, the UK&apos;s national charity for arrhythmia patients.
+          </p>
+          <p className="mt-4 max-w-3xl text-ink-soft">
+            He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors
+            cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations
+            available in English, Hindi and Punjabi.
+          </p>
+        </Reveal>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          {CREDENTIALS.map((c, i) => (
+            <Reveal key={c.n} delay={i * 70}>
+              <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
+              <p className="font-semibold">{c.title}</p>
+              <p className="text-sm text-ink-mute">{c.sub}</p>
+            </Reveal>
+          ))}
         </div>
+        <Reveal delay={300}>
+          <Link href="/journey" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            Follow the journey, 1988 - 2026 &rarr;
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

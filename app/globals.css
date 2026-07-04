@@ -39,11 +39,32 @@ body {
 }
 
 /* Shared reveal animation (driven by useReveal, Task 5) */
+.interactive {
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    opacity 200ms ease;
+}
+
+.card-hover {
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.card-hover:hover {
+  border-color: color-mix(in srgb, var(--color-brass) 35%, var(--color-line));
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-ink) 6%, transparent);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .reveal-visible {
   opacity: 1;
@@ -250,4 +271,27 @@ body {
   .mlafc-pin-active svg {
     transform: none;
   }
+
+  .faq-panel {
+    transition: none;
+  }
+}
+
+.faq-panel {
+  display: grid;
+  transition: grid-template-rows 200ms ease, opacity 200ms ease;
+}
+
+.faq-panel-closed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.faq-panel-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-panel-inner {
+  overflow: hidden;
 }

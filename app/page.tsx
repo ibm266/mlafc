@@ -8,6 +8,7 @@ import { TestimonialCard } from '@/components/TestimonialCard';
 import { VisitDates } from '@/components/VisitDates';
 import { CtaBand } from '@/components/CtaBand';
 import { Reveal } from '@/components/Reveal';
+import { ScrollProgress } from '@/components/ScrollProgress';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import locationsJson from '@/data/locations.json';
@@ -42,6 +43,7 @@ export default function Home() {
 
   return (
     <main id="main">
+      <ScrollProgress />
       <Hero />
       <StatsBand />
       <ComparisonCards />
@@ -59,7 +61,7 @@ export default function Home() {
             <LocationsMapLazy locations={locations} />
           </div>
           <Reveal delay={120}>
-            <Link href="/locations" className="mt-6 inline-block font-semibold text-brass hover:underline">
+            <Link href="/locations" className="interactive mt-6 inline-block font-semibold text-brass hover:underline">
               Explore every location &rarr;
             </Link>
           </Reveal>
@@ -129,7 +131,7 @@ export default function Home() {
             ))}
           </div>
           <Reveal delay={200}>
-            <Link href="/testimonials" className="mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            <Link href="/testimonials" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Read all 24 testimonials &rarr;
             </Link>
           </Reveal>

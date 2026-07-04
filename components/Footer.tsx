@@ -12,7 +12,7 @@ const pageLinks = [
 
 const patientLinks = [
   { href: '/journey', label: 'What to expect' },
-  { href: '/faqs', label: 'FAQs' },
+  { href: '/evidence#faq-heading', label: 'FAQs' },
   { href: '/book', label: 'Request an appointment' },
 ] as const;
 
@@ -22,7 +22,7 @@ function contactHref(kind: 'tel' | 'mailto', value: string) {
 
 export function Footer() {
   return (
-    <footer className="border-t border-line-dark bg-night text-paper">
+    <footer className="border-t border-line-dark bg-night pb-20 text-paper md:pb-14">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
           <Logo variant="dark" />
@@ -34,7 +34,7 @@ export function Footer() {
           <ul className="text-sm">
             {pageLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="block py-2.5 hover:text-brass">
+                <Link href={link.href} className="interactive block py-2.5 hover:text-brass">
                   {link.label}
                 </Link>
               </li>
@@ -47,7 +47,7 @@ export function Footer() {
           <ul className="text-sm">
             {patientLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="block py-2.5 hover:text-brass">
+                <Link href={link.href} className="interactive block py-2.5 hover:text-brass">
                   {link.label}
                 </Link>
               </li>
@@ -61,7 +61,7 @@ export function Footer() {
             <li>{site.address}</li>
             <li>
               {contactHref('tel', site.phone) ? (
-                <a href={contactHref('tel', site.phone)} className="hover:text-brass">
+                <a href={contactHref('tel', site.phone)} className="interactive hover:text-brass">
                   {site.phone}
                 </a>
               ) : (
@@ -70,7 +70,7 @@ export function Footer() {
             </li>
             <li>
               {contactHref('mailto', site.email) ? (
-                <a href={contactHref('mailto', site.email)} className="hover:text-brass">
+                <a href={contactHref('mailto', site.email)} className="interactive hover:text-brass">
                   {site.email}
                 </a>
               ) : (

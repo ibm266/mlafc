@@ -29,7 +29,7 @@ export default function JourneyPage() {
       <section className="mx-auto max-w-6xl px-5 pb-20">
         <Link
           href="/book"
-          className="inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
+          className="interactive inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
         >
           Book a consultation
         </Link>

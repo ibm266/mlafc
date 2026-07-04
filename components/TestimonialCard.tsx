@@ -15,7 +15,7 @@ export function TestimonialCard({
   onOpenLetter?: (t: Testimonial) => void;
 }) {
   return (
-    <article className="flex h-full flex-col rounded-lg border border-line bg-white p-6">
+    <article className="card-hover flex h-full flex-col rounded-lg border border-line bg-white p-6">
       <div className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
         {t.category === 'news' ? (
           <span className="flex items-baseline justify-between gap-2 normal-case tracking-normal">
@@ -38,7 +38,7 @@ export function TestimonialCard({
         <button
           type="button"
           onClick={() => onOpenLetter(t)}
-          className="mt-4 self-start text-sm font-semibold text-brass-deep hover:underline"
+          className="interactive mt-4 self-start text-sm font-semibold text-brass-deep hover:underline"
         >
           Read full letter &rarr;
         </button>

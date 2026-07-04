@@ -1,28 +1,21 @@
 import Image from 'next/image';
 
-// Flipped to true in Task 15 once brand PNGs exist in public/brand/.
-export const USE_IMAGE_ASSETS = false;
-
 type Props = {
   variant: 'mark' | 'full' | 'dark';
   className?: string;
 };
 
-const FILES = {
-  mark: '/brand/logo-mark.png',
-  full: '/brand/logo-full.png',
-  dark: '/brand/logo-dark.png',
-} as const;
+const MARK_LOGO = '/brand/logo-mark.jpg';
 
 export function Logo({ variant, className = '' }: Props) {
-  if (USE_IMAGE_ASSETS) {
+  if (variant === 'mark') {
     return (
       <Image
-        src={FILES[variant]}
+        src={MARK_LOGO}
         alt="Mumbai London AF Clinic"
-        width={variant === 'mark' ? 44 : 220}
-        height={44}
-        className={className}
+        width={56}
+        height={56}
+        className={`h-12 w-12 object-contain sm:h-14 sm:w-14 ${className}`}
         priority
       />
     );
@@ -44,11 +37,9 @@ export function Logo({ variant, className = '' }: Props) {
         />
         <circle cx="40" cy="14" r="3" fill="currentColor" />
       </svg>
-      {variant !== 'mark' && (
-        <span className={`font-serif text-lg tracking-wide ${textColor}`}>
-          Mumbai London AF Clinic
-        </span>
-      )}
+      <span className={`font-serif text-lg tracking-wide ${textColor}`}>
+        Mumbai London AF Clinic
+      </span>
     </span>
   );
 }

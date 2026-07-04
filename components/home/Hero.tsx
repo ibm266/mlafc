@@ -48,17 +48,24 @@ export function Hero() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/book"
-                className="rounded-full bg-brass px-7 py-3.5 font-semibold text-night hover:bg-brass-deep hover:text-paper"
+                className="interactive rounded-full bg-brass px-7 py-3.5 font-semibold text-night hover:bg-brass-deep hover:text-paper"
               >
                 Book a consultation
               </Link>
               <Link
                 href="/evidence"
-                className="rounded-full border border-line-dark px-7 py-3.5 font-semibold text-paper hover:border-brass hover:text-brass"
+                className="interactive rounded-full border border-line-dark px-7 py-3.5 font-semibold text-paper hover:border-brass hover:text-brass"
               >
                 See the evidence
               </Link>
             </div>
+          </Reveal>
+          <Reveal delay={680}>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-line-dark/50 pt-6 text-sm text-paper/80">
+              <li>GMC registered</li>
+              <li>Liverpool Heart and Chest Hospital</li>
+              <li>English · Hindi · Punjabi</li>
+            </ul>
           </Reveal>
           <Reveal delay={750} className="mt-10 max-w-xl border-l-2 border-brass pl-6">
             <p className="font-serif text-xl italic leading-relaxed text-paper/90">

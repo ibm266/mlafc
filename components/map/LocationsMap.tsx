@@ -134,7 +134,7 @@ export default function LocationsMap({
   const geometry = GEOMETRY[country];
 
   const bubbleBase =
-    'rounded-full px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass';
+    'interactive cursor-pointer rounded-full px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass';
   const bubbleActive = 'bg-brass text-night shadow-md';
   const bubbleIdle = 'border border-line-dark bg-night-soft text-paper hover:border-brass hover:text-brass';
 
@@ -232,7 +232,7 @@ export default function LocationsMap({
                 {active.readMore ? (
                   <Link
                     href={active.readMore}
-                    className="mt-4 inline-block font-semibold text-brass hover:underline"
+                    className="interactive mt-4 inline-block font-semibold text-brass hover:underline"
                   >
                     Read more &rarr;
                   </Link>

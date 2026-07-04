@@ -109,7 +109,7 @@ export default function EvidencePage() {
           <Reveal delay={100}>
             <Link
               href="/book"
-              className="mt-12 inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
+              className="interactive mt-12 inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
             >
               Book a consultation
             </Link>
