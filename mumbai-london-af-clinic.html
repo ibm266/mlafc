@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mumbai London AF Clinic — Specialist atrial fibrillation care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E2A2E;
+    --ink-soft: #2C4448;
+    --ink-mute: #5C7176;
+    --cream: #F5F0E6;
+    --cream-deep: #EDE5D3;
+    --paper: #FBF8F2;
+    --rule: #D8CFB9;
+    --accent: #B8552B;
+    --accent-deep: #8C3F1F;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--ink); color: var(--cream); }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 0;
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+  .logo-text {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    border-left: 1px solid var(--rule);
+    padding-left: 14px;
+  }
+  .logo-text .sep {
+    font-style: italic;
+    color: var(--ink-mute);
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--cream) !important;
+    padding: 10px 18px;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.02em;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--cream) !important; }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero-mark {
+    padding: 64px 0 0;
+    text-align: center;
+  }
+  .hero-mark img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    opacity: 0;
+    animation: markIn 1.1s ease forwards;
+    animation-delay: 0.1s;
+  }
+  @keyframes markIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero {
+    padding: 60px 0 100px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(44px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero-lead {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: 44px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 16px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-secondary {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 16px 4px;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--accent); border-color: var(--accent); }
+
+  .hero-aside {
+    border-left: 1px solid var(--rule);
+    padding-left: 40px;
+    padding-bottom: 8px;
+  }
+  .hero-aside-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
+  }
+  .hero-aside-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+  .hero-aside-attr {
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  .hero-aside-attr strong {
+    color: var(--ink);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ── STATS BAR ──────────────────────────── */
+  .stats {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: 0 32px;
+    border-right: 1px solid var(--rule);
+  }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .stat-num sup {
+    font-size: 24px;
+    color: var(--accent);
+    vertical-align: super;
+    font-style: italic;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ── PROFILE SECTION ────────────────────── */
+  .profile {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .profile-img {
+    aspect-ratio: 4/5;
+    background: var(--cream-deep);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-mute);
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    position: relative;
+  }
+  .profile-img::after {
+    content: 'Photograph of Prof. Gupta';
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    font-style: normal;
+    font-family: var(--sans);
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .profile h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .profile-creds {
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+  .profile p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    max-width: 580px;
+  }
+  .credentials {
+    margin-top: 40px;
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+  }
+  .credential {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .credential-num {
+    font-family: var(--serif);
+    color: var(--accent);
+    font-size: 14px;
+    min-width: 24px;
+    font-style: italic;
+  }
+  .credential-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .credential-sub {
+    color: var(--ink-mute);
+    font-size: 13px;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── HOW IT WORKS ─────────────────────── */
+  .process {
+    padding: 120px 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head {
+    margin-bottom: 72px;
+    max-width: 700px;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .section-head p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .step {
+    background: var(--cream);
+    padding: 44px 36px;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
+  }
+  .step h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* ── SERVICES ─────────────────────────── */
+  .services {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .service-col h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: -0.01em;
+  }
+  .service-list {
+    list-style: none;
+  }
+  .service-list li {
+    font-size: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .service-list li::before {
+    content: '—';
+    color: var(--accent);
+    font-family: var(--serif);
+  }
+  .service-list li:last-child { border-bottom: none; }
+
+  /* ── REFERRAL BAND ────────────────────── */
+  .referral {
+    padding: 100px 0;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .referral-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+  }
+  .referral .section-eyebrow { color: var(--cream-deep); }
+  .referral h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--cream);
+  }
+  .referral p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--cream-deep);
+    max-width: 560px;
+  }
+  .btn-cream {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 18px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-cream:hover { background: var(--accent); color: var(--cream); }
+
+  /* ── VISITS ───────────────────────────── */
+  .visits {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .visits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .visits h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .visits-text p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .visits-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 40px;
+  }
+  .visits-card-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+  }
+  .visit-date {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .visit-date:last-child { border-bottom: none; }
+  .visit-month {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .visit-month em {
+    color: var(--accent);
+    font-style: italic;
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .visit-status {
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .visit-status.open { color: var(--accent); }
+
+  /* ── FOOTER ───────────────────────────── */
+  footer {
+    background: var(--cream-deep);
+    padding: 80px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .footer-brand img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .footer-brand .dot {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    transform: translateY(-3px);
+  }
+  .footer-tag {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .footer-col a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink-mute);
+  }
+
+  /* ── RESPONSIVE ───────────────────────── */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-links .nav-cta { display: inline-block; font-size: 12px !important; padding: 8px 14px; }
+    .logo-mark { height: 32px; }
+    .logo-text { font-size: 16px; padding-left: 12px; gap: 6px; }
+    .hero-mark { padding: 40px 0 0; }
+    .hero-mark img { max-width: 240px; }
+    .hero { padding: 50px 0 70px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .hero-aside { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 40px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+    .stat { border-right: none; padding: 0 24px; border-bottom: 1px solid var(--rule); padding-bottom: 32px; }
+    .stat:nth-child(2) { padding-right: 0; }
+    .stat:nth-child(odd) { padding-left: 0; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; padding-top: 32px; }
+    .stat-num { font-size: 44px; }
+    .profile-grid { grid-template-columns: 1fr; gap: 60px; }
+    .credentials { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; gap: 60px; }
+    .referral-grid { grid-template-columns: 1fr; gap: 32px; }
+    .visits-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .section-head h2, .visits h2, .profile h2, .referral h2 { font-size: 34px; }
+  }
+
+  /* ── SUBTLE ENTRANCE ─────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .fade-in.d1 { animation-delay: 0.1s; }
+  .fade-in.d2 { animation-delay: 0.2s; }
+  .fade-in.d3 { animation-delay: 0.35s; }
+  .fade-in.d4 { animation-delay: 0.5s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="" class="logo-mark">
+      <span class="logo-text">Mumbai London<span class="sep">·</span>AF Clinic</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#process">How it works</a>
+      <a href="#services">Conditions & treatments</a>
+      <a href="#referral">For doctors</a>
+      <a href="#visits">Visit dates</a>
+      <a href="#book" class="nav-cta">Book consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO MARK -->
+<section class="hero-mark">
+  <div class="container">
+    <img src="logo.png" alt="Mumbai London AF Clinic">
+  </div>
+</section>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow fade-in">Specialist atrial fibrillation care · Mumbai</div>
+      <h1 class="fade-in d1">London-trained expertise<br>in <em>matters of the heart</em>, now in Mumbai.</h1>
+      <p class="hero-lead fade-in d2">For patients living with atrial fibrillation and other heart rhythm disorders, Mumbai London AF Clinic brings the experience of one of the United Kingdom's leading electrophysiologists to India — supported by trusted local cardiologists between visits.</p>
+      <div class="cta-row fade-in d3">
+        <a href="#book" class="btn-primary">Book a consultation</a>
+        <a href="#about" class="btn-secondary">Learn more</a>
+      </div>
+    </div>
+    <aside class="hero-aside fade-in d4">
+      <div class="hero-aside-label">Founder & lead consultant</div>
+      <p class="hero-aside-quote">"Patients in Mumbai deserve the same standard of arrhythmia care I provide in Liverpool — with the dignity of being treated close to home."</p>
+      <div class="hero-aside-attr">
+        <strong>Professor Dhiraj Gupta</strong>
+        Consultant cardiologist & electrophysiologist
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat">
+      <div class="stat-num">5,000<sup>+</sup></div>
+      <div class="stat-label">AF ablation procedures performed — placing him among the highest-volume operators in the world</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">350<sup>+</sup></div>
+      <div class="stat-label">Peer-reviewed scientific publications, cited over 13,000 times</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">18<sup>+</sup></div>
+      <div class="stat-label">Years as consultant at Liverpool Heart and Chest Hospital, the UK's largest cardiothoracic centre</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">&lt;1<sup>%</sup></div>
+      <div class="stat-label">Complication rate — published in peer-reviewed journals, on par with the world's best</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="about">
+  <div class="container profile-grid">
+    <div class="profile-img">portrait placeholder</div>
+    <div>
+      <div class="section-eyebrow">Meet your consultant</div>
+      <h2>Professor Dhiraj Gupta</h2>
+      <div class="profile-creds">MB BS, MD, DM, FRCP (London)</div>
+
+      <p>Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital — the United Kingdom's largest specialist cardiothoracic centre — since 2007. He is honorary Professor of Cardiology at the University of Liverpool, Senior Lecturer at Imperial College London, and a medical advisor to the AF Association, the UK's national charity for arrhythmia patients.</p>
+
+      <p>He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations available in English, Hindi and Punjabi.</p>
+
+      <div class="credentials">
+        <div class="credential">
+          <span class="credential-num">i.</span>
+          <div class="credential-text">NHS National Silver Clinical Excellence Award<span class="credential-sub">Awarded 2021. Earlier Bronze in 2017.</span></div>
+        </div>
+        <div class="credential">
+          <span class="credential-num">ii.</span>
+          <div class="credential-text">Arrhythmia Alliance Excellence in Practice Award<span class="credential-sub">Outstanding contribution to UK arrhythmia services</span></div>
+        </div>
+        <div class="credential">
+          <span class="credential-num">iii.</span>
+          <div class="credential-text">Chief Investigator, multi-centre AF trials<span class="credential-sub">PRESSURE · SMAAN-PAF · PRAISE · VISTAX · CRAFT</span></div>
+        </div>
+        <div class="credential">
+          <span class="credential-num">iv.</span>
+          <div class="credential-text">Author, British Heart Foundation AF booklet<span class="credential-sub">National patient education resource</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">How the Mumbai clinic works</div>
+      <h2>London expertise. Mumbai care. Continuous follow-up.</h2>
+      <p>Professor Gupta visits Mumbai for in-person consultations and procedures during scheduled clinic dates. Between visits, your care is coordinated with trusted local cardiologists — so you are never without a doctor close to home.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">i. Consultation</div>
+        <h3>An unhurried first visit</h3>
+        <p>Meet Professor Gupta in person during his scheduled Mumbai clinics. He reviews your history, tests and symptoms in detail, and explains your options clearly — in English, Hindi or Punjabi.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">ii. Treatment</div>
+        <h3>Procedure in Mumbai</h3>
+        <p>If a procedure is needed — catheter ablation, LAA occlusion, pacemaker or device — it is performed in Mumbai with our partner hospital teams, to the same protocol Professor Gupta uses in the UK.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iii. Follow-up</div>
+        <h3>Continuity, locally</h3>
+        <p>Your ongoing care is managed by trusted Mumbai cardiologists with Professor Gupta supervising remotely. You get specialist oversight without flying anywhere for routine follow-up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Conditions & treatments</div>
+      <h2>What we look after.</h2>
+      <p>The clinic specialises in disorders of heart rhythm — when the heart beats too fast, too slow, or irregularly — and the procedures used to correct them.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-col">
+        <h3>Conditions we treat</h3>
+        <ul class="service-list">
+          <li>Atrial fibrillation (AF)</li>
+          <li>Atrial flutter</li>
+          <li>Supraventricular tachycardia (SVT)</li>
+          <li>Palpitations & unexplained heart racing</li>
+          <li>Unexplained blackouts & dizziness</li>
+          <li>Bradycardia (slow heart rhythms)</li>
+        </ul>
+      </div>
+      <div class="service-col">
+        <h3>Procedures offered</h3>
+        <ul class="service-list">
+          <li>Catheter ablation for atrial fibrillation</li>
+          <li>Ablation for SVT and other arrhythmias</li>
+          <li>Left atrial appendage occlusion (LAAO)</li>
+          <li>Pacemaker implantation</li>
+          <li>Implantable defibrillators (ICDs)</li>
+          <li>Cardiac resynchronisation therapy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERRAL -->
+<section class="referral" id="referral">
+  <div class="container referral-grid">
+    <div>
+      <div class="section-eyebrow">For referring doctors</div>
+      <h2>A streamlined pathway for your AF patients.</h2>
+      <p>Send case notes ahead of Professor Gupta's next Mumbai visit. We coordinate scheduling, imaging review and shared follow-up with you — so your patient stays under your care while gaining specialist input on complex rhythm questions.</p>
+    </div>
+    <a href="#" class="btn-cream">Refer a patient →</a>
+  </div>
+</section>
+
+<!-- VISITS -->
+<section class="visits" id="visits">
+  <div class="container visits-grid">
+    <div class="visits-text">
+      <div class="section-eyebrow">Upcoming Mumbai visits</div>
+      <h2>Limited slots. Plan ahead.</h2>
+      <p>Professor Gupta consults and operates in Mumbai during scheduled visits across the year. Slots are limited and tend to fill several weeks in advance — early enquiries are encouraged.</p>
+      <p>For urgent rhythm concerns, please contact your local cardiologist or emergency services first.</p>
+    </div>
+    <div class="visits-card">
+      <div class="visits-card-label">Next clinic dates</div>
+      <div class="visit-date">
+        <div>
+          <div class="visit-month">[Month] 2026<em>Consultations & procedures</em></div>
+        </div>
+        <div class="visit-status open">Booking open</div>
+      </div>
+      <div class="visit-date">
+        <div>
+          <div class="visit-month">[Month] 2026<em>Consultations & procedures</em></div>
+        </div>
+        <div class="visit-status">Waitlist</div>
+      </div>
+      <div class="visit-date">
+        <div>
+          <div class="visit-month">[Month] 2026<em>To be confirmed</em></div>
+        </div>
+        <div class="visit-status">TBC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="logo.png" alt="">Mumbai London AF Clinic</div>
+        <p class="footer-tag">Specialist care for atrial fibrillation and other heart rhythm disorders, led by Professor Dhiraj Gupta of Liverpool Heart and Chest Hospital.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Clinic</h4>
+        <ul>
+          <li><a href="#about">About Prof. Gupta</a></li>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#visits">Visit dates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="#services">Conditions</a></li>
+          <li><a href="#services">Procedures</a></li>
+          <li><a href="#book">Book consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">Mumbai address</a></li>
+          <li><a href="#">+91 (placeholder)</a></li>
+          <li><a href="#">hello@mumbailondonaf.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© Mumbai London AF Clinic. All rights reserved.</div>
+      <div>Privacy · Terms · Medical disclaimer</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

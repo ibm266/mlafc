@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The journey · Professor Dhiraj Gupta · Mumbai London AF Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E2A2E;
+    --ink-soft: #2C4448;
+    --ink-mute: #5C7176;
+    --cream: #F5F0E6;
+    --cream-deep: #EDE5D3;
+    --paper: #FBF8F2;
+    --rule: #D8CFB9;
+    --rule-soft: #E8DFC8;
+    --accent: #B8552B;
+    --accent-deep: #8C3F1F;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--ink); color: var(--cream); }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── NAV ─────────────────────────────── */
+  nav {
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 0;
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+  .logo-text {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    border-left: 1px solid var(--rule);
+    padding-left: 14px;
+  }
+  .logo-text .sep {
+    font-style: italic;
+    color: var(--ink-mute);
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--cream) !important;
+    padding: 10px 18px;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.02em;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--cream) !important; }
+
+  /* ── PAGE INTRO ─────────────────────── */
+  .intro-mark {
+    text-align: center;
+    padding-top: 60px;
+  }
+  .intro-mark img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
+  }
+  .intro {
+    padding: 32px 0 80px;
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .intro .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .intro .eyebrow::before, .intro .eyebrow::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .intro h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .intro h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .scroll-cue {
+    margin-top: 60px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  .scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 36px;
+    background: var(--ink-mute);
+    display: inline-block;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  /* ── TIMELINE LAYOUT ────────────────── */
+  .timeline-section {
+    position: relative;
+    padding: 0;
+  }
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+
+  /* LEFT: sticky photo panel */
+  .photo-panel {
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px 40px 0;
+  }
+  .photo-stage {
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 4/5;
+    position: relative;
+    background: var(--cream-deep);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .photo-frame {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+    padding: 40px;
+    text-align: center;
+    background: var(--cream-deep);
+  }
+  .photo-frame.active { opacity: 1; }
+  .photo-frame .placeholder-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+  }
+  .photo-frame .photo-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .photo-frame .photo-caption {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 280px;
+  }
+  .photo-frame .photo-decor {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 24px 0;
+  }
+  .photo-counter {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+
+  /* Sticky year tag floating at edge of photo */
+  .year-marker {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: translateY(8px);
+  }
+  .year-marker.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .year-marker .year-sub {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-top: 6px;
+  }
+
+  /* RIGHT: scrolling content */
+  .content-panel {
+    padding: 80px 0 80px 60px;
+    border-left: 1px solid var(--rule);
+  }
+  .milestone {
+    min-height: 80vh;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.4;
+    transition: opacity 0.6s ease;
+  }
+  .milestone.in-view { opacity: 1; }
+  .milestone:last-child { border-bottom: none; }
+
+  .milestone-marker {
+    position: absolute;
+    left: -68px;
+    top: calc(50% - 8px);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    transition: background 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+  }
+  .milestone.in-view .milestone-marker {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.15);
+  }
+
+  .milestone-year {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .milestone-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .milestone h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .milestone h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .milestone p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 16px;
+  }
+  .milestone p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .milestone-meta {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    max-width: 540px;
+  }
+  .milestone-meta strong {
+    color: var(--ink);
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Vertical progress line */
+  .progress-rail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--accent) 0%, var(--accent) var(--progress, 0%), var(--rule) var(--progress, 0%), var(--rule));
+    transition: --progress 0.1s linear;
+  }
+
+  /* ── OUTRO / CTA ─────────────────────── */
+  .outro {
+    padding: 140px 0 120px;
+    background: var(--ink);
+    color: var(--cream);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .outro .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream-deep);
+    margin-bottom: 28px;
+  }
+  .outro h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--cream);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .outro h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .outro p {
+    font-size: 17px;
+    color: var(--cream-deep);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto 44px;
+  }
+  .btn-cream {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 18px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    display: inline-block;
+    margin: 0 6px;
+  }
+  .btn-cream:hover { background: var(--accent); color: var(--cream); }
+  .btn-outline {
+    color: var(--cream);
+    text-decoration: none;
+    border: 1px solid var(--cream-deep);
+    padding: 17px 32px;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    display: inline-block;
+    margin: 0 6px;
+  }
+  .btn-outline:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+
+  /* ── FOOTER ─────────────────────────── */
+  footer {
+    background: var(--cream-deep);
+    padding: 60px 0 32px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  footer .footer-brand img {
+    height: 40px;
+    width: auto;
+  }
+
+  /* ── RESPONSIVE ─────────────────────── */
+  @media (max-width: 900px) {
+    .container, .timeline-grid { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-links .nav-cta { display: inline-block; font-size: 12px !important; padding: 8px 14px; }
+    .logo-mark { height: 32px; }
+    .logo-text { font-size: 16px; padding-left: 12px; gap: 6px; }
+    .intro-mark { padding-top: 40px; }
+    .intro-mark img { max-width: 150px; }
+    .intro { padding: 24px 0 50px; }
+    .timeline-grid {
+      grid-template-columns: 1fr;
+    }
+    .photo-panel {
+      position: relative;
+      top: 0;
+      height: auto;
+      padding: 30px 0;
+      display: none; /* On mobile, photo embeds inside each milestone instead */
+    }
+    .content-panel {
+      padding: 40px 0 40px 32px;
+      border-left: 1px solid var(--rule);
+    }
+    .milestone {
+      min-height: auto;
+      padding: 50px 0;
+    }
+    .milestone-marker { left: -40px; }
+    .milestone h2 { font-size: 30px; }
+    .milestone-mobile-photo {
+      display: block;
+      aspect-ratio: 4/5;
+      max-width: 280px;
+      margin-bottom: 30px;
+      background: var(--cream-deep);
+      border: 1px solid var(--rule);
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .milestone-mobile-photo .placeholder-label {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-mute);
+    }
+    .milestone-mobile-photo .photo-title-m {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      margin-top: 10px;
+    }
+  }
+  @media (min-width: 901px) {
+    .milestone-mobile-photo { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="mumbai-london-af-clinic.html" class="logo">
+      <img src="logo.png" alt="" class="logo-mark">
+      <span class="logo-text">Mumbai London<span class="sep">·</span>AF Clinic</span>
+    </a>
+    <div class="nav-links">
+      <a href="mumbai-london-af-clinic.html#about">About</a>
+      <a href="#" class="active">The journey</a>
+      <a href="mumbai-london-af-clinic.html#services">Conditions & treatments</a>
+      <a href="mumbai-london-af-clinic.html#visits">Visit dates</a>
+      <a href="mumbai-london-af-clinic.html#book" class="nav-cta">Book consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section class="intro-mark">
+  <div class="container">
+    <img src="logo.png" alt="">
+  </div>
+</section>
+<section class="intro">
+  <div class="container">
+    <div class="eyebrow">The journey · 1988 — 2026</div>
+    <h1>Three decades in <em>matters of the heart</em>.</h1>
+    <p>From a medical school classroom in India to one of the United Kingdom's most active electrophysiology theatres — the path that brought Professor Gupta back to Mumbai.</p>
+    <div class="scroll-cue">Scroll to begin</div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="timeline-grid">
+
+    <!-- LEFT: Sticky photo panel -->
+    <div class="photo-panel">
+      <div class="photo-stage">
+
+        <div class="year-marker active" data-year="1988">
+          1988
+          <span class="year-sub">The beginning</span>
+        </div>
+        <div class="year-marker" data-year="1994">
+          1994
+          <span class="year-sub">Qualified</span>
+        </div>
+        <div class="year-marker" data-year="2000">
+          2000
+          <span class="year-sub">London</span>
+        </div>
+        <div class="year-marker" data-year="2007">
+          2007
+          <span class="year-sub">Liverpool</span>
+        </div>
+        <div class="year-marker" data-year="2009">
+          2009
+          <span class="year-sub">High-volume</span>
+        </div>
+        <div class="year-marker" data-year="2012">
+          2012
+          <span class="year-sub">FRCP</span>
+        </div>
+        <div class="year-marker" data-year="2014">
+          2014
+          <span class="year-sub">National award</span>
+        </div>
+        <div class="year-marker" data-year="2017">
+          2017
+          <span class="year-sub">NHS Bronze</span>
+        </div>
+        <div class="year-marker" data-year="2022">
+          2022
+          <span class="year-sub">NHS Silver</span>
+        </div>
+        <div class="year-marker" data-year="2024">
+          2024
+          <span class="year-sub">Professor</span>
+        </div>
+        <div class="year-marker" data-year="2026">
+          2026
+          <span class="year-sub">Mumbai</span>
+        </div>
+
+        <!-- Photo frames (one per milestone) -->
+        <div class="photo-frame active" data-frame="1988">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Medical school</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">A young student in India, beginning a six-year MB BS programme with cardiology already in mind.</div>
+        </div>
+        <div class="photo-frame" data-frame="1994">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Graduation</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Qualified MB BS — the first formal step on a path that would take him to London and Liverpool.</div>
+        </div>
+        <div class="photo-frame" data-frame="2000">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Commonwealth Fellow</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Awarded the Commonwealth Fellowship in Cardiac Electrophysiology — training in the UK begins.</div>
+        </div>
+        <div class="photo-frame" data-frame="2007">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">LHCH</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Appointed consultant cardiologist & electrophysiologist at Liverpool Heart and Chest Hospital.</div>
+        </div>
+        <div class="photo-frame" data-frame="2009">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">In theatre</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Begins performing 200+ AF ablation cases every year — a pace he has maintained since.</div>
+        </div>
+        <div class="photo-frame" data-frame="2012">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">FRCP, London</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Elected Fellow of the Royal College of Physicians — one of British medicine's senior distinctions.</div>
+        </div>
+        <div class="photo-frame" data-frame="2014">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Excellence in Practice</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Receives the Arrhythmia Alliance Excellence in Practice Award for outstanding contribution to UK arrhythmia services.</div>
+        </div>
+        <div class="photo-frame" data-frame="2017">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">NHS recognition</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Awarded the NHS National Bronze Clinical Excellence Award.</div>
+        </div>
+        <div class="photo-frame" data-frame="2022">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">NHS Silver</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Promoted to NHS National Silver Clinical Excellence Award — a small fraction of consultants reach this.</div>
+        </div>
+        <div class="photo-frame" data-frame="2024">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Professorship</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Appointed honorary Professor of Cardiology at the University of Liverpool.</div>
+        </div>
+        <div class="photo-frame" data-frame="2026">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title">Mumbai</div>
+          <div class="photo-decor"></div>
+          <div class="photo-caption">Mumbai London AF Clinic opens — bringing thirty years of UK practice back to the city where the journey began.</div>
+        </div>
+
+        <div class="photo-counter"><span id="counter">01</span> / 11</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Scrolling milestones -->
+    <div class="content-panel">
+
+      <article class="milestone in-view" data-milestone="1988">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">Medical school</div>
+        </div>
+        <div class="milestone-year">1988 — 1994</div>
+        <div class="milestone-tag">Foundation</div>
+        <h2>A medical student with <em>a destination in mind.</em></h2>
+        <p>Professor Gupta begins his MB BS in India in 1988. He set his sights on a career in cardiology early — long before specialisation was supposed to be on his mind — and qualified six years later as a doctor with a clear chosen path.</p>
+        <div class="milestone-meta">
+          <strong>Milestone</strong>
+          MB BS qualified, 1994
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2000">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">Commonwealth Fellow</div>
+        </div>
+        <div class="milestone-year">2000</div>
+        <div class="milestone-tag">London calling</div>
+        <h2>The <em>Commonwealth Fellowship</em> in Cardiac Electrophysiology.</h2>
+        <p>One of the small handful of awards each year that brings exceptional young doctors from across the Commonwealth to the United Kingdom for advanced training, the Fellowship marks the formal beginning of his electrophysiology career — the discipline of treating the heart's electrical system.</p>
+        <p>He completes specialist training in the UK, including MD and DM higher degrees, MRCP membership, and the years of supervised practice required before consultant appointment.</p>
+        <div class="milestone-meta">
+          <strong>Qualifications gained</strong>
+          MD · DM · MRCP
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2007">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">LHCH</div>
+        </div>
+        <div class="milestone-year">2007</div>
+        <div class="milestone-tag">Consultant</div>
+        <h2>Appointed at <em>Liverpool Heart and Chest Hospital.</em></h2>
+        <p>LHCH is the United Kingdom's largest specialist cardiothoracic centre. It provides a regional electrophysiology service to a population of <strong>2.8 million people</strong> across the North West of England — a referral catchment larger than the city of Mumbai's Greater Mumbai region.</p>
+        <p>Professor Gupta has been in continuous full-time practice there since.</p>
+        <div class="milestone-meta">
+          <strong>Position held since</strong>
+          18+ years and counting
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2009">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">200+ a year</div>
+        </div>
+        <div class="milestone-year">2009</div>
+        <div class="milestone-tag">High-volume practice</div>
+        <h2>200 ablations a year. <em>Every year.</em></h2>
+        <p>From 2009 onwards, Professor Gupta consistently performs over 200 catheter ablation procedures for atrial fibrillation each year — placing him among the highest-volume operators in the United Kingdom.</p>
+        <p>Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing under 50 ablations a year have measurably worse complication rates than those above 200.</p>
+        <div class="milestone-meta">
+          <strong>Career total to date</strong>
+          5,000+ AF ablations · &lt;1% complication rate
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2012">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">FRCP, London</div>
+        </div>
+        <div class="milestone-year">2012</div>
+        <div class="milestone-tag">Royal College</div>
+        <h2>Elected <em>FRCP, London.</em></h2>
+        <p>The Fellowship of the Royal College of Physicians is conferred on senior physicians who have practised as substantive consultants for over five years and who have made a recognised contribution to medicine.</p>
+        <p>It is, in British medicine, the post-nominal that matters — and the one that Mumbai families will recognise from generations of Indian doctors who trained in London.</p>
+        <div class="milestone-meta">
+          <strong>Royal College of Physicians, London</strong>
+          Fellow since 2012
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2014">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">Excellence in Practice</div>
+        </div>
+        <div class="milestone-year">2014</div>
+        <div class="milestone-tag">National recognition</div>
+        <h2>The <em>Arrhythmia Alliance</em> Excellence in Practice Award.</h2>
+        <p>Awarded annually for "Outstanding Individual who has contributed to Arrhythmia Services" in the UK. The same year, the Primary Care Atrial Fibrillation pathway he helped develop won "Anticoagulation Innovation of the Year" from the British Medical Association — and he was invited to speak at the All-Party Parliamentary Group on Atrial Fibrillation in Westminster.</p>
+        <div class="milestone-meta">
+          <strong>2014 alone</strong>
+          National practice award · BMA innovation award · Westminster invited speaker
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2017">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">NHS Bronze</div>
+        </div>
+        <div class="milestone-year">2017</div>
+        <div class="milestone-tag">NHS Bronze</div>
+        <h2>NHS National <em>Clinical Excellence Award.</em></h2>
+        <p>The NHS Clinical Excellence Awards recognise consultants who deliver work over and above the standard expected of their role — assessed nationally against a competitive field of senior doctors. The Bronze level is itself uncommon; Professor Gupta would receive it in 2017.</p>
+        <div class="milestone-meta">
+          <strong>NHS recognition</strong>
+          National Bronze Award, 2017
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2022">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">NHS Silver</div>
+        </div>
+        <div class="milestone-year">2022</div>
+        <div class="milestone-tag">NHS Silver</div>
+        <h2>Promoted to <em>NHS Silver.</em></h2>
+        <p>Five years after Bronze, Professor Gupta is awarded the NHS National Silver Clinical Excellence Award. Only a small fraction of NHS consultants are recognised at this level.</p>
+        <p>The Silver award reflects sustained national-level contribution — not just to clinical practice, but to research, teaching and the wider profession.</p>
+        <div class="milestone-meta">
+          <strong>NHS recognition</strong>
+          National Silver Award, 2022
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2024">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">Professor</div>
+        </div>
+        <div class="milestone-year">2024</div>
+        <div class="milestone-tag">Academic</div>
+        <h2>Honorary <em>Professor of Cardiology.</em></h2>
+        <p>Appointed honorary Professor of Cardiology at the University of Liverpool, alongside an existing Senior Lectureship at Imperial College London held since 2011.</p>
+        <p>By this point, Professor Gupta has authored more than <strong>350 peer-reviewed scientific publications</strong>, cited over 13,000 times — and has secured around <strong>£5 million</strong> in competitive research grants from the NIHR, British Heart Foundation and industry. He serves as Chief Investigator for five multicentre clinical trials: PRESSURE, SMAAN-PAF, PRAISE, VISTAX and CRAFT.</p>
+        <div class="milestone-meta">
+          <strong>Academic record</strong>
+          350+ publications · 13,000+ citations · £5M in research grants
+        </div>
+      </article>
+
+      <article class="milestone" data-milestone="2026">
+        <div class="milestone-marker"></div>
+        <div class="milestone-mobile-photo">
+          <div class="placeholder-label">photograph</div>
+          <div class="photo-title-m">Mumbai</div>
+        </div>
+        <div class="milestone-year">2026</div>
+        <div class="milestone-tag">Mumbai London AF Clinic</div>
+        <h2>And now, <em>home.</em></h2>
+        <p>Mumbai London AF Clinic opens — bringing more than thirty years of UK electrophysiology practice back to the city where the journey began.</p>
+        <p>Professor Gupta visits Mumbai for in-person consultations and procedures during scheduled clinic dates. Trusted local cardiologists provide continuity of care between visits, with his ongoing supervision.</p>
+        <p>The same standard of arrhythmia care he provides at Liverpool — with the dignity of being treated close to home.</p>
+        <div class="milestone-meta">
+          <strong>Today</strong>
+          Specialist atrial fibrillation care · Mumbai
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="container">
+    <div class="eyebrow">Begin your own journey</div>
+    <h2>From <em>diagnosis</em> to a treated heart, in fewer steps than you think.</h2>
+    <p>Book a consultation during Professor Gupta's next Mumbai visit, or send your case notes ahead of time to begin a conversation.</p>
+    <a href="mumbai-london-af-clinic.html#book" class="btn-cream">Book a consultation</a>
+    <a href="mumbai-london-af-clinic.html" class="btn-outline">Back to homepage</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-brand"><img src="logo.png" alt="">Mumbai London AF Clinic</div>
+    <div>© Mumbai London AF Clinic. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer to track which milestone is in view
+  const milestones = document.querySelectorAll('.milestone');
+  const photoFrames = document.querySelectorAll('.photo-frame');
+  const yearMarkers = document.querySelectorAll('.year-marker');
+  const counter = document.getElementById('counter');
+  const totalMilestones = milestones.length;
+
+  function setActive(year, index) {
+    // Update photo frames
+    photoFrames.forEach(frame => {
+      frame.classList.toggle('active', frame.dataset.frame === year);
+    });
+    // Update year marker
+    yearMarkers.forEach(marker => {
+      marker.classList.toggle('active', marker.dataset.year === year);
+    });
+    // Update counter
+    if (counter) {
+      counter.textContent = String(index + 1).padStart(2, '0');
+    }
+    // Update milestone opacity
+    milestones.forEach((m, i) => {
+      m.classList.toggle('in-view', i === index);
+    });
+  }
+
+  // Use IntersectionObserver with a viewport line at 50% from top
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const year = entry.target.dataset.milestone;
+        const index = Array.from(milestones).indexOf(entry.target);
+        setActive(year, index);
+      }
+    });
+  }, {
+    rootMargin: '-40% 0px -40% 0px',
+    threshold: 0
+  });
+
+  milestones.forEach(m => observer.observe(m));
+
+  // Initialize first milestone as active
+  setActive('1988', 0);
+</script>
+
+</body>
+</html>
