@@ -1,0 +1,135 @@
+[
+  {
+    "id": "liverpool",
+    "name": "Liverpool Heart and Chest Hospital",
+    "country": "United Kingdom",
+    "lat": 53.4287,
+    "lng": -2.9044,
+    "role": "operated",
+    "years": "2007 — present",
+    "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year.",
+    "images": [],
+    "readMore": "/journey"
+  },
+  {
+    "id": "london-imperial",
+    "name": "Imperial College London",
+    "country": "United Kingdom",
+    "lat": 51.4988,
+    "lng": -0.1749,
+    "role": "taught",
+    "years": "2011 — present",
+    "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation.",
+    "images": []
+  },
+  {
+    "id": "manchester",
+    "name": "Manchester Royal Infirmary",
+    "country": "United Kingdom",
+    "lat": 53.4631,
+    "lng": -2.2339,
+    "role": "proctored",
+    "years": "2015 — 2023 [placeholder]",
+    "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "leeds",
+    "name": "Leeds General Infirmary",
+    "country": "United Kingdom",
+    "lat": 53.8013,
+    "lng": -1.5507,
+    "role": "proctored",
+    "years": "2016 — 2022 [placeholder]",
+    "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "birmingham",
+    "name": "Queen Elizabeth Hospital Birmingham",
+    "country": "United Kingdom",
+    "lat": 52.4536,
+    "lng": -1.9385,
+    "role": "taught",
+    "years": "2018 [placeholder]",
+    "blurb": "Delivered training sessions on cryoballoon and radiofrequency ablation technique. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "brugge",
+    "name": "AZ Sint-Jan, Brugge",
+    "country": "Belgium",
+    "lat": 51.2172,
+    "lng": 3.2200,
+    "role": "taught",
+    "years": "2019 — present [placeholder]",
+    "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "bordeaux",
+    "name": "Hôpital Cardiologique Haut-Lévêque, Bordeaux",
+    "country": "France",
+    "lat": 44.8083,
+    "lng": -0.6320,
+    "role": "taught",
+    "years": "2017 [placeholder]",
+    "blurb": "Invited faculty at one of Europe's leading electrophysiology centres. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "prague",
+    "name": "IKEM, Prague",
+    "country": "Czech Republic",
+    "lat": 50.0299,
+    "lng": 14.4632,
+    "role": "proctored",
+    "years": "2020 [placeholder]",
+    "blurb": "Proctored complex ablation cases with the institute's arrhythmia team. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "hamburg",
+    "name": "Asklepios Klinik St. Georg, Hamburg",
+    "country": "Germany",
+    "lat": 53.5559,
+    "lng": 10.0128,
+    "role": "taught",
+    "years": "2018 [placeholder]",
+    "blurb": "Guest operator and lecturer on high-volume AF ablation practice. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "boston",
+    "name": "Massachusetts General Hospital, Boston",
+    "country": "United States",
+    "lat": 42.3632,
+    "lng": -71.0686,
+    "role": "taught",
+    "years": "2019 [placeholder]",
+    "blurb": "Visiting faculty, presenting trial data and ablation technique to the cardiac arrhythmia service. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "austin",
+    "name": "Texas Cardiac Arrhythmia Institute, Austin",
+    "country": "United States",
+    "lat": 30.2711,
+    "lng": -97.7437,
+    "role": "taught",
+    "years": "2022 [placeholder]",
+    "blurb": "Invited speaker and collaborator on multicentre AF ablation research. [placeholder]",
+    "images": []
+  },
+  {
+    "id": "mumbai",
+    "name": "Mumbai London AF Clinic, Mumbai",
+    "country": "India",
+    "lat": 19.0760,
+    "lng": 72.8777,
+    "role": "operated",
+    "years": "2026 — present",
+    "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
+    "images": []
+  }
+]
