@@ -14,9 +14,17 @@ test('comparison section presents both technologies factually and elevates the o
   expect(screen.getByRole('heading', { name: /pulsed field ablation/i })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: /the operator/i })).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /see the evidence/i })).toHaveAttribute('href', '/evidence');
-  // GMC guardrail: no superiority language anywhere in the section
+  // GMC guardrail: no superiority or superlative language anywhere in the section
   const text = document.body.textContent!.toLowerCase();
-  for (const banned of ['safer than', 'better than', 'more effective than', 'superior to']) {
+  for (const banned of [
+    'safer than',
+    'better than',
+    'more effective than',
+    'superior to',
+    'superior',
+    'safest',
+    'most effective',
+  ]) {
     expect(text).not.toContain(banned);
   }
 });
