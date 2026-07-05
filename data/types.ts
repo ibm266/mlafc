@@ -66,6 +66,7 @@ export type Condition = {
   help: string;
   videoSrc?: string;
   posterSrc?: string;
+  ecgVariant?: 'af' | 'atrial-flutter' | 'svt' | 'palpitations' | 'blackouts' | 'bradycardia';
   videoAlt: string;
   isSymptom?: boolean;
 };

@@ -19,25 +19,49 @@ Read [style-bible.md](style-bible.md). All prompts must use those hex values and
 
 ## MCP workflow (mandatory order)
 
-### 0. Discover model constraints
+### 0. Folder structure
+
+| Stage | Path |
+|---|---|
+| Base reference | `reference/conditions/base/{slug}.png` |
+| Converted still | `public/conditions/converted/{slug}.png` |
+| Animated video | `public/conditions/animated/{slug}.mp4` |
+
+Generate the full converted still set from base references before animating any condition.
+
+### 1. Discover model constraints
 
 Call `models_explore` with `action: get` for `gpt_image_2` and `seedance_2_0`.
 Note `aspect_ratios`, `durations`, `medias[].roles`.
 
 Preflight credits: `generate_image` / `generate_video` with `get_cost: true`.
 
-### 1. Generate schematic still (GPT Image 2)
+### 2. Convert base reference (GPT Image 2 + reference images)
+
+Upload base image via `media_upload` → PUT → `media_confirm`.
+
+For conditions after AF, attach three references:
+1. `public/conditions/converted/af.png` — style master (palette, heart diagram, layout)
+2. `reference/conditions/base/{slug}.png` — condition content source
+3. `reference/conditions/base/af-animated-frame.png` — optional motion feel (keep cream palette from #1, not dark tones from frame)
 
 ```
 generate_image:
   model: gpt_image_2
   aspect_ratio: "16:9"
-  prompt: <STILL_PROMPT + style lock>
+  medias:
+    - value: <af_converted_media_id>
+      role: image
+    - value: <condition_base_media_id>
+      role: image
+    - value: <af_animated_frame_media_id>
+      role: image
+  prompt: <Match AF style exactly, swap condition-specific ECG and heart signals>
 ```
 
-Poll `job_status` until `completed`. QC still before video.
+Save to `public/conditions/converted/{slug}.png`. QC still before video.
 
-### 2. Animate still (Seedance 2.0)
+### 3. Animate converted still (Seedance 2.0)
 
 ```
 generate_video:
@@ -52,10 +76,10 @@ generate_video:
 
 If `ip_detected`: call `reveal_generation` after user confirms rights.
 
-### 3. Site integration
+### 4. Site integration
 
-- Video: `public/videos/conditions/{slug}.mp4`
-- Poster: `public/images/conditions/{slug}-poster.jpg`
+- Video: `public/conditions/animated/{slug}.mp4`
+- Poster: `public/conditions/converted/{slug}.png`
 - Data: `videoSrc` + `posterSrc` in `data/conditions.ts`
 
 ## Style lock (append to all prompts)

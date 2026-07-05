@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ConditionMedia } from '@/components/conditions/ConditionMedia';
 import { ConditionMediaPlaceholder } from '@/components/conditions/ConditionMediaPlaceholder';
+import { EcgComparisonAnimation } from '@/components/conditions/EcgComparisonAnimation';
 import { Reveal } from '@/components/Reveal';
 import type { Condition } from '@/data/types';
 
@@ -20,7 +21,11 @@ export function ConditionSection({ condition, index }: Props) {
     >
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-12 md:py-20">
         <div className="flex w-full items-center justify-center md:justify-center">
-          {condition.videoSrc && condition.posterSrc ? (
+          {condition.ecgVariant ? (
+            <Reveal className="w-full max-w-lg">
+              <EcgComparisonAnimation variant={condition.ecgVariant} alt={condition.videoAlt} />
+            </Reveal>
+          ) : condition.videoSrc && condition.posterSrc ? (
             <Reveal className="w-full max-w-lg">
               <ConditionMedia
                 videoSrc={condition.videoSrc}
