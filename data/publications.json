@@ -1,0 +1,83 @@
+[
+  {
+    "id": "pub1",
+    "category": "original",
+    "title": "Single-operator outcomes of catheter ablation for paroxysmal atrial fibrillation: a 15-year consecutive series",
+    "journal": "Europace",
+    "year": "2023",
+    "authors": "Gupta D, et al.",
+    "summary": "Long-term freedom from AF after first ablation in a high-volume UK centre, with a published complication rate below 1%."
+  },
+  {
+    "id": "pub2",
+    "category": "original",
+    "title": "Left atrial appendage occlusion in patients with atrial fibrillation and contraindications to anticoagulation",
+    "journal": "Heart",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Real-world outcomes from a regional LAAO programme serving 2.8 million people across the North West of England."
+  },
+  {
+    "id": "pub3",
+    "category": "trial",
+    "title": "Pulsed field versus radiofrequency ablation for paroxysmal atrial fibrillation: a multicentre randomised comparison",
+    "journal": "Journal of the American College of Cardiology",
+    "year": "2025",
+    "authors": "Gupta D, et al.",
+    "summary": "Head-to-head trial reporting comparable efficacy between PFA and RFA, with operator experience as a key determinant of safety."
+  },
+  {
+    "id": "pub4",
+    "category": "review",
+    "title": "Catheter ablation of atrial fibrillation: where volume, technology and patient selection intersect",
+    "journal": "European Heart Journal",
+    "year": "2024",
+    "authors": "Gupta D",
+    "summary": "Editorial review of how centre and operator volume shape outcomes — regardless of whether heat or pulsed-field energy is used."
+  },
+  {
+    "id": "pub5",
+    "category": "original",
+    "title": "Complication rates in high-volume AF ablation centres: a national registry analysis",
+    "journal": "Circulation: Arrhythmia and Electrophysiology",
+    "year": "2021",
+    "authors": "Gupta D, et al.",
+    "summary": "Registry data confirming that procedural volume is the strongest modifiable predictor of major complications in AF ablation."
+  },
+  {
+    "id": "pub6",
+    "category": "guideline",
+    "title": "2024 ESC Guidelines for the management of atrial fibrillation: ablation and stroke prevention",
+    "journal": "European Heart Journal",
+    "year": "2024",
+    "authors": "ESC Task Force (contributor)",
+    "summary": "Updated European consensus on when to ablate, how to select energy modality, and LAAO in patients who cannot take anticoagulants."
+  },
+  {
+    "id": "pub7",
+    "category": "original",
+    "title": "Durability of pulmonary vein isolation with contact-force sensing in persistent atrial fibrillation",
+    "journal": "JACC: Clinical Electrophysiology",
+    "year": "2020",
+    "authors": "Gupta D, et al.",
+    "summary": "Late reconnection rates and predictors of recurrence after second-generation contact-force ablation in persistent AF."
+  },
+  {
+    "id": "pub8",
+    "category": "review",
+    "title": "Stroke prevention beyond anticoagulation: the evolving role of left atrial appendage closure",
+    "journal": "Heart Rhythm",
+    "year": "2023",
+    "authors": "Gupta D, et al.",
+    "summary": "Narrative review of patient selection, device options and long-term outcomes for LAAO in non-valvular AF."
+  },
+  {
+    "id": "pub9",
+    "category": "trial",
+    "title": "Cryoballoon versus radiofrequency ablation for first-line treatment of paroxysmal AF: five-year follow-up",
+    "journal": "The Lancet",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Extended follow-up from a pragmatic trial comparing first-line cryoablation and RF in treatment-naive paroxysmal AF patients."
+  }
+]

@@ -4,14 +4,45 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   path: string;
-  label: string;
+  label?: string;
   progress: number;
   active: boolean;
   y: number;
   glowFilterId: string;
+  variant?: 'monitor' | 'paper';
 };
 
-export function EcgStrip({ path, label, progress, active, y, glowFilterId }: Props) {
+const STRIP_COLORS = {
+  monitor: {
+    label: '#F7F5F1',
+    ghost: '#B08D3E',
+    ghostOpacity: 0.2,
+    trace: '#B08D3E',
+    traceWidth: 1.75,
+    glow: '#B08D3E',
+    core: '#F7F5F1',
+  },
+  paper: {
+    label: '#3A5468',
+    ghost: '#B08D3E',
+    ghostOpacity: 0.16,
+    trace: '#B08D3E',
+    traceWidth: 1.5,
+    glow: '#B08D3E',
+    core: '#F7F5F1',
+  },
+} as const;
+
+export function EcgStrip({
+  path,
+  label,
+  progress,
+  active,
+  y,
+  glowFilterId,
+  variant = 'monitor',
+}: Props) {
+  const colors = STRIP_COLORS[variant];
   const pathRef = useRef<SVGPathElement>(null);
   const glowRef = useRef<SVGCircleElement>(null);
   const coreRef = useRef<SVGCircleElement>(null);
@@ -48,34 +79,36 @@ export function EcgStrip({ path, label, progress, active, y, glowFilterId }: Pro
 
   return (
     <g>
-      <text
-        x={0}
-        y={y - 34}
-        fill="#F7F5F1"
-        fontSize={13}
-        fontWeight={500}
-        letterSpacing="0.04em"
-        style={{ fontFamily: 'var(--font-archivo), system-ui, sans-serif' }}
-      >
-        {label}
-      </text>
+      {label ? (
+        <text
+          x={0}
+          y={y - 34}
+          fill={colors.label}
+          fontSize={13}
+          fontWeight={500}
+          letterSpacing="0.04em"
+          style={{ fontFamily: 'var(--font-archivo), system-ui, sans-serif' }}
+        >
+          {label}
+        </text>
+      ) : null}
 
       <path
         d={path}
         fill="none"
-        stroke="#B08D3E"
-        strokeWidth={1.25}
+        stroke={colors.ghost}
+        strokeWidth={colors.traceWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
-        opacity={0.2}
+        opacity={colors.ghostOpacity}
       />
 
       <path
         ref={pathRef}
         d={path}
         fill="none"
-        stroke="#B08D3E"
-        strokeWidth={1.75}
+        stroke={colors.trace}
+        strokeWidth={colors.traceWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeDasharray={length || undefined}
@@ -83,8 +116,8 @@ export function EcgStrip({ path, label, progress, active, y, glowFilterId }: Pro
         opacity={clamped > 0 ? 1 : 0}
       />
 
-      <circle ref={glowRef} r={9} fill="#B08D3E" filter={`url(#${glowFilterId})`} opacity={0} />
-      <circle ref={coreRef} r={2.5} fill="#F7F5F1" opacity={0} />
+      <circle ref={glowRef} r={variant === 'paper' ? 7 : 9} fill={colors.glow} filter={`url(#${glowFilterId})`} opacity={0} />
+      <circle ref={coreRef} r={variant === 'paper' ? 2 : 2.5} fill={colors.core} opacity={0} />
     </g>
   );
 }

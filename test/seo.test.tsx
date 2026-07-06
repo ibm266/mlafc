@@ -14,6 +14,6 @@ test('JSON-LD declares Physician and MedicalClinic', () => {
 test('sitemap lists all routes', () => {
   const routes = sitemap().map((e) => new URL(e.url).pathname);
   expect(routes.sort()).toEqual(
-    ['/', '/book', '/conditions', '/evidence', '/journey', '/locations', '/testimonials'].sort(),
+    ['/', '/book', '/conditions', '/evidence', '/journey', '/locations', '/publications', '/testimonials'].sort(),
   );
 });

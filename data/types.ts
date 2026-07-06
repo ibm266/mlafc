@@ -58,6 +58,19 @@ export type Faq = { question: string; answer: string };
 
 export type Citation = { id: number; text: string };
 
+export type PublicationCategory = 'original' | 'review' | 'trial' | 'guideline';
+
+export type Publication = {
+  id: string;
+  category: PublicationCategory;
+  title: string;
+  journal: string;
+  year: string;
+  authors: string;
+  summary: string;
+  url?: string;
+};
+
 export type Condition = {
   id: string;
   title: string;

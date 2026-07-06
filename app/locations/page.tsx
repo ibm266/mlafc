@@ -23,7 +23,7 @@ export default function LocationsPage() {
               Where he works
             </p>
             <h1 className="mt-3 max-w-2xl font-serif text-4xl leading-tight md:text-5xl">
-              Trusted in theatres across <em className="text-brass">two continents</em>.
+              Trusted in theatres across <em className="text-brass">three continents</em>.
             </h1>
           </Reveal>
           <div className="mt-10">

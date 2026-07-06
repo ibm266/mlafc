@@ -5,18 +5,21 @@ import { ComparisonCards } from '@/components/home/ComparisonCards';
 import { ConsultantProfile } from '@/components/home/ConsultantProfile';
 import { Steps } from '@/components/Steps';
 import { TestimonialCard } from '@/components/TestimonialCard';
+import { PublicationCard } from '@/components/PublicationCard';
 import { VisitDates } from '@/components/VisitDates';
 import { CtaBand } from '@/components/CtaBand';
 import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
+import publicationsJson from '@/data/publications.json';
 import locationsJson from '@/data/locations.json';
 import visitsJson from '@/data/visits.json';
 import { conditions } from '@/data/conditions';
-import type { Location, Testimonial, Visit } from '@/data/types';
+import type { Location, Publication, Testimonial, Visit } from '@/data/types';
 
 const testimonials = testimonialsJson as Testimonial[];
+const publications = publicationsJson as Publication[];
 const locations = locationsJson as Location[];
 const visits = visitsJson as Visit[];
 
@@ -35,6 +38,10 @@ export default function Home() {
     .map((id) => testimonials.find((t) => t.id === id))
     .filter(Boolean) as Testimonial[];
 
+  const publicationTeasers = ['pub1', 'pub3', 'pub4']
+    .map((id) => publications.find((p) => p.id === id))
+    .filter(Boolean) as Publication[];
+
   return (
     <main id="main">
       <ScrollProgress />
@@ -48,7 +55,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 id="map-heading" className="max-w-xl font-serif text-4xl leading-tight">
-              Trusted in theatres across <em className="text-brass">two continents</em>.
+              Trusted in theatres across <em className="text-brass">three continents</em>.
             </h2>
           </Reveal>
           <div className="mt-10">
@@ -118,6 +125,33 @@ export default function Home() {
           <Reveal delay={120}>
             <Link href="/conditions" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Understand each condition &rarr;
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section aria-labelledby="publications-heading" className="border-t border-line bg-paper-soft">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">Research</p>
+            <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
+              Published evidence.
+            </h2>
+            <p className="mt-4 max-w-xl text-ink-soft">
+              Peer-reviewed work on AF ablation, stroke prevention, and outcomes — from the journals that set the
+              standard.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {publicationTeasers.map((p, i) => (
+              <Reveal key={p.id} delay={i * 90}>
+                <PublicationCard p={p} />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={200}>
+            <Link href="/publications" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+              Browse all publications &rarr;
             </Link>
           </Reveal>
         </div>

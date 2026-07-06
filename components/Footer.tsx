@@ -4,6 +4,7 @@ import { site } from '@/data/site';
 
 const pageLinks = [
   { href: '/evidence', label: 'The Evidence' },
+  { href: '/publications', label: 'Publications' },
   { href: '/conditions', label: 'Conditions We Treat' },
   { href: '/journey', label: 'The Journey' },
   { href: '/locations', label: 'Where He Works' },

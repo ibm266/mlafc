@@ -7,6 +7,7 @@ import { Logo } from '@/components/Logo';
 
 const LINKS = [
   { href: '/evidence', label: 'Evidence' },
+  { href: '/publications', label: 'Publications' },
   { href: '/conditions', label: 'Conditions' },
   { href: '/journey', label: 'Journey' },
   { href: '/locations', label: 'Where He Works' },

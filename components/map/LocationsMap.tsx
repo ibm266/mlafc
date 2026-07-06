@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { Location, LocationRole } from '@/data/types';
 import {
+  AMERICA_GEOMETRY,
   INDIA_GEOMETRY,
   MAP_VIEWBOX,
   UK_GEOMETRY,
@@ -11,7 +12,7 @@ import {
   type MapGeometry,
 } from './mapGeometry';
 
-type CountryRegion = 'uk' | 'india';
+type CountryRegion = 'uk' | 'india' | 'america';
 
 const ROLE_LABELS = {
   operated: 'Operated',
@@ -33,11 +34,19 @@ const CITY_LABELS: Record<string, string> = {
 const GEOMETRY: Record<CountryRegion, MapGeometry> = {
   uk: UK_GEOMETRY,
   india: INDIA_GEOMETRY,
+  america: AMERICA_GEOMETRY,
 };
 
 const COUNTRY_TITLES: Record<CountryRegion, string> = {
   uk: 'Map of the United Kingdom and Ireland',
   india: 'Map of India',
+  america: 'Map of the United States',
+};
+
+const REGION_LABELS: Record<CountryRegion, string> = {
+  uk: 'the United Kingdom',
+  india: 'India',
+  america: 'the United States',
 };
 
 /* Pin artwork is a 28x36 shape whose tip is at (14, 36). It is scaled and
@@ -146,6 +155,7 @@ export default function LocationsMap({
           [
             ['uk', 'United Kingdom'],
             ['india', 'India'],
+            ['america', 'United States'],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -187,34 +197,36 @@ export default function LocationsMap({
 
         {/* Info column */}
         <div>
-          <div
-            className="flex flex-wrap gap-2"
-            role="group"
-            aria-label={`Cities in ${country === 'uk' ? 'the United Kingdom' : 'India'}`}
-          >
-            {mapLocations.map((location) => (
-              <button
-                key={location.id}
-                type="button"
-                aria-pressed={active?.id === location.id}
-                onClick={() => setActiveId(location.id)}
-                onMouseEnter={() => {
-                  if (window.matchMedia('(hover: hover)').matches) setActiveId(location.id);
-                }}
-                className={`${bubbleBase} min-h-10 px-4 py-2 text-xs sm:text-sm ${
-                  active?.id === location.id
-                    ? bubbleActive
-                    : 'border border-line-dark/80 bg-paper/10 text-paper hover:border-brass hover:text-brass'
-                }`}
-              >
-                {cityLabel(location)}
-              </button>
-            ))}
-          </div>
+          {mapLocations.length > 0 ? (
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label={`Cities in ${REGION_LABELS[country]}`}
+            >
+              {mapLocations.map((location) => (
+                <button
+                  key={location.id}
+                  type="button"
+                  aria-pressed={active?.id === location.id}
+                  onClick={() => setActiveId(location.id)}
+                  onMouseEnter={() => {
+                    if (window.matchMedia('(hover: hover)').matches) setActiveId(location.id);
+                  }}
+                  className={`${bubbleBase} min-h-10 px-4 py-2 text-xs sm:text-sm ${
+                    active?.id === location.id
+                      ? bubbleActive
+                      : 'border border-line-dark/80 bg-paper/10 text-paper hover:border-brass hover:text-brass'
+                  }`}
+                >
+                  {cityLabel(location)}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           <div
             aria-live="polite"
-            className="mt-6 min-h-56 rounded-lg border border-line-dark bg-night-soft p-6 md:p-8"
+            className={`${mapLocations.length > 0 ? 'mt-6' : ''} min-h-56 rounded-lg border border-line-dark bg-night-soft p-6 md:p-8`}
           >
             {active ? (
               <div key={active.id} className="mlafc-panel-in">
