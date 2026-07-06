@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #0C1F2B; -webkit-font-smoothing: antialiased; }
+  a { color: #B08D3E; text-decoration: none; }
+  a:hover { color: #F7F5F1; }
+  @keyframes ecg-sweep-x {
+    0%   { transform: translateX(-420px); }
+    100% { transform: translateX(1460px); }
+  }
+  @keyframes ecg-fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+  .ecg-layer { animation: ecg-fadein 2.4s ease-out both; }
+  @media (prefers-reduced-motion: reduce) {
+    .ecg-sweep { animation: none; opacity: 0.55; }
+  }
+</style>
+</helmet>
+<section data-screen-label="Hero" style="position:relative; overflow:hidden; background:#0C1F2B; color:#F7F5F1; font-family:'Archivo',system-ui,sans-serif;">
+
+  <!-- ECG monitor trace, full-bleed behind everything -->
+  <svg class="ecg-layer" aria-hidden="true" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice"
+       style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;">
+    <defs>
+      <pattern id="hero-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#2A4254" stroke-width="0.5" opacity="0.4"></path>
+      </pattern>
+      <linearGradient id="ecg-win" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+        <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+        <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+        <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+      </linearGradient>
+      <mask id="ecg-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="720">
+        <rect class="ecg-sweep" x="0" y="0" width="420" height="720" fill="url(#ecg-win)"></rect>
+      </mask>
+      <filter id="ecg-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3.5" result="b"></feGaussianBlur>
+        <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+      </filter>
+      <radialGradient id="hero-vignette" cx="34%" cy="46%" r="78%">
+        <stop offset="0%" stop-color="#0C1F2B" stop-opacity="0"></stop>
+        <stop offset="55%" stop-color="#0C1F2B" stop-opacity="0.35"></stop>
+        <stop offset="100%" stop-color="#0C1F2B" stop-opacity="0.86"></stop>
+      </radialGradient>
+    </defs>
+
+    <rect data-ecg-grid width="1440" height="720" fill="url(#hero-grid)" opacity="0.5"></rect>
+
+    <!-- faint continuous trace -->
+    <path d="M 0 360 L 16.0 360.0 Q 28.8 353.0 41.6 360.0 L 54.4 360.0 L 57.2 362.0 L 62.1 314.0 L 67.1 376.0 L 89.6 360.0 L 92.8 360.0 Q 112.0 350.0 131.2 360.0 L 160.0 360.0 L 176.0 360.0 Q 188.8 353.0 201.6 360.0 L 214.4 360.0 L 217.2 362.0 L 222.1 314.0 L 227.1 376.0 L 249.6 360.0 L 252.8 360.0 Q 272.0 350.0 291.2 360.0 L 320.0 360.0 L 336.0 360.0 Q 348.8 353.0 361.6 360.0 L 374.4 360.0 L 377.2 362.0 L 382.1 314.0 L 387.1 376.0 L 409.6 360.0 L 412.8 360.0 Q 432.0 350.0 451.2 360.0 L 480.0 360.0 L 496.0 360.0 Q 508.8 353.0 521.6 360.0 L 534.4 360.0 L 537.2 362.0 L 542.1 314.0 L 547.1 376.0 L 569.6 360.0 L 572.8 360.0 Q 592.0 350.0 611.2 360.0 L 640.0 360.0 L 656.0 360.0 Q 668.8 353.0 681.6 360.0 L 694.4 360.0 L 697.2 362.0 L 702.1 314.0 L 707.1 376.0 L 729.6 360.0 L 732.8 360.0 Q 752.0 350.0 771.2 360.0 L 800.0 360.0 L 816.0 360.0 Q 828.8 353.0 841.6 360.0 L 854.4 360.0 L 857.2 362.0 L 862.1 314.0 L 867.1 376.0 L 889.6 360.0 L 892.8 360.0 Q 912.0 350.0 931.2 360.0 L 960.0 360.0 L 976.0 360.0 Q 988.8 353.0 1001.6 360.0 L 1014.4 360.0 L 1017.2 362.0 L 1022.1 314.0 L 1027.1 376.0 L 1049.6 360.0 L 1052.8 360.0 Q 1072.0 350.0 1091.2 360.0 L 1120.0 360.0 L 1136.0 360.0 Q 1148.8 353.0 1161.6 360.0 L 1174.4 360.0 L 1177.2 362.0 L 1182.1 314.0 L 1187.1 376.0 L 1209.6 360.0 L 1212.8 360.0 Q 1232.0 350.0 1251.2 360.0 L 1280.0 360.0 L 1296.0 360.0 Q 1308.8 353.0 1321.6 360.0 L 1334.4 360.0 L 1337.2 362.0 L 1342.1 314.0 L 1347.1 376.0 L 1369.6 360.0 L 1372.8 360.0 Q 1392.0 350.0 1411.2 360.0 L 1440.0 360.0"
+          fill="none" stroke="#B08D3E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.18" data-ecg-base></path>
+
+    <!-- bright sweep -->
+    <g mask="url(#ecg-sweep-mask)">
+      <path d="M 0 360 L 16.0 360.0 Q 28.8 353.0 41.6 360.0 L 54.4 360.0 L 57.2 362.0 L 62.1 314.0 L 67.1 376.0 L 89.6 360.0 L 92.8 360.0 Q 112.0 350.0 131.2 360.0 L 160.0 360.0 L 176.0 360.0 Q 188.8 353.0 201.6 360.0 L 214.4 360.0 L 217.2 362.0 L 222.1 314.0 L 227.1 376.0 L 249.6 360.0 L 252.8 360.0 Q 272.0 350.0 291.2 360.0 L 320.0 360.0 L 336.0 360.0 Q 348.8 353.0 361.6 360.0 L 374.4 360.0 L 377.2 362.0 L 382.1 314.0 L 387.1 376.0 L 409.6 360.0 L 412.8 360.0 Q 432.0 350.0 451.2 360.0 L 480.0 360.0 L 496.0 360.0 Q 508.8 353.0 521.6 360.0 L 534.4 360.0 L 537.2 362.0 L 542.1 314.0 L 547.1 376.0 L 569.6 360.0 L 572.8 360.0 Q 592.0 350.0 611.2 360.0 L 640.0 360.0 L 656.0 360.0 Q 668.8 353.0 681.6 360.0 L 694.4 360.0 L 697.2 362.0 L 702.1 314.0 L 707.1 376.0 L 729.6 360.0 L 732.8 360.0 Q 752.0 350.0 771.2 360.0 L 800.0 360.0 L 816.0 360.0 Q 828.8 353.0 841.6 360.0 L 854.4 360.0 L 857.2 362.0 L 862.1 314.0 L 867.1 376.0 L 889.6 360.0 L 892.8 360.0 Q 912.0 350.0 931.2 360.0 L 960.0 360.0 L 976.0 360.0 Q 988.8 353.0 1001.6 360.0 L 1014.4 360.0 L 1017.2 362.0 L 1022.1 314.0 L 1027.1 376.0 L 1049.6 360.0 L 1052.8 360.0 Q 1072.0 350.0 1091.2 360.0 L 1120.0 360.0 L 1136.0 360.0 Q 1148.8 353.0 1161.6 360.0 L 1174.4 360.0 L 1177.2 362.0 L 1182.1 314.0 L 1187.1 376.0 L 1209.6 360.0 L 1212.8 360.0 Q 1232.0 350.0 1251.2 360.0 L 1280.0 360.0 L 1296.0 360.0 Q 1308.8 353.0 1321.6 360.0 L 1334.4 360.0 L 1337.2 362.0 L 1342.1 314.0 L 1347.1 376.0 L 1369.6 360.0 L 1372.8 360.0 Q 1392.0 350.0 1411.2 360.0 L 1440.0 360.0"
+            fill="none" stroke="#D8B15A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ecg-glow)"></path>
+    </g>
+
+    <rect width="1440" height="720" fill="url(#hero-vignette)"></rect>
+  </svg>
+
+  <!-- Content -->
+  <div style="position:relative; z-index:2; max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.15fr 0.85fr; align-items:center; gap:64px; padding:120px 40px;">
+    <div>
+      <span style="display:inline-flex; align-items:center; gap:10px;">
+        <svg width="44" height="28" viewBox="0 0 44 28" aria-hidden="true" style="color:#B08D3E;">
+          <circle cx="4" cy="14" r="3" fill="currentColor"></circle>
+          <path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="40" cy="14" r="3" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family:'Newsreader',Georgia,serif; font-size:19px; letter-spacing:0.02em; color:#F7F5F1;">Mumbai London AF Clinic</span>
+      </span>
+
+      <h1 style="margin:34px 0 0; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.4rem,5.2vw,4rem); line-height:1.1; letter-spacing:-0.01em;">
+        The best ablation is the one<br>done by <em style="color:#B08D3E; font-style:italic;">experienced hands</em>.
+      </h1>
+
+      <p style="margin:26px 0 0; max-width:560px; font-size:1.125rem; line-height:1.65; color:rgba(247,245,241,0.85);">
+        Professor Dhiraj Gupta has performed more than 10,000 AF ablations at the UK's largest heart centre, using both radiofrequency and pulsed field technology. He now sees patients in Mumbai. Whatever the machine, the hands holding it matter more.
+      </p>
+
+      <div style="margin-top:34px; display:flex; flex-wrap:wrap; gap:16px;">
+        <a href="#book" style="border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:15px 30px; font-weight:600; transition:background-color .2s ease,color .2s ease;" onmouseover="this.style.background='#6E5826';this.style.color='#F7F5F1';" onmouseout="this.style.background='#B08D3E';this.style.color='#0C1F2B';">Book a consultation</a>
+        <a href="#evidence" style="border-radius:999px; border:1px solid #2A4254; color:#F7F5F1; padding:15px 30px; font-weight:600; transition:border-color .2s ease,color .2s ease;" onmouseover="this.style.borderColor='#B08D3E';this.style.color='#B08D3E';" onmouseout="this.style.borderColor='#2A4254';this.style.color='#F7F5F1';">See the evidence</a>
+      </div>
+
+      <ul style="margin:34px 0 0; padding:24px 0 0; list-style:none; display:flex; flex-wrap:wrap; gap:8px 26px; border-top:1px solid rgba(42,66,84,0.5); font-size:0.9rem; color:rgba(247,245,241,0.8);">
+        <li>GMC registered</li>
+        <li>Liverpool Heart and Chest Hospital</li>
+        <li>English · Hindi · Punjabi</li>
+      </ul>
+
+      <blockquote style="margin:40px 0 0; max-width:560px; border-left:2px solid #B08D3E; padding-left:24px;">
+        <p style="margin:0; font-family:'Newsreader',Georgia,serif; font-style:italic; font-size:1.25rem; line-height:1.6; color:rgba(247,245,241,0.9);">"Patients in Mumbai deserve the same standard of arrhythmia care I provide in Liverpool, with the dignity of being treated close to home."</p>
+        <p style="margin:16px 0 0; font-size:0.9rem; font-weight:600;">Professor Dhiraj Gupta</p>
+        <p style="margin:0; font-size:0.9rem; color:rgba(247,245,241,0.7);">Consultant cardiologist &amp; electrophysiologist</p>
+      </blockquote>
+    </div>
+
+    <div style="justify-self:end; width:100%; max-width:420px;">
+      <figure style="position:relative; margin:0; border-radius:12px; overflow:hidden; border:1px solid #2A4254; background:#F7F5F1; box-shadow:0 30px 60px rgba(6,15,21,0.6);">
+        <img src="assets/professor-gupta.png" alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist" width="573" height="612" style="display:block; width:100%; aspect-ratio:573/612; object-fit:cover; object-position:top;">
+      </figure>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:760},&quot;sweepSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:5.6,&quot;min&quot;:2,&quot;max&quot;:12,&quot;step&quot;:0.2,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;ECG animation&quot;},&quot;traceIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.18,&quot;min&quot;:0.05,&quot;max&quot;:0.5,&quot;step&quot;:0.01,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;ECG animation&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ECG animation&quot;}}">
+class Component extends DCLogic {
+  apply() {
+    const root = this._root;
+    if (!root) return;
+    const speed = this.props.sweepSpeed ?? 5.6;
+    const intensity = this.props.traceIntensity ?? 0.18;
+    const showGrid = this.props.showGrid ?? true;
+    const sweep = root.querySelector('.ecg-sweep');
+    if (sweep) sweep.style.animationDuration = speed + 's';
+    const base = root.querySelector('[data-ecg-base]');
+    if (base) base.setAttribute('opacity', String(intensity));
+    const grid = root.querySelector('[data-ecg-grid]');
+    if (grid) grid.setAttribute('opacity', showGrid ? '0.5' : '0');
+  }
+  componentDidMount() {
+    this._root = (typeof document !== 'undefined')
+      ? document.querySelector('[data-screen-label="Hero"]')
+      : null;
+    this.apply();
+  }
+  componentDidUpdate() { this.apply(); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -2,16 +2,17 @@ import { milestones } from '@/data/milestones';
 import { faqs } from '@/data/faqs';
 import { citations } from '@/data/citations';
 
-test('10 milestones covering 1988-2026', () => {
-  expect(milestones).toHaveLength(10);
+test('8 timeline milestones covering 1988-2024 plus separate finale', () => {
+  expect(milestones).toHaveLength(8);
   expect(milestones.map((m) => m.markerYear)).toEqual([
-    '1988', '2000', '2007', '2009', '2012', '2014', '2017', '2022', '2024', '2026',
+    '1988', '2000', '2007', '2009', '2012', '2014', '2017', '2024',
   ]);
-  expect(milestones[0].yearLabel).toBe('1988 - 1994');
+  expect(milestones[0].yearLabel).toBe('1988');
   expect(milestones[0].meta).toBe('MB BS qualified, 1994');
+  expect(milestones[6].variant).toBe('awards-band');
+  expect(milestones[6].yearLabel).toBe('2017 & 2022');
   for (const m of milestones) {
     expect(m.title.length).toBeGreaterThan(3);
-    expect(m.body.length).toBeGreaterThan(40);
     expect(m.photoTitle.length).toBeGreaterThan(2);
     expect(m.photoCaption.length).toBeGreaterThan(20);
   }

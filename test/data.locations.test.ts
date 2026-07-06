@@ -7,7 +7,9 @@ test('locations: 12 entries with required fields', () => {
   for (const l of locations) {
     expect(typeof l.id).toBe('string');
     expect(typeof l.name).toBe('string');
+    expect(typeof l.city).toBe('string');
     expect(typeof l.country).toBe('string');
+    expect(typeof l.region).toBe('string');
     expect(typeof l.lat).toBe('number');
     expect(typeof l.lng).toBe('number');
     expect(['operated', 'taught', 'proctored']).toContain(l.role);

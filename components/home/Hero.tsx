@@ -1,35 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Logo } from '@/components/Logo';
+import { EcgHeroMonitor } from '@/components/ecg/EcgHeroMonitor';
 import { Reveal } from '@/components/Reveal';
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-night text-paper">
-      {/* Faint dotted London to Mumbai arc */}
-      <svg
-        aria-hidden
-        className="mlafc-arc pointer-events-none absolute inset-0 h-full w-full text-brass opacity-25"
-        viewBox="0 0 1200 600"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <path
-          d="M 150 180 Q 600 -60 1050 420"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeDasharray="2 10"
-          strokeLinecap="round"
-        />
-        <circle cx="150" cy="180" r="4" fill="currentColor" />
-        <circle cx="1050" cy="420" r="4" fill="currentColor" />
-      </svg>
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-24 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:py-32">
+      <EcgHeroMonitor />
+      <div className="relative z-[2] mx-auto grid max-w-6xl items-center gap-10 px-5 py-24 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:py-32">
         <div>
-          <Reveal>
-            <Logo variant="dark" />
-          </Reveal>
-          <h1 className="mt-8 font-serif text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[1.12]">
+          <h1 className="font-serif text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[1.12]">
             <Reveal as="span" delay={150} className="block">
               The best ablation is the one done
             </Reveal>
@@ -39,7 +19,7 @@ export function Hero() {
           </h1>
           <Reveal delay={450}>
             <p className="mt-6 max-w-xl text-lg text-paper/85">
-              Professor Dhiraj Gupta has performed more than 5,000 AF ablations at the UK&apos;s largest heart centre,
+              Professor Dhiraj Gupta has performed more than 10,000 AF ablations at the UK&apos;s largest heart centre,
               using both radiofrequency and pulsed field technology. He now sees patients in Mumbai. Whatever the
               machine, the hands holding it matter more.
             </p>
@@ -78,7 +58,7 @@ export function Hero() {
         </div>
 
         <Reveal delay={650} className="mx-auto w-full max-w-md md:mx-0 md:justify-self-end">
-          <figure className="overflow-hidden rounded-lg border border-line-dark bg-paper shadow-[0_24px_48px_color-mix(in_srgb,var(--color-night)_60%,transparent)]">
+          <figure className="overflow-hidden rounded-xl border border-line-dark bg-paper shadow-[0_24px_48px_color-mix(in_srgb,var(--color-night)_60%,transparent)]">
             <Image
               src="/images/professor-gupta.png"
               alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist"

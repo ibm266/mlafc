@@ -1,42 +1,51 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { CtaBand } from '@/components/CtaBand';
+import { CountUp } from '@/components/CountUp';
 import { EvidenceChart } from '@/components/EvidenceChart';
-import { FaqAccordion } from '@/components/FaqAccordion';
+import { FaqConversation } from '@/components/FaqConversation';
+import { FloatingBookingPill } from '@/components/FloatingBookingPill';
+import { NightCtaCard } from '@/components/NightCtaCard';
+import { PageHeader } from '@/components/PageHeader';
 import { Reveal } from '@/components/Reveal';
+import { ScrollProgress } from '@/components/ScrollProgress';
+import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { citations } from '@/data/citations';
 import { faqs } from '@/data/faqs';
 
 export const metadata: Metadata = {
   title: 'The Evidence - Mumbai London AF Clinic',
   description:
-    'What published research says about PFA, RFA, and why the experience of the operator matters - in plain English, with citations.',
+    'What published research says about PFA, RFA, and why the experience of the operator matters, in plain English, with citations.',
 };
 
 export default function EvidencePage() {
   return (
     <main id="main">
+      <ScrollProgress />
+      <FloatingBookingPill />
+      <PageHeader
+        idPrefix="evidence"
+        eyebrow="The evidence"
+        title={
+          <>
+            Whatever the machine, it is safer in <em className="text-brass">experienced hands</em>.
+          </>
+        }
+        description="What published research says about PFA, RFA, and the doctor holding the catheter. In plain English, with citations."
+      />
+
       <section className="bg-paper">
-        <div className="mx-auto max-w-3xl px-5 py-20">
+        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
-              The evidence
+            <p className="text-lg text-ink-soft">
+              You may have been offered PFA, pulsed field ablation, because it is a newer way to treat atrial
+              fibrillation. RFA, radiofrequency ablation, uses carefully controlled heat; PFA uses short electrical
+              pulses instead. Both treat the same small areas of heart tissue that trigger AF.
             </p>
-            <h1 className="mt-3 font-serif text-[clamp(2rem,5vw,3.2rem)] leading-tight">
-              Whatever the machine, it is safer in{' '}
-              <em className="text-brass-deep">experienced hands</em>.
-            </h1>
           </Reveal>
-          <Reveal delay={120}>
-            <p className="mt-8 text-lg text-ink-soft">
-              You may have been offered PFA - pulsed field ablation - because it is a newer
-              way to treat atrial fibrillation. RFA - radiofrequency ablation - uses carefully
-              controlled heat; PFA uses short electrical pulses instead. Both treat the same
-              small areas of heart tissue that trigger AF.
-            </p>
+          <Reveal delay={100}>
             <p className="mt-4 text-lg text-ink-soft">
-              In 2025, large trials directly comparing the two reported their results:
-              PFA and RFA performed broadly comparably; the right choice depends on the patient.
+              In 2025, large trials directly comparing the two reported their results: PFA and RFA performed broadly
+              comparably; the right choice depends on the patient.
               <sup>
                 <a href="#ref-1">1</a>
               </sup>
@@ -46,14 +55,17 @@ export default function EvidencePage() {
       </section>
 
       <section aria-labelledby="volume-heading" className="border-y border-line bg-paper-soft">
-        <div className="mx-auto max-w-3xl px-5 py-20">
+        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
           <Reveal>
-            <h2 id="volume-heading" className="font-serif text-3xl">
+            <ChapterEyebrow label="The volume effect" />
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 id="volume-heading" className="mt-3 font-serif text-3xl md:text-4xl">
               The number that does change your outcome.
             </h2>
             <p className="mt-4 text-ink-soft">
-              Across published studies, one factor shows up again and again: how often the
-              centre - and the doctor - performs the procedure.
+              Across published studies, one factor shows up again and again: how often the centre, and the doctor,
+              performs the procedure.
               <sup>
                 <a href="#ref-2">2</a>
               </sup>
@@ -62,63 +74,93 @@ export default function EvidencePage() {
           <div className="mt-12">
             <EvidenceChart />
           </div>
+          <Reveal>
+            <p className="mx-auto mt-9 max-w-xl text-center font-serif text-xl italic text-ink">
+              Professor Gupta has performed over 200 a year, every year since 2009.
+              <sup>
+                <a href="#ref-3" className="not-italic">3</a>
+              </sup>
+            </p>
+          </Reveal>
         </div>
       </section>
 
       <section className="bg-paper">
-        <div className="mx-auto max-w-3xl px-5 py-20">
+        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
           <Reveal>
-            <h2 className="font-serif text-3xl">What this means for you.</h2>
+            <h2 className="font-serif text-3xl md:text-4xl">What this means for you.</h2>
             <p className="mt-4 text-ink-soft">
-              The right question is not &ldquo;which technology?&rdquo; It is &ldquo;who is
-              holding the catheter?&rdquo; Professor Gupta offers both RFA and PFA, and
-              chooses the right tool for each patient.
+              The right question is not &ldquo;which technology?&rdquo; It is &ldquo;who is holding the
+              catheter?&rdquo; Professor Gupta offers both RFA and PFA, and chooses the right tool for each patient.
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <h2 className="mt-14 font-serif text-3xl">His numbers, in context.</h2>
-            <ul className="mt-5 space-y-3 text-ink-soft">
-              <li>
-                200+ ablations a year, every year since 2009 - a high-volume UK operator.
-                <sup>
-                  <a href="#ref-3">3</a>
-                </sup>
-              </li>
-              <li>
-                A published complication rate below 1%.
-                <sup>
-                  <a href="#ref-3">3</a>
-                </sup>
-              </li>
-              <li>More than 5,000 procedures across his career.</li>
-            </ul>
+            <h2 className="mt-14 font-serif text-3xl md:text-4xl">His numbers, in context.</h2>
+            <div className="mt-8 grid gap-0 sm:grid-cols-3">
+              <div className="border-line sm:border-r sm:pr-6">
+                <div className="font-serif text-4xl text-ink">
+                  <CountUp to={200} suffix="+" />
+                </div>
+                <p className="mt-2 text-sm text-ink-soft">
+                  ablations a year, every year since 2009
+                  <sup>
+                    <a href="#ref-3">3</a>
+                  </sup>
+                </p>
+              </div>
+              <div className="mt-6 border-line sm:mt-0 sm:border-r sm:px-6">
+                <div className="font-serif text-4xl text-ink">
+                  <CountUp to={1} prefix="<" suffix="%" />
+                </div>
+                <p className="mt-2 text-sm text-ink-soft">
+                  published complication rate
+                  <sup>
+                    <a href="#ref-3">3</a>
+                  </sup>
+                </p>
+              </div>
+              <div className="mt-6 sm:mt-0 sm:pl-6">
+                <div className="font-serif text-4xl text-ink">
+                  <CountUp to={10000} suffix="+" />
+                </div>
+                <p className="mt-2 text-sm text-ink-soft">procedures across his career</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
 
       <section aria-labelledby="faq-heading" className="border-t border-line bg-paper">
-        <div className="mx-auto max-w-3xl px-5 py-20">
+        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
           <Reveal>
-            <h2 id="faq-heading" className="font-serif text-3xl">
+            <ChapterEyebrow label="Common questions" />
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 id="faq-heading" className="mt-3 font-serif text-3xl md:text-4xl">
               Your questions, plainly answered.
             </h2>
           </Reveal>
-          <div className="mt-10">
-            <FaqAccordion faqs={faqs} />
-          </div>
-          <Reveal delay={100}>
-            <Link
-              href="/book"
-              className="interactive mt-12 inline-block rounded-full bg-ink px-7 py-3.5 font-semibold text-paper hover:bg-night"
-            >
-              Book a consultation
-            </Link>
-          </Reveal>
+          <FaqConversation faqs={faqs} />
+        </div>
+      </section>
+
+      <section className="bg-paper">
+        <div className="mx-auto max-w-6xl px-5 pb-20">
+          <NightCtaCard
+            idPrefix="evidence-cta"
+            title={
+              <>
+                Convinced by the evidence? <em className="text-brass">Ask the questions that matter to you.</em>
+              </>
+            }
+            description="A short enquiry costs nothing, and every one is answered."
+            footnote="Next Mumbai visit: March 2026 · Booking open"
+          />
         </div>
       </section>
 
       <section id="references" aria-labelledby="ref-heading" className="border-t border-line bg-paper-soft">
-        <div className="mx-auto max-w-3xl px-5 py-14">
+        <div className="mx-auto max-w-3xl px-5 py-14 md:max-w-[768px]">
           <h2 id="ref-heading" className="font-serif text-2xl">
             References
           </h2>
@@ -131,8 +173,6 @@ export default function EvidencePage() {
           </ol>
         </div>
       </section>
-
-      <CtaBand />
     </main>
   );
 }

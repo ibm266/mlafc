@@ -1,9 +1,13 @@
 export type LocationRole = 'operated' | 'taught' | 'proctored';
 
+export type MapRegion = 'All' | 'United Kingdom' | 'Europe' | 'United States' | 'India';
+
 export type Location = {
   id: string;
   name: string;
+  city: string;
   country: string;
+  region: Exclude<MapRegion, 'All'>;
   lat: number;
   lng: number;
   role: LocationRole;
@@ -42,16 +46,25 @@ export type Testimonial = {
   letter?: TestimonialLetter; // hospital only
 };
 
+export type MilestoneAward = {
+  title: string;
+  body: string;
+  highlight?: boolean;
+};
+
 export type Milestone = {
-  markerYear: string; // "1988"
-  markerSub: string; // "The beginning"
-  yearLabel: string; // "1988 - 1994"
-  tag: string; // "Foundation"
+  markerYear: string;
+  markerSub: string;
+  yearLabel: string;
+  tag: string;
   title: string;
   body: string;
   meta?: string;
   photoTitle: string;
   photoCaption: string;
+  variant?: 'awards-band' | 'finale';
+  awards?: MilestoneAward[];
+  photoFirst?: boolean;
 };
 
 export type Faq = { question: string; answer: string };

@@ -27,7 +27,7 @@ export default function LocationsPage() {
             </h1>
           </Reveal>
           <div className="mt-10">
-            <LocationsMapLazy locations={locations} height="560px" />
+            <LocationsMapLazy locations={locations} />
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Hero } from '@/components/home/Hero';
+import { OperatorTrace } from '@/components/home/OperatorTrace';
 import { StatsBand } from '@/components/StatsBand';
 import { ComparisonCards } from '@/components/home/ComparisonCards';
 import { ConsultantProfile } from '@/components/home/ConsultantProfile';
@@ -10,6 +11,8 @@ import { VisitDates } from '@/components/VisitDates';
 import { CtaBand } from '@/components/CtaBand';
 import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
+import { FloatingBookingPill } from '@/components/FloatingBookingPill';
+import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import publicationsJson from '@/data/publications.json';
@@ -34,7 +37,8 @@ const PROCEDURES = [
 ];
 
 export default function Home() {
-  const teasers = ['pat1', 'peer1', 'hosp1']
+  const hospitalLetter = testimonials.find((t) => t.id === 'hosp1');
+  const patientPeer = ['pat1', 'peer1']
     .map((id) => testimonials.find((t) => t.id === id))
     .filter(Boolean) as Testimonial[];
 
@@ -45,24 +49,31 @@ export default function Home() {
   return (
     <main id="main">
       <ScrollProgress />
+      <FloatingBookingPill />
       <Hero />
+      <OperatorTrace />
       <StatsBand />
       <ComparisonCards />
       <ConsultantProfile />
 
-      {/* Map teaser - second and final night section */}
       <section aria-labelledby="map-heading" className="bg-night text-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <h2 id="map-heading" className="max-w-xl font-serif text-4xl leading-tight">
-              Trusted in theatres across <em className="text-brass">three continents</em>.
+            <ChapterEyebrow chapter="07" label="Where he works" dark />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="map-heading" className="mt-3 max-w-xl font-serif text-4xl leading-tight">
+              Trusted by heart centres <em className="text-brass">across three continents</em>.
             </h2>
+            <p className="mt-3 max-w-xl text-paper/80">
+              Where Professor Gupta has operated, taught, and proctored fellow consultants.
+            </p>
           </Reveal>
           <div className="mt-10">
             <LocationsMapLazy locations={locations} />
           </div>
           <Reveal delay={120}>
-            <Link href="/locations" className="interactive mt-6 inline-block font-semibold text-brass hover:underline">
+            <Link href="/locations" className="arrow-link interactive mt-6 inline-block font-semibold text-brass hover:underline">
               Explore every location &rarr;
             </Link>
           </Reveal>
@@ -72,9 +83,9 @@ export default function Home() {
       <section aria-labelledby="how-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
-              How the Mumbai clinic works
-            </p>
+            <ChapterEyebrow chapter="04" label="How the Mumbai clinic works" />
+          </Reveal>
+          <Reveal delay={80}>
             <h2 id="how-heading" className="mt-3 font-serif text-4xl">
               London expertise. Mumbai care. Continuous follow-up.
             </h2>
@@ -88,15 +99,13 @@ export default function Home() {
       <section aria-labelledby="services-heading" className="border-y border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">
-              Conditions &amp; treatments
-            </p>
+            <ChapterEyebrow chapter="05" label="Conditions &amp; treatments" />
+          </Reveal>
+          <Reveal delay={80}>
             <h2 id="services-heading" className="mt-3 font-serif text-4xl">
               What we look after.
             </h2>
-            <p className="mt-4 max-w-xl text-ink-soft">
-              Put your heart in the most experienced hands.
-            </p>
+            <p className="mt-4 max-w-xl text-ink-soft">Put your heart in the most experienced hands.</p>
           </Reveal>
           <div className="mt-10 grid gap-10 md:grid-cols-2">
             <Reveal>
@@ -123,56 +132,73 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal delay={120}>
-            <Link href="/conditions" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            <Link href="/conditions" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Understand each condition &rarr;
             </Link>
           </Reveal>
         </div>
       </section>
 
-      <section aria-labelledby="publications-heading" className="border-t border-line bg-paper-soft">
+      <section aria-labelledby="publications-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">Research</p>
+            <ChapterEyebrow chapter="06" label="Research" />
+          </Reveal>
+          <Reveal delay={80}>
             <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
               Published evidence.
             </h2>
             <p className="mt-4 max-w-xl text-ink-soft">
-              Peer-reviewed work on AF ablation, stroke prevention, and outcomes — from the journals that set the
+              Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the
               standard.
             </p>
           </Reveal>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {publicationTeasers.map((p, i) => (
-              <Reveal key={p.id} delay={i * 90}>
+              <Reveal key={p.id} delay={i * 90} className="card-lift">
                 <PublicationCard p={p} />
               </Reveal>
             ))}
           </div>
           <Reveal delay={200}>
-            <Link href="/publications" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            <Link href="/publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Browse all publications &rarr;
             </Link>
           </Reveal>
         </div>
       </section>
 
-      <section aria-labelledby="testimonials-heading" className="bg-paper">
+      <section aria-labelledby="testimonials-heading" className="border-t border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <h2 id="testimonials-heading" className="font-serif text-4xl">
-              In their words.
-            </h2>
+            <ChapterEyebrow chapter="08" label="In their words" />
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {teasers.map((t, i) => (
-              <Reveal key={t.id} delay={i * 90}>
+          {hospitalLetter ? (
+            <Reveal delay={100}>
+              <blockquote className="mt-9 max-w-4xl">
+                <p className="font-serif text-[clamp(1.5rem,2.9vw,2.2rem)] leading-snug text-ink">
+                  &ldquo;{hospitalLetter.quote}&rdquo;
+                </p>
+                <footer className="mt-5 flex items-center gap-3.5 text-sm text-ink-soft">
+                  <span aria-hidden className="inline-block h-0.5 w-9 bg-brass" />
+                  <span>
+                    <strong className="text-ink">{hospitalLetter.attribution}</strong>
+                    {hospitalLetter.detail ? ` · ${hospitalLetter.detail}` : ''}
+                    {hospitalLetter.letter?.date ? ` · ${hospitalLetter.letter.date}` : ''}
+                  </span>
+                </footer>
+              </blockquote>
+            </Reveal>
+          ) : null}
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {patientPeer.map((t, i) => (
+              <Reveal key={t.id} delay={i * 90} className="card-lift">
                 <TestimonialCard t={t} />
               </Reveal>
             ))}
           </div>
           <Reveal delay={200}>
-            <Link href="/testimonials" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            <Link href="/testimonials" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Read all 24 testimonials &rarr;
             </Link>
           </Reveal>
@@ -182,7 +208,10 @@ export default function Home() {
       <section aria-labelledby="visits-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <h2 id="visits-heading" className="font-serif text-4xl">
+            <ChapterEyebrow chapter="09" label="Plan ahead" />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="visits-heading" className="mt-3 font-serif text-4xl">
               Upcoming Mumbai visits.
             </h2>
             <p className="mt-3 max-w-xl text-ink-soft">Limited slots. Plan ahead.</p>

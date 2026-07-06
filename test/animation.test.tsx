@@ -25,7 +25,7 @@ test('Reveal renders visible immediately under reduced motion', () => {
 
 test('CountUp shows final value immediately under reduced motion', () => {
   mockReducedMotion(true);
-  render(<CountUp to={5000} suffix="+" />);
+  render(<CountUp to={10000} suffix="+" />);
   act(() => MockIntersectionObserver.instances.at(-1)?.trigger(true));
-  expect(screen.getByText('5,000+')).toBeInTheDocument();
+  expect(screen.getByText('10,000+')).toBeInTheDocument();
 });

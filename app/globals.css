@@ -6,6 +6,7 @@
   --color-ink-soft: #3A5468;
   --color-ink-mute: #556675;
   --color-brass: #B08D3E;
+  --color-brass-bright: #D8B15A;
   --color-brass-deep: #6E5826;
   --color-paper-soft: #EFEBE3;
   --color-night: #0C1F2B;
@@ -74,6 +75,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .ecg-sweep, .pulse-dot, .op-glow, .halo, .blip.lit { animation: none; }
+  .card-lift:hover { transform: none; box-shadow: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -84,6 +87,69 @@ body {
 @keyframes arc-fade {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes ecg-sweep-x {
+  0% { transform: translateX(-420px); }
+  100% { transform: translateX(1460px); }
+}
+
+@keyframes ecg-fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.55); opacity: 1; }
+}
+
+@keyframes op-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 1px var(--color-brass), 0 10px 30px rgba(176, 141, 62, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 1px var(--color-brass), 0 14px 44px rgba(176, 141, 62, 0.28);
+  }
+}
+
+@keyframes halo {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.45; }
+}
+
+@keyframes blip-halo {
+  0% { box-shadow: 0 0 0 0 rgba(176, 141, 62, 0.45); }
+  100% { box-shadow: 0 0 0 14px rgba(176, 141, 62, 0); }
+}
+
+.ecg-layer { animation: ecg-fadein 2.4s ease-out both; }
+.ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+.pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
+.op-glow { animation: op-glow 4.5s ease-in-out infinite; }
+.halo { animation: halo 3s ease-in-out infinite; }
+
+.blip.lit {
+  background: var(--color-brass);
+  animation: blip-halo 1.2s ease-out 1;
+}
+
+.card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(18, 43, 58, 0.1);
+  border-color: rgba(176, 141, 62, 0.5);
+}
+
+.arrow-link {
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
+}
+
+.arrow-link:hover {
+  letter-spacing: 0.02em;
 }
 
 .mlafc-arc {
@@ -109,52 +175,34 @@ body {
 }
 
 .mlafc-map {
-  background: var(--color-night);
-  border-radius: 8px;
+  background: #0A1A24;
+  border-radius: 12px;
 }
 
-.mlafc-landmass {
-  fill: color-mix(in srgb, var(--color-paper) 92%, var(--color-brass));
-  stroke: var(--color-brass);
-  stroke-width: 0.75;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
-}
-
-.mlafc-svg-pin {
-  cursor: pointer;
-}
-
-.mlafc-svg-pin:focus-visible {
-  outline: none;
-}
-
-.mlafc-svg-pin:focus-visible .mlafc-pin-shape {
-  stroke: var(--color-paper);
-  stroke-width: 2;
-}
-
-.mlafc-svg-pin .mlafc-pin-shape {
-  transition: filter 0.2s ease;
-}
-
-.mlafc-svg-pin-active .mlafc-pin-shape {
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-brass) 70%, transparent));
-}
-
-.mlafc-pin-label {
+.mlafc-map .leaflet-tooltip {
+  background: rgba(12, 31, 43, 0.85);
+  color: var(--color-paper);
+  border: 1px solid rgba(42, 66, 84, 0.8);
+  border-radius: 5px;
+  font-family: var(--font-sans);
+  font-weight: 600;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  fill: var(--color-paper);
-  paint-order: stroke;
-  stroke: var(--color-night);
-  stroke-width: 3;
-  stroke-linejoin: round;
+  letter-spacing: 0.02em;
+  padding: 2px 8px;
+  box-shadow: none;
 }
 
-.mlafc-explorer-pin svg {
+.mlafc-map .leaflet-tooltip-top::before {
+  display: none;
+}
+
+.mlafc-pin {
   transition: transform 0.2s ease;
+  transform-origin: center bottom;
+}
+
+.mlafc-pin:hover {
+  transform: scale(1.25);
 }
 
 @keyframes panel-in {

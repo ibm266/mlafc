@@ -1,10 +1,11 @@
 import { CountUp } from '@/components/CountUp';
 import Link from 'next/link';
+import { DotWall } from '@/components/home/DotWall';
 import { Reveal } from '@/components/Reveal';
 
 const STATS = [
   {
-    node: <CountUp to={5000} suffix="+" />,
+    node: <CountUp to={10000} suffix="+" />,
     label: 'AF ablations performed',
     sub: 'Among the highest-volume operators worldwide',
   },
@@ -29,9 +30,16 @@ export function StatsBand() {
   return (
     <section aria-label="Key numbers" className="border-y border-line bg-paper-soft">
       <div className="mx-auto max-w-6xl px-5 py-14">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal className="mb-12">
+          <DotWall />
+        </Reveal>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
           {STATS.map((s, i) => (
-            <Reveal key={i} delay={i * 80}>
+            <Reveal
+              key={s.label}
+              delay={i * 80}
+              className={`lg:px-7 ${i < STATS.length - 1 ? 'lg:border-r lg:border-line' : ''}`}
+            >
               <div className="font-serif text-5xl text-ink">{s.node}</div>
               <p className="mt-2 font-semibold text-ink">{s.label}</p>
               <p className="mt-1 text-sm text-ink-soft">{s.sub}</p>

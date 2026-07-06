@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F7F5F1; color: #122B3A; font-family: 'Archivo', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: #6E5826; text-decoration: none; }
+  a:hover { color: #122B3A; }
+  h1, h2, h3 { margin: 0; }
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .rv.in { opacity: 1; transform: none; }
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.55); opacity: 1; } }
+  @keyframes ecg-sweep-x { 0% { transform: translateX(-420px); } 100% { transform: translateX(1460px); } }
+  @keyframes blip-halo { 0% { box-shadow: 0 0 0 0 rgba(176,141,62,0.45); } 100% { box-shadow: 0 0 0 14px rgba(176,141,62,0); } }
+  .pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
+  .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+  .blip.lit { background: #B08D3E; animation: blip-halo 1.2s ease-out 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; transition: none; }
+    .pulse-dot, .ecg-sweep, .blip.lit { animation: none; }
+  }
+</style>
+</helmet>
+<div style="position:relative;">
+
+  <!-- scroll progress -->
+  <div aria-hidden="true" style="position:fixed; inset:0 0 auto 0; height:3px; background:rgba(217,211,199,0.5); z-index:60; pointer-events:none;">
+    <div data-scroll-bar style="height:100%; width:0%; background:#B08D3E;"></div>
+  </div>
+
+  <!-- NAV -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,245,241,0.95); backdrop-filter:blur(8px); border-bottom:1px solid #D9D3C7;">
+    <div style="max-width:1152px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; min-height:64px;">
+      <a href="Homepage v2.dc.html" style="display:inline-flex; align-items:center; gap:10px; color:#122B3A;">
+        <svg width="40" height="26" viewBox="0 0 44 28" aria-hidden="true" style="color:#6E5826;">
+          <circle cx="4" cy="14" r="3" fill="currentColor"></circle>
+          <path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="40" cy="14" r="3" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family:'Newsreader',Georgia,serif; font-size:17px; letter-spacing:0.01em;">Mumbai London AF Clinic</span>
+      </a>
+      <nav style="display:flex; align-items:center; gap:30px;">
+        <a href="Homepage v2.dc.html" style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Home</a>
+        <span style="font-size:15px; font-weight:600; color:#122B3A; border-bottom:2px solid #B08D3E; padding-bottom:2px;">The Journey</span>
+        <a href="Homepage v2.dc.html#cta" style="border-radius:999px; background:#122B3A; color:#F7F5F1; padding:10px 20px; font-size:15px; font-weight:600; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Book a consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section data-screen-label="Journey header" style="position:relative; overflow:hidden; background:#0C1F2B; color:#F7F5F1;">
+    <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:120px; pointer-events:none; opacity:0.8;">
+      <defs>
+        <linearGradient id="jh-win" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+        </linearGradient>
+        <mask id="jh-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="120"><rect class="ecg-sweep" x="0" y="0" width="420" height="120" fill="url(#jh-win)"></rect></mask>
+      </defs>
+      <path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#B08D3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"></path>
+      <g mask="url(#jh-sweep-mask)"><path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#D8B15A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g>
+    </svg>
+    <div style="position:relative; z-index:2; max-width:1152px; margin:0 auto; padding:88px 20px 128px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#B08D3E;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>The journey · 1988 to 2026</p>
+      <h1 class="rv" data-reveal-delay="80" style="margin-top:18px; max-width:820px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.4rem,5vw,3.9rem); line-height:1.1; letter-spacing:-0.01em;">Thirty-eight years,<br>one specialty, <em style="color:#B08D3E; font-style:italic;">one line</em>.</h1>
+      <p class="rv" data-reveal-delay="160" style="margin-top:22px; max-width:600px; font-size:1.125rem; color:rgba(247,245,241,0.85);">From a medical student in India to one of the UK's highest-volume electrophysiologists, and now back to Mumbai. Follow the line.</p>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section data-screen-label="Timeline" data-timeline style="position:relative; background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; position:relative; padding:40px 20px 80px;">
+
+      <!-- lifeline rail -->
+      <div aria-hidden="true" style="position:absolute; top:0; bottom:0; left:44px; width:2px; background:rgba(176,141,62,0.18);"></div>
+      <div aria-hidden="true" data-lifeline style="position:absolute; top:0; left:44px; width:2px; height:0; background:linear-gradient(to bottom, #B08D3E 0%, #B08D3E calc(100% - 60px), rgba(176,141,62,0) 100%);"></div>
+
+      <!-- milestone: 1988 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;">
+          <div class="rv">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">1988</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">Foundation · to 1994</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">A medical student with a destination in mind.</h2>
+            <p style="margin-top:16px; color:#3A5468;">Professor Gupta begins his MB BS in India in 1988. He set his sights on a career in cardiology early, long before specialisation was supposed to be on his mind, and qualified six years later as a doctor with a clear chosen path.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">MB BS qualified, 1994</p>
+          </div>
+          <div class="rv" data-reveal-delay="120">
+            <image-slot id="journey-1988" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: medical school years"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">A young student in India, beginning a six-year MB BS programme with cardiology already in mind.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2000 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;">
+          <div class="rv" data-reveal-delay="120" style="order:1;">
+            <image-slot id="journey-2000" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: Commonwealth Fellowship"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Awarded the Commonwealth Fellowship in Cardiac Electrophysiology. Training in the UK begins.</p>
+          </div>
+          <div class="rv" style="order:2;">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2000</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">London calling</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">The Commonwealth Fellowship in Cardiac Electrophysiology.</h2>
+            <p style="margin-top:16px; color:#3A5468;">One of the small handful of awards each year that brings exceptional young doctors from across the Commonwealth to the United Kingdom for advanced training. The Fellowship marks the formal beginning of his electrophysiology career, the discipline of treating the heart's electrical system. He completes specialist training in the UK, including MD and DM higher degrees, MRCP membership, and the years of supervised practice required before consultant appointment.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">MD · DM · MRCP</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2007 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;">
+          <div class="rv">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2007</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">Consultant</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">Appointed at Liverpool Heart and Chest Hospital.</h2>
+            <p style="margin-top:16px; color:#3A5468;">LHCH is the United Kingdom's largest specialist cardiothoracic centre. It provides a regional electrophysiology service to a population of 2.8 million people across the North West of England, a referral catchment larger than Greater Mumbai. Professor Gupta has been in continuous full-time practice there since.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">18+ years and counting</p>
+          </div>
+          <div class="rv" data-reveal-delay="120">
+            <image-slot id="journey-2007" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: LHCH"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Appointed consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2009 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;">
+          <div class="rv" data-reveal-delay="120" style="order:1;">
+            <image-slot id="journey-2009" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: in theatre"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Begins performing 200+ AF ablation cases every year, a pace he has maintained since.</p>
+          </div>
+          <div class="rv" style="order:2;">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2009</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">High-volume practice</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">200 ablations a year. Every year.</h2>
+            <p style="margin-top:16px; color:#3A5468;">From 2009 onwards, Professor Gupta consistently performs over 200 catheter ablation procedures for atrial fibrillation each year, placing him among the highest-volume operators in the United Kingdom. Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing under 50 ablations a year have measurably worse complication rates than those above 200.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">10,000+ AF ablations · &lt;1% complication rate</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2012 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;">
+          <div class="rv">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2012</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">Royal College</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">Elected FRCP, London.</h2>
+            <p style="margin-top:16px; color:#3A5468;">The Fellowship of the Royal College of Physicians is conferred on senior physicians who have practised as substantive consultants for over five years and who have made a recognised contribution to medicine. It is, in British medicine, the post-nominal that matters, and the one that Mumbai families will recognise from generations of Indian doctors who trained in London.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">Fellow since 2012</p>
+          </div>
+          <div class="rv" data-reveal-delay="120">
+            <image-slot id="journey-2012" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: FRCP, London"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Elected Fellow of the Royal College of Physicians, one of British medicine's senior distinctions.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2014 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;">
+          <div class="rv" data-reveal-delay="120" style="order:1;">
+            <image-slot id="journey-2014" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: award ceremony"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Receives the Arrhythmia Alliance Excellence in Practice Award for outstanding contribution to UK arrhythmia services.</p>
+          </div>
+          <div class="rv" style="order:2;">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2014</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">National recognition</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">The Arrhythmia Alliance Excellence in Practice Award.</h2>
+            <p style="margin-top:16px; color:#3A5468;">Awarded annually for "Outstanding Individual who has contributed to Arrhythmia Services" in the UK. The same year, the Primary Care Atrial Fibrillation pathway he helped develop won "Anticoagulation Innovation of the Year" from the British Medical Association, and he was invited to speak at the All-Party Parliamentary Group on Atrial Fibrillation in Westminster.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">National practice award · BMA innovation award · Westminster invited speaker</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2017 + 2022 combined awards band -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative;">
+          <div class="rv"><div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2017 & 2022</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">NHS Clinical Excellence</span></div></div>
+          <h2 class="rv" data-reveal-delay="60" style="margin-top:14px; max-width:720px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">Bronze, then Silver. Recognised nationally, twice.</h2>
+          <div style="margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+            <div class="rv" style="border-radius:12px; border:1px solid #D9D3C7; background:#EFEBE3; padding:28px;">
+              <p style="margin:0; font-family:'Newsreader',Georgia,serif; font-size:1.4rem;">NHS Bronze, 2017</p>
+              <p style="margin-top:10px; color:#3A5468;">The NHS Clinical Excellence Awards recognise consultants who deliver work over and above the standard expected of their role, assessed nationally against a competitive field of senior doctors. The Bronze level is itself uncommon.</p>
+            </div>
+            <div class="rv" data-reveal-delay="100" style="border-radius:12px; border:1px solid rgba(176,141,62,0.5); background:#EFEBE3; padding:28px;">
+              <p style="margin:0; font-family:'Newsreader',Georgia,serif; font-size:1.4rem; color:#6E5826;">NHS Silver, 2022</p>
+              <p style="margin-top:10px; color:#3A5468;">Five years after Bronze, only a small fraction of NHS consultants are recognised at this level. Silver reflects sustained national-level contribution: to clinical practice, research, teaching and the wider profession.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- milestone: 2024 -->
+      <article data-ms style="position:relative; padding:64px 0 64px 96px;">
+        <span class="blip" data-blip style="position:absolute; left:18.5px; top:86px; width:15px; height:15px; border-radius:50%; border:2px solid #B08D3E; background:#F7F5F1; transition:background-color .4s ease;"></span>
+        <div style="position:relative; display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;">
+          <div class="rv">
+            <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2024</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;">Academic</span></div>
+            <h2 style="margin-top:16px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.15;">Honorary Professor of Cardiology.</h2>
+            <p style="margin-top:16px; color:#3A5468;">Appointed honorary Professor of Cardiology at the University of Liverpool, alongside an existing Senior Lectureship at Imperial College London held since 2011. By this point, Professor Gupta has authored more than 350 peer-reviewed publications, cited over 13,000 times, and has secured around £5 million in competitive research grants from the NIHR, British Heart Foundation and industry. He serves as Chief Investigator for five multicentre clinical trials: PRESSURE, SMAAN-PAF, PRAISE, VISTAX and CRAFT.</p>
+            <p style="margin-top:14px; font-size:0.85rem; font-weight:600; color:#6E5826;">350+ publications · 13,000+ citations · £5M in research grants</p>
+          </div>
+          <div class="rv" data-reveal-delay="120">
+            <image-slot id="journey-2024" style="display:block; width:100%; aspect-ratio:4/3; height:auto;" shape="rounded" radius="12" placeholder="Drop a photo: professorship"></image-slot>
+            <p style="margin:10px 0 0; font-size:0.8rem; color:#556675;">Appointed honorary Professor of Cardiology at the University of Liverpool.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 2026 FINALE -->
+  <section data-screen-label="2026 finale" style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:8px 20px 96px;">
+      <div class="rv" style="position:relative; overflow:hidden; border-radius:16px; background:#0C1F2B; color:#F7F5F1; box-shadow:0 30px 60px rgba(6,15,21,0.25);">
+        <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:110px; pointer-events:none;">
+          <defs>
+            <linearGradient id="jn-win" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+              <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+              <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+              <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+              <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+            </linearGradient>
+            <mask id="jn-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="120"><rect class="ecg-sweep" x="0" y="0" width="420" height="120" fill="url(#jn-win)"></rect></mask>
+          </defs>
+          <path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#B08D3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"></path>
+          <g mask="url(#jn-sweep-mask)"><path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#D8B15A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g>
+        </svg>
+        <div style="position:relative; z-index:2; padding:72px 64px 150px;">
+          <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;"><span style="font-family:'Newsreader',Georgia,serif; font-size:2.6rem; line-height:1; color:#B08D3E;">2026</span><span style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#B08D3E;">Mumbai London AF Clinic</span></div>
+          <h2 style="margin-top:18px; max-width:720px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2rem,4vw,3.2rem); line-height:1.1;">And now, <em style="color:#B08D3E; font-style:italic;">home</em>.</h2>
+          <p style="margin-top:20px; max-width:640px; font-size:1.1rem; color:rgba(247,245,241,0.85);">Mumbai London AF Clinic opens, bringing more than thirty years of UK electrophysiology practice back to the city where the journey began. Professor Gupta visits Mumbai for in-person consultations and procedures during scheduled clinic dates. Trusted local cardiologists provide continuity between visits, under his ongoing supervision. The same standard of care he provides at Liverpool, with the dignity of being treated close to home.</p>
+          <div style="margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+            <a href="Homepage v2.dc.html#cta" style="border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:15px 30px; font-weight:600; transition:background-color .2s, color .2s;" onmouseover="this.style.background='#6E5826';this.style.color='#F7F5F1'" onmouseout="this.style.background='#B08D3E';this.style.color='#0C1F2B'">Book a consultation</a>
+            <p style="margin:0; font-size:0.9rem; color:rgba(247,245,241,0.7);">Next Mumbai visit: March 2026 · Booking open</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (compact) -->
+  <footer style="background:#0C1F2B; color:#F7F5F1; border-top:1px solid #2A4254;">
+    <div style="max-width:1152px; margin:0 auto; padding:28px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-size:0.8rem; color:rgba(247,245,241,0.7);">
+      <span>© 2026 Mumbai London AF Clinic. All rights reserved.</span>
+      <a href="Homepage v2.dc.html" style="color:#B08D3E;" onmouseover="this.style.color='#F7F5F1'" onmouseout="this.style.color='#B08D3E'">Back to home</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll('.rv'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+            setTimeout(() => el.classList.add('in'), d);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(el => io.observe(el));
+    }
+
+    // Blips light as they pass
+    const blips = Array.from(document.querySelectorAll('[data-blip]'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      blips.forEach(b => b.classList.add('lit'));
+    } else {
+      const bio = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('lit'); bio.unobserve(e.target); } });
+      }, { threshold: 0.9, rootMargin: '0px 0px -20% 0px' });
+      blips.forEach(b => bio.observe(b));
+    }
+
+    // Lifeline draws with scroll; progress bar
+    const line = document.querySelector('[data-lifeline]');
+    const tl = document.querySelector('[data-timeline]');
+    const bar = document.querySelector('[data-scroll-bar]');
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (bar) {
+        const sc = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (sc > 0 ? (y / sc) * 100 : 0) + '%';
+      }
+      if (line && tl) {
+        const r = tl.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = r.height;
+        const passed = Math.min(Math.max(vh * 0.7 - r.top, 0), total);
+        line.style.height = passed + 'px';
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -9,9 +9,7 @@
     "lng": -2.9044,
     "role": "operated",
     "years": "2007 - present",
-    "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year.",
-    "images": [],
-    "readMore": "/journey"
+    "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year."
   },
   {
     "id": "london-imperial",
@@ -23,8 +21,7 @@
     "lng": -0.1749,
     "role": "taught",
     "years": "2011 - present",
-    "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation.",
-    "images": []
+    "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation."
   },
   {
     "id": "manchester",
@@ -36,8 +33,7 @@
     "lng": -2.2339,
     "role": "proctored",
     "years": "2015 - 2023",
-    "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service.",
-    "images": []
+    "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service."
   },
   {
     "id": "leeds",
@@ -49,8 +45,7 @@
     "lng": -1.5507,
     "role": "proctored",
     "years": "2016 - 2022",
-    "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures.",
-    "images": []
+    "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures."
   },
   {
     "id": "birmingham",
@@ -62,8 +57,7 @@
     "lng": -1.9385,
     "role": "taught",
     "years": "2018",
-    "blurb": "Delivered training sessions on cryoballoon and radiofrequency ablation technique.",
-    "images": []
+    "blurb": "Delivered training sessions on cryoballoon and radiofrequency ablation technique."
   },
   {
     "id": "brugge",
@@ -75,8 +69,7 @@
     "lng": 3.22,
     "role": "taught",
     "years": "2019 - present",
-    "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial.",
-    "images": []
+    "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial."
   },
   {
     "id": "bordeaux",
@@ -88,8 +81,7 @@
     "lng": -0.632,
     "role": "taught",
     "years": "2017",
-    "blurb": "Invited faculty at one of Europe's leading electrophysiology centres.",
-    "images": []
+    "blurb": "Invited faculty at one of Europe's leading electrophysiology centres."
   },
   {
     "id": "prague",
@@ -101,8 +93,7 @@
     "lng": 14.4632,
     "role": "proctored",
     "years": "2020",
-    "blurb": "Proctored complex ablation cases with the institute's arrhythmia team.",
-    "images": []
+    "blurb": "Proctored complex ablation cases with the institute's arrhythmia team."
   },
   {
     "id": "hamburg",
@@ -114,8 +105,7 @@
     "lng": 10.0128,
     "role": "taught",
     "years": "2018",
-    "blurb": "Guest operator and lecturer on high-volume AF ablation practice.",
-    "images": []
+    "blurb": "Guest operator and lecturer on high-volume AF ablation practice."
   },
   {
     "id": "boston",
@@ -127,8 +117,7 @@
     "lng": -71.0686,
     "role": "taught",
     "years": "2019",
-    "blurb": "Visiting faculty, presenting trial data and ablation technique to the cardiac arrhythmia service.",
-    "images": []
+    "blurb": "Visiting faculty, presenting trial data and ablation technique to the cardiac arrhythmia service."
   },
   {
     "id": "austin",
@@ -140,8 +129,7 @@
     "lng": -97.7437,
     "role": "taught",
     "years": "2022",
-    "blurb": "Invited speaker and collaborator on multicentre AF ablation research.",
-    "images": []
+    "blurb": "Invited speaker and collaborator on multicentre AF ablation research."
   },
   {
     "id": "mumbai",
@@ -153,7 +141,6 @@
     "lng": 72.8777,
     "role": "operated",
     "years": "2026 - present",
-    "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
-    "images": []
+    "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits."
   }
 ]

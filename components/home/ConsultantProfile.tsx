@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { Reveal } from '@/components/Reveal';
 
 const CREDENTIALS = [
@@ -21,13 +22,15 @@ export function ConsultantProfile() {
     <section aria-labelledby="profile-heading" className="bg-paper-soft">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-widest text-brass-deep">Meet your consultant</p>
+          <ChapterEyebrow chapter="03" label="Meet your consultant" />
+        </Reveal>
+        <Reveal delay={80}>
           <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
             Professor Dhiraj Gupta
           </h2>
           <p className="mt-1 font-semibold text-ink-soft">MB BS, MD, DM, FRCP (London)</p>
         </Reveal>
-        <Reveal delay={100}>
+        <Reveal delay={120}>
           <p className="mt-5 max-w-3xl text-ink-soft">
             Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the United Kingdom&apos;s
             largest specialist cardiothoracic centre, since 2007. He is honorary Professor of Cardiology at the
@@ -42,7 +45,7 @@ export function ConsultantProfile() {
         </Reveal>
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {CREDENTIALS.map((c, i) => (
-            <Reveal key={c.n} delay={i * 70}>
+            <Reveal key={c.n} delay={160 + i * 70} className="border-t border-line pt-5">
               <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
               <p className="font-semibold">{c.title}</p>
               <p className="text-sm text-ink-mute">{c.sub}</p>
@@ -50,8 +53,8 @@ export function ConsultantProfile() {
           ))}
         </div>
         <Reveal delay={300}>
-          <Link href="/journey" className="interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
-            Follow the journey, 1988 - 2026 &rarr;
+          <Link href="/journey" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            Follow the journey, 1988 to 2026 &rarr;
           </Link>
         </Reveal>
       </div>

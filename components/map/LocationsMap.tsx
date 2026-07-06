@@ -1,224 +1,277 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
-import type { Location, LocationRole } from '@/data/types';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { Location, LocationRole, MapRegion } from '@/data/types';
 import {
-  AMERICA_GEOMETRY,
-  INDIA_GEOMETRY,
-  MAP_VIEWBOX,
-  UK_GEOMETRY,
-  projectToMap,
-  type MapGeometry,
-} from './mapGeometry';
+  MAP_REGIONS,
+  countryBounds,
+  countryStyle,
+  countriesGeoJson,
+  markerStyle,
+  type WorldAtlas,
+} from './mapHelpers';
+import 'leaflet/dist/leaflet.css';
 
-type CountryRegion = 'uk' | 'india' | 'america';
-
-const ROLE_LABELS = {
+const ROLE_LABELS: Record<LocationRole, string> = {
   operated: 'Operated',
   taught: 'Taught',
   proctored: 'Proctored',
-} as const satisfies Record<LocationRole, string>;
-
-const ROLE_ORDER: LocationRole[] = ['operated', 'taught', 'proctored'];
-
-const CITY_LABELS: Record<string, string> = {
-  liverpool: 'Liverpool',
-  'london-imperial': 'London',
-  manchester: 'Manchester',
-  leeds: 'Leeds',
-  birmingham: 'Birmingham',
-  mumbai: 'Mumbai',
 };
 
-const GEOMETRY: Record<CountryRegion, MapGeometry> = {
-  uk: UK_GEOMETRY,
-  india: INDIA_GEOMETRY,
-  america: AMERICA_GEOMETRY,
+const ROLE_BADGE: Record<LocationRole, string> = {
+  operated: 'rounded-full bg-brass px-2.5 py-0.5 text-[0.72rem] font-semibold text-night',
+  taught: 'rounded-full border-[1.5px] border-brass-bright px-2.5 py-0.5 text-[0.72rem] font-semibold text-brass-bright',
+  proctored: 'rounded-full border-[1.5px] border-ink-mute px-2.5 py-0.5 text-[0.72rem] font-semibold text-ink-mute',
 };
 
-const COUNTRY_TITLES: Record<CountryRegion, string> = {
-  uk: 'Map of the United Kingdom and Ireland',
-  india: 'Map of India',
-  america: 'Map of the United States',
-};
+type MarkerMap = Record<string, L.CircleMarker>;
 
-const REGION_LABELS: Record<CountryRegion, string> = {
-  uk: 'the United Kingdom',
-  india: 'India',
-  america: 'the United States',
-};
+export default function LocationsMap({ locations }: { locations: Location[] }) {
+  const mapElRef = useRef<HTMLDivElement>(null);
+  const storeRef = useRef<{
+    map: L.Map;
+    markers: MarkerMap;
+    countries: L.GeoJSON | null;
+    L: typeof import('leaflet');
+  } | null>(null);
 
-/* Pin artwork is a 28x36 shape whose tip is at (14, 36). It is scaled and
-   translated so the tip lands exactly on the projected city coordinate. */
-const PIN_SCALE = 0.85;
-const PIN_W = 28;
-const PIN_H = 36;
+  const [region, setRegion] = useState<MapRegion>('All');
+  const [activeId, setActiveId] = useState<string | null>(locations[0]?.id ?? null);
+  const [ready, setReady] = useState(false);
 
-function cityLabel(location: Location) {
-  return CITY_LABELS[location.id] ?? location.name.split(',')[0];
-}
+  const visibleLocations = useMemo(
+    () => (region === 'All' ? locations : locations.filter((l) => l.region === region)),
+    [locations, region],
+  );
 
-function regionForLocation(location: Location): CountryRegion | null {
-  if (location.country === 'United Kingdom') return 'uk';
-  if (location.country === 'India') return 'india';
-  return null;
-}
+  const active = locations.find((l) => l.id === activeId) ?? visibleLocations[0] ?? null;
 
-function MapPin({
-  location,
-  geometry,
-  active,
-  onSelect,
-}: {
-  location: Location;
-  geometry: MapGeometry;
-  active: boolean;
-  onSelect: (id: string) => void;
-}) {
-  const { x, y } = projectToMap(geometry.projection, location.lat, location.lng);
+  const styleLabels = useCallback(
+    (nextRegion: MapRegion, nextActiveId: string | null) => {
+      const store = storeRef.current;
+      if (!store) return;
+      const { markers } = store;
 
-  return (
-    <g
-      role="button"
-      tabIndex={0}
-      aria-pressed={active}
-      aria-label={`${location.name}, ${ROLE_LABELS[location.role]}`}
-      className={`mlafc-svg-pin mlafc-pin-${location.role} ${active ? 'mlafc-svg-pin-active' : ''}`}
-      onClick={() => onSelect(location.id)}
-      onMouseEnter={() => {
-        if (window.matchMedia('(hover: hover)').matches) onSelect(location.id);
-      }}
-      onFocus={() => onSelect(location.id)}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          onSelect(location.id);
+      Object.entries(markers).forEach(([id, marker]) => {
+        const loc = locations.find((l) => l.id === id);
+        if (!loc) return;
+        const inRegion = nextRegion !== 'All' && loc.region === nextRegion;
+        const isActive = id === nextActiveId;
+        marker.unbindTooltip();
+        marker.bindTooltip(loc.city, {
+          direction: 'top',
+          offset: [0, -6],
+          permanent: inRegion || isActive,
+          opacity: 0.95,
+        });
+        const visible = nextRegion === 'All' || inRegion;
+        if (visible) {
+          marker.setStyle(markerStyle(loc.role, isActive));
+        } else {
+          marker.setStyle({ opacity: 0.18, fillOpacity: 0.1 });
         }
-      }}
-    >
-      {/* generous invisible hit area, always aligned with the map */}
-      <circle cx={x} cy={y - 14} r={18} fill="transparent" stroke="none" />
-      <g
-        transform={`translate(${x - (PIN_W / 2) * PIN_SCALE}, ${y - PIN_H * PIN_SCALE}) scale(${PIN_SCALE})`}
-      >
-        <path
-          className="mlafc-pin-shape"
-          d="M14 0C6.3 0 0 6.3 0 14c0 10 14 22 14 22s14-12 14-22C28 6.3 21.7 0 14 0z"
-        />
-        <circle cx="14" cy="14" r="5" className="fill-night" />
-      </g>
-      {active ? (
-        <text x={x} y={y + 16} textAnchor="middle" className="mlafc-pin-label">
-          {cityLabel(location).toUpperCase()}
-        </text>
-      ) : null}
-    </g>
-  );
-}
-
-export default function LocationsMap({
-  locations,
-  height = '480px',
-}: {
-  locations: Location[];
-  height?: string;
-}) {
-  const [country, setCountry] = useState<CountryRegion>('uk');
-
-  const mapLocations = useMemo(
-    () => locations.filter((location) => regionForLocation(location) === country),
-    [country, locations],
+      });
+    },
+    [locations],
   );
 
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const active =
-    mapLocations.find((location) => location.id === activeId) ?? mapLocations[0] ?? null;
+  const styleCountries = useCallback((nextRegion: MapRegion) => {
+    const store = storeRef.current;
+    if (!store?.countries) return;
+    store.countries.eachLayer((layer) => {
+      const feature = (layer as L.Layer & { feature?: { properties: { name: string } } }).feature;
+      if (!feature) return;
+      (layer as L.Path).setStyle(countryStyle(feature.properties.name, nextRegion));
+    });
+  }, []);
 
-  const selectCountry = (next: CountryRegion) => {
-    setCountry(next);
-    setActiveId(null);
-  };
+  const styleMarkers = useCallback((nextActiveId: string | null) => {
+    const store = storeRef.current;
+    if (!store) return;
+    Object.entries(store.markers).forEach(([id, marker]) => {
+      const role = (marker as L.CircleMarker & { _role?: LocationRole })._role ?? 'operated';
+      marker.setStyle(markerStyle(role, id === nextActiveId));
+      if (id === nextActiveId) marker.bringToFront();
+    });
+  }, []);
 
-  const geometry = GEOMETRY[country];
+  const selectCityRef = useRef<(id: string, fly?: boolean) => void>(() => {});
 
-  const bubbleBase =
-    'interactive cursor-pointer rounded-full px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass';
-  const bubbleActive = 'bg-brass text-night shadow-md';
-  const bubbleIdle = 'border border-line-dark bg-night-soft text-paper hover:border-brass hover:text-brass';
+  const selectCity = useCallback(
+    (id: string, fly = true) => {
+      setActiveId(id);
+      const loc = locations.find((l) => l.id === id);
+      const store = storeRef.current;
+      if (!store) return;
+
+      styleMarkers(id);
+      Object.values(store.markers).forEach((m) => m.unbindTooltip());
+
+      if (loc && fly) {
+        store.map.flyTo([loc.lat, loc.lng], Math.max(store.map.getZoom(), 5), { duration: 0.8 });
+        store.map.once('moveend', () => styleLabels(region, id));
+      } else {
+        styleLabels(region, id);
+      }
+    },
+    [locations, region, styleLabels, styleMarkers],
+  );
+
+  selectCityRef.current = selectCity;
+
+  const selectRegion = useCallback(
+    (nextRegion: MapRegion) => {
+      const locs = nextRegion === 'All' ? locations : locations.filter((l) => l.region === nextRegion);
+      const nextActiveId = locs[0]?.id ?? null;
+      setRegion(nextRegion);
+      setActiveId(nextActiveId);
+
+      const store = storeRef.current;
+      if (store && locs.length) {
+        let bounds =
+          nextRegion === 'All' ? null : countryBounds(nextRegion, store.countries!, store.L);
+        if (!bounds || !bounds.isValid()) {
+          bounds = store.L.latLngBounds(locs.map((l) => [l.lat, l.lng]));
+          if (nextRegion !== 'All') bounds = bounds.pad(nextRegion === 'United Kingdom' ? 0.55 : 0.35);
+        }
+        if (bounds.isValid()) {
+          store.map.flyToBounds(
+            bounds,
+            nextRegion === 'All'
+              ? { padding: [56, 56], duration: 0.9 }
+              : { padding: [20, 20], maxZoom: 6.5, duration: 0.9 },
+          );
+        }
+      }
+
+      styleMarkers(nextActiveId);
+      styleCountries(nextRegion);
+      if (store) {
+        Object.values(store.markers).forEach((m) => m.unbindTooltip());
+        store.map.once('moveend', () => styleLabels(nextRegion, nextActiveId));
+      } else {
+        styleLabels(nextRegion, nextActiveId);
+      }
+    },
+    [locations, styleCountries, styleLabels, styleMarkers],
+  );
+
+  useEffect(() => {
+    const el = mapElRef.current;
+    if (!el || storeRef.current) return;
+
+    let cancelled = false;
+
+    (async () => {
+      const [L, topojson] = await Promise.all([import('leaflet'), import('topojson-client')]);
+      if (cancelled || !mapElRef.current) return;
+
+      const map = L.map(el, {
+        attributionControl: false,
+        zoomControl: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        zoomSnap: 0.25,
+        maxZoom: 7,
+        minZoom: 1.5,
+      });
+      map.setView([32, 10], 1.8);
+
+      const markers: MarkerMap = {};
+      storeRef.current = { map, markers, countries: null, L };
+
+      locations.forEach((loc) => {
+        const marker = L.circleMarker([loc.lat, loc.lng], markerStyle(loc.role, false)).addTo(map);
+        (marker as L.CircleMarker & { _role: LocationRole })._role = loc.role;
+        marker.bindTooltip(loc.city, { direction: 'top', offset: [0, -6], opacity: 0.95 });
+        marker.on('click', () => selectCityRef.current(loc.id, false));
+        markers[loc.id] = marker;
+      });
+
+      const bounds = L.latLngBounds(locations.map((l) => [l.lat, l.lng]));
+      map.fitBounds(bounds, { padding: [56, 56] });
+      setActiveId(locations[0]?.id ?? null);
+      styleMarkers(locations[0]?.id ?? null);
+
+      try {
+        const res = await fetch('/data/countries-110m.json');
+        const world = (await res.json()) as WorldAtlas;
+        if (cancelled) return;
+        const geo = countriesGeoJson(world, topojson);
+        const countries = L.geoJSON(geo, {
+          style: (f) => countryStyle(f?.properties?.name ?? '', 'All'),
+          interactive: false,
+        }).addTo(map);
+        countries.bringToBack();
+        storeRef.current!.countries = countries;
+      } catch {
+        // map still works with pins only
+      }
+
+      setReady(true);
+    })();
+
+    return () => {
+      cancelled = true;
+      storeRef.current?.map.remove();
+      storeRef.current = null;
+    };
+  }, [locations, styleMarkers]);
+
+  const tabBase =
+    'interactive cursor-pointer rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass';
+  const chipBase =
+    'interactive cursor-pointer rounded-full px-3.5 py-2 text-xs font-semibold transition-colors sm:text-sm';
 
   return (
     <div>
-      {/* Country switch, directly under the section headline */}
-      <div className="flex flex-wrap gap-3" role="group" aria-label="Choose country">
-        {(
-          [
-            ['uk', 'United Kingdom'],
-            ['india', 'India'],
-            ['america', 'United States'],
-          ] as const
-        ).map(([id, label]) => (
+      <div className="flex flex-wrap gap-2.5" role="group" aria-label="Choose region">
+        {MAP_REGIONS.map((r) => (
           <button
-            key={id}
+            key={r}
             type="button"
-            aria-pressed={country === id}
-            onClick={() => selectCountry(id)}
-            className={`${bubbleBase} min-h-11 ${country === id ? bubbleActive : bubbleIdle}`}
+            aria-pressed={region === r}
+            onClick={() => selectRegion(r)}
+            className={`${tabBase} min-h-11 ${
+              region === r
+                ? 'border border-brass bg-brass text-night'
+                : 'border border-line-dark bg-transparent text-paper hover:border-brass hover:text-brass'
+            }`}
           >
-            {label}
+            {r}
           </button>
         ))}
       </div>
 
-      <div className="mt-8 grid items-center gap-10 md:grid-cols-2 md:gap-12">
-        {/* Map column */}
-        <div key={country} className="mlafc-panel-in mx-auto w-full max-w-sm md:max-w-md">
-          <svg
-            viewBox={`0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}`}
-            className="h-auto w-full"
-            style={{ maxHeight: height }}
-            role="img"
-            aria-label={COUNTRY_TITLES[country]}
-          >
-            {geometry.paths.map((p) => (
-              <path key={p.name} d={p.d} className="mlafc-landmass" />
-            ))}
-            {mapLocations.map((location) => (
-              <MapPin
-                key={location.id}
-                location={location}
-                geometry={geometry}
-                active={active?.id === location.id}
-                onSelect={setActiveId}
-              />
-            ))}
-          </svg>
-        </div>
+      <div className="mt-6 grid items-stretch gap-5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
+        <div
+          ref={mapElRef}
+          className="mlafc-map min-h-[clamp(320px,48vh,460px)] overflow-hidden rounded-xl border border-line-dark"
+          aria-label="World map of locations"
+          data-ready={ready || undefined}
+        />
 
-        {/* Info column */}
-        <div>
-          {mapLocations.length > 0 ? (
-            <div
-              className="flex flex-wrap gap-2"
-              role="group"
-              aria-label={`Cities in ${REGION_LABELS[country]}`}
-            >
-              {mapLocations.map((location) => (
+        <div className="flex min-w-0 flex-col gap-4">
+          {visibleLocations.length > 0 ? (
+            <div className="flex flex-wrap gap-2" role="group" aria-label={`Cities in ${region}`}>
+              {visibleLocations.map((loc) => (
                 <button
-                  key={location.id}
+                  key={loc.id}
                   type="button"
-                  aria-pressed={active?.id === location.id}
-                  onClick={() => setActiveId(location.id)}
-                  onMouseEnter={() => {
-                    if (window.matchMedia('(hover: hover)').matches) setActiveId(location.id);
-                  }}
-                  className={`${bubbleBase} min-h-10 px-4 py-2 text-xs sm:text-sm ${
-                    active?.id === location.id
-                      ? bubbleActive
-                      : 'border border-line-dark/80 bg-paper/10 text-paper hover:border-brass hover:text-brass'
+                  aria-pressed={active?.id === loc.id}
+                  onClick={() => selectCity(loc.id)}
+                  className={`${chipBase} ${
+                    active?.id === loc.id
+                      ? 'border border-brass bg-brass text-night'
+                      : 'border border-line-dark bg-paper/10 text-paper hover:border-brass hover:text-brass'
                   }`}
                 >
-                  {cityLabel(location)}
+                  {loc.city}
                 </button>
               ))}
             </div>
@@ -226,26 +279,21 @@ export default function LocationsMap({
 
           <div
             aria-live="polite"
-            className={`${mapLocations.length > 0 ? 'mt-6' : ''} min-h-56 rounded-lg border border-line-dark bg-night-soft p-6 md:p-8`}
+            className="flex-1 rounded-xl border border-line-dark bg-ink p-6 md:p-7"
           >
             {active ? (
               <div key={active.id} className="mlafc-panel-in">
-                <p className="text-xs font-semibold uppercase tracking-widest text-brass">
-                  {cityLabel(active)}, {active.country}
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brass">
+                  {active.city}, {active.country}
                 </p>
                 <p className="mt-2 font-serif text-2xl leading-snug text-paper">{active.name}</p>
                 <p className="mt-3 text-sm text-paper/75">
-                  <span className="mr-2 inline-block rounded-full bg-brass px-2.5 py-0.5 font-semibold text-night">
-                    {ROLE_LABELS[active.role]}
-                  </span>
-                  {active.years}
+                  <span className={ROLE_BADGE[active.role]}>{ROLE_LABELS[active.role]}</span>
+                  <span className="ml-2">{active.years}</span>
                 </p>
                 <p className="mt-4 leading-relaxed text-paper/85">{active.blurb}</p>
                 {active.readMore ? (
-                  <Link
-                    href={active.readMore}
-                    className="interactive mt-4 inline-block font-semibold text-brass hover:underline"
-                  >
+                  <Link href={active.readMore} className="arrow-link interactive mt-4 inline-block font-semibold text-brass hover:underline">
                     Read more &rarr;
                   </Link>
                 ) : null}
@@ -253,16 +301,19 @@ export default function LocationsMap({
             ) : null}
           </div>
 
-          <ul className="mt-5 flex flex-wrap gap-4 text-xs text-paper/80" aria-label="Location legend">
-            {ROLE_ORDER.map((role) => (
-              <li key={role} className="flex items-center gap-1.5">
-                <span
-                  aria-hidden
-                  className={`mlafc-legend-dot mlafc-legend-dot-${role} inline-block h-2.5 w-2.5 rounded-full`}
-                />
-                {ROLE_LABELS[role]}
-              </li>
-            ))}
+          <ul className="flex flex-wrap gap-4 text-xs text-paper/80" aria-label="Location legend">
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-full bg-brass" />
+              Operated
+            </li>
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-full border-2 border-brass-bright bg-night" />
+              Taught
+            </li>
+            <li className="flex items-center gap-2">
+              <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-full border-2 border-ink-mute bg-night" />
+              Proctored
+            </li>
           </ul>
         </div>
       </div>

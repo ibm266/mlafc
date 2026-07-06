@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F7F5F1; color: #122B3A; font-family: 'Archivo', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: #6E5826; text-decoration: none; }
+  a:hover { color: #122B3A; }
+  h1, h2, h3 { margin: 0; }
+  ul { margin: 0; }
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .rv.in { opacity: 1; transform: none; }
+  @keyframes ecg-sweep-x { 0% { transform: translateX(-420px); } 100% { transform: translateX(1460px); } }
+  @keyframes ecg-fadein { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.55); opacity: 1; } }
+  @keyframes op-glow { 0%,100% { box-shadow: 0 0 0 1px #B08D3E, 0 10px 30px rgba(176,141,62,0.10); } 50% { box-shadow: 0 0 0 1px #B08D3E, 0 14px 44px rgba(176,141,62,0.28); } }
+  @keyframes halo { 0%,100% { opacity: 0.12; } 50% { opacity: 0.45; } }
+  .halo { animation: halo 3s ease-in-out infinite; }
+  .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+  .ecg-layer { animation: ecg-fadein 2.4s ease-out both; }
+  .pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
+  .op-glow { animation: op-glow 4.5s ease-in-out infinite; }
+  .mlafc-map { background: #0A1A24; }
+  .mlafc-map .leaflet-tooltip { background: rgba(12,31,43,0.85); color: #F7F5F1; border: 1px solid rgba(42,66,84,0.8); border-radius: 5px; font-family: 'Archivo', system-ui, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.02em; padding: 2px 8px; box-shadow: none; }
+  .mlafc-map .leaflet-tooltip-top:before { display: none; }
+  .mlafc-pin { transition: transform .2s ease; transform-origin: center bottom; }
+  .mlafc-pin:hover { transform: scale(1.25); }
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; transition: none; }
+    .ecg-sweep, .pulse-dot, .op-glow, .halo { animation: none; }
+  }
+</style>
+</helmet>
+<div style="position:relative;">
+
+  <!-- scroll progress -->
+  <div aria-hidden="true" style="position:fixed; inset:0 0 auto 0; height:3px; background:rgba(217,211,199,0.5); z-index:60; pointer-events:none;">
+    <div data-scroll-bar style="height:100%; width:0%; background:#B08D3E;"></div>
+  </div>
+
+  <!-- floating booking pill -->
+  <a data-pill href="#cta" style="position:fixed; right:24px; bottom:24px; z-index:55; display:flex; align-items:center; gap:10px; border-radius:999px; background:#0C1F2B; color:#F7F5F1; padding:14px 22px; font-weight:600; font-size:0.9rem; box-shadow:0 12px 32px rgba(6,15,21,0.35); opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease;" onmouseover="this.style.background='#16303F'" onmouseout="this.style.background='#0C1F2B'">
+    <span class="pulse-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#B08D3E;"></span>
+    Next Mumbai visit: March 2026 · Booking open
+  </a>
+
+  <!-- NAV -->
+  <header data-nav style="position:sticky; top:0; z-index:50; background:rgba(247,245,241,0.95); backdrop-filter:blur(8px); border-bottom:1px solid transparent; transition:padding .3s ease, border-color .3s ease, box-shadow .3s ease;">
+    <div style="max-width:1152px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; min-height:64px;">
+      <a href="#top" style="display:inline-flex; align-items:center; gap:10px; color:#122B3A;">
+        <svg width="40" height="26" viewBox="0 0 44 28" aria-hidden="true" style="color:#6E5826;">
+          <circle cx="4" cy="14" r="3" fill="currentColor"></circle>
+          <path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="40" cy="14" r="3" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family:'Newsreader',Georgia,serif; font-size:17px; letter-spacing:0.01em;">Mumbai London AF Clinic</span>
+      </a>
+      <nav style="display:flex; align-items:center; gap:30px;">
+        <a href="#compare" style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Evidence</a>
+        <a href="#profile" style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Consultant</a>
+        <a href="#conditions" style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Conditions</a>
+        <a href="#visits" style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Visits</a>
+        <a href="#cta" style="border-radius:999px; background:#122B3A; color:#F7F5F1; padding:10px 20px; font-size:15px; font-weight:600; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Book a consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" data-screen-label="Hero" style="position:relative; overflow:hidden; background:#0C1F2B; color:#F7F5F1;">
+    <svg class="ecg-layer" aria-hidden="true" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none;">
+      <defs>
+        <pattern id="hp-grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="#2A4254" stroke-width="0.5" opacity="0.4"></path></pattern>
+        <linearGradient id="hp-win" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+        </linearGradient>
+        <mask id="hp-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="720"><rect class="ecg-sweep" x="0" y="0" width="420" height="720" fill="url(#hp-win)"></rect></mask>
+        <filter id="hp-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"></feGaussianBlur><feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+        <radialGradient id="hp-vig" cx="34%" cy="46%" r="78%">
+          <stop offset="0%" stop-color="#0C1F2B" stop-opacity="0"></stop>
+          <stop offset="55%" stop-color="#0C1F2B" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-color="#0C1F2B" stop-opacity="0.86"></stop>
+        </radialGradient>
+      </defs>
+      <rect width="1440" height="720" fill="url(#hp-grid)" opacity="0.5"></rect>
+      <path d="M 0 360 L 16.0 360.0 Q 28.8 353.0 41.6 360.0 L 54.4 360.0 L 57.2 362.0 L 62.1 314.0 L 67.1 376.0 L 89.6 360.0 L 92.8 360.0 Q 112.0 350.0 131.2 360.0 L 160.0 360.0 L 176.0 360.0 Q 188.8 353.0 201.6 360.0 L 214.4 360.0 L 217.2 362.0 L 222.1 314.0 L 227.1 376.0 L 249.6 360.0 L 252.8 360.0 Q 272.0 350.0 291.2 360.0 L 320.0 360.0 L 336.0 360.0 Q 348.8 353.0 361.6 360.0 L 374.4 360.0 L 377.2 362.0 L 382.1 314.0 L 387.1 376.0 L 409.6 360.0 L 412.8 360.0 Q 432.0 350.0 451.2 360.0 L 480.0 360.0 L 496.0 360.0 Q 508.8 353.0 521.6 360.0 L 534.4 360.0 L 537.2 362.0 L 542.1 314.0 L 547.1 376.0 L 569.6 360.0 L 572.8 360.0 Q 592.0 350.0 611.2 360.0 L 640.0 360.0 L 656.0 360.0 Q 668.8 353.0 681.6 360.0 L 694.4 360.0 L 697.2 362.0 L 702.1 314.0 L 707.1 376.0 L 729.6 360.0 L 732.8 360.0 Q 752.0 350.0 771.2 360.0 L 800.0 360.0 L 816.0 360.0 Q 828.8 353.0 841.6 360.0 L 854.4 360.0 L 857.2 362.0 L 862.1 314.0 L 867.1 376.0 L 889.6 360.0 L 892.8 360.0 Q 912.0 350.0 931.2 360.0 L 960.0 360.0 L 976.0 360.0 Q 988.8 353.0 1001.6 360.0 L 1014.4 360.0 L 1017.2 362.0 L 1022.1 314.0 L 1027.1 376.0 L 1049.6 360.0 L 1052.8 360.0 Q 1072.0 350.0 1091.2 360.0 L 1120.0 360.0 L 1136.0 360.0 Q 1148.8 353.0 1161.6 360.0 L 1174.4 360.0 L 1177.2 362.0 L 1182.1 314.0 L 1187.1 376.0 L 1209.6 360.0 L 1212.8 360.0 Q 1232.0 350.0 1251.2 360.0 L 1280.0 360.0 L 1296.0 360.0 Q 1308.8 353.0 1321.6 360.0 L 1334.4 360.0 L 1337.2 362.0 L 1342.1 314.0 L 1347.1 376.0 L 1369.6 360.0 L 1372.8 360.0 Q 1392.0 350.0 1411.2 360.0 L 1440.0 360.0" fill="none" stroke="#B08D3E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"></path>
+      <g mask="url(#hp-sweep-mask)"><path d="M 0 360 L 16.0 360.0 Q 28.8 353.0 41.6 360.0 L 54.4 360.0 L 57.2 362.0 L 62.1 314.0 L 67.1 376.0 L 89.6 360.0 L 92.8 360.0 Q 112.0 350.0 131.2 360.0 L 160.0 360.0 L 176.0 360.0 Q 188.8 353.0 201.6 360.0 L 214.4 360.0 L 217.2 362.0 L 222.1 314.0 L 227.1 376.0 L 249.6 360.0 L 252.8 360.0 Q 272.0 350.0 291.2 360.0 L 320.0 360.0 L 336.0 360.0 Q 348.8 353.0 361.6 360.0 L 374.4 360.0 L 377.2 362.0 L 382.1 314.0 L 387.1 376.0 L 409.6 360.0 L 412.8 360.0 Q 432.0 350.0 451.2 360.0 L 480.0 360.0 L 496.0 360.0 Q 508.8 353.0 521.6 360.0 L 534.4 360.0 L 537.2 362.0 L 542.1 314.0 L 547.1 376.0 L 569.6 360.0 L 572.8 360.0 Q 592.0 350.0 611.2 360.0 L 640.0 360.0 L 656.0 360.0 Q 668.8 353.0 681.6 360.0 L 694.4 360.0 L 697.2 362.0 L 702.1 314.0 L 707.1 376.0 L 729.6 360.0 L 732.8 360.0 Q 752.0 350.0 771.2 360.0 L 800.0 360.0 L 816.0 360.0 Q 828.8 353.0 841.6 360.0 L 854.4 360.0 L 857.2 362.0 L 862.1 314.0 L 867.1 376.0 L 889.6 360.0 L 892.8 360.0 Q 912.0 350.0 931.2 360.0 L 960.0 360.0 L 976.0 360.0 Q 988.8 353.0 1001.6 360.0 L 1014.4 360.0 L 1017.2 362.0 L 1022.1 314.0 L 1027.1 376.0 L 1049.6 360.0 L 1052.8 360.0 Q 1072.0 350.0 1091.2 360.0 L 1120.0 360.0 L 1136.0 360.0 Q 1148.8 353.0 1161.6 360.0 L 1174.4 360.0 L 1177.2 362.0 L 1182.1 314.0 L 1187.1 376.0 L 1209.6 360.0 L 1212.8 360.0 Q 1232.0 350.0 1251.2 360.0 L 1280.0 360.0 L 1296.0 360.0 Q 1308.8 353.0 1321.6 360.0 L 1334.4 360.0 L 1337.2 362.0 L 1342.1 314.0 L 1347.1 376.0 L 1369.6 360.0 L 1372.8 360.0 Q 1392.0 350.0 1411.2 360.0 L 1440.0 360.0" fill="none" stroke="#D8B15A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#hp-glow)"></path></g>
+      <rect width="1440" height="720" fill="url(#hp-vig)"></rect>
+    </svg>
+
+    <div style="position:relative; z-index:2; max-width:1152px; margin:0 auto; display:grid; grid-template-columns:1.15fr 0.85fr; align-items:center; gap:64px; padding:104px 20px;">
+      <div>
+        <h1 class="rv" style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.4rem,5vw,3.9rem); line-height:1.1; letter-spacing:-0.01em;">The best ablation is the one<br>done by <em style="color:#B08D3E; font-style:italic;">experienced hands</em>.</h1>
+        <p class="rv" data-reveal-delay="120" style="margin-top:24px; max-width:560px; font-size:1.125rem; line-height:1.65; color:rgba(247,245,241,0.85);">Professor Dhiraj Gupta has performed more than 10,000 AF ablations at the UK's largest heart centre, using both radiofrequency and pulsed field technology. He now sees patients in Mumbai. Whatever the machine, the hands holding it matter more.</p>
+        <div class="rv" data-reveal-delay="220" style="margin-top:32px; display:flex; flex-wrap:wrap; gap:16px;">
+          <a href="#cta" style="border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:15px 30px; font-weight:600; transition:background-color .2s, color .2s;" onmouseover="this.style.background='#6E5826';this.style.color='#F7F5F1'" onmouseout="this.style.background='#B08D3E';this.style.color='#0C1F2B'">Book a consultation</a>
+          <a href="#compare" style="border-radius:999px; border:1px solid #2A4254; color:#F7F5F1; padding:15px 30px; font-weight:600; transition:border-color .2s, color .2s;" onmouseover="this.style.borderColor='#B08D3E';this.style.color='#B08D3E'" onmouseout="this.style.borderColor='#2A4254';this.style.color='#F7F5F1'">See the evidence</a>
+        </div>
+        <p class="rv" data-reveal-delay="260" style="margin-top:14px; font-size:0.85rem; color:rgba(247,245,241,0.6);">It costs nothing to ask. Every enquiry is answered.</p>
+        <ul class="rv" data-reveal-delay="300" style="margin-top:32px; padding-top:24px; list-style:none; display:flex; flex-wrap:wrap; gap:8px 26px; border-top:1px solid rgba(42,66,84,0.5); font-size:0.9rem; color:rgba(247,245,241,0.8);">
+          <li>GMC registered</li><li>Liverpool Heart and Chest Hospital</li><li>English · Hindi · Punjabi</li>
+        </ul>
+        <blockquote class="rv" data-reveal-delay="360" style="margin:36px 0 0; max-width:560px; border-left:2px solid #B08D3E; padding-left:24px;">
+          <p style="margin:0; font-family:'Newsreader',Georgia,serif; font-style:italic; font-size:1.2rem; line-height:1.6; color:rgba(247,245,241,0.9);">"Patients in Mumbai deserve the same standard of arrhythmia care I provide in Liverpool, with the dignity of being treated close to home."</p>
+          <p style="margin:14px 0 0; font-size:0.9rem; font-weight:600;">Professor Dhiraj Gupta</p>
+          <p style="margin:0; font-size:0.9rem; color:rgba(247,245,241,0.7);">Consultant cardiologist &amp; electrophysiologist</p>
+        </blockquote>
+      </div>
+      <div class="rv" data-reveal-delay="200" style="justify-self:end; width:100%; max-width:420px;">
+        <figure style="position:relative; margin:0; border-radius:12px; overflow:hidden; border:1px solid #2A4254; background:#F7F5F1; box-shadow:0 30px 60px rgba(6,15,21,0.6);">
+          <img src="assets/professor-gupta.png" alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist" width="573" height="612" style="display:block; width:100%; aspect-ratio:573/612; object-fit:cover; object-position:top;">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CONSTANT -->
+  <section id="constant" style="background:#F7F5F1; overflow:hidden;">
+    <div style="max-width:1152px; margin:0 auto; padding:96px 20px 0; text-align:center;">
+      <p class="rv" style="display:flex; align-items:center; justify-content:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>01 · The one constant</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin:16px auto 0; max-width:760px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.1rem,4.2vw,3rem); line-height:1.12;">What changes the rhythm is <em style="color:#6E5826; font-style:italic;">the operator</em>.</h2>
+    </div>
+    <div class="rv" data-reveal-delay="160" style="max-width:1400px; margin:36px auto 0; padding:0 20px;">
+      <svg viewBox="0 0 1400 180" style="display:block; width:100%; height:auto;" role="img" aria-label="An ECG trace beginning in chaotic atrial fibrillation, passing through a point marked the operator, and continuing as a steady sinus rhythm.">
+        <text x="4" y="30" fill="#556675" font-size="12" font-weight="600" letter-spacing="0.16em" style="font-family:'Archivo',system-ui,sans-serif;">ATRIAL FIBRILLATION</text>
+        <text x="1396" y="30" text-anchor="end" fill="#556675" font-size="12" font-weight="600" letter-spacing="0.16em" style="font-family:'Archivo',system-ui,sans-serif;">STEADY RHYTHM</text>
+        <path data-trace d="M 0 90 L 0.0 90.0 L 1.9 90.0 L 3.8 85.5 L 5.8 93.9 L 7.7 89.4 L 9.6 93.0 L 11.5 86.6 L 13.4 88.9 L 15.4 91.1 L 17.3 89.1 L 19.2 95.1 L 23.0 92.0 L 29.8 60.0 L 36.5 100.5 L 67.2 90.0 L 67.2 91.1 L 69.6 85.2 L 72.0 91.9 L 74.4 87.5 L 76.8 96.1 L 79.2 88.1 L 81.6 87.7 L 84.0 90.3 L 86.4 87.5 L 88.8 95.7 L 91.2 88.0 L 93.6 91.5 L 96.0 85.1 L 96.0 89.4 L 98.7 93.3 L 101.4 90.1 L 104.1 86.0 L 106.8 92.0 L 109.4 87.2 L 112.1 94.9 L 114.8 89.1 L 117.5 89.2 L 120.2 88.2 L 122.9 88.9 L 128.3 92.0 L 137.7 52.0 L 147.1 103.3 L 190.1 90.0 L 190.1 91.3 L 193.4 87.1 L 196.8 93.1 L 200.2 91.9 L 203.5 88.6 L 206.9 90.2 L 210.2 84.6 L 213.6 95.9 L 217.0 89.0 L 220.3 91.8 L 223.7 88.4 L 227.0 86.4 L 230.4 92.9 L 230.4 92.7 L 231.9 89.9 L 233.5 91.5 L 235.0 84.5 L 236.5 93.0 L 238.1 89.1 L 239.6 92.5 L 241.2 90.9 L 242.7 85.9 L 244.2 91.2 L 245.8 88.3 L 248.8 92.0 L 254.2 60.0 L 259.6 100.5 L 284.2 90.0 L 284.2 87.5 L 286.1 92.8 L 288.0 83.8 L 289.9 92.0 L 291.8 92.2 L 293.8 90.3 L 295.7 91.3 L 297.6 84.7 L 299.5 92.6 L 301.4 87.8 L 303.4 95.3 L 305.3 89.0 L 307.2 86.3 L 307.2 90.3 L 310.3 94.8 L 313.3 86.8 L 316.4 91.4 L 319.5 86.0 L 322.6 92.2 L 325.6 91.1 L 328.7 90.9 L 331.8 90.5 L 334.8 84.6 L 337.9 93.7 L 344.1 92.0 L 354.8 52.0 L 365.6 103.3 L 414.7 90.0 L 414.7 86.1 L 418.6 89.8 L 422.4 88.5 L 426.2 89.9 L 430.1 95.9 L 433.9 85.8 L 437.8 91.2 L 441.6 85.9 L 445.4 92.5 L 449.3 91.8 L 453.1 90.1 L 457.0 90.9 L 460.8 83.5 L 460.8 87.4 L 463.1 94.1 L 465.4 88.4 L 467.7 93.6 L 470.0 86.2 L 472.3 89.5 L 474.6 89.9 L 476.9 91.5 L 479.2 93.3 L 481.5 85.3 L 483.8 91.8 L 488.4 92.0 L 496.5 60.0 L 504.6 100.5 L 541.4 90.0 L 541.4 88.8 L 544.3 86.9 L 547.2 94.8 L 550.1 88.3 L 553.0 94.0 L 555.8 85.1 L 558.7 88.6 L 561.6 92.7 L 564.5 89.6 L 567.4 94.0 L 570.2 85.1 L 573.1 91.0 L 576.0 87.2 L 576.0 89.2 L 577.3 93.2 L 578.6 87.5 L 579.8 87.0 L 581.1 92.8 L 582.4 88.6 L 583.7 94.5 L 585.0 86.8 L 586.2 89.7 L 587.5 88.2 L 588.8 91.4 L 591.4 92.0 L 595.8 52.0 L 600.3 103.3 L 620.8 90.0 L 700 90 L 760 90 L 772.8 90.0 Q 783.0 85.0 793.3 90.0 L 803.5 90.0 L 805.8 92.0 L 809.7 56.0 L 813.7 101.9 L 831.7 90.0 L 834.2 90.0 Q 849.6 83.0 865.0 90.0 L 888.0 90.0 L 900.8 90.0 Q 911.0 85.0 921.3 90.0 L 931.5 90.0 L 933.8 92.0 L 937.7 56.0 L 941.7 101.9 L 959.7 90.0 L 962.2 90.0 Q 977.6 83.0 993.0 90.0 L 1016.0 90.0 L 1028.8 90.0 Q 1039.0 85.0 1049.3 90.0 L 1059.5 90.0 L 1061.8 92.0 L 1065.7 56.0 L 1069.7 101.9 L 1087.7 90.0 L 1090.2 90.0 Q 1105.6 83.0 1121.0 90.0 L 1144.0 90.0 L 1156.8 90.0 Q 1167.0 85.0 1177.3 90.0 L 1187.5 90.0 L 1189.8 92.0 L 1193.7 56.0 L 1197.7 101.9 L 1215.7 90.0 L 1218.2 90.0 Q 1233.6 83.0 1249.0 90.0 L 1272.0 90.0 L 1284.8 90.0 Q 1295.0 85.0 1305.3 90.0 L 1315.5 90.0 L 1317.8 92.0 L 1321.7 56.0 L 1325.7 101.9 L 1343.7 90.0 L 1346.2 90.0 Q 1361.6 83.0 1377.0 90.0 L 1400.0 90.0 L 1400 90" fill="none" stroke="#122B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <circle class="halo" cx="700" cy="90" r="17" fill="#B08D3E"></circle>
+        <circle cx="700" cy="90" r="6" fill="#B08D3E"></circle>
+        <text x="700" y="140" text-anchor="middle" fill="#6E5826" font-size="12" font-weight="600" letter-spacing="0.18em" style="font-family:'Archivo',system-ui,sans-serif;">THE OPERATOR</text>
+      </svg>
+    </div>
+    <p class="rv" data-reveal-delay="220" style="max-width:640px; margin:28px auto 0; padding:0 20px 88px; text-align:center; font-size:0.95rem; color:#556675;">The same heart, before and after ablation. In the largest head-to-head trials, RFA and PFA performed comparably. The strongest predictor of a safe, successful outcome is the experience of the hands performing it.</p>
+  </section>
+
+  <!-- STATS -->
+  <section aria-label="Key numbers" style="border-top:1px solid #D9D3C7; border-bottom:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:56px 20px;">
+      <div class="rv" style="margin-bottom:48px;">
+        <canvas data-dotwall width="1112" height="185" style="display:block; width:100%; height:auto;"></canvas>
+        <p style="margin:14px 0 0; font-size:0.85rem; color:#556675;">Every dot is one AF ablation performed by Professor Gupta. 10,000 and counting.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+        <div class="rv" style="padding:0 28px; border-right:1px solid #D9D3C7;">
+          <div style="font-family:'Newsreader',Georgia,serif; font-size:3rem; line-height:1; color:#122B3A;"><span data-count="10000" data-suffix="+">0</span></div>
+          <p style="margin:10px 0 0; font-weight:600; color:#122B3A;">AF ablations performed</p>
+          <p style="margin:4px 0 0; font-size:0.9rem; color:#3A5468;">Among the highest-volume operators worldwide</p>
+        </div>
+        <div class="rv" data-reveal-delay="90" style="padding:0 28px; border-right:1px solid #D9D3C7;">
+          <div style="font-family:'Newsreader',Georgia,serif; font-size:3rem; line-height:1; color:#122B3A;"><span data-count="1" data-prefix="&lt;" data-suffix="%">0</span></div>
+          <p style="margin:10px 0 0; font-weight:600; color:#122B3A;">Complication rate</p>
+          <p style="margin:4px 0 0; font-size:0.9rem; color:#3A5468;">Published in peer-reviewed journals</p>
+        </div>
+        <div class="rv" data-reveal-delay="180" style="padding:0 28px; border-right:1px solid #D9D3C7;">
+          <div style="font-family:'Newsreader',Georgia,serif; font-size:3rem; line-height:1; color:#122B3A;"><span data-count="18" data-suffix="+">0</span></div>
+          <p style="margin:10px 0 0; font-weight:600; color:#122B3A;">Years as consultant</p>
+          <p style="margin:4px 0 0; font-size:0.9rem; color:#3A5468;">At Liverpool Heart and Chest Hospital, the UK's largest cardiothoracic centre</p>
+        </div>
+        <div class="rv" data-reveal-delay="270" style="padding:0 28px;">
+          <div style="font-family:'Newsreader',Georgia,serif; font-size:3rem; line-height:1; color:#122B3A;"><span data-count="350" data-suffix="+">0</span></div>
+          <p style="margin:10px 0 0; font-weight:600; color:#122B3A;">Scientific publications</p>
+          <p style="margin:4px 0 0; font-size:0.9rem; color:#3A5468;">Cited over 13,000 times</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="compare" style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>02 · RFA and PFA</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; max-width:680px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">Two technologies. <em style="color:#6E5826; font-style:italic;">One question that matters more than both.</em></h2>
+      <div style="margin-top:44px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
+        <div class="rv" data-card style="border-radius:12px; border:1px solid #D9D3C7; background:#EFEBE3; padding:30px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <h3 style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem;">Radiofrequency ablation (RFA)</h3>
+          <p style="margin-top:12px; color:#3A5468;">Uses carefully controlled heat to treat the small areas of heart tissue that trigger AF. In worldwide use for over twenty years, with long-term results documented in thousands of published studies.</p>
+        </div>
+        <div class="rv" data-reveal-delay="90" data-card style="border-radius:12px; border:1px solid #D9D3C7; background:#EFEBE3; padding:30px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <h3 style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem;">Pulsed field ablation (PFA)</h3>
+          <p style="margin-top:12px; color:#3A5468;">Uses short electrical pulses instead of heat, designed to target heart tissue selectively. A newer approach. In the largest head-to-head trials, published in 2025, its results were broadly comparable to RFA.<sup>1</sup></p>
+        </div>
+        <div class="rv op-glow" data-reveal-delay="180" style="border-radius:12px; background:#0C1F2B; padding:30px; color:#F7F5F1;">
+          <h3 style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem; color:#B08D3E;">The operator</h3>
+          <p style="margin-top:12px; color:rgba(247,245,241,0.9);">In those trials, both technologies produced broadly comparable results. What consistently predicts a safe, successful ablation in published research is the experience of the doctor performing it.<sup>2</sup> Professor Gupta offers both RFA and PFA, and recommends the right one for you.</p>
+          <a href="#profile" class="arrow" style="margin-top:20px; display:inline-block; font-weight:600; color:#B08D3E;">See the evidence &rarr;</a>
+        </div>
+      </div>
+      <div class="rv" data-reveal-delay="240" style="margin-top:40px; display:flex; flex-wrap:wrap; align-items:center; gap:16px; border-top:1px solid #D9D3C7; padding-top:32px;">
+        <a href="#cta" style="border-radius:999px; background:#122B3A; color:#F7F5F1; padding:13px 26px; font-weight:600; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Book a consultation</a>
+        <p style="margin:0; font-size:0.9rem; color:#3A5468;">Not sure which technology? Start with a conversation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTANT PROFILE -->
+  <section id="profile" style="background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>03 · Meet your consultant</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">Professor Dhiraj Gupta</h2>
+      <p class="rv" data-reveal-delay="120" style="margin-top:4px; font-weight:600; color:#3A5468;">MB BS, MD, DM, FRCP (London)</p>
+      <p class="rv" data-reveal-delay="160" style="margin-top:20px; max-width:760px; color:#3A5468;">Professor Gupta has been a consultant at Liverpool Heart and Chest Hospital, the United Kingdom's largest specialist cardiothoracic centre, since 2007. He is honorary Professor of Cardiology at the University of Liverpool, Senior Lecturer at Imperial College London, and a medical advisor to the AF Association, the UK's national charity for arrhythmia patients.</p>
+      <p class="rv" data-reveal-delay="200" style="margin-top:16px; max-width:760px; color:#3A5468;">He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations available in English, Hindi and Punjabi.</p>
+      <div style="margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+        <div class="rv" style="padding-top:18px; border-top:1px solid #D9D3C7;"><p style="margin:0; font-size:0.85rem; font-weight:600; color:#6E5826;">i.</p><p style="margin:6px 0 0; font-weight:600;">NHS National Silver Clinical Excellence Award</p><p style="margin:2px 0 0; font-size:0.9rem; color:#556675;">Awarded 2021. Earlier Bronze in 2017.</p></div>
+        <div class="rv" data-reveal-delay="70" style="padding-top:18px; border-top:1px solid #D9D3C7;"><p style="margin:0; font-size:0.85rem; font-weight:600; color:#6E5826;">ii.</p><p style="margin:6px 0 0; font-weight:600;">Arrhythmia Alliance Excellence in Practice Award</p><p style="margin:2px 0 0; font-size:0.9rem; color:#556675;">Outstanding contribution to UK arrhythmia services</p></div>
+        <div class="rv" data-reveal-delay="140" style="padding-top:18px; border-top:1px solid #D9D3C7;"><p style="margin:0; font-size:0.85rem; font-weight:600; color:#6E5826;">iii.</p><p style="margin:6px 0 0; font-weight:600;">Chief Investigator, multi-centre AF trials</p><p style="margin:2px 0 0; font-size:0.9rem; color:#556675;">PRESSURE · SMAAN-PAF · PRAISE · VISTAX · CRAFT</p></div>
+        <div class="rv" data-reveal-delay="210" style="padding-top:18px; border-top:1px solid #D9D3C7;"><p style="margin:0; font-size:0.85rem; font-weight:600; color:#6E5826;">iv.</p><p style="margin:6px 0 0; font-weight:600;">Author, British Heart Foundation AF booklet</p><p style="margin:2px 0 0; font-size:0.9rem; color:#556675;">National patient education resource</p></div>
+      </div>
+      <a href="#top" class="rv arrow" data-reveal-delay="260" style="margin-top:32px; display:inline-block; font-weight:600; color:#6E5826;">Follow the journey, 1988 – 2026 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>04 · How the Mumbai clinic works</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">London expertise. Mumbai care. Continuous follow-up.</h2>
+      <div style="margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px;">
+        <div class="rv"><div style="font-size:0.9rem; font-weight:600; color:#6E5826;">i. An unhurried first visit</div><p style="margin-top:10px; color:#3A5468;">A full consultation in Mumbai: your history, your recordings, your questions. In English, Hindi or Punjabi. You leave with a clear plan.</p></div>
+        <div class="rv" data-reveal-delay="90"><div style="font-size:0.9rem; font-weight:600; color:#6E5826;">ii. Procedure in Mumbai</div><p style="margin-top:10px; color:#3A5468;">If a procedure is right for you, Professor Gupta performs it himself during a scheduled Mumbai visit, using the technology that suits your heart.</p></div>
+        <div class="rv" data-reveal-delay="180"><div style="font-size:0.9rem; font-weight:600; color:#6E5826;">iii. Continuity, locally</div><p style="margin-top:10px; color:#3A5468;">Follow-up happens close to home with trusted local cardiologists, coordinated under his supervision between visits.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDITIONS / PROCEDURES -->
+  <section id="conditions" style="border-top:1px solid #D9D3C7; border-bottom:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>05 · Conditions &amp; treatments</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">What we look after.</h2>
+      <p class="rv" data-reveal-delay="120" style="margin-top:12px; max-width:560px; color:#3A5468;">Put your heart in the most experienced hands.</p>
+      <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+        <div class="rv">
+          <h3 style="font-weight:600; color:#6E5826;">Conditions we treat</h3>
+          <ul style="margin-top:16px; list-style:none; padding:0; color:#3A5468;">
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Atrial fibrillation (AF)</a></li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Atrial flutter</a></li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Supraventricular tachycardia (SVT)</a></li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Palpitations</a></li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Blackouts</a></li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;"><a href="#conditions" style="color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Bradycardia</a></li>
+          </ul>
+        </div>
+        <div class="rv" data-reveal-delay="90">
+          <h3 style="font-weight:600; color:#6E5826;">Procedures offered</h3>
+          <ul style="margin-top:16px; list-style:none; padding:0; color:#3A5468;">
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Catheter ablation for atrial fibrillation</li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Ablation for SVT and other arrhythmias</li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Left atrial appendage occlusion (LAAO)</li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Pacemaker implantation</li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Implantable defibrillators (ICDs)</li>
+            <li style="padding:10px 0; border-bottom:1px solid #D9D3C7;">Cardiac resynchronisation therapy</li>
+          </ul>
+        </div>
+      </div>
+      <a href="#conditions" class="rv arrow" data-reveal-delay="140" style="margin-top:32px; display:inline-block; font-weight:600; color:#6E5826;">Understand each condition &rarr;</a>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>06 · Research</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">Published evidence.</h2>
+      <p class="rv" data-reveal-delay="120" style="margin-top:12px; max-width:560px; color:#3A5468;">Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the standard.</p>
+      <div style="margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
+        <article class="rv" data-card style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Original research</div>
+          <h3 style="margin-top:12px; font-family:'Newsreader',Georgia,serif; font-size:1.2rem; line-height:1.3;">Single-operator outcomes of catheter ablation for paroxysmal AF: a 15-year consecutive series</h3>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">Long-term freedom from AF after first ablation in a high-volume UK centre, with a published complication rate below 1%.</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Gupta D, et al.</strong><span style="color:#556675;">Europace · 2023</span></footer>
+          <a href="#" class="arrow" style="margin-top:14px; align-self:flex-start; font-size:0.85rem; font-weight:600; color:#6E5826;">Read paper &rarr;</a>
+        </article>
+        <article class="rv" data-reveal-delay="90" data-card style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Clinical trial</div>
+          <h3 style="margin-top:12px; font-family:'Newsreader',Georgia,serif; font-size:1.2rem; line-height:1.3;">Pulsed field versus radiofrequency ablation for paroxysmal AF: a multicentre randomised comparison</h3>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">Head-to-head trial reporting comparable efficacy between PFA and RFA, with operator experience as a key determinant of safety.</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Gupta D, et al.</strong><span style="color:#556675;">Journal of the American College of Cardiology · 2025</span></footer>
+          <a href="#" class="arrow" style="margin-top:14px; align-self:flex-start; font-size:0.85rem; font-weight:600; color:#6E5826;">Read paper &rarr;</a>
+        </article>
+        <article class="rv" data-reveal-delay="180" data-card style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Review &amp; editorial</div>
+          <h3 style="margin-top:12px; font-family:'Newsreader',Georgia,serif; font-size:1.2rem; line-height:1.3;">Catheter ablation of AF: where volume, technology and patient selection intersect</h3>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">Editorial review of how centre and operator volume shape outcomes, regardless of whether heat or pulsed-field energy is used.</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Gupta D</strong><span style="color:#556675;">European Heart Journal · 2024</span></footer>
+          <a href="#" class="arrow" style="margin-top:14px; align-self:flex-start; font-size:0.85rem; font-weight:600; color:#6E5826;">Read paper &rarr;</a>
+        </article>
+      </div>
+      <a href="#" class="rv arrow" data-reveal-delay="220" style="margin-top:32px; display:inline-block; font-weight:600; color:#6E5826;">Browse all publications &rarr;</a>
+    </div>
+  </section>
+
+  <!-- WHERE HE WORKS: interactive map -->
+  <section id="map" data-screen-label="Where he works" style="background:#0C1F2B; color:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#B08D3E;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>07 · Where he works</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">Trusted by heart centres <em style="color:#B08D3E; font-style:italic;">across three continents</em>.</h2>
+      <p class="rv" data-reveal-delay="120" style="margin-top:12px; max-width:600px; color:rgba(247,245,241,0.8);">Where Professor Gupta has operated, taught, and proctored fellow consultants.</p>
+
+      <div class="rv" data-reveal-delay="160" style="margin-top:28px; display:flex; flex-wrap:wrap; gap:10px;">
+        <sc-for list="{{ regionTabs }}" as="tab" hint-placeholder-count="5">
+          <button onClick="{{ tab.select }}" style="{{ tab.style }}">{{ tab.label }}</button>
+        </sc-for>
+      </div>
+
+      <div class="rv" data-reveal-delay="200" style="margin-top:22px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:22px; align-items:stretch;">
+        <div class="mlafc-map" data-map style="min-height:clamp(320px, 48vh, 460px); border-radius:12px; border:1px solid #2A4254; overflow:hidden;"></div>
+        <div style="display:flex; flex-direction:column; gap:16px; min-width:0;">
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <sc-for list="{{ cities }}" as="c" hint-placeholder-count="6">
+              <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.city }}</button>
+            </sc-for>
+          </div>
+          <div aria-live="polite" style="flex:1; border-radius:12px; border:1px solid #2A4254; background:#122B3A; padding:26px;">
+            <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:0; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#B08D3E;">{{ activeCity }}, {{ activeCountry }}</p>
+              <p style="margin:10px 0 0; font-family:'Newsreader',Georgia,serif; font-size:1.4rem; line-height:1.25;">{{ activeName }}</p>
+              <p style="margin:12px 0 0; font-size:0.85rem; color:rgba(247,245,241,0.75);"><span style="{{ activeRoleStyle }}">{{ activeRole }}</span>&nbsp;&nbsp;{{ activeYears }}</p>
+              <p style="margin:14px 0 0; color:rgba(247,245,241,0.85);">{{ activeBlurb }}</p>
+            </sc-if>
+          </div>
+          <ul aria-label="Legend" style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:18px; font-size:0.8rem; color:rgba(247,245,241,0.8);">
+            <li style="display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:11px; height:11px; border-radius:50%; background:#B08D3E;"></span>Operated</li>
+            <li style="display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:11px; height:11px; border-radius:50%; border:2px solid #D8B15A;"></span>Taught</li>
+            <li style="display:flex; align-items:center; gap:8px;"><span style="display:inline-block; width:11px; height:11px; border-radius:50%; border:2px solid #8A97A3;"></span>Proctored</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="border-top:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>08 · In their words</p>
+      <blockquote class="rv" data-reveal-delay="100" style="margin:36px 0 0; max-width:920px;">
+        <p style="margin:0; font-family:'Newsreader',Georgia,serif; font-size:clamp(1.5rem,2.9vw,2.2rem); line-height:1.35; color:#122B3A;">"Among the most reliable and skilled electrophysiologists we have worked with; patient outcomes consistently above the regional benchmark."</p>
+        <footer style="margin-top:22px; display:flex; align-items:center; gap:14px; font-size:0.9rem; color:#3A5468;">
+          <span style="display:inline-block; width:36px; height:2px; background:#B08D3E;"></span>
+          <span><strong style="color:#122B3A;">Liverpool Heart and Chest Hospital</strong> · Medical Director, hospital letter, 2024</span>
+        </footer>
+      </blockquote>
+      <div style="margin-top:48px; display:grid; grid-template-columns:repeat(2,1fr); gap:22px;">
+        <article class="rv" data-card style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Patient</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">"After years of being told my palpitations were 'just stress,' Professor Gupta listened, ran proper tests, and treated me. I haven't had an episode in two years."</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">R. K.</strong><span style="color:#556675;">Treated 2023 · Mumbai</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="90" data-card style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Peer</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">"Dhiraj is among the operators I would refer my own family to without a second thought. His judgement on borderline cases is exceptional."</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Prof. G. Lip</strong><span style="color:#556675;">Liverpool Centre for Cardiovascular Science</span></footer>
+        </article>
+      </div>
+      <a href="#" class="rv arrow" data-reveal-delay="220" style="margin-top:32px; display:inline-block; font-weight:600; color:#6E5826;">Read all 24 testimonials &rarr;</a>
+    </div>
+  </section>
+
+  <!-- VISITS -->
+  <section id="visits" style="border-top:1px solid #D9D3C7; background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>09 · Plan ahead</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">Upcoming Mumbai visits.</h2>
+      <p class="rv" data-reveal-delay="80" style="margin-top:10px; max-width:560px; color:#3A5468;">Limited slots. Plan ahead.</p>
+      <div style="margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div class="rv" data-card style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 12px;"><span style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem; white-space:nowrap;">March 2026</span><span style="border-radius:999px; padding:4px 12px; font-size:0.72rem; font-weight:600; white-space:nowrap; background:#B08D3E; color:#0C1F2B;">Booking open</span></div>
+          <p style="margin-top:12px; font-size:0.9rem; color:#3A5468;">Consultations and procedures. Limited slots.</p>
+          <a href="#cta" class="arrow" style="margin-top:14px; display:inline-block; font-size:0.85rem; font-weight:600; color:#6E5826;">Request a slot &rarr;</a>
+        </div>
+        <div class="rv" data-reveal-delay="80" data-card style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 12px;"><span style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem; white-space:nowrap;">June 2026</span><span style="border-radius:999px; padding:4px 12px; font-size:0.72rem; font-weight:600; white-space:nowrap; border:1px solid #D9D3C7; background:#EFEBE3; color:#122B3A;">Waitlist</span></div>
+          <p style="margin-top:12px; font-size:0.9rem; color:#3A5468;">Consultation list full. Join the waitlist.</p>
+        </div>
+        <div class="rv" data-reveal-delay="160" data-card style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 12px;"><span style="font-family:'Newsreader',Georgia,serif; font-size:1.5rem; white-space:nowrap;">October 2026</span><span style="border-radius:999px; padding:4px 12px; font-size:0.72rem; font-weight:600; white-space:nowrap; border:1px solid #D9D3C7; background:#EFEBE3; color:#3A5468;">TBC</span></div>
+          <p style="margin-top:12px; font-size:0.9rem; color:#3A5468;">Dates to be confirmed. Register interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" style="background:#122B3A; color:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; align-items:start; gap:48px; padding:88px 20px;">
+      <div class="rv">
+        <h2 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">Take the first step. <em style="color:#B08D3E; font-style:italic;">It costs nothing to ask.</em></h2>
+        <p style="margin-top:16px; max-width:440px; color:rgba(247,245,241,0.85);">Send a short enquiry and the clinic team will come back to you, or message us directly on WhatsApp.</p>
+        <a href="#" style="margin-top:24px; display:inline-block; border-radius:999px; border:1px solid #B08D3E; padding:13px 26px; font-weight:600; color:#B08D3E; transition:background-color .2s, color .2s;" onmouseover="this.style.background='#B08D3E';this.style.color='#0C1F2B'" onmouseout="this.style.background='transparent';this.style.color='#B08D3E'">Message on WhatsApp</a>
+      </div>
+      <div class="rv" data-reveal-delay="120" style="border-radius:12px; background:#F7F5F1; color:#122B3A; padding:28px;">
+        <form onsubmit="return false" style="display:flex; flex-direction:column; gap:14px;">
+          <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; font-weight:600; color:#3A5468;">Your name<input type="text" placeholder="Full name" style="border:1px solid #D9D3C7; border-radius:8px; padding:11px 13px; font-size:1rem; font-family:inherit; background:#fff;"></label>
+          <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; font-weight:600; color:#3A5468;">Email or phone<input type="text" placeholder="How can we reach you?" style="border:1px solid #D9D3C7; border-radius:8px; padding:11px 13px; font-size:1rem; font-family:inherit; background:#fff;"></label>
+          <label style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem; font-weight:600; color:#3A5468;">How can we help?<textarea rows="3" placeholder="A sentence or two about your situation" style="border:1px solid #D9D3C7; border-radius:8px; padding:11px 13px; font-size:1rem; font-family:inherit; background:#fff; resize:vertical;"></textarea></label>
+          <button type="submit" style="margin-top:4px; border:none; border-radius:999px; background:#122B3A; color:#F7F5F1; padding:13px; font-size:1rem; font-weight:600; cursor:pointer; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Send enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0C1F2B; color:#F7F5F1; border-top:1px solid #2A4254;">
+    <div style="max-width:1152px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding:56px 20px;">
+      <div>
+        <span style="display:inline-flex; align-items:center; gap:10px;">
+          <svg width="40" height="26" viewBox="0 0 44 28" aria-hidden="true" style="color:#B08D3E;"><circle cx="4" cy="14" r="3" fill="currentColor"></circle><path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path><circle cx="40" cy="14" r="3" fill="currentColor"></circle></svg>
+          <span style="font-family:'Newsreader',Georgia,serif; font-size:17px;">Mumbai London AF Clinic</span>
+        </span>
+        <p style="margin-top:16px; max-width:320px; font-size:0.9rem; color:rgba(247,245,241,0.8);">London expertise. Mumbai care. Continuous follow-up.</p>
+      </div>
+      <nav><h2 style="font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#B08D3E; margin-bottom:12px;">Pages</h2><ul style="list-style:none; padding:0; font-size:0.9rem;"><li style="padding:6px 0;"><a href="#compare" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">The Evidence</a></li><li style="padding:6px 0;"><a href="#" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">Publications</a></li><li style="padding:6px 0;"><a href="#conditions" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">Conditions We Treat</a></li><li style="padding:6px 0;"><a href="#visits" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">Where He Works</a></li></ul></nav>
+      <nav><h2 style="font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#B08D3E; margin-bottom:12px;">Patients</h2><ul style="list-style:none; padding:0; font-size:0.9rem;"><li style="padding:6px 0;"><a href="#conditions" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">Conditions explained</a></li><li style="padding:6px 0;"><a href="#how" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">What to expect</a></li><li style="padding:6px 0;"><a href="#cta" style="color:#F7F5F1;" onmouseover="this.style.color='#B08D3E'" onmouseout="this.style.color='#F7F5F1'">Request an appointment</a></li></ul></nav>
+      <div><h2 style="font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#B08D3E; margin-bottom:12px;">Contact</h2><ul style="list-style:none; padding:0; font-size:0.9rem; color:rgba(247,245,241,0.85); line-height:1.9;"><li>Clinic address, Mumbai</li><li>English · Hindi · Punjabi</li></ul></div>
+    </div>
+    <div style="border-top:1px solid #2A4254;"><div style="max-width:1152px; margin:0 auto; padding:24px 20px; font-size:0.75rem; color:rgba(247,245,241,0.7); line-height:1.8;"><p style="margin:0;">Professor Dhiraj Gupta is registered with the UK General Medical Council.</p><p style="margin:6px 0 0;">Information on this site is for general education and is not a substitute for individual medical advice.</p><p style="margin:6px 0 0;">© 2026 Mumbai London AF Clinic. All rights reserved.</p></div></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { locations: [], activeId: null, region: 'All' };
+
+  /*
+   * HOW TO ADD A CITY TO THE MAP
+   * ----------------------------
+   * 1. Open locations.json (in this project folder).
+   * 2. Copy any existing entry and edit it:
+   *      id      unique slug, e.g. "delhi"
+   *      name    full institution name shown in the detail card
+   *      city    short label shown on the pin and chip
+   *      country shown in the detail card
+   *      region  which tab it belongs to: "United Kingdom", "Europe",
+   *              "United States" or "India" (add a new tab name if needed;
+   *              also list it in the `regions` array in renderVals below)
+   *      lat/lng coordinates. Get them from Google Maps: right-click the
+   *              hospital -> click the coordinates to copy them.
+   *      role    "operated" | "taught" | "proctored" (sets the pin style)
+   *      years / blurb   shown in the detail card
+   * 3. If the city is in a country not yet outlined in brass, add that
+   *    country's English name to _regionCountries() below (names must match
+   *    Natural Earth naming, e.g. "Czechia", "United States of America").
+   * Nothing else is required - pins, chips, labels and zooming all derive
+   * from the JSON.
+   */
+
+  // Map objects are stashed on the map's DOM element (not on `this`) so
+  // they survive the logic class being hot-swapped in the design editor.
+  _m() {
+    const el = document.querySelector('[data-map]');
+    return (el && el._mlafc) || {};
+  }
+
+  // Locations, from state or (if state was lost to a live-edit reload) the store.
+  _locs() {
+    if (this.state.locations.length) return this.state.locations;
+    return this._m().locations || [];
+  }
+
+  selectCity = (id, fly) => {
+    this.setState({ activeId: id, locations: this._locs() });
+    const loc = this._locs().find(l => l.id === id);
+    this._styleMarkers(id);
+    const { map, markers } = this._m();
+    if (markers) Object.keys(markers).forEach(k => markers[k].unbindTooltip());
+    if (loc && map && fly !== false) {
+      map.flyTo([loc.lat, loc.lng], Math.max(map.getZoom(), 5), { duration: 0.8 });
+      map.once('moveend', () => this._styleLabels(this.state.region));
+    } else {
+      this._styleLabels(this.state.region);
+    }
+  };
+
+  selectRegion = (region) => {
+    const all = this._locs();
+    const locs = region === 'All' ? all : all.filter(l => l.region === region);
+    this.setState({ region, activeId: (locs[0] || {}).id || null, locations: all });
+    const { map, markers, L } = this._m();
+    if (map && locs.length && L) {
+      // Prefer the actual country outlines (mainland only) so the frame
+      // shows the whole country, not just a tight box around the pins.
+      let b = region === 'All' ? null : this._countryBounds(region);
+      if (!b || !b.isValid()) {
+        b = L.latLngBounds(locs.map(l => [l.lat, l.lng]));
+        if (region !== 'All') b = b.pad(region === 'United Kingdom' ? 0.55 : 0.35);
+      }
+      if (b.isValid()) {
+        map.flyToBounds(b, region === 'All'
+          ? { padding: [56, 56], duration: 0.9 }
+          : { padding: [20, 20], maxZoom: 6.5, duration: 0.9 });
+      }
+    }
+    this._styleMarkers((locs[0] || {}).id || null);
+    this._styleCountries(region);
+    // strip labels immediately, then bind/open permanent labels only after
+    // the flyTo animation settles (rebinding mid-flight crashes Leaflet)
+    if (markers) Object.keys(markers).forEach(id => markers[id].unbindTooltip());
+    if (map) {
+      map.once('moveend', () => this._styleLabels(region));
+    } else {
+      this._styleLabels(region);
+    }
+  };
+
+  _styleLabels(region) {
+    const { markers } = this._m();
+    if (!markers) return;
+    const locs = this._locs();
+    Object.keys(markers).forEach(id => {
+      const m = markers[id];
+      const loc = locs.find(l => l.id === id);
+      if (!loc) return;
+      const inRegion = region !== 'All' && loc.region === region;
+      const isActive = id === this.state.activeId;
+      m.unbindTooltip();
+      m.bindTooltip(loc.city, {
+        direction: 'top', offset: [0, -6],
+        permanent: inRegion || isActive, opacity: 0.95
+      });
+      const visible = region === 'All' || inRegion;
+      if (visible) {
+        m.setStyle(this._markerStyle(m._role, id === this.state.activeId));
+      } else {
+        m.setStyle({ opacity: 0.18, fillOpacity: 0.1 });
+      }
+    });
+  }
+
+  // Bounds covering the mainland of every highlighted country in a region.
+  // For countries made of many polygons (UK islands, US states + Alaska +
+  // Hawaii, France + overseas territories) we use only the LARGEST polygon,
+  // so remote territories don't zoom the camera out to the whole hemisphere.
+  _countryBounds(region) {
+    const { countries, L } = this._m();
+    if (!countries || !L) return null;
+    const wanted = this._regionCountries(region);
+    let bounds = null;
+    countries.eachLayer(layer => {
+      const f = layer.feature;
+      if (wanted.indexOf(f.properties.name) === -1) return;
+      const geom = f.geometry;
+      let rings = [];
+      if (geom.type === 'Polygon') rings = [geom.coordinates[0]];
+      else if (geom.type === 'MultiPolygon') rings = geom.coordinates.map(p => p[0]);
+      if (!rings.length) return;
+      // pick the ring with the largest (approximate, shoelace) area = mainland
+      let best = rings[0], bestA = -1;
+      rings.forEach(r => {
+        let a = 0;
+        for (let i = 0; i < r.length - 1; i++) a += r[i][0] * r[i + 1][1] - r[i + 1][0] * r[i][1];
+        a = Math.abs(a);
+        if (a > bestA) { bestA = a; best = r; }
+      });
+      const rb = L.latLngBounds(best.map(c => [c[1], c[0]]));
+      bounds = bounds ? bounds.extend(rb) : rb;
+    });
+    return bounds;
+  }
+
+  _regionCountries(region) {
+    const map = {
+      'United Kingdom': ['United Kingdom'],
+      'Europe': ['Belgium', 'France', 'Czechia', 'Germany'],
+      'United States': ['United States of America'],
+      'India': ['India']
+    };
+    if (region === 'All') return [].concat(map['United Kingdom'], map['Europe'], map['United States'], map['India']);
+    return map[region] || [];
+  }
+
+  _countryStyle(name, region) {
+    const lit = region !== 'All' && this._regionCountries(region).indexOf(name) !== -1;
+    // selected country: slightly lifted land + thin brass outline, no fill wash
+    if (lit) return { fillColor: '#1B3949', fillOpacity: 0.85, color: '#B08D3E', weight: 1.2, opacity: 0.85 };
+    const dim = region !== 'All';
+    return { fillColor: '#122B3A', fillOpacity: dim ? 0.35 : 0.55, color: '#2A4254', weight: 0.6, opacity: dim ? 0.5 : 0.8 };
+  }
+
+  _styleCountries(region) {
+    const { countries } = this._m();
+    if (!countries) return;
+    countries.eachLayer(l => {
+      l.setStyle(this._countryStyle(l.feature.properties.name, region));
+    });
+  }
+
+  _markerStyle(role, active) {
+    const base = { radius: active ? 6 : 4, weight: active ? 2 : 1.5, className: 'mlafc-pin' };
+    if (role === 'operated') return Object.assign(base, { color: active ? '#F7F5F1' : '#B08D3E', fillColor: '#B08D3E', fillOpacity: 1 });
+    if (role === 'taught') return Object.assign(base, { color: '#D8B15A', fillColor: '#0C1F2B', fillOpacity: active ? 0.9 : 0.5 });
+    return Object.assign(base, { color: '#8A97A3', fillColor: '#0C1F2B', fillOpacity: active ? 0.9 : 0.5 });
+  }
+
+  _styleMarkers(activeId) {
+    const { markers } = this._m();
+    if (!markers) return;
+    Object.keys(markers).forEach(id => {
+      const m = markers[id];
+      m.setStyle(this._markerStyle(m._role, id === activeId));
+      if (id === activeId) m.bringToFront();
+    });
+  }
+
+  _initMap(tries) {
+    const el = document.querySelector('[data-map]');
+    if (!el) return;
+    if (el._mlafc) return; // already initialised (e.g. after a live code reload)
+    if (!window.L) {
+      if ((tries || 0) < 40) setTimeout(() => this._initMap((tries || 0) + 1), 250);
+      return;
+    }
+    const L = window.L;
+    const map = L.map(el, {
+      attributionControl: false, zoomControl: false,
+      dragging: false, scrollWheelZoom: false, touchZoom: false,
+      doubleClickZoom: false, boxZoom: false, keyboard: false, tapHold: false,
+      zoomSnap: 0.25, maxZoom: 7, minZoom: 1.5
+    });
+    map.setView([32, 10], 1.8);
+    // pin the exact Leaflet instance the map was built with; if the page
+    // ever ends up with a second Leaflet copy, mixing instances breaks
+    // instanceof checks inside Leaflet (bounds silently become invalid)
+    const store = { map, markers: {}, countries: null, L: L };
+    el._mlafc = store;
+    fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
+      .then(r => r.json())
+      .then(world => {
+        if (!window.topojson) return;
+        const geo = window.topojson.feature(world, world.objects.countries);
+        store.countries = L.geoJSON(geo, {
+          style: (f) => this._countryStyle(f.properties.name, this.state.region),
+          interactive: false
+        }).addTo(map);
+        store.countries.bringToBack();
+      })
+      .catch(() => {});
+    fetch('locations.json').then(r => r.json()).then(locations => {
+      locations.forEach(loc => {
+        const m = L.circleMarker([loc.lat, loc.lng], this._markerStyle(loc.role, false)).addTo(map);
+        m._role = loc.role;
+        m.bindTooltip(loc.city, { direction: 'top', offset: [0, -6], opacity: 0.95 });
+        m.on('click', () => this.selectCity(loc.id, false));
+        store.markers[loc.id] = m;
+      });
+      store.locations = locations;
+      const b = store.L.latLngBounds(locations.map(l => [l.lat, l.lng]));
+      map.fitBounds(b, { padding: [56, 56] });
+      this.setState({ locations, activeId: (locations[0] || {}).id || null });
+      this._styleMarkers((locations[0] || {}).id || null);
+    }).catch(() => {});
+  }
+
+  componentDidMount() {
+    this._initMap(0);
+    const root = (typeof document !== 'undefined') ? document.currentScript : null;
+    // scope to the whole document (single DC page)
+    this.root = document;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll('.rv'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+            setTimeout(() => el.classList.add('in'), d);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(el => io.observe(el));
+    }
+
+    // Count up
+    const counters = Array.from(document.querySelectorAll('[data-count]'));
+    const runCount = (el) => {
+      const to = parseFloat(el.getAttribute('data-count'));
+      const prefix = (el.getAttribute('data-prefix') || '').replace('&lt;', '<');
+      const suffix = el.getAttribute('data-suffix') || '';
+      if (reduce) { el.textContent = prefix + to.toLocaleString('en-GB') + suffix; return; }
+      const dur = 1400; const start = performance.now();
+      const tick = (t) => {
+        const p = Math.min((t - start) / dur, 1);
+        const v = Math.round(to * (1 - Math.pow(1 - p, 3)));
+        el.textContent = prefix + v.toLocaleString('en-GB') + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    if (reduce || !('IntersectionObserver' in window)) {
+      counters.forEach(runCount);
+    } else {
+      const cio = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } });
+      }, { threshold: 0.5 });
+      counters.forEach(el => cio.observe(el));
+    }
+
+    // Conversion trace: looping draw-on (draw, hold, redraw)
+    const trace = document.querySelector('[data-trace]');
+    if (trace && typeof trace.getTotalLength === 'function' && !reduce && 'IntersectionObserver' in window) {
+      const len = trace.getTotalLength();
+      trace.style.strokeDasharray = String(len);
+      trace.style.strokeDashoffset = String(len);
+      const DRAW = 4600, HOLD = 1800;
+      let raf = 0, start = 0, running = false;
+      const tick = (t) => {
+        if (!start) start = t;
+        const el = (t - start) % (DRAW + HOLD);
+        const p = Math.min(el / DRAW, 1);
+        const eased = 1 - Math.pow(1 - p, 2);
+        trace.style.strokeDashoffset = String(len * (1 - eased));
+        raf = requestAnimationFrame(tick);
+      };
+      const tio = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (e.isIntersecting && !running) { running = true; start = 0; raf = requestAnimationFrame(tick); }
+          else if (!e.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
+        });
+      }, { threshold: 0.3 });
+      tio.observe(trace);
+    }
+
+    // Dot wall: every dot is one ablation
+    const wall = document.querySelector('[data-dotwall]');
+    if (wall && wall.getContext) {
+      const ctx = wall.getContext('2d');
+      const COLS = 250, ROWS = 40, TOTAL = 10000;
+      const pw = wall.width / COLS, ph = wall.height / ROWS;
+      let done = 0;
+      const drawTo = (n) => {
+        ctx.fillStyle = '#B08D3E';
+        ctx.globalAlpha = 0.8;
+        for (let i = done; i < n; i++) {
+          const c = i % COLS, r = Math.floor(i / COLS);
+          ctx.beginPath();
+          ctx.arc(c * pw + pw / 2, r * ph + ph / 2, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        done = n;
+      };
+      if (reduce || !('IntersectionObserver' in window)) {
+        drawTo(TOTAL);
+      } else {
+        const wio = new IntersectionObserver((es) => {
+          es.forEach(e => {
+            if (e.isIntersecting) {
+              wio.disconnect();
+              const dur = 2600, st = performance.now();
+              const tick = (t) => {
+                const p = Math.min((t - st) / dur, 1);
+                drawTo(Math.round(TOTAL * (1 - Math.pow(1 - p, 2))));
+                if (p < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+            }
+          });
+        }, { threshold: 0.3 });
+        wio.observe(wall);
+      }
+    }
+
+    // Card hover lift
+    document.querySelectorAll('[data-card]').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-4px)';
+        card.style.boxShadow = '0 14px 34px rgba(18,43,58,0.10)';
+        card.style.borderColor = 'rgba(176,141,62,0.5)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'none';
+        card.style.boxShadow = 'none';
+        card.style.borderColor = '#D9D3C7';
+      });
+    });
+
+    // Arrow nudge
+    document.querySelectorAll('.arrow').forEach(a => {
+      a.style.transition = 'color .2s, letter-spacing .2s';
+      a.addEventListener('mouseenter', () => { a.style.letterSpacing = '0.02em'; });
+      a.addEventListener('mouseleave', () => { a.style.letterSpacing = 'normal'; });
+    });
+
+    // Nav shrink + scroll progress
+    const nav = document.querySelector('[data-nav]');
+    const bar = document.querySelector('[data-scroll-bar]');
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (nav) {
+        if (y > 60) {
+          nav.style.boxShadow = '0 2px 16px rgba(217,211,199,0.9)';
+          nav.style.borderColor = '#D9D3C7';
+        } else {
+          nav.style.boxShadow = 'none';
+          nav.style.borderColor = 'transparent';
+        }
+      }
+      const pill = document.querySelector('[data-pill]');
+      if (pill) {
+        const show = y > 560;
+        pill.style.opacity = show ? '1' : '0';
+        pill.style.transform = show ? 'none' : 'translateY(12px)';
+        pill.style.pointerEvents = show ? 'auto' : 'none';
+      }
+      if (bar) {
+        const sc = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (sc > 0 ? (y / sc) * 100 : 0) + '%';
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+  renderVals() {
+    const { activeId, region } = this.state;
+    const locations = this._locs();
+    const tabBase = 'border-radius:999px; padding:9px 18px; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:inherit; transition:all .2s;';
+    const chipBase = 'border-radius:999px; padding:7px 14px; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; transition:all .2s;';
+    const regions = ['All', 'United Kingdom', 'Europe', 'United States', 'India'];
+    const regionTabs = regions.map(r => ({
+      label: r,
+      select: () => this.selectRegion(r),
+      style: r === region
+        ? tabBase + 'border:1px solid #B08D3E; background:#B08D3E; color:#0C1F2B;'
+        : tabBase + 'border:1px solid #2A4254; background:transparent; color:#F7F5F1;'
+    }));
+    const visible = region === 'All' ? locations : locations.filter(l => l.region === region);
+    const cities = visible.map(l => ({
+      city: l.city,
+      select: () => this.selectCity(l.id),
+      style: l.id === activeId
+        ? chipBase + 'border:1px solid #B08D3E; background:#B08D3E; color:#0C1F2B;'
+        : chipBase + 'border:1px solid #2A4254; background:rgba(247,245,241,0.06); color:rgba(247,245,241,0.9);'
+    }));
+    const active = locations.find(l => l.id === activeId) || null;
+    const roleLabels = { operated: 'Operated', taught: 'Taught', proctored: 'Proctored' };
+    const roleStyles = {
+      operated: 'display:inline-block; border-radius:999px; padding:3px 12px; font-size:0.72rem; font-weight:600; background:#B08D3E; color:#0C1F2B;',
+      taught: 'display:inline-block; border-radius:999px; padding:3px 12px; font-size:0.72rem; font-weight:600; border:1.5px solid #D8B15A; color:#D8B15A;',
+      proctored: 'display:inline-block; border-radius:999px; padding:3px 12px; font-size:0.72rem; font-weight:600; border:1.5px solid #8A97A3; color:#8A97A3;'
+    };
+    return {
+      regionTabs,
+      cities,
+      hasActive: !!active,
+      activeCity: active ? active.city : '',
+      activeCountry: active ? active.country : '',
+      activeName: active ? active.name : '',
+      activeRole: active ? roleLabels[active.role] : '',
+      activeRoleStyle: active ? roleStyles[active.role] : '',
+      activeYears: active ? active.years : '',
+      activeBlurb: active ? active.blurb : ''
+    };
+  }
+}
+</script>
+</body>
+</html>
