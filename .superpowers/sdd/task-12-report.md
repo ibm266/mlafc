@@ -39,4 +39,4 @@ Replaced `CtaBand` on `/journey` with the brief's explicit final section: `Link 
 
 - `npm test -- test/journey.test.tsx`: 1 file, 1 test passed.
 - `npm test`: 13 files, 32 tests passed.
-- `npm run build`: PASS — `/journey` generated successfully.
+- `npm run build`: PASS: `/journey` generated successfully.

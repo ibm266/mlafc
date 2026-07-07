@@ -27,7 +27,7 @@ import type { Location, Publication, SiteLinks, Testimonial, Visit } from '@/dat
 export const metadata: Metadata = {
   title: 'AF Ablation in Mumbai | London Consultant Electrophysiologist',
   description:
-    'Expert atrial fibrillation care in Mumbai from Professor Dhiraj Gupta — consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital. Book a consultation.',
+    'Expert atrial fibrillation care in Mumbai from Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital. Book a consultation.',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'AF Ablation in Mumbai | Mumbai London AF Clinic',

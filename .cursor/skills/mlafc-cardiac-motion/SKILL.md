@@ -41,9 +41,9 @@ Preflight credits: `generate_image` / `generate_video` with `get_cost: true`.
 Upload base image via `media_upload` → PUT → `media_confirm`.
 
 For conditions after AF, attach three references:
-1. `public/conditions/converted/af.png` — style master (palette, heart diagram, layout)
-2. `reference/conditions/base/{slug}.png` — condition content source
-3. `reference/conditions/base/af-animated-frame.png` — optional motion feel (keep cream palette from #1, not dark tones from frame)
+1. `public/conditions/converted/af.png`: style master (palette, heart diagram, layout)
+2. `reference/conditions/base/{slug}.png`: condition content source
+3. `reference/conditions/base/af-animated-frame.png`: optional motion feel (keep cream palette from #1, not dark tones from frame)
 
 ```
 generate_image:

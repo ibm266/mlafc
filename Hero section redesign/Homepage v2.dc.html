@@ -804,7 +804,7 @@ class Component extends DCLogic {
               const dur = 3600, st = performance.now();
               const tick = (t) => {
                 const p = Math.min((t - st) / dur, 1);
-                // ease-in: starts slow, accelerates — more dramatic build-up
+                // ease-in: starts slow, accelerates: more dramatic build-up
                 drawTo(Math.round(TOTAL * Math.pow(p, 2.6)));
                 if (p < 1) requestAnimationFrame(tick);
               };

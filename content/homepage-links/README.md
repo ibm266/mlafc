@@ -16,17 +16,17 @@ Once a URL is set in the data file, the dashed **link needed** flags on the live
 ## Homepage sections
 
 ### 02 · Meet your consultant
-- **Interview video** — Lilavati Hospital YouTube embed (`interview`)
+- **Interview video**: Lilavati Hospital YouTube embed (`interview`)
 
 ### 05 · Research
-- **Publication teasers** — entries with `featured: true` in `data/publications.json` (currently three)
+- **Publication teasers**: entries with `featured: true` in `data/publications.json` (currently three)
 
 ### 07 · In their words
-- **Verify independently** — featured profile pills: GMC Register, MMC Register, Top Doctors
+- **Verify independently**: featured profile pills: GMC Register, MMC Register, Top Doctors
 
 ### Sitewide (footer on homepage)
-- **Verify his record** — all profile pills in the footer row
-- **Contact** — phone, email, WhatsApp (footer + floating WhatsApp button)
+- **Verify his record**: all profile pills in the footer row
+- **Contact**: phone, email, WhatsApp (footer + floating WhatsApp button)
 
 Map hospital site links are not used on the homepage verify strip. Location pins do not require outbound URLs.
 

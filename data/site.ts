@@ -1,6 +1,6 @@
 export const site = {
   name: 'Mumbai London AF Clinic',
-  /** Canonical production URL — keep in sync across sitemap, metadata, JSON-LD, and robots. */
+  /** Canonical production URL: keep in sync across sitemap, metadata, JSON-LD, and robots. */
   url: 'https://www.mumbailondonaf.com',
   tagline: 'London expertise. Mumbai care. Continuous follow-up.',
   phone: '[placeholder]',

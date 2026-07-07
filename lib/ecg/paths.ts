@@ -47,7 +47,7 @@ function normalBeat(x: number, y: number, width: number): string {
 }
 
 /**
- * SVT beat: narrow-complex tachycardia — regular, fast, often no visible P waves.
+ * SVT beat: narrow-complex tachycardia, regular, fast, often no visible P waves.
  * Clean flat baseline between beats (unlike AF/flutter).
  */
 function svtBeat(x: number, y: number, width: number): string {
@@ -75,7 +75,7 @@ export function buildSvtRhythmPath(width: number, y: number): string {
   return d;
 }
 
-/** Premature ectopic beat — slightly taller QRS (pounding/thump). */
+/** Premature ectopic beat, slightly taller QRS (pounding/thump). */
 function appendEctopicQrs(d: string, x: number, y: number, width: number): string {
   const q = x + width * 0.08;
   const r = x + width * 0.22;
@@ -92,7 +92,7 @@ function appendEctopicQrs(d: string, x: number, y: number, width: number): strin
 
 /**
  * Palpitations: mostly normal sinus with an early ectopic beat and compensatory pause.
- * Symptom pattern — "skipped or extra beat" — not a single diagnosis.
+ * Symptom pattern ("skipped or extra beat"), not a single diagnosis.
  */
 export function buildPalpitationsRhythmPath(width: number, y: number): string {
   const beatWidth = width / 5;
