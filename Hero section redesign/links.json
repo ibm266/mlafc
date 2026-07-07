@@ -1,0 +1,67 @@
+{
+  "_HOW_TO_EDIT": [
+    "Every outbound link on the site lives in this file, except hospital website links, which live next to each hospital in locations.json.",
+    "Fill in each empty \"url\". While a url is empty the site shows a dashed 'link needed' flag in its place; paste the real link and the flag disappears automatically.",
+    "profiles: rendered in the 'Verify his record' row in every page footer. Entries with \"featured\": true also appear in the strip under the homepage testimonials (keep to 3 or 4).",
+    "press: rendered on the Voices page. \"featured\": true renders as a large card (keep to 4); everything else renders in the compact list below the cards. Add as many list entries as you like.",
+    "interview: the video on the homepage 'Meet your consultant' section. Paste the YouTube, Vimeo or hosted video link; the card opens it in a new tab."
+  ],
+  "profiles": [
+    { "label": "GMC Register", "sublabel": "General Medical Council", "featured": true, "url": "" },
+    { "label": "Liverpool Heart and Chest Hospital", "sublabel": "Consultant profile", "featured": true, "url": "" },
+    { "label": "University of Liverpool", "sublabel": "Professor of Cardiology", "featured": false, "url": "" },
+    { "label": "Imperial College London", "sublabel": "Senior Lecturer", "featured": false, "url": "" },
+    { "label": "AF Association", "sublabel": "Medical advisor", "featured": false, "url": "" },
+    { "label": "Doctify", "sublabel": "Verified patient reviews", "featured": true, "url": "" },
+    { "label": "Top Doctors", "sublabel": "Specialist profile", "featured": false, "url": "" },
+    { "label": "LinkedIn", "sublabel": "Professional profile", "featured": false, "url": "" },
+    { "label": "ResearchGate", "sublabel": "Research output", "featured": false, "url": "" },
+    { "label": "ORCID", "sublabel": "Author identifier", "featured": false, "url": "" }
+  ],
+  "interview": {
+    "title": "In conversation: Professor Gupta on treating atrial fibrillation",
+    "duration": "Video interview",
+    "url": ""
+  },
+  "press": [
+    {
+      "outlet": "The Indian Express",
+      "date": "27 March 2025",
+      "headline": "Global heart rhythm expert conducts free training at PGIMER",
+      "note": "\u201cI am using the opportunity to perform complex cases in five cities and train local cardiologists in these procedures.\u201d",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "The Tribune",
+      "date": "26 March 2025",
+      "headline": "UK cardiologist kicks off India tour from PGIMER",
+      "note": "Performing the costly procedures without taking \u201ca single paisa\u201d from patients or hospitals, even bearing his own travel expenses.",
+      "credit": "Reporting in The Tribune",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "The Pioneer",
+      "date": "March 2025",
+      "headline": "UK Heart Rhythm Expert Begins India Tour from Chd",
+      "note": "\u201cA philanthropist and proud alumnus of PGIMER Chandigarh and AIIMS New Delhi\u2026 reflecting his commitment to expanding access to advanced cardiac care.\u201d",
+      "credit": "Reporting in The Pioneer",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "Punjab Kesari",
+      "date": "March 2025",
+      "headline": "Global heart expert to give free treatment, train doctors across India",
+      "note": "\u201cAs a proud alumnus of PGIMER Chandigarh and AIIMS New Delhi, I have retained strong professional and personal links with India.\u201d",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": ""
+    },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" }
+  ]
+}

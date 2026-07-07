@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Location, LocationRole, MapRegion } from '@/data/types';
+import { LinkNeededFlag } from '@/components/LinkNeededFlag';
 import {
   MAP_REGIONS,
   countryBounds,
@@ -292,6 +293,21 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
                   <span className="ml-2">{active.years}</span>
                 </p>
                 <p className="mt-4 leading-relaxed text-paper/85">{active.blurb}</p>
+                {active.url ? (
+                  <a
+                    href={active.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="arrow-link interactive mt-4 inline-block font-semibold text-brass hover:underline"
+                  >
+                    Visit hospital site ↗
+                  </a>
+                ) : (
+                  <LinkNeededFlag
+                    label="hospital link needed · locations.json"
+                    className="mt-4 inline-block"
+                  />
+                )}
                 {active.readMore ? (
                   <Link href={active.readMore} className="arrow-link interactive mt-4 inline-block font-semibold text-brass hover:underline">
                     Read more &rarr;

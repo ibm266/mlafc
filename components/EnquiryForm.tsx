@@ -67,17 +67,42 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
 
   if (done) {
     return (
-      <div role="status" className="rounded-lg border border-line bg-paper-soft p-6">
-        <p className="font-serif text-2xl">Thank you.</p>
-        <p className="mt-2 text-ink-soft">
-          Thank you - the clinic team will contact you within {site.responseDays} working days.
+      <div role="status" className="px-2 py-8 text-center md:py-10">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" className="mx-auto block">
+          <circle cx="28" cy="28" r="27" fill="none" stroke="currentColor" className="text-brass" strokeWidth="2" />
+          <path
+            d="M17 29l8 8 14-18"
+            fill="none"
+            stroke="currentColor"
+            className="text-brass"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <h2 className="mt-6 font-serif text-2xl">Thank you. Your enquiry is with us.</h2>
+        <p className="mx-auto mt-3 max-w-md text-ink-soft">
+          The clinic team will contact you within {site.responseDays} working days. If it is urgent, please use
+          WhatsApp or phone instead.
         </p>
+        <button
+          type="button"
+          onClick={() => {
+            setDone(false);
+            setFields(EMPTY);
+            setErrors({});
+          }}
+          className="interactive mt-6 rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-ink-soft hover:text-ink"
+        >
+          Send another enquiry
+        </button>
       </div>
     );
   }
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-4">
+      <h2 className="font-serif text-2xl">Send an enquiry</h2>
       {field(
         'name',
         'Your name',

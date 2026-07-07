@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F7F5F1; color: #122B3A; font-family: 'Archivo', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: #6E5826; text-decoration: none; }
+  a:hover { color: #122B3A; }
+  h1, h2, h3 { margin: 0; }
+  input, select, textarea { font-family: 'Archivo', system-ui, sans-serif; font-size: 1rem; color: #122B3A; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid #B08D3E; outline-offset: 1px; border-color: #B08D3E; }
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .rv.in { opacity: 1; transform: none; }
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.55); opacity: 1; } }
+  @keyframes ecg-sweep-x { 0% { transform: translateX(-420px); } 100% { transform: translateX(1460px); } }
+  .pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
+  .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+  ::selection { background: #B08D3E; color: #0C1F2B; }
+  header nav a, header nav span { white-space: nowrap; }
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 72px; }
+  @media (max-width: 760px) {
+    header nav { gap: 14px !important; }
+    header nav a[data-nav-link], header nav > div > nav > span { display: none; }
+    [data-m-stack] { grid-template-columns: 1fr !important; gap: 36px !important; }
+    [data-m-stack-tight] { grid-template-columns: 1fr !important; }
+    [data-m-2col] { grid-template-columns: 1fr 1fr !important; gap: 28px 24px !important; }
+    [data-m-2col] > div { border-right: none !important; padding: 0 !important; }
+    [data-pill] { right: 12px !important; bottom: 12px !important; padding: 10px 16px !important; font-size: 0.8rem !important; }
+    [data-pill-long] { display: none; }
+    [data-pill-short] { display: inline !important; }
+    figure[data-ecg] { position: static !important; }
+    article[data-ms] { padding-left: 52px !important; }
+    [data-m-letter] { padding: 32px 22px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; transition: none; }
+    .pulse-dot, .ecg-sweep { animation: none; }
+  }
+</style>
+</helmet>
+<div style="position:relative;">
+
+  <!-- scroll progress -->
+  <div aria-hidden="true" style="position:fixed; inset:0 0 auto 0; height:3px; background:rgba(217,211,199,0.5); z-index:60; pointer-events:none;">
+    <div data-scroll-bar style="height:100%; width:0%; background:#B08D3E;"></div>
+  </div>
+
+  <!-- NAV -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,245,241,0.95); backdrop-filter:blur(8px); border-bottom:1px solid #D9D3C7;">
+    <div style="max-width:1152px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; min-height:64px;">
+      <a href="Homepage v2.dc.html" style="display:inline-flex; align-items:center; gap:10px; color:#122B3A;">
+        <svg width="40" height="26" viewBox="0 0 44 28" aria-hidden="true" style="color:#6E5826;">
+          <circle cx="4" cy="14" r="3" fill="currentColor"></circle>
+          <path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="40" cy="14" r="3" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family:'Newsreader',Georgia,serif; font-size:17px; letter-spacing:0.01em;">Mumbai London AF Clinic</span>
+      </a>
+      <nav style="display:flex; align-items:center; gap:26px;">
+        <a href="Homepage v2.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Home</a>
+        <a href="Conditions.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Conditions</a>
+        <a href="Evidence.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">The Evidence</a>
+        <a href="Journey.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">The Journey</a>
+        <a href="Voices.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Voices</a>
+        <span style="border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:10px 20px; font-size:15px; font-weight:600;">Book a consultation</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section data-screen-label="Book header" style="position:relative; overflow:hidden; background:#0C1F2B; color:#F7F5F1;">
+    <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:120px; pointer-events:none; opacity:0.8;">
+      <defs>
+        <linearGradient id="bk-win" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+        </linearGradient>
+        <mask id="bk-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="120"><rect class="ecg-sweep" x="0" y="0" width="420" height="120" fill="url(#bk-win)"></rect></mask>
+      </defs>
+      <path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#B08D3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"></path>
+      <g mask="url(#bk-sweep-mask)"><path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#D8B15A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g>
+    </svg>
+    <div style="position:relative; z-index:2; max-width:1152px; margin:0 auto; padding:88px 20px 128px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#B08D3E;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>Book a consultation</p>
+      <h1 class="rv" data-reveal-delay="80" style="margin-top:18px; max-width:820px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.4rem,5vw,3.9rem); line-height:1.1; letter-spacing:-0.01em; text-wrap:balance;">Start with a <em style="color:#B08D3E; font-style:italic;">conversation</em>.</h1>
+      <p class="rv" data-reveal-delay="160" style="margin-top:22px; max-width:620px; font-size:1.125rem; color:rgba(247,245,241,0.85);">Tell us a little about the problem. The clinic team will contact you within {{ responseDays }} working days to arrange the next step.</p>
+    </div>
+  </section>
+
+  <!-- FORM + CONTACT -->
+  <section data-screen-label="Enquiry form" style="background:#F7F5F1;">
+    <div data-m-stack style="max-width:1152px; margin:0 auto; padding:80px 20px; display:grid; grid-template-columns:3fr 2fr; gap:44px; align-items:start;">
+
+      <div class="rv" style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:40px;">
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submitEnquiry }}">
+          <h2 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.6rem;">Send an enquiry</h2>
+          <div data-m-stack-tight style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <label style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">Full name
+              <input name="name" type="text" required placeholder="Your name" style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1;">
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">Phone or WhatsApp
+              <input name="phone" type="tel" required placeholder="+91" style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1;">
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">Email
+              <input name="email" type="email" placeholder="Optional" style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1;">
+            </label>
+            <label style="display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">City
+              <input name="city" type="text" placeholder="e.g. Mumbai" style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1;">
+            </label>
+          </div>
+          <label style="margin-top:20px; display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">Preferred language
+            <select name="language" style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1;">
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Punjabi</option>
+            </select>
+          </label>
+          <label style="margin-top:20px; display:flex; flex-direction:column; gap:8px; font-size:0.85rem; font-weight:600; color:#3A5468;">Tell us a little about the problem
+            <textarea name="message" rows="5" required placeholder="e.g. My father has AF and has been advised an ablation. We would like a second opinion before deciding." style="border:1px solid #D9D3C7; border-radius:8px; padding:12px 14px; background:#F7F5F1; resize:vertical;"></textarea>
+          </label>
+          <div style="margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+            <button type="submit" style="border:none; cursor:pointer; border-radius:999px; background:#122B3A; color:#F7F5F1; padding:15px 30px; font-size:1rem; font-weight:600; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Send enquiry</button>
+            <p style="margin:0; font-size:0.85rem; color:#8A97A3;">No obligation. Your details are only used to respond to you.</p>
+          </div>
+        </form>
+        </sc-if>
+        <sc-if value="{{ showSuccess }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; padding:40px 20px;">
+          <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" style="display:block; margin:0 auto;">
+            <circle cx="28" cy="28" r="27" fill="none" stroke="#B08D3E" stroke-width="2"></circle>
+            <path d="M17 29l8 8 14-18" fill="none" stroke="#B08D3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <h2 style="margin-top:24px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.6rem;">Thank you. Your enquiry is with us.</h2>
+          <p style="margin:14px auto 0; max-width:420px; color:#3A5468;">The clinic team will contact you within {{ responseDays }} working days. If it is urgent, please use WhatsApp or phone instead.</p>
+          <button onClick="{{ resetForm }}" style="margin-top:26px; border:1px solid #D9D3C7; cursor:pointer; border-radius:999px; background:transparent; color:#3A5468; padding:11px 24px; font-size:0.9rem; font-weight:600;">Send another enquiry</button>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:22px;">
+        <div class="rv" data-reveal-delay="100" style="border-radius:12px; border:1px solid #D9D3C7; background:#EFEBE3; padding:32px;">
+          <h2 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.4rem;">Prefer to talk directly?</h2>
+          <ul style="margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column;">
+            <li style="border-bottom:1px solid #D9D3C7;"><a href="#" style="display:block; padding:14px 0; font-weight:600; color:#6E5826;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#6E5826'">Message on WhatsApp &rarr;</a></li>
+            <li style="border-bottom:1px solid #D9D3C7;"><a href="#" style="display:block; padding:14px 0; font-weight:600; color:#6E5826;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#6E5826'">+91 [phone placeholder]</a></li>
+            <li><a href="#" style="display:block; padding:14px 0; font-weight:600; color:#6E5826;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#6E5826'">[email placeholder]</a></li>
+          </ul>
+        </div>
+        <div class="rv" data-reveal-delay="160" style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:32px;">
+          <h3 style="font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#6E5826;">What happens next</h3>
+          <ol style="margin:16px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px; font-size:0.95rem; color:#3A5468;">
+            <li style="display:flex; gap:14px;"><span style="flex:none; font-family:'Newsreader',Georgia,serif; color:#B08D3E;">i.</span>The clinic team reviews your enquiry and calls you back.</li>
+            <li style="display:flex; gap:14px;"><span style="flex:none; font-family:'Newsreader',Georgia,serif; color:#B08D3E;">ii.</span>A consultation is arranged during the next Mumbai visit, or by video if sooner is better.</li>
+            <li style="display:flex; gap:14px;"><span style="flex:none; font-family:'Newsreader',Georgia,serif; color:#B08D3E;">iii.</span>You leave with a clear plan, whether or not it includes a procedure.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISITS -->
+  <section data-screen-label="Upcoming visits" style="border-top:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:80px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>Plan ahead</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem);">Upcoming Mumbai visits.</h2>
+      <div data-m-stack style="margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <article class="rv" style="border-radius:12px; border:1px solid #B08D3E; background:#fff; padding:28px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <h3 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.5rem;">March 2026</h3>
+            <span style="flex:none; border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:5px 14px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;">Booking open</span>
+          </div>
+          <p style="margin:14px 0 0; font-size:0.95rem; color:#3A5468;">Consultations and procedures. Limited slots.</p>
+        </article>
+        <article class="rv" data-reveal-delay="90" style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:28px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <h3 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.5rem;">June 2026</h3>
+            <span style="flex:none; border-radius:999px; border:1px solid #B08D3E; color:#6E5826; padding:4px 14px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;">Waitlist</span>
+          </div>
+          <p style="margin:14px 0 0; font-size:0.95rem; color:#3A5468;">Consultation list full. Join the waitlist.</p>
+        </article>
+        <article class="rv" data-reveal-delay="180" style="border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:28px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <h3 style="font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:1.5rem;">October 2026</h3>
+            <span style="flex:none; border-radius:999px; border:1px solid #D9D3C7; color:#8A97A3; padding:4px 14px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;">Dates TBC</span>
+          </div>
+          <p style="margin:14px 0 0; font-size:0.95rem; color:#3A5468;">Dates to be confirmed. Register interest.</p>
+        </article>
+      </div>
+      <p class="rv" style="margin:32px 0 0; font-size:0.8rem; color:#8A97A3;">Dates are placeholders pending confirmation. Information on this site is for general education and is not a substitute for individual medical advice.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER (compact) -->
+  <footer style="background:#0C1F2B; color:#F7F5F1; border-top:1px solid #2A4254;">
+    <div style="max-width:1152px; margin:0 auto; padding:28px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-size:0.8rem; color:rgba(247,245,241,0.7);">
+      <div style="display:flex; flex-direction:column; gap:4px;"><span>© 2026 Mumbai London AF Clinic. All rights reserved.</span><span style="color:rgba(247,245,241,0.5);">Professor Dhiraj Gupta is registered with the UK General Medical Council.</span></div>
+      <a href="Homepage v2.dc.html" style="color:#B08D3E;" onmouseover="this.style.color='#F7F5F1'" onmouseout="this.style.color='#B08D3E'">Back to home</a>
+    </div>
+    <dc-import name="VerifyRow" hint-size="100%,180px"></dc-import>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;responseDays&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;3&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Copy&quot; },
+  &quot;showSuccessState&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Preview&quot; }
+}">
+class Component extends DCLogic {
+  state = { sent: false };
+
+  componentDidMount() {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const els = Array.from(document.querySelectorAll('.rv'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+            setTimeout(() => el.classList.add('in'), d);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+      els.forEach(el => io.observe(el));
+    }
+
+    const bar = document.querySelector('[data-scroll-bar]');
+    const onScroll = () => {
+      if (bar) {
+        const sc = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (sc > 0 ? (window.scrollY / sc) * 100 : 0) + '%';
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+  renderVals() {
+    const forced = this.props.showSuccessState === true;
+    const success = forced || this.state.sent;
+    return {
+      responseDays: this.props.responseDays || '3',
+      showForm: !success,
+      showSuccess: success,
+      submitEnquiry: (e) => { e.preventDefault(); this.setState({ sent: true }); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      resetForm: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

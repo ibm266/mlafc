@@ -4,9 +4,9 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 
-test('Nav renders the four section links and the booking CTA', () => {
+test('Nav renders section links and the booking CTA', () => {
   render(<Nav />);
-  for (const label of ['Evidence', 'Journey', 'Where He Works', 'Testimonials']) {
+  for (const label of ['Conditions', 'The Evidence', 'The Journey', 'Voices']) {
     expect(screen.getAllByRole('link', { name: label }).length).toBeGreaterThan(0);
   }
   expect(screen.getAllByRole('link', { name: /book a consultation/i })[0]).toHaveAttribute('href', '/book');
@@ -20,13 +20,13 @@ test('mobile menu traps focus and closes on Escape', async () => {
   await user.click(menuButton);
 
   expect(screen.getByRole('navigation', { name: /mobile/i })).toBeInTheDocument();
-  await waitFor(() => expect(screen.getAllByRole('link', { name: 'Evidence' }).at(-1)).toHaveFocus());
+  await waitFor(() => expect(screen.getAllByRole('link', { name: 'Conditions' }).at(-1)).toHaveFocus());
 
   await user.keyboard('{Shift>}{Tab}{/Shift}');
   expect(screen.getAllByRole('link', { name: /book a consultation/i }).at(-1)).toHaveFocus();
 
   await user.keyboard('{Tab}');
-  expect(screen.getAllByRole('link', { name: 'Evidence' }).at(-1)).toHaveFocus();
+  expect(screen.getAllByRole('link', { name: 'Conditions' }).at(-1)).toHaveFocus();
 
   await user.keyboard('{Escape}');
   expect(screen.queryByRole('navigation', { name: /mobile/i })).not.toBeInTheDocument();
@@ -35,7 +35,7 @@ test('mobile menu traps focus and closes on Escape', async () => {
 
 test('Footer carries GMC line and disclaimer', () => {
   render(<Footer />);
-  expect(screen.getByText(/General Medical Council/)).toBeInTheDocument();
+  expect(screen.getAllByText(/General Medical Council/).length).toBeGreaterThan(0);
   expect(screen.getByText(/not a substitute for individual medical advice/)).toBeInTheDocument();
 });
 

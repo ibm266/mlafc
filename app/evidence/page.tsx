@@ -8,8 +8,13 @@ import { PageHeader } from '@/components/PageHeader';
 import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
+import { PublicationsList } from '@/components/PublicationsList';
 import { citations } from '@/data/citations';
 import { faqs } from '@/data/faqs';
+import publicationsJson from '@/data/publications.json';
+import type { Publication } from '@/data/types';
+
+const publications = publicationsJson as Publication[];
 
 export const metadata: Metadata = {
   title: 'The Evidence - Mumbai London AF Clinic',
@@ -126,6 +131,29 @@ export default function EvidencePage() {
                 <p className="mt-2 text-sm text-ink-soft">procedures across his career</p>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section id="publications" aria-labelledby="publications-heading" className="border-t border-line bg-paper-soft">
+        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
+          <Reveal>
+            <ChapterEyebrow label="Selected publications" />
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 id="publications-heading" className="mt-3 font-serif text-3xl md:text-4xl">
+              The work behind the numbers.
+            </h2>
+            <p className="mt-4 text-ink-soft">
+              Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the
+              standard of care.
+            </p>
+          </Reveal>
+          <PublicationsList publications={publications} />
+          <Reveal>
+            <p className="mt-7 text-sm text-ink-mute">
+              Nine of more than 350 peer-reviewed publications, cited over 13,000 times.
+            </p>
           </Reveal>
         </div>
       </section>

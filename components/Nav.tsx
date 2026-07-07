@@ -6,12 +6,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/Logo';
 
 const LINKS = [
-  { href: '/evidence', label: 'Evidence' },
-  { href: '/publications', label: 'Publications' },
   { href: '/conditions', label: 'Conditions' },
-  { href: '/journey', label: 'Journey' },
-  { href: '/locations', label: 'Where He Works' },
-  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/evidence', label: 'The Evidence' },
+  { href: '/journey', label: 'The Journey' },
+  { href: '/testimonials', label: 'Voices' },
 ] as const;
 
 function isActive(href: string, pathname: string) {

@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
+import { InterviewVideoSection } from '@/components/home/InterviewVideoSection';
 import { Reveal } from '@/components/Reveal';
-import { YouTubeEmbed } from '@/components/YouTubeEmbed';
+import linksJson from '@/data/links.json';
+import type { SiteLinks } from '@/data/types';
+
+const links = linksJson as SiteLinks;
 
 const CREDENTIALS = [
   { n: 'i.', title: 'NHS National Silver Clinical Excellence Award', sub: 'Awarded 2021. Earlier Bronze in 2017.' },
@@ -23,7 +27,7 @@ export function ConsultantProfile() {
     <section aria-labelledby="profile-heading" className="bg-paper-soft">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
-          <ChapterEyebrow chapter="03" label="Meet your consultant" />
+          <ChapterEyebrow chapter="02" label="Meet your consultant" />
         </Reveal>
         <Reveal delay={80}>
           <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
@@ -44,19 +48,6 @@ export function ConsultantProfile() {
             available in English, Hindi and Punjabi.
           </p>
         </Reveal>
-        <Reveal delay={180} className="mt-10 max-w-3xl">
-          <h3 className="font-serif text-2xl">Hear him explain heart health in plain language.</h3>
-          <p className="mt-3 text-ink-soft">
-            Professor Gupta on the Lilavati Hospital podcast series, discussing atrial fibrillation, ablation, and what
-            patients should know before choosing a procedure.
-          </p>
-          <div className="mt-6">
-            <YouTubeEmbed
-              videoId="juKnv3sN2wM"
-              title="Everything About Heart Health | Lilavati Hospital Podcast Series"
-            />
-          </div>
-        </Reveal>
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {CREDENTIALS.map((c, i) => (
             <Reveal key={c.n} delay={160 + i * 70} className="border-t border-line pt-5">
@@ -66,8 +57,9 @@ export function ConsultantProfile() {
             </Reveal>
           ))}
         </div>
+        <InterviewVideoSection interview={links.interview} />
         <Reveal delay={300}>
-          <Link href="/journey" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+          <Link href="/journey" className="arrow-link interactive mt-9 inline-block font-semibold text-brass-deep hover:underline">
             Follow the journey, 1988 to 2026 &rarr;
           </Link>
         </Reveal>

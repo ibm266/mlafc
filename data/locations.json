@@ -11,7 +11,8 @@
     "years": "2007 - present",
     "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 200+ AF ablations a year.",
     "images": [],
-    "readMore": "/journey"
+    "readMore": "/journey",
+    "url": ""
   },
   {
     "id": "london-imperial",
@@ -24,7 +25,8 @@
     "role": "taught",
     "years": "2011 - present",
     "blurb": "Senior Lecturer, teaching a generation of UK trainees how to assess and treat atrial fibrillation.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "manchester",
@@ -37,7 +39,8 @@
     "role": "proctored",
     "years": "2015 - 2023",
     "blurb": "Proctored consultant colleagues through complex ablation cases as the unit expanded its arrhythmia service.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "leeds",
@@ -50,7 +53,8 @@
     "role": "proctored",
     "years": "2016 - 2022",
     "blurb": "Supported the cardiology team with hands-on proctoring for left atrial appendage occlusion procedures.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "birmingham",
@@ -63,7 +67,8 @@
     "role": "taught",
     "years": "2018",
     "blurb": "Delivered training sessions on cryoballoon and radiofrequency ablation technique.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "brugge",
@@ -76,7 +81,8 @@
     "role": "taught",
     "years": "2019 - present",
     "blurb": "Long-standing research and teaching collaboration on pulmonary vein isolation, including the VISTAX trial.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "bordeaux",
@@ -89,7 +95,8 @@
     "role": "taught",
     "years": "2017",
     "blurb": "Invited faculty at one of Europe's leading electrophysiology centres.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "prague",
@@ -102,7 +109,8 @@
     "role": "proctored",
     "years": "2020",
     "blurb": "Proctored complex ablation cases with the institute's arrhythmia team.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "hamburg",
@@ -115,7 +123,8 @@
     "role": "taught",
     "years": "2018",
     "blurb": "Guest operator and lecturer on high-volume AF ablation practice.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "boston",
@@ -128,7 +137,8 @@
     "role": "taught",
     "years": "2019",
     "blurb": "Visiting faculty, presenting trial data and ablation technique to the cardiac arrhythmia service.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "austin",
@@ -141,7 +151,8 @@
     "role": "taught",
     "years": "2022",
     "blurb": "Invited speaker and collaborator on multicentre AF ablation research.",
-    "images": []
+    "images": [],
+    "url": ""
   },
   {
     "id": "mumbai",
@@ -154,6 +165,7 @@
     "role": "operated",
     "years": "2026 - present",
     "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
-    "images": []
+    "images": [],
+    "url": ""
   }
 ]

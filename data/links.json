@@ -1,0 +1,60 @@
+{
+  "profiles": [
+    { "label": "GMC Register", "sublabel": "General Medical Council", "featured": true, "url": "" },
+    { "label": "Liverpool Heart and Chest Hospital", "sublabel": "Consultant profile", "featured": true, "url": "" },
+    { "label": "University of Liverpool", "sublabel": "Professor of Cardiology", "featured": false, "url": "" },
+    { "label": "Imperial College London", "sublabel": "Senior Lecturer", "featured": false, "url": "" },
+    { "label": "AF Association", "sublabel": "Medical advisor", "featured": false, "url": "" },
+    { "label": "Doctify", "sublabel": "Verified patient reviews", "featured": true, "url": "" },
+    { "label": "Top Doctors", "sublabel": "Specialist profile", "featured": false, "url": "" },
+    { "label": "LinkedIn", "sublabel": "Professional profile", "featured": false, "url": "" },
+    { "label": "ResearchGate", "sublabel": "Research output", "featured": false, "url": "" },
+    { "label": "ORCID", "sublabel": "Author identifier", "featured": false, "url": "" }
+  ],
+  "interview": {
+    "title": "In conversation: Professor Gupta on treating atrial fibrillation",
+    "duration": "Video interview",
+    "url": "https://www.youtube.com/watch?v=juKnv3sN2wM"
+  },
+  "press": [
+    {
+      "outlet": "The Indian Express",
+      "date": "27 March 2025",
+      "headline": "Global heart rhythm expert conducts free training at PGIMER",
+      "note": "“I am using the opportunity to perform complex cases in five cities and train local cardiologists in these procedures.”",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "The Tribune",
+      "date": "26 March 2025",
+      "headline": "UK cardiologist kicks off India tour from PGIMER",
+      "note": "Performing the costly procedures without taking “a single paisa” from patients or hospitals, even bearing his own travel expenses.",
+      "credit": "Reporting in The Tribune",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "The Pioneer",
+      "date": "March 2025",
+      "headline": "UK Heart Rhythm Expert Begins India Tour from Chd",
+      "note": "“A philanthropist and proud alumnus of PGIMER Chandigarh and AIIMS New Delhi… reflecting his commitment to expanding access to advanced cardiac care.”",
+      "credit": "Reporting in The Pioneer",
+      "featured": true,
+      "url": ""
+    },
+    {
+      "outlet": "Punjab Kesari",
+      "date": "March 2025",
+      "headline": "Global heart expert to give free treatment, train doctors across India",
+      "note": "“As a proud alumnus of PGIMER Chandigarh and AIIMS New Delhi, I have retained strong professional and personal links with India.”",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": ""
+    },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" },
+    { "outlet": "Add outlet name", "date": "Month Year", "headline": "Paste the article headline here", "featured": false, "url": "" }
+  ]
+}

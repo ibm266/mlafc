@@ -11,7 +11,7 @@ beforeEach(() => {
 test('conditions page renders AF section with ECG animation', () => {
   render(<ConditionsPage />);
   expect(screen.getByRole('heading', { name: /your heart, explained/i })).toBeInTheDocument();
-  expect(screen.getByText('Put your heart in the most experienced hands.')).toBeInTheDocument();
+  expect(screen.getByText(/Put your heart in the most experienced hands/i)).toBeInTheDocument();
   const af = conditions.find((c) => c.id === 'af')!;
   expect(screen.getByRole('heading', { name: af.title })).toBeInTheDocument();
   expect(screen.getByRole('figure', { name: af.videoAlt })).toBeInTheDocument();

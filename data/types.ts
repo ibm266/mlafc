@@ -13,6 +13,7 @@ export type Location = {
   role: LocationRole;
   years: string;
   blurb: string;
+  url: string;
   images: string[];
   readMore?: string;
 };
@@ -95,4 +96,33 @@ export type Condition = {
   ecgVariant?: 'af' | 'atrial-flutter' | 'svt' | 'palpitations' | 'blackouts' | 'bradycardia';
   videoAlt: string;
   isSymptom?: boolean;
+};
+
+export type ProfileLink = {
+  label: string;
+  sublabel: string;
+  featured: boolean;
+  url: string;
+};
+
+export type InterviewLink = {
+  title: string;
+  duration: string;
+  url: string;
+};
+
+export type PressLink = {
+  outlet: string;
+  date: string;
+  headline: string;
+  note?: string;
+  credit?: string;
+  featured: boolean;
+  url: string;
+};
+
+export type SiteLinks = {
+  profiles: ProfileLink[];
+  interview: InterviewLink;
+  press: PressLink[];
 };

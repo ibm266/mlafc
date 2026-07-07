@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
+import { VerifyRow } from '@/components/VerifyRow';
+import linksJson from '@/data/links.json';
 import { site } from '@/data/site';
+import type { SiteLinks } from '@/data/types';
+
+const links = linksJson as SiteLinks;
 
 const pageLinks = [
+  { href: '/conditions', label: 'Conditions' },
   { href: '/evidence', label: 'The Evidence' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/conditions', label: 'Conditions We Treat' },
   { href: '/journey', label: 'The Journey' },
-  { href: '/locations', label: 'Where He Works' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/book', label: 'Book a consultation' },
+  { href: '/testimonials', label: 'Voices' },
 ] as const;
 
 const patientLinks = [
@@ -42,6 +44,11 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/book" className="interactive block py-2.5 hover:text-brass">
+                Book a consultation
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -81,6 +88,12 @@ export function Footer() {
               )}
             </li>
           </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-line-dark">
+        <div className="mx-auto max-w-6xl px-5 pb-10 pt-2">
+          <VerifyRow profiles={links.profiles} />
         </div>
       </div>
 

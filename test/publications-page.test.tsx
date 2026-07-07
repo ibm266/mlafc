@@ -1,17 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { PublicationsList } from '@/components/PublicationsList';
 import { PublicationCard } from '@/components/PublicationCard';
-import { PublicationsGrid } from '@/components/PublicationsGrid';
 import publications from '@/data/publications.json';
 import type { Publication } from '@/data/types';
+import { MockIntersectionObserver, mockReducedMotion } from './mocks';
 
-test('filters the publications grid and updates the count', async () => {
-  const user = userEvent.setup();
-  render(<PublicationsGrid />);
-  expect(screen.getAllByRole('article')).toHaveLength(9);
-  await user.click(screen.getByRole('button', { name: /clinical trials/i }));
-  expect(screen.getAllByRole('article')).toHaveLength(2);
-  expect(screen.getByText(/2 publications shown/i)).toBeInTheDocument();
+beforeEach(() => {
+  MockIntersectionObserver.install();
+  mockReducedMotion(true);
+});
+
+test('PublicationsList renders all nine publications', () => {
+  render(<PublicationsList publications={publications as Publication[]} />);
+  expect(screen.getAllByRole('listitem')).toHaveLength(9);
+  expect(screen.getByText(/Pulsed field versus radiofrequency ablation/i)).toBeInTheDocument();
 });
 
 test('PublicationCard shows placeholder when no url is set', () => {

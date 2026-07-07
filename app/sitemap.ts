@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next';
 
-const BASE = 'https://www.mumbailondonaf.com';
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ['/', '/evidence', '/publications', '/conditions', '/journey', '/locations', '/testimonials', '/book'].map((path) => ({
-    url: `${BASE}${path}`,
-    changeFrequency: 'monthly',
+  const base = 'https://mlafc.com';
+
+  return ['/', '/evidence', '/conditions', '/journey', '/testimonials', '/book'].map((path) => ({
+    url: `${base}${path}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
     priority: path === '/' ? 1 : 0.8,
   }));
 }

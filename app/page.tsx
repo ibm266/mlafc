@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Hero } from '@/components/home/Hero';
 import { OperatorTrace } from '@/components/home/OperatorTrace';
 import { StatsBand } from '@/components/StatsBand';
-import { ComparisonCards } from '@/components/home/ComparisonCards';
 import { ConsultantProfile } from '@/components/home/ConsultantProfile';
+import { VerifyIndependentlyStrip } from '@/components/home/VerifyIndependentlyStrip';
 import { Steps } from '@/components/Steps';
 import { TestimonialCard } from '@/components/TestimonialCard';
 import { PublicationCard } from '@/components/PublicationCard';
@@ -17,14 +17,16 @@ import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import publicationsJson from '@/data/publications.json';
 import locationsJson from '@/data/locations.json';
+import linksJson from '@/data/links.json';
 import visitsJson from '@/data/visits.json';
 import { conditions } from '@/data/conditions';
-import type { Location, Publication, Testimonial, Visit } from '@/data/types';
+import type { Location, Publication, SiteLinks, Testimonial, Visit } from '@/data/types';
 
 const testimonials = testimonialsJson as Testimonial[];
 const publications = publicationsJson as Publication[];
 const locations = locationsJson as Location[];
 const visits = visitsJson as Visit[];
+const links = linksJson as SiteLinks;
 
 const CONDITION_LINKS = conditions.map((c) => ({ id: c.id, title: c.title }));
 const PROCEDURES = [
@@ -53,37 +55,12 @@ export default function Home() {
       <Hero />
       <OperatorTrace />
       <StatsBand />
-      <ComparisonCards />
       <ConsultantProfile />
-
-      <section aria-labelledby="map-heading" className="bg-night text-paper">
-        <div className="mx-auto max-w-6xl px-5 py-20">
-          <Reveal>
-            <ChapterEyebrow chapter="07" label="Where he works" dark />
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 id="map-heading" className="mt-3 max-w-xl font-serif text-4xl leading-tight">
-              Trusted by heart centres <em className="text-brass">across three continents</em>.
-            </h2>
-            <p className="mt-3 max-w-xl text-paper/80">
-              Where Professor Gupta has operated, taught, and proctored fellow consultants.
-            </p>
-          </Reveal>
-          <div className="mt-10">
-            <LocationsMapLazy locations={locations} />
-          </div>
-          <Reveal delay={120}>
-            <Link href="/locations" className="arrow-link interactive mt-6 inline-block font-semibold text-brass hover:underline">
-              Explore every location &rarr;
-            </Link>
-          </Reveal>
-        </div>
-      </section>
 
       <section aria-labelledby="how-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="04" label="How the Mumbai clinic works" />
+            <ChapterEyebrow chapter="03" label="How the Mumbai clinic works" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="how-heading" className="mt-3 font-serif text-4xl">
@@ -99,7 +76,7 @@ export default function Home() {
       <section aria-labelledby="services-heading" className="border-y border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="05" label="Conditions &amp; treatments" />
+            <ChapterEyebrow chapter="04" label="Conditions &amp; treatments" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="services-heading" className="mt-3 font-serif text-4xl">
@@ -142,7 +119,7 @@ export default function Home() {
       <section aria-labelledby="publications-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="06" label="Research" />
+            <ChapterEyebrow chapter="05" label="Research" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
@@ -161,17 +138,36 @@ export default function Home() {
             ))}
           </div>
           <Reveal delay={200}>
-            <Link href="/publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+            <Link href="/evidence#publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Browse all publications &rarr;
             </Link>
           </Reveal>
         </div>
       </section>
 
+      <section aria-labelledby="map-heading" className="bg-night text-paper">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal>
+            <ChapterEyebrow chapter="06" label="Where he works" dark />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="map-heading" className="mt-3 max-w-xl font-serif text-4xl leading-tight">
+              Trusted by heart centres <em className="text-brass">across three continents</em>.
+            </h2>
+            <p className="mt-3 max-w-xl text-paper/80">
+              Where Professor Gupta has operated, taught, and proctored fellow consultants.
+            </p>
+          </Reveal>
+          <div className="mt-10">
+            <LocationsMapLazy locations={locations} />
+          </div>
+        </div>
+      </section>
+
       <section aria-labelledby="testimonials-heading" className="border-t border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="08" label="In their words" />
+            <ChapterEyebrow chapter="07" label="In their words" />
           </Reveal>
           {hospitalLetter ? (
             <Reveal delay={100}>
@@ -197,9 +193,10 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <VerifyIndependentlyStrip profiles={links.profiles} />
           <Reveal delay={200}>
-            <Link href="/testimonials" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
-              Read all 24 testimonials &rarr;
+            <Link href="/testimonials" className="arrow-link interactive mt-7 inline-block font-semibold text-brass-deep hover:underline">
+              More voices: hospitals, patients, peers, and the press &rarr;
             </Link>
           </Reveal>
         </div>
@@ -208,7 +205,7 @@ export default function Home() {
       <section aria-labelledby="visits-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="09" label="Plan ahead" />
+            <ChapterEyebrow chapter="08" label="Plan ahead" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="visits-heading" className="mt-3 font-serif text-4xl">

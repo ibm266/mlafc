@@ -14,6 +14,7 @@ test('locations: 12 entries with required fields', () => {
     expect(typeof l.lng).toBe('number');
     expect(['operated', 'taught', 'proctored']).toContain(l.role);
     expect(typeof l.years).toBe('string');
+    expect(typeof l.url).toBe('string');
     expect(l.blurb.length).toBeGreaterThan(20);
     expect(Array.isArray(l.images)).toBe(true);
   }

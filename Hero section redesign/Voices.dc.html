@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F7F5F1; color: #122B3A; font-family: 'Archivo', system-ui, sans-serif; font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: #6E5826; text-decoration: none; }
+  a:hover { color: #122B3A; }
+  h1, h2, h3 { margin: 0; }
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+  .rv.in { opacity: 1; transform: none; }
+  @keyframes pulse-dot { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.55); opacity: 1; } }
+  @keyframes ecg-sweep-x { 0% { transform: translateX(-420px); } 100% { transform: translateX(1460px); } }
+  .pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
+  .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+  ::selection { background: #B08D3E; color: #0C1F2B; }
+  header nav a, header nav span { white-space: nowrap; }
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 72px; }
+  @media (max-width: 760px) {
+    header nav { gap: 14px !important; }
+    header nav a[data-nav-link], header nav > div > nav > span { display: none; }
+    [data-m-stack] { grid-template-columns: 1fr !important; gap: 36px !important; }
+    [data-m-stack-tight] { grid-template-columns: 1fr !important; }
+    [data-m-2col] { grid-template-columns: 1fr 1fr !important; gap: 28px 24px !important; }
+    [data-m-2col] > div { border-right: none !important; padding: 0 !important; }
+    [data-pill] { right: 12px !important; bottom: calc(12px + env(safe-area-inset-bottom)) !important; padding: 10px 16px !important; font-size: 0.8rem !important; }
+    [data-pill-long] { display: none; }
+    [data-pill-short] { display: inline !important; }
+    figure[data-ecg] { position: static !important; }
+    article[data-ms] { padding-left: 52px !important; }
+    [data-m-letter] { padding: 32px 22px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; transition: none; }
+    .pulse-dot, .ecg-sweep { animation: none; }
+  }
+</style>
+</helmet>
+<div style="position:relative;">
+
+  <!-- scroll progress -->
+  <div aria-hidden="true" style="position:fixed; inset:0 0 auto 0; height:3px; background:rgba(217,211,199,0.5); z-index:60; pointer-events:none;">
+    <div data-scroll-bar style="height:100%; width:0%; background:#B08D3E;"></div>
+  </div>
+
+  <!-- floating booking pill -->
+  <a data-pill href="Book.dc.html" style="position:fixed; right:24px; bottom:24px; z-index:55; display:flex; align-items:center; gap:10px; border-radius:999px; background:#0C1F2B; color:#F7F5F1; padding:14px 22px; font-weight:600; font-size:0.9rem; box-shadow:0 12px 32px rgba(6,15,21,0.35); opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease;" onmouseover="this.style.background='#16303F'" onmouseout="this.style.background='#0C1F2B'">
+    <span class="pulse-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#B08D3E;"></span>
+    <span data-pill-long>Book a consultation</span><span data-pill-short style="display:none;">Book</span>
+    <button data-pill-close aria-label="Hide booking reminder" style="display:flex; align-items:center; justify-content:center; width:24px; height:24px; margin:-2px -8px -2px 2px; border:none; border-radius:50%; background:rgba(247,245,241,0.14); color:rgba(247,245,241,0.85); font-size:15px; line-height:1; padding:0; cursor:pointer;">&times;</button>
+  </a>
+
+  <!-- NAV -->
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,245,241,0.95); backdrop-filter:blur(8px); border-bottom:1px solid #D9D3C7;">
+    <div style="max-width:1152px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; min-height:64px;">
+      <a href="Homepage v2.dc.html" style="display:inline-flex; align-items:center; gap:10px; color:#122B3A;">
+        <svg width="40" height="26" viewBox="0 0 44 28" aria-hidden="true" style="color:#6E5826;">
+          <circle cx="4" cy="14" r="3" fill="currentColor"></circle>
+          <path d="M7 14h8l3-8 5 16 3-8h11" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+          <circle cx="40" cy="14" r="3" fill="currentColor"></circle>
+        </svg>
+        <span style="font-family:'Newsreader',Georgia,serif; font-size:17px; letter-spacing:0.01em;">Mumbai London AF Clinic</span>
+      </a>
+      <nav style="display:flex; align-items:center; gap:26px;">
+        <a href="Homepage v2.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Home</a>
+        <a href="Conditions.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">Conditions</a>
+        <a href="Evidence.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">The Evidence</a>
+        <a href="Journey.dc.html" data-nav-link style="font-size:15px; font-weight:500; color:#3A5468;" onmouseover="this.style.color='#122B3A'" onmouseout="this.style.color='#3A5468'">The Journey</a>
+        <span style="font-size:15px; font-weight:600; color:#122B3A; border-bottom:2px solid #B08D3E; padding-bottom:2px;">Voices</span>
+        <a href="Book.dc.html" style="border-radius:999px; background:#122B3A; color:#F7F5F1; padding:10px 20px; font-size:15px; font-weight:600; transition:background-color .2s;" onmouseover="this.style.background='#0C1F2B'" onmouseout="this.style.background='#122B3A'">Book a consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section data-screen-label="Voices header" style="position:relative; overflow:hidden; background:#0C1F2B; color:#F7F5F1;">
+    <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:120px; pointer-events:none; opacity:0.8;">
+      <defs>
+        <linearGradient id="vo-win" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+          <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+        </linearGradient>
+        <mask id="vo-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="120"><rect class="ecg-sweep" x="0" y="0" width="420" height="120" fill="url(#vo-win)"></rect></mask>
+      </defs>
+      <path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#B08D3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"></path>
+      <g mask="url(#vo-sweep-mask)"><path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#D8B15A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g>
+    </svg>
+    <div style="position:relative; z-index:2; max-width:1152px; margin:0 auto; padding:88px 20px 128px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#B08D3E;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>Voices</p>
+      <h1 class="rv" data-reveal-delay="80" style="margin-top:18px; max-width:820px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(2.4rem,5vw,3.9rem); line-height:1.1; letter-spacing:-0.01em; text-wrap:balance;">Hospitals, patients, and peers. <em style="color:#B08D3E; font-style:italic;">In their own words.</em></h1>
+      <p class="rv" data-reveal-delay="160" style="margin-top:22px; max-width:620px; font-size:1.125rem; color:rgba(247,245,241,0.85);">Written references from the institutions Professor Gupta has served, and the people he has treated.</p>
+    </div>
+  </section>
+
+  <!-- 01 THE LETTER -->
+  <section data-screen-label="Hospital letter" style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>01 · From the hospitals</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; max-width:680px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">What his own institutions put in writing.</h2>
+      <div class="rv" data-reveal-delay="140" data-m-letter style="margin:44px auto 0; max-width:820px; border:1px solid #D9D3C7; border-radius:4px; background:#FFFEFB; box-shadow:0 24px 56px rgba(18,43,58,0.1); padding:56px 64px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; border-bottom:1px solid #D9D3C7; padding-bottom:22px;">
+          <div>
+            <p style="margin:0; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#6E5826;">To whom it may concern</p>
+            <p style="margin:10px 0 0; font-family:'Newsreader',Georgia,serif; font-size:1.3rem; color:#122B3A;">Liverpool Heart and Chest Hospital NHS Foundation Trust</p>
+            <p style="margin:4px 0 0; font-size:0.85rem; color:#556675;">The largest specialist cardiothoracic centre in the United Kingdom</p>
+          </div>
+          <p style="margin:0; flex:none; font-size:0.85rem; color:#556675;">Issued 2024</p>
+        </div>
+        <div style="margin-top:28px; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.75; color:#122B3A; display:flex; flex-direction:column; gap:18px;">
+          <p style="margin:0;">It gives me great pleasure to write in support of Professor Dhiraj Gupta, who has been a consultant cardiologist and electrophysiologist at this Trust since 2007.</p>
+          <p style="margin:0;">Over the past seventeen years, Professor Gupta has consistently been among the most reliable and skilled electrophysiologists we have worked with. His patient outcomes are consistently above the regional benchmark, his complication rates have been published in peer-reviewed journals, and his teaching of junior staff is exemplary.</p>
+          <p style="margin:0;">He has been a key driver of the LAA occlusion service which now serves a population of 2.8 million across the North West of England. He is, without reservation, a senior figure in UK arrhythmia care, and we are fortunate to have him.</p>
+        </div>
+        <div style="margin-top:32px; display:flex; align-items:center; gap:14px;">
+          <span style="display:inline-block; width:36px; height:2px; background:#B08D3E;"></span>
+          <p style="margin:0; font-size:0.9rem; color:#3A5468;"><strong style="color:#122B3A;">Medical Director</strong> · Liverpool Heart and Chest Hospital NHS Foundation Trust</p>
+        </div>
+      </div>
+
+      <div style="margin-top:26px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px;">
+        <article class="rv" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Hospital reference</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">“Professor Gupta’s leadership of our LAA occlusion service has set the standard others now measure themselves against.”</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Royal Brompton Hospital</strong><span style="color:#556675;">Institute of Cardiovascular Medicine · 2023</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="80" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Hospital reference</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">“His proctoring has materially raised the quality of complex ablation work across our cardiology unit.”</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">St Bartholomew’s Hospital</strong><span style="color:#556675;">Cardiology Department · 2022</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="160" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Academic reference</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">“A clinician of rare calibre, operating at the intersection of high-volume practice, rigorous research and patient-centred care.”</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">University of Liverpool</strong><span style="color:#556675;">Faculty of Health and Life Sciences · 2024</span></footer>
+        </article>
+        <article class="rv" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Academic reference</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">“His contribution as Senior Lecturer has shaped how a generation of trainees approach atrial fibrillation.”</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Imperial College London</strong><span style="color:#556675;">National Heart and Lung Institute · 2023</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="80" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <div style="font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.14em; color:#6E5826;">Society endorsement</div>
+          <p style="margin-top:12px; flex:1; color:#3A5468;">“Professor Gupta’s published complication rate places him firmly in the top echelon of UK electrophysiologists.”</p>
+          <footer style="margin-top:16px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">British Heart Rhythm Society</strong><span style="color:#556675;">Council statement · 2018</span></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PATIENTS -->
+  <section data-screen-label="Patient voices" style="border-top:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>02 · From patients</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; max-width:680px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">The people he has treated.</h2>
+      <div style="margin-top:44px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px;">
+        <article class="rv" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“After years of being told my palpitations were ‘just stress,’ Professor Gupta listened, ran proper tests, and treated me. I haven’t had an episode in two years.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">R. K.</strong><span style="color:#556675;">Treated 2023 · Mumbai</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="70" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“He explained my AF in a way I could finally understand. Three languages, no jargon, no rush. The procedure went exactly as he described.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">S. Mehta</strong><span style="color:#556675;">Treated 2024 · London</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="140" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“My father is 76 and we were terrified. The professor took an hour with us, an hour. He treated my dad like a person, not a case number.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Anonymous</strong><span style="color:#556675;">Daughter of patient · Treated 2024</span></footer>
+        </article>
+        <article class="rv" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“Genuinely the kindest doctor I have ever met. And the best, my flutter is gone after eight years of beta-blockers that never quite worked.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">P. Nair</strong><span style="color:#556675;">Treated 2023</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="70" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“I came from Delhi for my consultation expecting a cold London hospital. Got something completely different, felt like sitting with a family doctor who happens to be world-class.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">V. Sharma</strong><span style="color:#556675;">Treated 2024</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="140" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“My ablation was nine months ago. Heart rhythm has been steady since the day I went home. I’d waited fourteen years for this.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">J. Bhattacharya</strong><span style="color:#556675;">Treated 2024</span></footer>
+        </article>
+        <article class="rv" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“He spoke to my mother in Hindi and to me in English in the same conversation. That seems like a small thing, until you’ve spent years translating for an elderly parent in clinics.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">R. Ahuja</strong><span style="color:#556675;">Treated 2023</span></footer>
+        </article>
+        <article class="rv" data-reveal-delay="70" style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+          <p style="margin:0; flex:1; font-family:'Newsreader',Georgia,serif; font-size:1.1rem; line-height:1.6; color:#122B3A;">“Followed up with me by email three weeks after the procedure to check how I was. Three weeks. Unprompted.”</p>
+          <footer style="margin-top:18px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">M. Kapoor</strong><span style="color:#556675;">Treated 2025</span></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PEERS -->
+  <section data-screen-label="Peer voices" style="border-top:1px solid #D9D3C7; background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>03 · From peers</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; max-width:680px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">The doctors who refer to him.</h2>
+      <div style="margin-top:44px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:0;">
+        <blockquote class="rv" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 28px 28px 0;">
+          <p style="margin:0; color:#3A5468;">“Dhiraj is among the operators I would refer my own family to without a second thought. His judgement on borderline cases is exceptional.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Prof. G. Lip</strong><span style="color:#556675;">Liverpool Centre for Cardiovascular Science</span></footer>
+        </blockquote>
+        <blockquote class="rv" data-reveal-delay="70" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 28px 28px 0;">
+          <p style="margin:0; color:#3A5468;">“One of the most thoughtful electrophysiologists in Britain. His VISTAX trial work has changed how a number of us approach pulmonary vein isolation.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Dr M. Duytschaever</strong><span style="color:#556675;">AZ Sint-Jan Brugge, Belgium</span></footer>
+        </blockquote>
+        <blockquote class="rv" data-reveal-delay="140" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 0;">
+          <p style="margin:0; color:#3A5468;">“Combines the rigour of a researcher with the calm of a senior surgeon. The patients I send him come back better, and remember the experience.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Mr R. Snowdon</strong><span style="color:#556675;">Liverpool Heart and Chest Hospital</span></footer>
+        </blockquote>
+        <blockquote class="rv" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 28px 28px 0;">
+          <p style="margin:0; color:#3A5468;">“Working with Dhiraj on multicentre trials has been the highlight of my decade. He raises the standard of every team he sits in.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Dr J. Andrade</strong><span style="color:#556675;">University of British Columbia</span></footer>
+        </blockquote>
+        <blockquote class="rv" data-reveal-delay="70" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 28px 28px 0;">
+          <p style="margin:0; color:#3A5468;">“Genuinely one of the few clinicians whose name brings my whole arrhythmia MDT to attention when his cases come up.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Dr R. Whitlock</strong><span style="color:#556675;">McMaster University</span></footer>
+        </blockquote>
+        <blockquote class="rv" data-reveal-delay="140" style="margin:0; border-top:1px solid #D9D3C7; padding:28px 0;">
+          <p style="margin:0; color:#3A5468;">“A consummate clinician. The thing that distinguishes Dhiraj is how seriously he takes the question after the question, what really matters to this patient.”</p>
+          <footer style="margin-top:14px; font-size:0.85rem;"><strong style="display:block; color:#122B3A;">Dr J. Waktare</strong><span style="color:#556675;">Liverpool Heart and Chest Hospital</span></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PRESS -->
+  <sc-if value="{{ showPress }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Press" style="border-top:1px solid #D9D3C7; background:#EFEBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:88px 20px;">
+      <p class="rv" style="display:flex; align-items:center; gap:10px; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.18em; color:#6E5826;"><span class="pulse-dot" style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#B08D3E;"></span>04 · In the press</p>
+      <h2 class="rv" data-reveal-delay="80" style="margin-top:14px; max-width:680px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.15;">Covered across India, March 2025.</h2>
+      <div style="margin-top:44px; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr)); gap:22px;">
+        <sc-for list="{{ pressCards }}" as="pc" hint-placeholder-count="4">
+          <article style="display:flex; flex-direction:column; border-radius:12px; border:1px solid #D9D3C7; background:#fff; padding:26px;">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; border-bottom:1px solid #D9D3C7; padding-bottom:12px;">
+              <span style="font-family:'Newsreader',Georgia,serif; font-weight:500; font-size:1.05rem; color:#122B3A;">{{ pc.outlet }}</span>
+              <span style="font-size:0.75rem; color:#8A97A3;">{{ pc.date }}</span>
+            </div>
+            <h3 style="margin-top:14px; font-size:1rem; line-height:1.4; color:#122B3A;">{{ pc.headline }}</h3>
+            <p style="margin-top:12px; flex:1; font-size:0.95rem; color:#3A5468;">{{ pc.note }}</p>
+            <footer style="margin-top:14px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 12px; font-size:0.8rem; color:#556675;">
+              <span>{{ pc.credit }}</span>
+              <sc-if value="{{ pc.hasUrl }}" hint-placeholder-val="{{ false }}">
+                <a class="arrow" href="{{ pc.url }}" target="_blank" rel="noopener" style="font-weight:600; color:#6E5826;">Read article &nearr;</a>
+              </sc-if>
+              <sc-if value="{{ pc.needsUrl }}" hint-placeholder-val="{{ false }}">
+                <span style="font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:#6E5826; border:1px dashed #B08D3E; border-radius:4px; padding:2px 7px; white-space:nowrap;">link needed · links.json</span>
+              </sc-if>
+            </footer>
+          </article>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ false }}">
+        <div class="rv" style="margin-top:40px;">
+          <h3 style="font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.16em; color:#6E5826;">More coverage</h3>
+          <div style="margin-top:10px; border-top:1px solid #D9D3C7;">
+            <sc-for list="{{ pressMore }}" as="pm" hint-placeholder-count="3">
+              <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px; border-bottom:1px solid #D9D3C7; padding:14px 0;">
+                <span style="min-width:170px; font-weight:600; color:#122B3A;">{{ pm.outlet }}</span>
+                <span style="flex:1; min-width:220px; color:#3A5468;">{{ pm.headline }}</span>
+                <span style="font-size:0.8rem; color:#8A97A3;">{{ pm.date }}</span>
+                <sc-if value="{{ pm.hasUrl }}" hint-placeholder-val="{{ false }}">
+                  <a class="arrow" href="{{ pm.url }}" target="_blank" rel="noopener" style="font-size:0.85rem; font-weight:600; color:#6E5826;">Read &nearr;</a>
+                </sc-if>
+                <sc-if value="{{ pm.needsUrl }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:#6E5826; border:1px dashed #B08D3E; border-radius:4px; padding:2px 7px; white-space:nowrap;">link needed</span>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+  </sc-if>
+
+  <!-- CTA CARD -->
+  <section style="background:#F7F5F1;">
+    <div style="max-width:1152px; margin:0 auto; padding:80px 20px;">
+      <div class="rv" style="position:relative; overflow:hidden; border-radius:16px; background:#0C1F2B; color:#F7F5F1; box-shadow:0 30px 60px rgba(6,15,21,0.25);">
+        <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:100px; pointer-events:none;">
+          <defs>
+            <linearGradient id="vc-win" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop>
+              <stop offset="52%" stop-color="#fff" stop-opacity="0"></stop>
+              <stop offset="80%" stop-color="#fff" stop-opacity="1"></stop>
+              <stop offset="94%" stop-color="#fff" stop-opacity="1"></stop>
+              <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+            </linearGradient>
+            <mask id="vc-sweep-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="120"><rect class="ecg-sweep" x="0" y="0" width="420" height="120" fill="url(#vc-win)"></rect></mask>
+          </defs>
+          <path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#B08D3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"></path>
+          <g mask="url(#vc-sweep-mask)"><path d="M 0 60 L 176.0 60.0 Q 188.8 53.0 201.6 60.0 L 214.4 60.0 L 217.2 62.0 L 222.1 24.0 L 227.1 76.0 L 249.6 60.0 L 252.8 60.0 Q 272.0 50.0 291.2 60.0 L 480.0 60.0 L 496.0 60.0 Q 508.8 53.0 521.6 60.0 L 534.4 60.0 L 537.2 62.0 L 542.1 24.0 L 547.1 76.0 L 569.6 60.0 L 572.8 60.0 Q 592.0 50.0 611.2 60.0 L 800.0 60.0 L 816.0 60.0 Q 828.8 53.0 841.6 60.0 L 854.4 60.0 L 857.2 62.0 L 862.1 24.0 L 867.1 76.0 L 889.6 60.0 L 892.8 60.0 Q 912.0 50.0 931.2 60.0 L 1120.0 60.0 L 1136.0 60.0 Q 1148.8 53.0 1161.6 60.0 L 1174.4 60.0 L 1177.2 62.0 L 1182.1 24.0 L 1187.1 76.0 L 1209.6 60.0 L 1212.8 60.0 Q 1232.0 50.0 1251.2 60.0 L 1440.0 60.0" fill="none" stroke="#D8B15A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g>
+        </svg>
+        <div style="position:relative; z-index:2; padding:64px 64px 140px;">
+          <h2 style="max-width:640px; font-family:'Newsreader',Georgia,serif; font-weight:400; font-size:clamp(1.9rem,3.6vw,2.8rem); line-height:1.12;">Hear it for yourself. <em style="color:#B08D3E; font-style:italic;">Start with a conversation.</em></h2>
+          <p style="margin:18px 0 0; max-width:520px; color:rgba(247,245,241,0.85);">A short enquiry costs nothing, and every one is answered.</p>
+          <div style="margin-top:30px; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+            <a href="Book.dc.html" style="border-radius:999px; background:#B08D3E; color:#0C1F2B; padding:15px 30px; font-weight:600; transition:background-color .2s, color .2s;" onmouseover="this.style.background='#6E5826';this.style.color='#F7F5F1'" onmouseout="this.style.background='#B08D3E';this.style.color='#0C1F2B'">Book a consultation</a>
+            <p style="margin:0; font-size:0.9rem; color:rgba(247,245,241,0.7);">Next Mumbai visit: March 2026 · Booking open</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (compact) -->
+  <footer style="background:#0C1F2B; color:#F7F5F1; border-top:1px solid #2A4254;">
+    <div style="max-width:1152px; margin:0 auto; padding:28px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-size:0.8rem; color:rgba(247,245,241,0.7);">
+      <div style="display:flex; flex-direction:column; gap:4px;"><span>© 2026 Mumbai London AF Clinic. All rights reserved.</span><span style="color:rgba(247,245,241,0.5);">Professor Dhiraj Gupta is registered with the UK General Medical Council.</span></div>
+      <a href="Homepage v2.dc.html" style="color:#B08D3E;" onmouseover="this.style.color='#F7F5F1'" onmouseout="this.style.color='#B08D3E'">Back to home</a>
+    </div>
+    <dc-import name="VerifyRow" hint-size="100%,180px"></dc-import>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showPress&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
+}">
+class Component extends DCLogic {
+  state = { press: [] };
+  componentDidMount() {
+    fetch('links.json')
+      .then(r => r.json())
+      .then(d => this.setState({ press: d.press || [] }))
+      .catch(() => {});
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const els = Array.from(document.querySelectorAll('.rv'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+            setTimeout(() => el.classList.add('in'), d);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+      els.forEach(el => io.observe(el));
+    }
+
+    const bar = document.querySelector('[data-scroll-bar]');
+    const pill = document.querySelector('[data-pill]');
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (bar) {
+        const sc = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (sc > 0 ? (y / sc) * 100 : 0) + '%';
+      }
+      if (pill) {
+        // hide near the end of the page so it never covers footer contact links
+        const end = document.documentElement.scrollHeight - window.innerHeight;
+        const show = y > 480 && (end - y) > window.innerHeight * 0.6 && !this._pillHidden;
+        pill.style.opacity = show ? '1' : '0';
+        pill.style.transform = show ? 'none' : 'translateY(12px)';
+        pill.style.pointerEvents = show ? 'auto' : 'none';
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+    const pillClose = document.querySelector('[data-pill-close]');
+    if (pillClose) pillClose.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      this._pillHidden = true; onScroll();
+    });
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+  renderVals() {
+    const deco = a => ({
+      outlet: a.outlet, date: a.date, headline: a.headline,
+      note: a.note || '', credit: a.credit || '',
+      url: a.url || undefined, hasUrl: !!a.url, needsUrl: !a.url
+    });
+    const pressCards = this.state.press.filter(a => a.featured).map(deco);
+    const pressMore = this.state.press.filter(a => !a.featured).map(deco);
+    return {
+      showPress: this.props.showPress !== false,
+      pressCards,
+      pressMore,
+      hasMore: pressMore.length > 0
+    };
+  }
+}
+</script>
+</body>
+</html>
