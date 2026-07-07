@@ -9,7 +9,11 @@ const STAR_ANIM_MS = 450;
 
 function StarIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" className="text-brass">
+    <svg
+      viewBox="0 0 20 20"
+      aria-hidden="true"
+      className="h-[clamp(3.5rem,16vw,13.75rem)] w-[clamp(3.5rem,16vw,13.75rem)] text-brass"
+    >
       <path
         fill="currentColor"
         d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.35l-4.94 2.6.94-5.5-4-3.9 5.53-.8L10 1.5z"
@@ -37,18 +41,18 @@ export function TopDoctorsRating({ url }: { url: string }) {
   }, [visible, reducedMotion]);
 
   return (
-    <div ref={ref} className="mt-11 border-t border-line pt-8">
+    <div ref={ref} className="mt-11 border-t border-line pt-10 text-center">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-mute">Top Doctors</p>
 
       <div
-        className="mt-3 flex items-center gap-1"
+        className="mx-auto mt-6 flex w-full max-w-5xl items-center justify-center gap-[clamp(0.15rem,1.2vw,0.65rem)]"
         role="img"
         aria-label="Five-star rating on Top Doctors, over 40 patient reviews"
       >
         {Array.from({ length: STAR_COUNT }, (_, i) => (
           <span
             key={i}
-            className={`top-doctors-star ${visible ? 'top-doctors-star-visible' : ''}`}
+            className={`top-doctors-star inline-flex shrink-0 ${visible ? 'top-doctors-star-visible' : ''}`}
             style={visible && !reducedMotion ? { animationDelay: `${i * STAR_STAGGER_MS}ms` } : undefined}
           >
             <StarIcon />
@@ -57,18 +61,18 @@ export function TopDoctorsRating({ url }: { url: string }) {
       </div>
 
       <div
-        className={`top-doctors-copy ${showCopy ? 'top-doctors-copy-visible' : ''}`}
+        className={`top-doctors-copy mx-auto max-w-lg ${showCopy ? 'top-doctors-copy-visible' : ''}`}
         aria-hidden={!showCopy}
       >
-        <p className="mt-4 font-serif text-[clamp(1.15rem,2vw,1.35rem)] leading-snug text-ink">
+        <p className="mt-6 font-serif text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug text-ink">
           Five-star rating on Top Doctors
         </p>
-        <p className="mt-1 text-sm text-ink-soft">40+ patient reviews</p>
+        <p className="mt-2 text-base text-ink-soft">40+ patient reviews</p>
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="arrow-link interactive mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brass-deep hover:underline"
+          className="arrow-link interactive mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brass-deep hover:underline"
           tabIndex={showCopy ? undefined : -1}
         >
           Read them in full
