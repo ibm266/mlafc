@@ -1,83 +1,205 @@
 [
   {
     "id": "pub1",
-    "category": "original",
-    "title": "Single-operator outcomes of catheter ablation for paroxysmal atrial fibrillation: a 15-year consecutive series",
-    "journal": "Europace",
-    "year": "2023",
+    "category": "trial",
+    "title": "Cost, efficiency, and outcomes of pulsed field ablation vs thermal ablation for atrial fibrillation",
+    "journal": "Heart Rhythm",
+    "year": "2024",
     "authors": "Gupta D, et al.",
-    "summary": "Long-term freedom from AF after first ablation in a high-volume UK centre, with a published complication rate below 1%."
+    "summary": "Compares newer pulsed-field ablation with traditional heat-based techniques, showing how technology choice affects procedure time, cost, and patient outcomes.",
+    "url": "https://doi.org/10.1016/j.hrthm.2024.05.032",
+    "featured": true
   },
   {
     "id": "pub2",
-    "category": "original",
-    "title": "Left atrial appendage occlusion in patients with atrial fibrillation and contraindications to anticoagulation",
-    "journal": "Heart",
-    "year": "2022",
+    "category": "review",
+    "title": "Atrial fibrillation and stroke prevention: 25 years of research at EP Europace journal",
+    "journal": "Europace",
+    "year": "2023",
     "authors": "Gupta D, et al.",
-    "summary": "Real-world outcomes from a regional LAAO programme serving 2.8 million people across the North West of England."
+    "summary": "A quarter-century review of how stroke prevention in AF has evolved — from blood thinners to ablation and left atrial appendage closure.",
+    "url": "https://doi.org/10.1093/europace/euad226",
+    "featured": true
   },
   {
     "id": "pub3",
-    "category": "trial",
-    "title": "Pulsed field versus radiofrequency ablation for paroxysmal atrial fibrillation: a multicentre randomised comparison",
-    "journal": "Journal of the American College of Cardiology",
-    "year": "2025",
+    "category": "review",
+    "title": "Contemporary management of persistent atrial fibrillation",
+    "journal": "Heart",
+    "year": "2022",
     "authors": "Gupta D, et al.",
-    "summary": "Head-to-head trial reporting comparable efficacy between PFA and RFA, with operator experience as a key determinant of safety."
+    "summary": "A practical guide to treating persistent AF today — when to ablate, which energy to use, and how to reduce the chance of the rhythm returning.",
+    "url": "https://doi.org/10.1136/heartjnl-2020-317422",
+    "featured": true
   },
   {
     "id": "pub4",
-    "category": "review",
-    "title": "Catheter ablation of atrial fibrillation: where volume, technology and patient selection intersect",
-    "journal": "European Heart Journal",
-    "year": "2024",
-    "authors": "Gupta D",
-    "summary": "Editorial review of how centre and operator volume shape outcomes, regardless of whether heat or pulsed-field energy is used."
+    "category": "original",
+    "title": "Use of Ablation Index-Guided Ablation Results in High Rates of Durable Pulmonary Vein Isolation",
+    "journal": "Circulation: Arrhythmia and Electrophysiology",
+    "year": "2018",
+    "authors": "Gupta D, et al.",
+    "summary": "Shows that measuring lesion quality during ablation leads to more durable vein isolation and fewer repeat procedures for paroxysmal AF.",
+    "url": "https://doi.org/10.1161/circep.118.006576"
   },
   {
     "id": "pub5",
     "category": "original",
-    "title": "Complication rates in high-volume AF ablation centres: a national registry analysis",
-    "journal": "Circulation: Arrhythmia and Electrophysiology",
+    "title": "Predictors of Device-Related Thrombus Following Percutaneous Left Atrial Appendage Occlusion",
+    "journal": "Journal of the American College of Cardiology",
     "year": "2021",
     "authors": "Gupta D, et al.",
-    "summary": "Registry data confirming that procedural volume is the strongest modifiable predictor of major complications in AF ablation."
+    "summary": "Identifies which patients are at higher risk of blood clots forming on LAAO devices, helping doctors time anticoagulation more safely.",
+    "url": "https://doi.org/10.1016/j.jacc.2021.04.098"
   },
   {
     "id": "pub6",
     "category": "guideline",
-    "title": "2024 ESC Guidelines for the management of atrial fibrillation: ablation and stroke prevention",
-    "journal": "European Heart Journal",
-    "year": "2024",
-    "authors": "ESC Task Force (contributor)",
-    "summary": "Updated European consensus on when to ablate, how to select energy modality, and LAAO in patients who cannot take anticoagulants."
+    "title": "How to use digital devices to detect and manage arrhythmias: an EHRA practical guide",
+    "journal": "Europace",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "European expert guidance on using smartwatches and phone apps to spot irregular heart rhythms and decide when further testing is needed.",
+    "url": "https://doi.org/10.1093/europace/euac038"
   },
   {
     "id": "pub7",
-    "category": "original",
-    "title": "Durability of pulmonary vein isolation with contact-force sensing in persistent atrial fibrillation",
-    "journal": "JACC: Clinical Electrophysiology",
-    "year": "2020",
+    "category": "review",
+    "title": "Silent cerebral lesions following catheter ablation for atrial fibrillation: a state-of-the-art review",
+    "journal": "Europace",
+    "year": "2023",
     "authors": "Gupta D, et al.",
-    "summary": "Late reconnection rates and predictors of recurrence after second-generation contact-force ablation in persistent AF."
+    "summary": "Reviews the small brain changes sometimes seen on scans after AF ablation — what they mean, how common they are, and how to minimise risk.",
+    "url": "https://doi.org/10.1093/europace/euad151"
   },
   {
     "id": "pub8",
-    "category": "review",
-    "title": "Stroke prevention beyond anticoagulation: the evolving role of left atrial appendage closure",
-    "journal": "Heart Rhythm",
+    "category": "original",
+    "title": "Persistent and Recurrent Device-Related Thrombus After Left Atrial Appendage Closure",
+    "journal": "JACC: Cardiovascular Interventions",
     "year": "2023",
     "authors": "Gupta D, et al.",
-    "summary": "Narrative review of patient selection, device options and long-term outcomes for LAAO in non-valvular AF."
+    "summary": "Tracks how often clots form on or around LAAO devices over time, and which patients need longer blood-thinning after the procedure.",
+    "url": "https://doi.org/10.1016/j.jcin.2023.09.017"
   },
   {
     "id": "pub9",
-    "category": "trial",
-    "title": "Cryoballoon versus radiofrequency ablation for first-line treatment of paroxysmal AF: five-year follow-up",
-    "journal": "The Lancet",
+    "category": "original",
+    "title": "Outcomes of left atrial appendage occlusion vs. non-vitamin K antagonist oral anticoagulants",
+    "journal": "Clinical Research in Cardiology",
     "year": "2022",
     "authors": "Gupta D, et al.",
-    "summary": "Extended follow-up from a pragmatic trial comparing first-line cryoablation and RF in treatment-naive paroxysmal AF patients."
+    "summary": "Real-world comparison of closing the appendage versus taking newer blood thinners — helping patients who cannot tolerate long-term anticoagulation.",
+    "url": "https://doi.org/10.1007/s00392-021-01983-z"
+  },
+  {
+    "id": "pub10",
+    "category": "original",
+    "title": "Clinical outcomes with very high power very short duration ablation for atrial fibrillation",
+    "journal": "Journal of Cardiovascular Electrophysiology",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Tests a faster ablation technique that delivers high energy in brief bursts — shorter procedure times with safety outcomes reported in detail.",
+    "url": "https://doi.org/10.1111/jce.15679"
+  },
+  {
+    "id": "pub11",
+    "category": "trial",
+    "title": "Catheter ablation vs. thoracoscopic surgical ablation in long-standing persistent atrial fibrillation",
+    "journal": "European Heart Journal",
+    "year": "2020",
+    "authors": "Gupta D, et al.",
+    "summary": "Head-to-head comparison of keyhole surgical ablation versus catheter ablation for the hardest-to-treat persistent AF patients.",
+    "url": "https://doi.org/10.1093/eurheartj/ehaa658"
+  },
+  {
+    "id": "pub12",
+    "category": "review",
+    "title": "Catheter ablation as first-line treatment for paroxysmal atrial fibrillation: a systematic review",
+    "journal": "Heart",
+    "year": "2021",
+    "authors": "Gupta D, et al.",
+    "summary": "Synthesises the evidence for offering ablation early — before years of failed medications — in patients with intermittent AF.",
+    "url": "https://doi.org/10.1136/heartjnl-2021-319496"
+  },
+  {
+    "id": "pub13",
+    "category": "original",
+    "title": "Efficacy of Catheter Ablation for Persistent Atrial Fibrillation",
+    "journal": "Circulation: Arrhythmia and Electrophysiology",
+    "year": "2014",
+    "authors": "Gupta D, et al.",
+    "summary": "Landmark single-centre series showing that even persistent AF can be treated successfully with ablation when done by an experienced operator.",
+    "url": "https://doi.org/10.1161/circep.114.001759"
+  },
+  {
+    "id": "pub14",
+    "category": "original",
+    "title": "Ablation index, a novel marker of ablation lesion quality: prediction of pulmonary vein reconnection",
+    "journal": "Europace",
+    "year": "2016",
+    "authors": "Gupta D, et al.",
+    "summary": "Introduces the Ablation Index — a measure of lesion quality that predicts whether veins stay isolated, reducing the need for repeat procedures.",
+    "url": "https://doi.org/10.1093/europace/euw105"
+  },
+  {
+    "id": "pub15",
+    "category": "review",
+    "title": "Improvement in hard outcomes following catheter ablation for atrial fibrillation: the debate is far from over",
+    "journal": "Europace",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Examines whether ablation genuinely reduces stroke and heart failure — not just symptom relief — and where the evidence still has gaps.",
+    "url": "https://doi.org/10.1093/europace/euab223"
+  },
+  {
+    "id": "pub16",
+    "category": "original",
+    "title": "Impact of early ablation of atrial fibrillation on long-term outcomes",
+    "journal": "Clinical Research in Cardiology",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Follows patients over years to show that treating AF sooner — rather than waiting — is linked to better long-term heart health.",
+    "url": "https://doi.org/10.1007/s00392-022-02022-1"
+  },
+  {
+    "id": "pub17",
+    "category": "original",
+    "title": "Quality of life and healthcare utilisation improvements after atrial fibrillation ablation",
+    "journal": "Heart",
+    "year": "2021",
+    "authors": "Gupta D, et al.",
+    "summary": "Documents how successful ablation improves day-to-day wellbeing and reduces hospital visits — outcomes patients care about most.",
+    "url": "https://doi.org/10.1136/heartjnl-2020-318676"
+  },
+  {
+    "id": "pub18",
+    "category": "original",
+    "title": "Left Atrial Function Predicts Atrial Arrhythmia Recurrence Following Ablation of Long-Standing Persistent AF",
+    "journal": "Circulation: Cardiovascular Imaging",
+    "year": "2023",
+    "authors": "Gupta D, et al.",
+    "summary": "Uses heart imaging to predict which persistent-AF patients are most likely to stay in normal rhythm after ablation.",
+    "url": "https://doi.org/10.1161/circimaging.123.015352"
+  },
+  {
+    "id": "pub19",
+    "category": "original",
+    "title": "Incidence and predictors of stroke and silent cerebral embolism following very high-power short-duration ablation",
+    "journal": "Europace",
+    "year": "2023",
+    "authors": "Gupta D, et al.",
+    "summary": "Reports stroke and silent brain-embolism rates after fast high-power ablation, identifying patient factors that raise or lower risk.",
+    "url": "https://doi.org/10.1093/europace/euad327"
+  },
+  {
+    "id": "pub20",
+    "category": "original",
+    "title": "Cryoballoon Pulmonary Vein Isolation as First-Line Treatment for Typical Atrial Flutter",
+    "journal": "Heart",
+    "year": "2023",
+    "authors": "Gupta D, et al.",
+    "summary": "Shows that freezing the pulmonary veins can treat atrial flutter as a first option — a less invasive alternative to conventional ablation.",
+    "url": "https://doi.org/10.1136/heartjnl-2022-321729"
   }
 ]

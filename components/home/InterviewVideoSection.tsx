@@ -13,7 +13,7 @@ export function InterviewVideoSection({ interview }: Props) {
   const hasUrl = Boolean(interview.url);
 
   return (
-    <Reveal delay={180} className="mt-10 max-w-3xl border-t border-line pt-10">
+    <Reveal delay={180} className="mx-auto mt-10 max-w-3xl border-t border-line pt-10">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brass-deep">Watch video interview</p>
       <p className="mt-2 max-w-2xl font-serif text-xl leading-snug text-ink">{interview.title}</p>
 

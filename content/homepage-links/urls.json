@@ -127,29 +127,32 @@
     {
       "section": "05 · Research",
       "id": "pub1",
-      "title": "Single-operator outcomes of catheter ablation for paroxysmal atrial fibrillation: a 15-year consecutive series",
+      "title": "Cost, efficiency, and outcomes of pulsed field ablation vs thermal ablation for atrial fibrillation",
+      "journal": "Heart Rhythm",
+      "year": "2024",
+      "targetFile": "data/publications.json",
+      "featured": true,
+      "url": "https://doi.org/10.1016/j.hrthm.2024.05.032"
+    },
+    {
+      "section": "05 · Research",
+      "id": "pub2",
+      "title": "Atrial fibrillation and stroke prevention: 25 years of research at EP Europace journal",
       "journal": "Europace",
       "year": "2023",
       "targetFile": "data/publications.json",
-      "url": ""
+      "featured": true,
+      "url": "https://doi.org/10.1093/europace/euad226"
     },
     {
       "section": "05 · Research",
       "id": "pub3",
-      "title": "Pulsed field versus radiofrequency ablation for paroxysmal atrial fibrillation: a multicentre randomised comparison",
-      "journal": "Journal of the American College of Cardiology",
-      "year": "2025",
+      "title": "Contemporary management of persistent atrial fibrillation",
+      "journal": "Heart",
+      "year": "2022",
       "targetFile": "data/publications.json",
-      "url": ""
-    },
-    {
-      "section": "05 · Research",
-      "id": "pub4",
-      "title": "Catheter ablation of atrial fibrillation: where volume, technology and patient selection intersect",
-      "journal": "European Heart Journal",
-      "year": "2024",
-      "targetFile": "data/publications.json",
-      "url": ""
+      "featured": true,
+      "url": "https://doi.org/10.1136/heartjnl-2020-317422"
     }
   ],
   "contact": {

@@ -8,7 +8,7 @@ Outbound URLs used on the homepage. Fill in any remaining `url` fields in **`url
 |-------------|-----------|
 | `interview.url` | `data/links.json` → `interview.url` |
 | `profiles[]` | `data/links.json` → `profiles` (match by `label`) |
-| `publicationTeasers[]` | `data/publications.json` (match by `id`) |
+| `publicationTeasers[]` | `data/publications.json` (entries with `featured: true` show on homepage) |
 | `contact` | `data/site.ts` |
 
 Once a URL is set in the data file, the dashed **link needed** flags on the live site disappear automatically.
@@ -19,7 +19,7 @@ Once a URL is set in the data file, the dashed **link needed** flags on the live
 - **Interview video** — Lilavati Hospital YouTube embed (`interview`)
 
 ### 05 · Research
-- **Publication teasers** — `pub1`, `pub3`, `pub4` show “Read paper ↗” when `url` is set
+- **Publication teasers** — entries with `featured: true` in `data/publications.json` (currently three)
 
 ### 07 · In their words
 - **Verify independently** — featured profile pills: GMC Register, MMC Register, Top Doctors

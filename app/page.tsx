@@ -45,9 +45,7 @@ export default function Home() {
     .map((id) => testimonials.find((t) => t.id === id))
     .filter(Boolean) as Testimonial[];
 
-  const publicationTeasers = ['pub1', 'pub3', 'pub4']
-    .map((id) => publications.find((p) => p.id === id))
-    .filter(Boolean) as Publication[];
+  const publicationTeasers = publications.filter((p) => p.featured);
 
   return (
     <main id="main">

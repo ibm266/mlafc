@@ -8,7 +8,8 @@ import { PageHeader } from '@/components/PageHeader';
 import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
-import { PublicationsList } from '@/components/PublicationsList';
+import { HorizontalCardGallery } from '@/components/HorizontalCardGallery';
+import { PublicationCard } from '@/components/PublicationCard';
 import { citations } from '@/data/citations';
 import { faqs } from '@/data/faqs';
 import publicationsJson from '@/data/publications.json';
@@ -136,7 +137,7 @@ export default function EvidencePage() {
       </section>
 
       <section id="publications" aria-labelledby="publications-heading" className="border-t border-line bg-paper-soft">
-        <div className="mx-auto max-w-3xl px-5 py-20 md:max-w-[768px]">
+        <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <ChapterEyebrow label="Selected publications" />
           </Reveal>
@@ -144,15 +145,30 @@ export default function EvidencePage() {
             <h2 id="publications-heading" className="mt-3 font-serif text-3xl md:text-4xl">
               The work behind the numbers.
             </h2>
-            <p className="mt-4 text-ink-soft">
+            <p className="mt-4 max-w-xl text-ink-soft">
               Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the
               standard of care.
             </p>
           </Reveal>
-          <PublicationsList publications={publications} />
+          <HorizontalCardGallery
+            ariaLabel="Selected publications"
+            children={publications.map((p) => (
+              <div key={p.id} className="h-full">
+                <PublicationCard p={p} />
+              </div>
+            ))}
+          />
           <Reveal>
             <p className="mt-7 text-sm text-ink-mute">
-              Nine of more than 350 peer-reviewed publications, cited over 13,000 times.
+              Twenty curated highlights from more than 350 peer-reviewed publications, cited over 13,000 times.{' '}
+              <a
+                href="https://orcid.org/0000-0002-3490-090X"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-brass-deep hover:underline"
+              >
+                View full list on ORCID &rarr;
+              </a>
             </p>
           </Reveal>
         </div>

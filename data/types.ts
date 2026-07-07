@@ -83,6 +83,7 @@ export type Publication = {
   authors: string;
   summary: string;
   url?: string;
+  featured?: boolean;
 };
 
 export type Condition = {

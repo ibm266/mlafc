@@ -1,32 +1,31 @@
 import { render, screen } from '@testing-library/react';
-import { PublicationsList } from '@/components/PublicationsList';
 import { PublicationCard } from '@/components/PublicationCard';
 import publications from '@/data/publications.json';
 import type { Publication } from '@/data/types';
 import { MockIntersectionObserver, mockReducedMotion } from './mocks';
+
+const pubs = publications as Publication[];
 
 beforeEach(() => {
   MockIntersectionObserver.install();
   mockReducedMotion(true);
 });
 
-test('PublicationsList renders all nine publications', () => {
-  render(<PublicationsList publications={publications as Publication[]} />);
-  expect(screen.getAllByRole('listitem')).toHaveLength(9);
-  expect(screen.getByText(/Pulsed field versus radiofrequency ablation/i)).toBeInTheDocument();
-});
-
-test('PublicationCard shows placeholder when no url is set', () => {
-  render(<PublicationCard p={(publications as Publication[])[0]} />);
-  expect(screen.getByText(/paper link coming soon/i)).toBeInTheDocument();
-  expect(screen.getByText(/Europace/)).toBeInTheDocument();
+test('publications dataset has twenty curated entries', () => {
+  expect(pubs).toHaveLength(20);
+  expect(pubs.filter((p) => p.featured)).toHaveLength(3);
 });
 
 test('PublicationCard links out when url is provided', () => {
-  const withUrl: Publication = {
-    ...(publications as Publication[])[0],
-    url: 'https://example.com/paper',
-  };
-  render(<PublicationCard p={withUrl} />);
-  expect(screen.getByRole('link', { name: /read paper/i })).toHaveAttribute('href', 'https://example.com/paper');
+  render(<PublicationCard p={pubs[0]} />);
+  expect(screen.getByRole('link', { name: /read paper/i })).toHaveAttribute(
+    'href',
+    'https://doi.org/10.1016/j.hrthm.2024.05.032',
+  );
+  expect(screen.getByText(/Heart Rhythm/)).toBeInTheDocument();
+});
+
+test('PublicationCard shows lay summary', () => {
+  render(<PublicationCard p={pubs[1]} />);
+  expect(screen.getByText(/quarter-century review of how stroke prevention/i)).toBeInTheDocument();
 });
