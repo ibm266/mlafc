@@ -209,12 +209,16 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       const fitIndia = () => {
         if (cancelled) return;
         syncMapSize(store);
-        const indiaLocs = locations.filter((l) => l.region === 'India');
-        const bounds = L.latLngBounds(indiaLocs.map((l) => [l.lat, l.lng]));
-        map.flyToBounds(bounds.pad(0.35), { padding: [20, 20], maxZoom: 6.5, duration: 0.9 });
+        let bounds = store.countries ? countryBounds('India', store.countries, L) : null;
+        if (!bounds || !bounds.isValid()) {
+          const indiaLocs = locations.filter((l) => l.region === 'India');
+          bounds = L.latLngBounds(indiaLocs.map((l) => [l.lat, l.lng])).pad(0.35);
+        }
+        if (bounds.isValid()) {
+          map.flyToBounds(bounds, { padding: [20, 20], maxZoom: 6.5, duration: 0.9 });
+        }
       };
 
-      requestAnimationFrame(fitIndia);
       setActiveId(defaultIndiaId);
       styleMarkers(defaultIndiaId);
 
