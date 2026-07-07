@@ -7,9 +7,15 @@
       "url": "https://www.gmc-uk.org/registrants/5205561"
     },
     {
+      "label": "MMC Register",
+      "sublabel": "Maharashtra Medical Council",
+      "featured": true,
+      "url": "https://maharashtramedicalcouncil.org.in/doctors/b3ceb0c0-3bda-4ed6-98a0-5776047e5dd3"
+    },
+    {
       "label": "Liverpool Heart and Chest Hospital",
       "sublabel": "Consultant profile",
-      "featured": true,
+      "featured": false,
       "url": "https://www.lhch.nhs.uk/staff/consultants/35"
     },
     {

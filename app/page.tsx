@@ -13,6 +13,7 @@ import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { FloatingBookingPill } from '@/components/FloatingBookingPill';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
+import { HorizontalCardGallery } from '@/components/HorizontalCardGallery';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import publicationsJson from '@/data/publications.json';
@@ -130,13 +131,14 @@ export default function Home() {
               standard.
             </p>
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {publicationTeasers.map((p, i) => (
-              <Reveal key={p.id} delay={i * 90} className="card-lift">
+          <HorizontalCardGallery
+            ariaLabel="Published evidence highlights"
+            children={publicationTeasers.map((p) => (
+              <div key={p.id} className="card-lift h-full">
                 <PublicationCard p={p} />
-              </Reveal>
+              </div>
             ))}
-          </div>
+          />
           <Reveal delay={200}>
             <Link href="/evidence#publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Browse all publications &rarr;
@@ -186,13 +188,14 @@ export default function Home() {
               </blockquote>
             </Reveal>
           ) : null}
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {patientPeer.map((t, i) => (
-              <Reveal key={t.id} delay={i * 90} className="card-lift">
+          <HorizontalCardGallery
+            ariaLabel="Patient and peer testimonials"
+            children={patientPeer.map((t) => (
+              <div key={t.id} className="card-lift h-full">
                 <TestimonialCard t={t} />
-              </Reveal>
+              </div>
             ))}
-          </div>
+          />
           <VerifyIndependentlyStrip profiles={links.profiles} />
           <Reveal delay={200}>
             <Link href="/testimonials" className="arrow-link interactive mt-7 inline-block font-semibold text-brass-deep hover:underline">

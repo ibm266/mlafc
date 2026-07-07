@@ -2,6 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EcgHeroMonitor } from '@/components/ecg/EcgHeroMonitor';
 import { Reveal } from '@/components/Reveal';
+import linksJson from '@/data/links.json';
+import type { SiteLinks } from '@/data/types';
+
+const links = linksJson as SiteLinks;
+
+const gmcUrl = links.profiles.find((p) => p.label === 'GMC Register')?.url;
+const mmcUrl = links.profiles.find((p) => p.label === 'MMC Register')?.url;
 
 export function Hero() {
   return (
@@ -42,8 +49,34 @@ export function Hero() {
           </Reveal>
           <Reveal delay={680}>
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-line-dark/50 pt-6 text-sm text-paper/80">
-              <li>GMC registered</li>
-              <li>Liverpool Heart and Chest Hospital</li>
+              {gmcUrl ? (
+                <li>
+                  <a
+                    href={gmcUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="interactive hover:text-brass"
+                  >
+                    GMC registered (Specialist Register) ↗
+                  </a>
+                </li>
+              ) : (
+                <li>GMC registered (Specialist Register)</li>
+              )}
+              {mmcUrl ? (
+                <li>
+                  <a
+                    href={mmcUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="interactive hover:text-brass"
+                  >
+                    MMC registered ↗
+                  </a>
+                </li>
+              ) : (
+                <li>MMC registered</li>
+              )}
               <li>English · Hindi · Punjabi</li>
             </ul>
           </Reveal>

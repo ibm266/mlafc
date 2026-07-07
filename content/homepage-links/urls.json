@@ -14,16 +14,25 @@
       "label": "GMC Register",
       "sublabel": "General Medical Council",
       "featured": true,
-      "showsOnHomepage": "Verify independently strip + footer",
+      "showsOnHomepage": "Hero trust line + verify strip + footer",
       "targetFile": "data/links.json",
       "url": "https://www.gmc-uk.org/registrants/5205561"
     },
     {
       "section": "07 · In their words + footer",
+      "label": "MMC Register",
+      "sublabel": "Maharashtra Medical Council",
+      "featured": true,
+      "showsOnHomepage": "Hero trust line + verify strip + footer",
+      "targetFile": "data/links.json",
+      "url": "https://maharashtramedicalcouncil.org.in/doctors/b3ceb0c0-3bda-4ed6-98a0-5776047e5dd3"
+    },
+    {
+      "section": "Footer only",
       "label": "Liverpool Heart and Chest Hospital",
       "sublabel": "Consultant profile",
-      "featured": true,
-      "showsOnHomepage": "Verify independently strip + footer",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
       "url": "https://www.lhch.nhs.uk/staff/consultants/35"
     },

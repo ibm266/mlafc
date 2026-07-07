@@ -1,14 +1,26 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReveal } from '@/lib/useReveal';
 import { OPERATOR_CONVERSION_TRACE } from '@/lib/ecg/design-paths';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { Reveal } from '@/components/Reveal';
 
+const DESKTOP_VIEWBOX = '0 0 1400 180';
+const MOBILE_VIEWBOX = '420 0 560 180';
+
 export function OperatorTrace() {
   const traceRef = useRef<SVGPathElement>(null);
   const { ref, visible } = useReveal<HTMLDivElement>();
+  const [mobileCrop, setMobileCrop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const update = () => setMobileCrop(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     const trace = traceRef.current;
@@ -46,6 +58,10 @@ export function OperatorTrace() {
     return () => cancelAnimationFrame(raf);
   }, [visible]);
 
+  const afLabelX = mobileCrop ? 430 : 4;
+  const steadyLabelX = mobileCrop ? 970 : 1396;
+  const steadyAnchor = mobileCrop ? 'middle' : 'end';
+
   return (
     <section aria-labelledby="constant-heading" className="overflow-hidden bg-paper">
       <div className="mx-auto max-w-6xl px-5 pt-20 text-center">
@@ -62,60 +78,61 @@ export function OperatorTrace() {
         </Reveal>
       </div>
       <Reveal delay={160}>
-        <div ref={ref} className="mx-auto mt-9 max-w-[1400px] px-5">
-        <svg
-          viewBox="0 0 1400 180"
-          role="img"
-          aria-label="An ECG trace beginning in chaotic atrial fibrillation, passing through a point marked the operator, and continuing as a steady sinus rhythm."
-          className="block h-auto w-full"
-        >
-          <text
-            x="4"
-            y="30"
-            fill="#556675"
-            fontSize="12"
-            fontWeight="600"
-            letterSpacing="0.16em"
-            className="font-sans"
+        <div ref={ref} className="mx-auto mt-9 max-w-3xl px-5 md:max-w-[1400px]">
+          <svg
+            viewBox={mobileCrop ? MOBILE_VIEWBOX : DESKTOP_VIEWBOX}
+            role="img"
+            aria-label="An ECG trace beginning in chaotic atrial fibrillation, passing through a point marked the operator, and continuing as a steady sinus rhythm."
+            className="block h-auto w-full"
+            preserveAspectRatio="xMidYMid meet"
           >
-            ATRIAL FIBRILLATION
-          </text>
-          <text
-            x="1396"
-            y="30"
-            textAnchor="end"
-            fill="#556675"
-            fontSize="12"
-            fontWeight="600"
-            letterSpacing="0.16em"
-            className="font-sans"
-          >
-            STEADY RHYTHM
-          </text>
-          <path
-            ref={traceRef}
-            d={OPERATOR_CONVERSION_TRACE}
-            fill="none"
-            stroke="#122B3A"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle className="halo" cx="700" cy="90" r="17" fill="#B08D3E" />
-          <circle cx="700" cy="90" r="6" fill="#B08D3E" />
-          <text
-            x="700"
-            y="140"
-            textAnchor="middle"
-            fill="#6E5826"
-            fontSize="12"
-            fontWeight="600"
-            letterSpacing="0.18em"
-            className="font-sans"
-          >
-            THE OPERATOR
-          </text>
-        </svg>
+            <text
+              x={afLabelX}
+              y="30"
+              fill="#556675"
+              fontSize="12"
+              fontWeight="600"
+              letterSpacing="0.16em"
+              className="font-sans"
+            >
+              ATRIAL FIBRILLATION
+            </text>
+            <text
+              x={steadyLabelX}
+              y="30"
+              textAnchor={steadyAnchor}
+              fill="#556675"
+              fontSize="12"
+              fontWeight="600"
+              letterSpacing="0.16em"
+              className="font-sans"
+            >
+              STEADY RHYTHM
+            </text>
+            <path
+              ref={traceRef}
+              d={OPERATOR_CONVERSION_TRACE}
+              fill="none"
+              stroke="#122B3A"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle className="halo" cx="700" cy="90" r="17" fill="#B08D3E" />
+            <circle cx="700" cy="90" r="6" fill="#B08D3E" />
+            <text
+              x="700"
+              y="140"
+              textAnchor="middle"
+              fill="#6E5826"
+              fontSize="12"
+              fontWeight="600"
+              letterSpacing="0.18em"
+              className="font-sans"
+            >
+              THE OPERATOR
+            </text>
+          </svg>
         </div>
       </Reveal>
       <Reveal delay={220}>

@@ -22,7 +22,7 @@ Once a URL is set in the data file, the dashed **link needed** flags on the live
 - **Publication teasers** — `pub1`, `pub3`, `pub4` show “Read paper ↗” when `url` is set
 
 ### 07 · In their words
-- **Verify independently** — featured profile pills: GMC Register, Liverpool Heart and Chest Hospital, Top Doctors
+- **Verify independently** — featured profile pills: GMC Register, MMC Register, Top Doctors
 
 ### Sitewide (footer on homepage)
 - **Verify his record** — all profile pills in the footer row
@@ -37,7 +37,8 @@ Internal navigation links (`/book`, `/evidence`, `/conditions`, etc.) are alread
 | Label | URL |
 |-------|-----|
 | GMC Register | gmc-uk.org/registrants/5205561 |
-| Liverpool Heart and Chest Hospital | lhch.nhs.uk staff profile |
+| MMC Register | maharashtramedicalcouncil.org.in doctor profile |
+| Liverpool Heart and Chest Hospital | lhch.nhs.uk staff profile (footer only) |
 | University of Liverpool | Honorary clinical academics page |
 | Top Doctors | topdoctors.co.uk profile |
 | PHIN | phin.org.uk consultant profile |
