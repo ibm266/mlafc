@@ -129,14 +129,13 @@ export default function Home() {
               standard.
             </p>
           </Reveal>
-          <HorizontalCardGallery
-            ariaLabel="Published evidence highlights"
-            children={publicationTeasers.map((p) => (
+          <HorizontalCardGallery ariaLabel="Published evidence highlights">
+            {publicationTeasers.map((p) => (
               <div key={p.id} className="card-lift h-full">
                 <PublicationCard p={p} />
               </div>
             ))}
-          />
+          </HorizontalCardGallery>
           <Reveal delay={200}>
             <Link href="/evidence#publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               Browse all publications &rarr;
@@ -186,14 +185,13 @@ export default function Home() {
               </blockquote>
             </Reveal>
           ) : null}
-          <HorizontalCardGallery
-            ariaLabel="Patient and peer testimonials"
-            children={patientPeer.map((t) => (
+          <HorizontalCardGallery ariaLabel="Patient and peer testimonials">
+            {patientPeer.map((t) => (
               <div key={t.id} className="card-lift h-full">
                 <TestimonialCard t={t} />
               </div>
             ))}
-          />
+          </HorizontalCardGallery>
           <VerifyIndependentlyStrip profiles={links.profiles} />
           <Reveal delay={200}>
             <Link href="/testimonials" className="arrow-link interactive mt-7 inline-block font-semibold text-brass-deep hover:underline">

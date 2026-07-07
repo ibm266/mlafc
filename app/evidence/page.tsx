@@ -150,14 +150,13 @@ export default function EvidencePage() {
               standard of care.
             </p>
           </Reveal>
-          <HorizontalCardGallery
-            ariaLabel="Selected publications"
-            children={publications.map((p) => (
+          <HorizontalCardGallery ariaLabel="Selected publications">
+            {publications.map((p) => (
               <div key={p.id} className="h-full">
                 <PublicationCard p={p} />
               </div>
             ))}
-          />
+          </HorizontalCardGallery>
           <Reveal>
             <p className="mt-7 text-sm text-ink-mute">
               Twenty curated highlights from more than 350 peer-reviewed publications, cited over 13,000 times.{' '}
