@@ -28,7 +28,7 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-export function HorizontalCardGallery({ ariaLabel, children, className = '', itemsPerPage = 1 }: Props) {
+export function HorizontalCardGallery({ ariaLabel, children, className = 'mt-10', itemsPerPage = 1 }: Props) {
   const slides = Children.toArray(children);
   const count = slides.length;
   const pageCount = Math.max(1, Math.ceil(count / itemsPerPage));
@@ -130,12 +130,12 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
   const canGoNext = activePage < pageCount - 1;
 
   return (
-    <div className={className ?? 'mt-10'}>
+    <div className={className}>
       <div
         ref={scrollRef}
         role="region"
         aria-label={ariaLabel}
-        className="flex gap-5 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0"
+        className="flex gap-5 overflow-x-auto overscroll-x-contain -mt-2 pt-2 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-[calc(50vw-min(42.5vw,11rem))] sm:px-[calc(50vw-min(39vw,12rem))] md:mx-0 md:px-0"
       >
         {slides.map((child, i) => (
           <div

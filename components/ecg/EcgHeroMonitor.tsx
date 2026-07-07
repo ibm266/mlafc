@@ -47,25 +47,27 @@ export function EcgHeroMonitor() {
           <line x1={cx} y1={cy - 6} x2={cx} y2={cy + 6} />
         </g>
       ))}
-      <path
-        d={HERO_MONITOR_TRACE}
-        fill="none"
-        stroke="#B08D3E"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.18"
-      />
-      <g mask="url(#hp-sweep-mask)">
+      <g className="ecg-hero-trace">
         <path
           d={HERO_MONITOR_TRACE}
           fill="none"
-          stroke="#D8B15A"
-          strokeWidth="2.5"
+          stroke="#B08D3E"
+          strokeWidth="1.75"
           strokeLinecap="round"
           strokeLinejoin="round"
-          filter="url(#hp-glow)"
+          opacity="0.18"
         />
+        <g mask="url(#hp-sweep-mask)">
+          <path
+            d={HERO_MONITOR_TRACE}
+            fill="none"
+            stroke="#D8B15A"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#hp-glow)"
+          />
+        </g>
       </g>
       <rect width="1440" height="720" fill="url(#hp-vig)" />
     </svg>

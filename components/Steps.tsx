@@ -28,6 +28,54 @@ function StepCard({ step }: { step: (typeof STEPS)[number] }) {
   );
 }
 
+/** Mobile gallery card: numbered, with an ECG-style arrow pointing to the next step. */
+function GalleryStepCard({ step, index }: { step: (typeof STEPS)[number]; index: number }) {
+  const isLast = index === STEPS.length - 1;
+
+  return (
+    <div className="card-lift flex h-full flex-col rounded-lg border border-line bg-paper p-5">
+      <div className="flex items-center justify-between">
+        <span aria-hidden className="font-serif text-2xl leading-none text-brass">
+          0{index + 1}
+        </span>
+        {isLast ? (
+          <span aria-hidden className="mr-1 inline-block h-2 w-2 rounded-full bg-brass" />
+        ) : (
+          <svg viewBox="0 0 48 12" className="h-3 w-12 text-brass" fill="none" aria-hidden>
+            <circle cx="3" cy="6" r="2" fill="currentColor" className="opacity-75" />
+            <path d="M8 6 H30" stroke="#D9D3C7" strokeWidth="1" strokeLinecap="round" />
+            <path d="M30 6 H38" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
+            <path
+              d="M34 2.5 L41 6 L34 9.5"
+              stroke="currentColor"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+      </div>
+      <h3 className="mt-3 text-sm font-semibold text-brass-deep">{step.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
+    </div>
+  );
+}
+
+function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d={direction === 'left' ? 'M10 3 L5 8 L10 13' : 'M6 3 L11 8 L6 13'}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function StepArrow({ compact = false }: { compact?: boolean }) {
   return (
     <div
@@ -132,32 +180,51 @@ function MobileStepsGallery() {
         ref={scrollRef}
         role="region"
         aria-label="How the Mumbai clinic works"
-        className="flex items-stretch gap-0 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5"
+        className="flex items-stretch gap-3 overflow-x-auto overscroll-x-contain -mt-2 pt-2 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-[calc(50vw-min(42vw,10rem))]"
       >
         {STEPS.map((step, i) => (
-          <Fragment key={step.title}>
-            {i > 0 ? <StepArrow compact /> : null}
-            <div data-step-card={i} className="w-[min(68vw,13.5rem)] shrink-0 snap-center">
-              <StepCard step={step} />
-            </div>
-          </Fragment>
+          <div key={step.title} data-step-card={i} className="w-[min(84vw,20rem)] shrink-0 snap-center">
+            <GalleryStepCard step={step} index={i} />
+          </div>
         ))}
       </div>
 
-      <div className="mt-4 flex justify-center gap-2" role="tablist" aria-label="Clinic steps">
-        {STEPS.map((step, i) => (
-          <button
-            key={step.title}
-            type="button"
-            role="tab"
-            aria-selected={i === activeStep}
-            aria-label={`Step ${i + 1}: ${step.title}`}
-            onClick={() => scrollToStep(i)}
-            className={`h-2 rounded-full transition-all duration-200 ${
-              i === activeStep ? 'w-6 bg-brass' : 'w-2 bg-line hover:bg-brass/50'
-            }`}
-          />
-        ))}
+      <div className="mt-4 flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={() => scrollToStep(activeStep - 1)}
+          disabled={activeStep === 0}
+          aria-label="Previous step"
+          className="interactive flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-ink-soft disabled:pointer-events-none disabled:opacity-35"
+        >
+          <ChevronIcon direction="left" />
+        </button>
+
+        <div className="flex gap-2" role="tablist" aria-label="Clinic steps">
+          {STEPS.map((step, i) => (
+            <button
+              key={step.title}
+              type="button"
+              role="tab"
+              aria-selected={i === activeStep}
+              aria-label={`Step ${i + 1}: ${step.title}`}
+              onClick={() => scrollToStep(i)}
+              className={`h-2 rounded-full transition-all duration-200 ${
+                i === activeStep ? 'w-6 bg-brass' : 'w-2 bg-line hover:bg-brass/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => scrollToStep(activeStep + 1)}
+          disabled={activeStep === STEPS.length - 1}
+          aria-label="Next step"
+          className="interactive flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-ink-soft disabled:pointer-events-none disabled:opacity-35"
+        >
+          <ChevronIcon direction="right" />
+        </button>
       </div>
     </div>
   );

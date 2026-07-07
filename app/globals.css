@@ -125,6 +125,25 @@ body {
 
 .ecg-layer { animation: ecg-fadein 2.4s ease-out both; }
 .ecg-sweep { animation: ecg-sweep-x 5.6s linear infinite; }
+
+/* On mobile the hero is tall and narrow, so the slice-scaled SVG shows only a
+   thin central band of the 1440-unit trace, roughly x 630-810 at 375px wide.
+   Lift the trace above the fold and run the sweep over a shorter range so the
+   beat re-enters the visible strip quickly instead of spending most of the
+   loop off-screen. Units are SVG user units (viewBox 1440x720). */
+@media (max-width: 767px) {
+  .ecg-hero-trace { transform: translateY(-200px); }
+  .ecg-sweep { animation: ecg-sweep-x-mobile 3s linear infinite; }
+}
+
+@keyframes ecg-sweep-x-mobile {
+  0% { transform: translateX(120px); }
+  100% { transform: translateX(760px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecg-sweep { animation: none; }
+}
 .pulse-dot { animation: pulse-dot 2.6s ease-in-out infinite; }
 .op-glow { animation: op-glow 4.5s ease-in-out infinite; }
 .halo { animation: halo 3s ease-in-out infinite; }

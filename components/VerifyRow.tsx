@@ -3,7 +3,7 @@ import type { ProfileLink } from '@/data/types';
 
 function ProfilePill({ profile }: { profile: ProfileLink }) {
   const base =
-    'inline-flex items-center gap-2 rounded-full px-4 py-2 transition-colors duration-200';
+    'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm transition-colors duration-200';
 
   if (profile.url) {
     return (
@@ -11,13 +11,11 @@ function ProfilePill({ profile }: { profile: ProfileLink }) {
         href={profile.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} border border-line-dark bg-paper/5 hover:border-brass`}
+        title={profile.sublabel}
+        className={`${base} border border-line-dark bg-paper/5 text-paper/85 hover:border-brass hover:text-paper`}
       >
-        <span className="text-sm font-semibold text-paper">{profile.label}</span>
-        {profile.sublabel ? (
-          <span className="text-xs text-paper/55">{profile.sublabel}</span>
-        ) : null}
-        <span aria-hidden className="text-brass">
+        {profile.label}
+        <span aria-hidden className="text-xs text-brass">
           ↗
         </span>
       </a>
@@ -25,11 +23,11 @@ function ProfilePill({ profile }: { profile: ProfileLink }) {
   }
 
   return (
-    <span className={`${base} border border-dashed border-brass-deep bg-transparent`}>
-      <span className="text-sm font-semibold text-paper">{profile.label}</span>
-      {profile.sublabel ? (
-        <span className="text-xs text-paper/55">{profile.sublabel}</span>
-      ) : null}
+    <span
+      title={profile.sublabel}
+      className={`${base} border border-dashed border-brass-deep bg-transparent text-paper/85`}
+    >
+      {profile.label}
       <LinkNeededFlag label="add link" />
     </span>
   );
@@ -45,7 +43,7 @@ export function VerifyRow({ profiles }: { profiles: ProfileLink[] }) {
           </h2>
           <p className="text-sm text-paper/50">Independent registers, profiles and reviews.</p>
         </div>
-        <div className="flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2">
           {profiles.map((profile) => (
             <ProfilePill key={profile.label} profile={profile} />
           ))}
