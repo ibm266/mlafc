@@ -12,7 +12,7 @@ function StarIcon() {
     <svg
       viewBox="0 0 20 20"
       aria-hidden="true"
-      className="h-[clamp(3.5rem,16vw,13.75rem)] w-[clamp(3.5rem,16vw,13.75rem)] text-brass"
+      className="h-[clamp(2.5rem,9vw,125px)] w-[clamp(2.5rem,9vw,125px)] text-brass"
     >
       <path
         fill="currentColor"
