@@ -45,24 +45,30 @@ export function ConsultantProfile() {
           <p className="mt-4 max-w-3xl text-ink-soft">
             He has earned national repute in the UK for his expertise in treating atrial fibrillation, and proctors
             cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations
-            available in English, Hindi and Punjabi.
+            are available in English, Hindi and Punjabi. See an introductory video below from Lilavati Hospital in
+            Mumbai.
           </p>
         </Reveal>
 
         <InterviewVideoSection interview={links.interview} />
 
-        <div className="mt-9 grid gap-5 sm:grid-cols-2">
-          {CREDENTIALS.map((c, i) => (
-            <Reveal key={c.n} delay={240 + i * 70} className="border-t border-line pt-5">
-              <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
-              <p className="font-semibold">{c.title}</p>
-              <p className="text-sm text-ink-mute">{c.sub}</p>
-            </Reveal>
-          ))}
+        <div className="mt-14 border-t border-line pt-10">
+          <Reveal delay={260}>
+            <h3 className="font-serif text-2xl text-ink">Awards received</h3>
+          </Reveal>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            {CREDENTIALS.map((c, i) => (
+              <Reveal key={c.n} delay={300 + i * 70} className="border-t border-line pt-5">
+                <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
+                <p className="font-semibold">{c.title}</p>
+                <p className="text-sm text-ink-mute">{c.sub}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         <Reveal delay={520}>
-          <Link href="/journey" className="arrow-link interactive mt-9 inline-block font-semibold text-brass-deep hover:underline">
+          <Link href="/journey" className="arrow-link interactive mt-10 inline-block font-semibold text-brass-deep hover:underline">
             Follow the journey, 1988 to 2026 &rarr;
           </Link>
         </Reveal>

@@ -1,0 +1,239 @@
+{
+  "interview": {
+    "section": "02 · Meet your consultant",
+    "label": "Lilavati Hospital interview (YouTube)",
+    "title": "In conversation with Professor Gupta: everything about heart health with Lilavati Hospital",
+    "targetFile": "data/links.json",
+    "targetPath": "interview.url",
+    "url": "https://www.youtube.com/watch?v=juKnv3sN2wM",
+    "notes": "Already set. Change only if the video moves."
+  },
+  "profiles": [
+    {
+      "section": "07 · In their words + footer",
+      "label": "GMC Register",
+      "sublabel": "General Medical Council",
+      "featured": true,
+      "showsOnHomepage": "Verify independently strip + footer",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "07 · In their words + footer",
+      "label": "Liverpool Heart and Chest Hospital",
+      "sublabel": "Consultant profile",
+      "featured": true,
+      "showsOnHomepage": "Verify independently strip + footer",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "University of Liverpool",
+      "sublabel": "Professor of Cardiology",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "Imperial College London",
+      "sublabel": "Senior Lecturer",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "AF Association",
+      "sublabel": "Medical advisor",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "07 · In their words + footer",
+      "label": "Doctify",
+      "sublabel": "Verified patient reviews",
+      "featured": true,
+      "showsOnHomepage": "Verify independently strip + footer",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "Top Doctors",
+      "sublabel": "Specialist profile",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "LinkedIn",
+      "sublabel": "Professional profile",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "ResearchGate",
+      "sublabel": "Research output",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    },
+    {
+      "section": "Footer only",
+      "label": "ORCID",
+      "sublabel": "Author identifier",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": ""
+    }
+  ],
+  "mapLocations": [
+    {
+      "section": "06 · Where he works",
+      "id": "liverpool",
+      "name": "Liverpool Heart and Chest Hospital",
+      "city": "Liverpool",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "london-imperial",
+      "name": "Imperial College London",
+      "city": "London",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "manchester",
+      "name": "Manchester Royal Infirmary",
+      "city": "Manchester",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "leeds",
+      "name": "Leeds General Infirmary",
+      "city": "Leeds",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "birmingham",
+      "name": "Queen Elizabeth Hospital Birmingham",
+      "city": "Birmingham",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "brugge",
+      "name": "AZ Sint-Jan, Brugge",
+      "city": "Brugge",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "bordeaux",
+      "name": "Hopital Cardiologique Haut-Leveque, Bordeaux",
+      "city": "Bordeaux",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "prague",
+      "name": "IKEM, Prague",
+      "city": "Prague",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "hamburg",
+      "name": "Asklepios Klinik St. Georg, Hamburg",
+      "city": "Hamburg",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "boston",
+      "name": "Massachusetts General Hospital, Boston",
+      "city": "Boston",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "austin",
+      "name": "Texas Cardiac Arrhythmia Institute, Austin",
+      "city": "Austin",
+      "targetFile": "data/locations.json",
+      "url": ""
+    },
+    {
+      "section": "06 · Where he works",
+      "id": "mumbai",
+      "name": "Mumbai London AF Clinic, Mumbai",
+      "city": "Mumbai",
+      "targetFile": "data/locations.json",
+      "url": ""
+    }
+  ],
+  "publicationTeasers": [
+    {
+      "section": "05 · Research",
+      "id": "pub1",
+      "title": "Single-operator outcomes of catheter ablation for paroxysmal atrial fibrillation: a 15-year consecutive series",
+      "journal": "Europace",
+      "year": "2023",
+      "targetFile": "data/publications.json",
+      "url": ""
+    },
+    {
+      "section": "05 · Research",
+      "id": "pub3",
+      "title": "Pulsed field versus radiofrequency ablation for paroxysmal atrial fibrillation: a multicentre randomised comparison",
+      "journal": "Journal of the American College of Cardiology",
+      "year": "2025",
+      "targetFile": "data/publications.json",
+      "url": ""
+    },
+    {
+      "section": "05 · Research",
+      "id": "pub4",
+      "title": "Catheter ablation of atrial fibrillation: where volume, technology and patient selection intersect",
+      "journal": "European Heart Journal",
+      "year": "2024",
+      "targetFile": "data/publications.json",
+      "url": ""
+    }
+  ],
+  "contact": {
+    "section": "Footer + WhatsApp button",
+    "targetFile": "data/site.ts",
+    "phone": "",
+    "email": "",
+    "whatsappNumber": "",
+    "whatsappHref": "",
+    "notes": "whatsappHref is usually https://wa.me/<number without + or spaces>. Also update gmcLine GMC number placeholder when known."
+  }
+}
