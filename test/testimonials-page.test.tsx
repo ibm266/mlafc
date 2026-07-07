@@ -13,6 +13,7 @@ test('Voices page renders hospital letter, patients, peers, and press', () => {
   expect(screen.getByText(/It was a landmark day in our catheterization lab/)).toBeInTheDocument();
   expect(screen.getByText(/The people he has treated/i)).toBeInTheDocument();
   expect(screen.getByText(/The doctors who refer to him/i)).toBeInTheDocument();
-  expect(screen.getByText(/Covered across India, March 2025/i)).toBeInTheDocument();
+  expect(screen.getByText(/Covered across India/i)).toBeInTheDocument();
+  expect(screen.getByText(/Health Dialogues/)).toBeInTheDocument();
   expect(screen.getByText(/The Indian Express/)).toBeInTheDocument();
 });

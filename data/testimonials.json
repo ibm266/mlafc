@@ -252,40 +252,60 @@
   {
     "id": "news1",
     "category": "news",
-    "masthead": "The Indian Express",
-    "date": "27 March",
-    "headline": "Global heart rhythm expert conducts free training at PGIMER",
-    "quote": "I am using the opportunity to perform complex cases in five cities and train local cardiologists in these procedures.",
+    "masthead": "Health Dialogues",
+    "date": "4 April 2026",
+    "headline": "UK Heart Rhythm Expert Performs Advanced Procedures in India",
+    "quote": "I have developed a low-cost single catheter ablation technique, thereby allowing this treatment to reach more patients. I am performing ablation procedures and using the opportunity to train local cardiologists in this technique.",
     "attribution": "Prof. Gupta",
-    "detail": "quoted in The Indian Express"
+    "detail": "quoted in Health Dialogues"
   },
   {
     "id": "news2",
     "category": "news",
-    "masthead": "The Tribune",
-    "date": "26 March",
-    "headline": "UK cardiologist kicks off India tour from PGIMER",
-    "quote": "Performing the costly procedures without taking \"a single paisa\" from patients or hospitals - even bearing his own travel expenses.",
-    "attribution": "The Tribune",
-    "detail": "Reporting in The Tribune"
+    "masthead": "The Hawk",
+    "date": "3 April 2026",
+    "headline": "UK heart rhythm expert now performing procedures in India",
+    "quote": "Performing complex atrial fibrillation procedures on tour across India while training local cardiologists during live cases.",
+    "attribution": "The Hawk",
+    "detail": "Reporting in The Hawk"
   },
   {
     "id": "news3",
     "category": "news",
-    "masthead": "The Pioneer",
+    "masthead": "The Tribune",
     "date": "March 2025",
-    "headline": "UK Heart Rhythm Expert Begins India Tour from Chd",
-    "quote": "A philanthropist and proud alumnus of PGIMER Chandigarh and AIIMS New Delhi… reflecting his commitment to expanding access to advanced cardiac care.",
-    "attribution": "The Pioneer",
-    "detail": "Reporting in The Pioneer"
+    "headline": "UK cardiologist kicks off India tour from PGIMER in Chandigarh",
+    "quote": "Performing the costly procedures without taking \"a single paisa\" from patients or hospitals, even bearing his own travel expenses. His focus was on skill transfer, not just surgery.",
+    "attribution": "The Tribune",
+    "detail": "Reporting in The Tribune"
   },
   {
     "id": "news4",
     "category": "news",
+    "masthead": "The Indian Express",
+    "date": "27 March 2025",
+    "headline": "Global heart rhythm expert conducts free training at PGIMER",
+    "quote": "I am using the opportunity to perform complex cases in five cities and train local cardiologists in these procedures. As a proud alumnus of PGIMER Chandigarh and AIIMS New Delhi, I have retained strong professional and personal links with India.",
+    "attribution": "Prof. Gupta",
+    "detail": "quoted in The Indian Express"
+  },
+  {
+    "id": "news5",
+    "category": "news",
+    "masthead": "The Pioneer",
+    "date": "March 2025",
+    "headline": "UK Heart Rhythm Expert Begins India Tour from Chd, Offers Free Advanced Cardiac Procedures",
+    "quote": "Conducting the procedures without charging patients or hospitals and personally bearing his travel expenses, reflecting his commitment to expanding access to advanced cardiac care. The Chandigarh leg focuses on proctoring local cardiologists, ensuring hands-on training rather than just treatment.",
+    "attribution": "The Pioneer",
+    "detail": "Reporting in The Pioneer"
+  },
+  {
+    "id": "news6",
+    "category": "news",
     "masthead": "Punjab Kesari",
     "date": "March 2025",
     "headline": "Global heart expert to give free treatment, train doctors across India",
-    "quote": "As a proud alumnus of PGIMER Chandigarh and AIIMS New Delhi, I have retained strong professional and personal links with India.",
+    "quote": "The purpose of this initiative is to ensure that advanced treatment reaches as many people as possible and to enhance the capabilities of local doctors. Performing these procedures without charging patients or hospitals, and bearing his own travel expenses.",
     "attribution": "Prof. Gupta",
     "detail": "quoted in Punjab Kesari"
   }

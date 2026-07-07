@@ -1,12 +1,12 @@
 import testimonials from '@/data/testimonials.json';
 
-test('26 testimonials with exact category counts', () => {
-  expect(testimonials).toHaveLength(26);
+test('28 testimonials with exact category counts', () => {
+  expect(testimonials).toHaveLength(28);
   const count = (c: string) => testimonials.filter((t) => t.category === c).length;
   expect(count('hospital')).toBe(8);
   expect(count('patient')).toBe(8);
   expect(count('peer')).toBe(6);
-  expect(count('news')).toBe(4);
+  expect(count('news')).toBe(6);
 });
 
 test('every hospital testimonial carries a full letter', () => {
@@ -34,5 +34,5 @@ test('spot-check ported content is verbatim', () => {
   expect(pat1.quote).toContain('stubborn Atrial Fibrillation');
   expect(pat1.detail).toContain('Top Doctors');
   const news1 = testimonials.find((t) => t.id === 'news1')!;
-  expect(news1.masthead).toBe('The Indian Express');
+  expect(news1.masthead).toBe('Health Dialogues');
 });

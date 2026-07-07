@@ -1,6 +1,5 @@
 'use client';
 
-import { LinkNeededFlag } from '@/components/LinkNeededFlag';
 import { NightCtaCard } from '@/components/NightCtaCard';
 import { Reveal } from '@/components/Reveal';
 import linksJson from '@/data/links.json';
@@ -76,9 +75,7 @@ function PressCard({ item }: { item: PressLink }) {
           >
             Read article ↗
           </a>
-        ) : (
-          <LinkNeededFlag />
-        )}
+        ) : null}
       </footer>
     </article>
   );
@@ -182,7 +179,7 @@ export function VoicesContent() {
               04 · In the press
             </p>
             <h2 id="press-heading" className="mt-3 max-w-2xl font-serif text-4xl leading-tight">
-              Covered across India, March 2025.
+              Covered across India.
             </h2>
           </Reveal>
           <div className="mt-11 grid gap-5 lg:grid-cols-2">
@@ -213,9 +210,7 @@ export function VoicesContent() {
                       >
                         Read ↗
                       </a>
-                    ) : (
-                      <LinkNeededFlag label="link needed" />
-                    )}
+                    ) : null}
                   </div>
                 ))}
               </div>

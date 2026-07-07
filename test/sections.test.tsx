@@ -35,7 +35,7 @@ test('TestimonialCard renders each category shape', () => {
   const { rerender } = render(<TestimonialCard t={byCat('patient')} />);
   expect(screen.getByText(/Patient/)).toBeInTheDocument();
   rerender(<TestimonialCard t={byCat('news')} />);
-  expect(screen.getByText('The Indian Express')).toBeInTheDocument();
+  expect(screen.getByText('Health Dialogues')).toBeInTheDocument();
   rerender(<TestimonialCard t={byCat('hospital')} onOpenLetter={() => {}} />);
   expect(screen.getByRole('button', { name: /read full letter/i })).toBeInTheDocument();
 });

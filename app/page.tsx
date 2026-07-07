@@ -154,56 +154,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="publications-heading" className="bg-paper">
+      <section aria-label="In their words" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="05" label="Research" />
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
-              Published evidence.
-            </h2>
-            <p className="mt-4 max-w-xl text-ink-soft">
-              Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the
-              standard.
-            </p>
-          </Reveal>
-          <div className="md:hidden">
-            <HorizontalCardGallery ariaLabel="Published evidence highlights" itemsPerPage={1}>
-              {publicationTeasers.map((p) => (
-                <div key={p.id} className="h-full">
-                  <PublicationCard p={p} />
-                </div>
-              ))}
-            </HorizontalCardGallery>
-          </div>
-          <div className="mt-10 hidden gap-5 md:grid md:grid-cols-3">
-            {publicationTeasers.map((p) => (
-              <div key={p.id} className="h-full">
-                <PublicationCard p={p} />
-              </div>
-            ))}
-          </div>
-          <Reveal delay={200}>
-            <Link href="/evidence#publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
-              Browse all publications &rarr;
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section aria-labelledby="testimonials-heading" className="bg-paper-soft">
-        <div className="mx-auto max-w-6xl px-5 py-14">
-          <Reveal>
-            <ChapterEyebrow chapter="06" label="In their words" />
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 id="testimonials-heading" className="mt-3 font-serif text-4xl">
-              In their words.
-            </h2>
+            <ChapterEyebrow chapter="05" label="In their words" />
           </Reveal>
           {hospitalLetter ? (
-            <Reveal delay={100}>
+            <Reveal delay={80}>
               <blockquote className="mt-9 max-w-4xl">
                 <p className="font-serif text-[clamp(1.5rem,2.9vw,2.2rem)] leading-snug text-ink">
                   &ldquo;{hospitalLetter.quote}&rdquo;
@@ -235,10 +192,48 @@ export default function Home() {
               </div>
             ))}
           </div>
-          {topDoctorsProfile?.url ? <TopDoctorsRating url={topDoctorsProfile.url} /> : null}
-          <Reveal delay={200}>
-            <Link href="/testimonials" className="arrow-link interactive mt-7 inline-block font-semibold text-brass-deep hover:underline">
+          <Reveal delay={120}>
+            <Link href="/testimonials" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
               More voices: hospitals, patients, peers, and the press &rarr;
+            </Link>
+          </Reveal>
+          {topDoctorsProfile?.url ? <TopDoctorsRating url={topDoctorsProfile.url} /> : null}
+        </div>
+      </section>
+
+      <section aria-labelledby="publications-heading" className="bg-paper-soft">
+        <div className="mx-auto max-w-6xl px-5 py-14">
+          <Reveal>
+            <ChapterEyebrow chapter="06" label="Research" />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
+              Published evidence.
+            </h2>
+            <p className="mt-4 max-w-xl text-ink-soft">
+              Peer-reviewed work on AF ablation, stroke prevention, and outcomes, from the journals that set the
+              standard.
+            </p>
+          </Reveal>
+          <div className="md:hidden">
+            <HorizontalCardGallery ariaLabel="Published evidence highlights" itemsPerPage={1}>
+              {publicationTeasers.map((p) => (
+                <div key={p.id} className="h-full">
+                  <PublicationCard p={p} />
+                </div>
+              ))}
+            </HorizontalCardGallery>
+          </div>
+          <div className="mt-10 hidden gap-5 md:grid md:grid-cols-3">
+            {publicationTeasers.map((p) => (
+              <div key={p.id} className="h-full">
+                <PublicationCard p={p} />
+              </div>
+            ))}
+          </div>
+          <Reveal delay={200}>
+            <Link href="/evidence#publications" className="arrow-link interactive mt-8 inline-block font-semibold text-brass-deep hover:underline">
+              Browse all publications &rarr;
             </Link>
           </Reveal>
         </div>

@@ -1,0 +1,78 @@
+{
+  "_instructions": [
+    "Add news articles here first. When ready, copy each entry into the live data files listed in README.md.",
+    "For online articles: paste the article URL in url.",
+    "For print or physical clippings: leave url empty and paste the relevant quote or paragraph in snippet.",
+    "featured: true shows as a large card on the Voices page (keep to 4). Everything else goes in the More coverage list.",
+    "Each article also needs a matching entry in data/testimonials.json if you want it in the News filter on the Voices grid.",
+    "Do not use em dashes in any copy."
+  ],
+  "articles": [
+    {
+      "status": "live",
+      "outlet": "Health Dialogues",
+      "date": "4 April 2026",
+      "headline": "UK Heart Rhythm Expert Performs Advanced Procedures in India",
+      "snippet": "I have developed a low-cost single catheter ablation technique, thereby allowing this treatment to reach more patients. I am performing ablation procedures and using the opportunity to train local cardiologists in this technique.",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": "https://health.medicaldialogues.in/latest-news/uk-heart-rhythm-expert-performs-advanced-procedures-in-india-167922",
+      "notes": "Online article."
+    },
+    {
+      "status": "live",
+      "outlet": "The Hawk",
+      "date": "3 April 2026",
+      "headline": "UK heart rhythm expert now performing procedures in India",
+      "snippet": "Performing complex atrial fibrillation procedures on tour across India while training local cardiologists during live cases.",
+      "credit": "Reporting in The Hawk",
+      "featured": true,
+      "url": "https://www.thehawk.in/news/health/uk-heart-rhythm-expert-now-performing-procedures-in-india",
+      "notes": "Online article."
+    },
+    {
+      "status": "live",
+      "outlet": "The Tribune",
+      "date": "March 2025",
+      "headline": "UK cardiologist kicks off India tour from PGIMER in Chandigarh",
+      "snippet": "Performing the costly procedures without taking \"a single paisa\" from patients or hospitals, even bearing his own travel expenses. His focus was on skill transfer, not just surgery.",
+      "credit": "Reporting in The Tribune",
+      "featured": true,
+      "url": "https://www.tribuneindia.com/news/chandigarh/uk-cardiologist-kicks-off-india-tour-from-pgimer-in-chandigarh/",
+      "notes": "Online article."
+    },
+    {
+      "status": "live",
+      "outlet": "The Indian Express",
+      "date": "27 March 2025",
+      "headline": "Global heart rhythm expert conducts free training at PGIMER",
+      "snippet": "I am using the opportunity to perform complex cases in five cities and train local cardiologists in these procedures. As a proud alumnus of PGIMER Chandigarh and AIIMS New Delhi, I have retained strong professional and personal links with India.",
+      "credit": "Prof. Gupta, quoted",
+      "featured": false,
+      "url": "",
+      "notes": "Print clipping."
+    },
+    {
+      "status": "live",
+      "outlet": "The Pioneer",
+      "date": "March 2025",
+      "headline": "UK Heart Rhythm Expert Begins India Tour from Chd, Offers Free Advanced Cardiac Procedures",
+      "snippet": "Conducting the procedures without charging patients or hospitals and personally bearing his travel expenses, reflecting his commitment to expanding access to advanced cardiac care. The Chandigarh leg focuses on proctoring local cardiologists, ensuring hands-on training rather than just treatment.",
+      "credit": "Reporting in The Pioneer",
+      "featured": false,
+      "url": "",
+      "notes": "Print clipping."
+    },
+    {
+      "status": "live",
+      "outlet": "Punjab Kesari",
+      "date": "March 2025",
+      "headline": "Global heart expert to give free treatment, train doctors across India",
+      "snippet": "The purpose of this initiative is to ensure that advanced treatment reaches as many people as possible and to enhance the capabilities of local doctors. Performing these procedures without charging patients or hospitals, and bearing his own travel expenses.",
+      "credit": "Prof. Gupta, quoted",
+      "featured": false,
+      "url": "",
+      "notes": "Print clipping (Hindi original)."
+    }
+  ]
+}

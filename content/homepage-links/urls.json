@@ -10,7 +10,7 @@
   },
   "profiles": [
     {
-      "section": "07 · In their words + footer",
+      "section": "05 · In their words + footer",
       "label": "GMC Register",
       "sublabel": "General Medical Council",
       "featured": false,
@@ -19,7 +19,7 @@
       "url": "https://www.gmc-uk.org/registrants/5205561"
     },
     {
-      "section": "07 · In their words + footer",
+      "section": "05 · In their words + footer",
       "label": "MMC Register",
       "sublabel": "Maharashtra Medical Council",
       "featured": false,
@@ -37,7 +37,7 @@
       "url": "https://www.lhch.nhs.uk/staff/consultants/35"
     },
     {
-      "section": "07 · In their words + footer",
+      "section": "05 · In their words + footer",
       "label": "Top Doctors",
       "sublabel": "Specialist profile",
       "featured": false,
@@ -125,7 +125,7 @@
   ],
   "publicationTeasers": [
     {
-      "section": "05 · Research",
+      "section": "06 · Research",
       "id": "pub1",
       "title": "Cost, efficiency, and outcomes of pulsed field ablation vs thermal ablation for atrial fibrillation",
       "journal": "Heart Rhythm",
@@ -135,7 +135,7 @@
       "url": "https://doi.org/10.1016/j.hrthm.2024.05.032"
     },
     {
-      "section": "05 · Research",
+      "section": "06 · Research",
       "id": "pub2",
       "title": "Atrial fibrillation and stroke prevention: 25 years of research at EP Europace journal",
       "journal": "Europace",
@@ -145,7 +145,7 @@
       "url": "https://doi.org/10.1093/europace/euad226"
     },
     {
-      "section": "05 · Research",
+      "section": "06 · Research",
       "id": "pub3",
       "title": "Contemporary management of persistent atrial fibrillation",
       "journal": "Heart",
