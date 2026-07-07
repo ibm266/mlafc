@@ -54,6 +54,11 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
     () => locations.filter((l) => l.region === region),
     [locations, region],
   );
+  const cityCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    visibleLocations.forEach((l) => counts.set(l.city, (counts.get(l.city) ?? 0) + 1));
+    return counts;
+  }, [visibleLocations]);
 
   const active = locations.find((l) => l.id === activeId) ?? visibleLocations[0] ?? null;
 
@@ -304,7 +309,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
                       : 'border border-line-dark bg-paper/10 text-paper hover:border-brass hover:text-brass'
                   }`}
                 >
-                  {loc.city}
+                  {(cityCounts.get(loc.city) ?? 0) > 1 ? loc.name : loc.city}
                 </button>
               ))}
             </div>

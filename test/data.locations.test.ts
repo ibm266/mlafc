@@ -2,8 +2,8 @@ import locations from '@/data/locations.json';
 import visits from '@/data/visits.json';
 import { site } from '@/data/site';
 
-test('locations: 12 entries with required fields', () => {
-  expect(locations).toHaveLength(12);
+test('locations: training and procedure entries with required fields', () => {
+  expect(locations).toHaveLength(34);
   for (const l of locations) {
     expect(typeof l.id).toBe('string');
     expect(typeof l.name).toBe('string');
@@ -20,11 +20,14 @@ test('locations: 12 entries with required fields', () => {
   }
 });
 
-test('locations: Liverpool and Mumbai present; 5 UK pins', () => {
+test('locations: procedure cities and India training cities present', () => {
   const names = locations.map((l) => l.name);
+  const cities = locations.map((l) => l.city);
   expect(names).toContain('Liverpool Heart and Chest Hospital');
   expect(names.some((n) => n.includes('Mumbai'))).toBe(true);
-  expect(locations.filter((l) => l.country === 'United Kingdom')).toHaveLength(5);
+  expect(cities).toEqual(expect.arrayContaining(['London', 'Liverpool', 'Mumbai', 'Delhi', 'Pondicherry', 'Kolkata']));
+  expect(locations.filter((l) => l.role === 'operated')).toHaveLength(4);
+  expect(locations.filter((l) => l.country === 'United Kingdom')).toHaveLength(7);
 });
 
 test('visits: 3 entries with valid statuses', () => {

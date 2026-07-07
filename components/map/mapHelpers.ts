@@ -10,7 +10,7 @@ export function regionCountries(region: MapRegion): string[] {
   const map: Record<MapRegion, string[]> = {
     India: ['India'],
     'United Kingdom': ['United Kingdom'],
-    Europe: ['Belgium', 'France', 'Czechia', 'Germany'],
+    Europe: ['Austria', 'Ireland'],
     'United States': ['United States of America'],
   };
 
