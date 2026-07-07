@@ -38,5 +38,5 @@ export function useStrokeDraw(
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [visible, duration]);
+  }, [pathRef, visible, duration]);
 }

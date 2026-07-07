@@ -45,7 +45,7 @@ function AwardCard({ award, delay }: { award: (typeof AWARDS)[number]; delay: nu
     <Reveal
       delay={delay}
       className={`card-lift h-full rounded-xl border bg-paper p-5 ${
-        award.highlight ? 'border-brass/50' : 'border-line'
+        'highlight' in award && award.highlight ? 'border-brass/50' : 'border-line'
       }`}
     >
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brass-deep">

@@ -22,6 +22,6 @@ export const enquiryContactPreferences = [
   { id: 'whatsapp', label: 'WhatsApp' },
 ] as const;
 
-export const enquiryConditionIds = new Set(enquiryConditions.map((option) => option.id));
-export const enquiryReferralSourceIds = new Set(enquiryReferralSources.map((option) => option.id));
-export const enquiryContactPreferenceIds = new Set(enquiryContactPreferences.map((option) => option.id));
+export const enquiryConditionIds = new Set<string>(enquiryConditions.map((option) => option.id));
+export const enquiryReferralSourceIds = new Set<string>(enquiryReferralSources.map((option) => option.id));
+export const enquiryContactPreferenceIds = new Set<string>(enquiryContactPreferences.map((option) => option.id));

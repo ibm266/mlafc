@@ -1,5 +1,4 @@
-import isEmail from 'validator/lib/isEmail';
-import normalizeEmail from 'validator/lib/normalizeEmail';
+import { isEmail, normalizeEmail } from 'validator';
 
 const EMAIL_OPTIONS = {
   allow_display_name: false,
@@ -11,7 +10,9 @@ const EMAIL_OPTIONS = {
 } as const;
 
 export function normalizeEnquiryEmail(email: string): string {
-  return normalizeEmail(email.trim(), { gmail_remove_dots: false }) ?? email.trim().toLowerCase();
+  const trimmed = email.trim();
+  const normalized = normalizeEmail(trimmed, { gmail_remove_dots: false });
+  return normalized === false ? trimmed.toLowerCase() : normalized;
 }
 
 export function validateEmail(email: string): string | null {

@@ -16,7 +16,7 @@ export function FloatingBookingPill() {
   return (
     <Link
       href="/book"
-      className={`fixed bottom-6 right-6 z-[55] flex items-center gap-2.5 rounded-full bg-night px-5 py-3.5 text-sm font-semibold text-paper shadow-[0_12px_32px_rgba(6,15,21,0.35)] transition-[opacity,transform] duration-300 hover:bg-night-soft ${
+      className={`fixed bottom-[5.5rem] right-5 z-[55] flex items-center gap-2.5 rounded-full bg-night px-5 py-3.5 text-sm font-semibold text-paper shadow-[0_12px_32px_rgba(6,15,21,0.35)] transition-[opacity,transform] duration-300 hover:bg-night-soft ${
         visible ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
       }`}
     >
