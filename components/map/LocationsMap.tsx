@@ -28,14 +28,20 @@ const ROLE_BADGE: Record<LocationRole, string> = {
 
 type MarkerMap = Record<string, L.CircleMarker>;
 
+type MapStore = {
+  map: L.Map;
+  markers: MarkerMap;
+  countries: L.GeoJSON | null;
+  L: typeof import('leaflet');
+};
+
+function syncMapSize(store: MapStore) {
+  store.map.invalidateSize({ animate: false });
+}
+
 export default function LocationsMap({ locations }: { locations: Location[] }) {
   const mapElRef = useRef<HTMLDivElement>(null);
-  const storeRef = useRef<{
-    map: L.Map;
-    markers: MarkerMap;
-    countries: L.GeoJSON | null;
-    L: typeof import('leaflet');
-  } | null>(null);
+  const storeRef = useRef<MapStore | null>(null);
 
   const [region, setRegion] = useState<MapRegion>('All');
   const [activeId, setActiveId] = useState<string | null>(locations[0]?.id ?? null);
@@ -110,6 +116,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       Object.values(store.markers).forEach((m) => m.unbindTooltip());
 
       if (loc && fly) {
+        syncMapSize(store);
         store.map.flyTo([loc.lat, loc.lng], Math.max(store.map.getZoom(), 5), { duration: 0.8 });
         store.map.once('moveend', () => styleLabels(region, id));
       } else {
@@ -131,12 +138,15 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       const store = storeRef.current;
       if (store && locs.length) {
         let bounds =
-          nextRegion === 'All' ? null : countryBounds(nextRegion, store.countries!, store.L);
+          nextRegion === 'All' || !store.countries
+            ? null
+            : countryBounds(nextRegion, store.countries, store.L);
         if (!bounds || !bounds.isValid()) {
           bounds = store.L.latLngBounds(locs.map((l) => [l.lat, l.lng]));
           if (nextRegion !== 'All') bounds = bounds.pad(nextRegion === 'United Kingdom' ? 0.55 : 0.35);
         }
         if (bounds.isValid()) {
+          syncMapSize(store);
           store.map.flyToBounds(
             bounds,
             nextRegion === 'All'
@@ -163,6 +173,13 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
     if (!el || storeRef.current) return;
 
     let cancelled = false;
+    let resizeObserver: ResizeObserver | null = null;
+
+    const onResize = () => {
+      const store = storeRef.current;
+      if (!store) return;
+      syncMapSize(store);
+    };
 
     (async () => {
       const [L, topojson] = await Promise.all([import('leaflet'), import('topojson-client')]);
@@ -184,7 +201,8 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       map.setView([32, 10], 1.8);
 
       const markers: MarkerMap = {};
-      storeRef.current = { map, markers, countries: null, L };
+      const store: MapStore = { map, markers, countries: null, L };
+      storeRef.current = store;
 
       locations.forEach((loc) => {
         const marker = L.circleMarker([loc.lat, loc.lng], markerStyle(loc.role, false)).addTo(map);
@@ -194,10 +212,20 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
         markers[loc.id] = marker;
       });
 
-      const bounds = L.latLngBounds(locations.map((l) => [l.lat, l.lng]));
-      map.fitBounds(bounds, { padding: [56, 56] });
+      const fitAllPins = () => {
+        if (cancelled) return;
+        syncMapSize(store);
+        const bounds = L.latLngBounds(locations.map((l) => [l.lat, l.lng]));
+        map.fitBounds(bounds, { padding: [56, 56] });
+      };
+
+      requestAnimationFrame(fitAllPins);
       setActiveId(locations[0]?.id ?? null);
       styleMarkers(locations[0]?.id ?? null);
+
+      resizeObserver = new ResizeObserver(onResize);
+      resizeObserver.observe(el);
+      window.addEventListener('resize', onResize);
 
       try {
         const res = await fetch('/data/countries-110m.json');
@@ -209,7 +237,8 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
           interactive: false,
         }).addTo(map);
         countries.bringToBack();
-        storeRef.current!.countries = countries;
+        store.countries = countries;
+        requestAnimationFrame(fitAllPins);
       } catch {
         // map still works with pins only
       }
@@ -219,6 +248,8 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
 
     return () => {
       cancelled = true;
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', onResize);
       storeRef.current?.map.remove();
       storeRef.current = null;
     };
@@ -252,7 +283,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       <div className="mt-6 grid items-stretch gap-5 [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]">
         <div
           ref={mapElRef}
-          className="mlafc-map min-h-[clamp(320px,48vh,460px)] overflow-hidden rounded-xl border border-line-dark"
+          className="mlafc-map h-[clamp(320px,48vh,460px)] min-h-[clamp(320px,48vh,460px)] overflow-hidden rounded-xl border border-line-dark"
           aria-label="World map of locations"
           data-ready={ready || undefined}
         />

@@ -197,12 +197,11 @@ body {
 }
 
 .mlafc-pin {
-  transition: transform 0.2s ease;
-  transform-origin: center bottom;
+  transition: opacity 0.2s ease;
 }
 
 .mlafc-pin:hover {
-  transform: scale(1.25);
+  opacity: 0.85;
 }
 
 @keyframes panel-in {
