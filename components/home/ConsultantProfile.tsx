@@ -9,8 +9,8 @@ const links = linksJson as SiteLinks;
 
 export function ConsultantProfile() {
   return (
-    <section aria-labelledby="profile-heading" className="bg-paper">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+    <section aria-labelledby="profile-heading" className="bg-paper-soft">
+      <div className="mx-auto max-w-6xl px-5 py-14">
         <Reveal>
           <ChapterEyebrow chapter="01" label="Meet your consultant" />
         </Reveal>

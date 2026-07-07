@@ -29,7 +29,7 @@ const STATS = [
 export function StatsBand() {
   return (
     <section aria-label="Key numbers" className="border-b border-line bg-paper">
-      <div className="mx-auto max-w-6xl px-5 pb-20">
+      <div className="mx-auto max-w-6xl px-5 pb-12">
         <Reveal>
           <div className="flex flex-col items-center pt-7">
             <span aria-hidden className="block h-14 w-px bg-gradient-to-b from-brass/0 via-brass/50 to-brass" />
