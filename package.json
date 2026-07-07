@@ -12,11 +12,13 @@
   "dependencies": {
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
+    "libphonenumber-js": "^1.13.8",
     "next": "^15.5.20",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-leaflet": "^5.0.0",
-    "topojson-client": "^3.1.0"
+    "topojson-client": "^3.1.0",
+    "validator": "^13.15.35"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -36,6 +36,17 @@ export function EcgHeroMonitor() {
         </radialGradient>
       </defs>
       <rect width="1440" height="720" fill="url(#hp-grid)" opacity="0.5" />
+      {[
+        [20, 20],
+        [1420, 20],
+        [20, 700],
+        [1420, 700],
+      ].map(([cx, cy], i) => (
+        <g key={i} stroke="#3A5468" strokeWidth="0.75" opacity="0.7">
+          <line x1={cx - 6} y1={cy} x2={cx + 6} y2={cy} />
+          <line x1={cx} y1={cy - 6} x2={cx} y2={cy + 6} />
+        </g>
+      ))}
       <path
         d={HERO_MONITOR_TRACE}
         fill="none"

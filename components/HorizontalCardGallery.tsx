@@ -5,6 +5,7 @@ import { Children, useCallback, useEffect, useRef, useState, type ReactNode } fr
 type Props = {
   ariaLabel: string;
   children: ReactNode;
+  className?: string;
   itemsPerPage?: number;
 };
 
@@ -23,7 +24,7 @@ function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
   );
 }
 
-export function HorizontalCardGallery({ ariaLabel, children, itemsPerPage = 1 }: Props) {
+export function HorizontalCardGallery({ ariaLabel, children, className = '', itemsPerPage = 1 }: Props) {
   const slides = Children.toArray(children);
   const count = slides.length;
   const pageCount = Math.max(1, Math.ceil(count / itemsPerPage));
@@ -89,7 +90,7 @@ export function HorizontalCardGallery({ ariaLabel, children, itemsPerPage = 1 }:
   const canGoNext = activePage < pageCount - 1;
 
   return (
-    <div className="mt-10">
+    <div className={className ?? 'mt-10'}>
       <div
         ref={scrollRef}
         role="region"

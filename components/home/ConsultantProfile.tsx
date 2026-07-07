@@ -7,27 +7,12 @@ import type { SiteLinks } from '@/data/types';
 
 const links = linksJson as SiteLinks;
 
-const CREDENTIALS = [
-  { n: 'i.', title: 'NHS National Silver Clinical Excellence Award', sub: 'Awarded 2021. Earlier Bronze in 2017.' },
-  {
-    n: 'ii.',
-    title: 'Arrhythmia Alliance Excellence in Practice Award',
-    sub: 'Outstanding contribution to UK arrhythmia services',
-  },
-  {
-    n: 'iii.',
-    title: 'Chief Investigator, multi-centre AF trials',
-    sub: 'PRESSURE · SMAAN-PAF · PRAISE · VISTAX · CRAFT',
-  },
-  { n: 'iv.', title: 'Author, British Heart Foundation AF booklet', sub: 'National patient education resource' },
-];
-
 export function ConsultantProfile() {
   return (
-    <section aria-labelledby="profile-heading" className="bg-paper-soft">
+    <section aria-labelledby="profile-heading" className="bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
-          <ChapterEyebrow chapter="02" label="Meet your consultant" />
+          <ChapterEyebrow chapter="01" label="Meet your consultant" />
         </Reveal>
         <Reveal delay={80}>
           <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
@@ -48,30 +33,12 @@ export function ConsultantProfile() {
             are available in English, Hindi and Punjabi. See an introductory video below from Lilavati Hospital in
             Mumbai.
           </p>
-        </Reveal>
-
-        <InterviewVideoSection interview={links.interview} />
-
-        <div className="mt-14 border-t border-line pt-10">
-          <Reveal delay={260}>
-            <h3 className="font-serif text-2xl text-ink">Awards received</h3>
-          </Reveal>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2">
-            {CREDENTIALS.map((c, i) => (
-              <Reveal key={c.n} delay={300 + i * 70} className="border-t border-line pt-5">
-                <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
-                <p className="font-semibold">{c.title}</p>
-                <p className="text-sm text-ink-mute">{c.sub}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        <Reveal delay={520}>
-          <Link href="/journey" className="arrow-link interactive mt-10 inline-block font-semibold text-brass-deep hover:underline">
+          <Link href="/journey" className="arrow-link interactive mt-5 inline-block font-semibold text-brass-deep hover:underline">
             Follow the journey, 1988 to 2026 &rarr;
           </Link>
         </Reveal>
+
+        <InterviewVideoSection interview={links.interview} />
       </div>
     </section>
   );

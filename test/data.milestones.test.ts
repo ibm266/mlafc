@@ -10,7 +10,7 @@ test('8 timeline milestones covering 1988-2024 plus separate finale', () => {
   expect(milestones[0].yearLabel).toBe('1988');
   expect(milestones[0].meta).toBe('MB BS qualified, 1994');
   expect(milestones[6].variant).toBe('awards-band');
-  expect(milestones[6].yearLabel).toBe('2017 & 2022');
+  expect(milestones[6].yearLabel).toBe('2017 & 2021');
   for (const m of milestones) {
     expect(m.title.length).toBeGreaterThan(3);
     expect(m.photoTitle.length).toBeGreaterThan(2);

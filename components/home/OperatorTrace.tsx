@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReveal } from '@/lib/useReveal';
 import { OPERATOR_CONVERSION_TRACE } from '@/lib/ecg/design-paths';
-import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { Reveal } from '@/components/Reveal';
 
 const DESKTOP_VIEWBOX = '0 0 1400 180';
@@ -67,13 +66,10 @@ export function OperatorTrace() {
   return (
     <section aria-labelledby="constant-heading" className="overflow-hidden bg-paper">
       <div className="mx-auto max-w-6xl px-5 pt-20 text-center">
-        <Reveal className="justify-center">
-          <ChapterEyebrow chapter="01" label="The one constant" className="justify-center" />
-        </Reveal>
-        <Reveal delay={80}>
+        <Reveal>
           <h2
             id="constant-heading"
-            className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
+            className="mx-auto max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
           >
             What changes the rhythm is <em className="text-brass-deep">the operator</em>.
           </h2>
@@ -138,7 +134,7 @@ export function OperatorTrace() {
         </div>
       </Reveal>
       <Reveal delay={220}>
-        <p className="mx-auto max-w-xl px-5 pb-20 pt-7 text-center text-lg text-ink-mute">
+        <p className="mx-auto max-w-xl px-5 pt-7 text-center text-lg text-ink-mute">
           The same heart, before and after ablation. In the largest head-to-head trials, RFA and PFA performed
           comparably. The strongest predictor of a safe, successful outcome is the experience of the hands performing
           it.

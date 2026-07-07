@@ -1,3 +1,4 @@
+import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { CountUp } from '@/components/CountUp';
 import { DotWall } from '@/components/home/DotWall';
 import { Reveal } from '@/components/Reveal';
@@ -27,12 +28,22 @@ const STATS = [
 
 export function StatsBand() {
   return (
-    <section aria-label="Key numbers" className="border-y border-line bg-paper-soft">
-      <div className="mx-auto max-w-6xl px-5 py-14">
-        <Reveal className="mb-12">
+    <section aria-label="Key numbers" className="border-b border-line bg-paper">
+      <div className="mx-auto max-w-6xl px-5 pb-20">
+        <Reveal>
+          <div className="flex flex-col items-center pt-7">
+            <span aria-hidden className="block h-14 w-px bg-gradient-to-b from-brass/0 via-brass/50 to-brass" />
+            <span aria-hidden className="pulse-dot mt-1.5 block h-1.5 w-1.5 rounded-full bg-brass" />
+            <ChapterEyebrow
+              label="Dr Gupta's experience in numbers"
+              className="mt-3 justify-center"
+            />
+          </div>
+        </Reveal>
+        <Reveal delay={80} className="mb-12 mt-10">
           <DotWall />
         </Reveal>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+        <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
           {STATS.map((s, i) => (
             <Reveal
               key={s.label}

@@ -3,9 +3,14 @@ import { submitEnquiry } from '@/app/book/actions';
 
 const valid = {
   name: 'A. Patient',
-  phone: '+91 98765 43210',
+  phoneCountry: 'IN',
+  phone: '9876543210',
   email: 'a@example.com',
+  condition: 'af',
   message: 'I have had palpitations for two years.',
+  referralSource: 'google',
+  location: 'Mumbai, India',
+  contactPreference: 'phone',
   month: '[March] 2026',
 };
 
@@ -14,11 +19,24 @@ test('validateEnquiry passes a valid submission', () => {
 });
 
 test('validateEnquiry returns friendly messages for bad fields', () => {
-  const errors = validateEnquiry({ name: '', phone: '123', email: 'nope', message: 'hi', month: '' });
+  const errors = validateEnquiry({
+    name: '',
+    phoneCountry: '',
+    phone: '123',
+    email: 'nope',
+    condition: '',
+    message: 'hi',
+    referralSource: '',
+    location: '',
+    contactPreference: '',
+    month: '',
+  });
   expect(errors.name).toMatch(/name/i);
-  expect(errors.phone).toMatch(/country code/i);
+  expect(errors.phone).toBeTruthy();
   expect(errors.email).toMatch(/email/i);
+  expect(errors.condition).toBeTruthy();
   expect(errors.message).toBeTruthy();
+  expect(errors.referralSource).toBeTruthy();
   expect(errors.month).toBeTruthy();
 });
 

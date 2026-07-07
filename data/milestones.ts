@@ -79,7 +79,7 @@ export const milestones: Milestone[] = [
   {
     markerYear: '2017',
     markerSub: 'NHS awards',
-    yearLabel: '2017 & 2022',
+    yearLabel: '2017 & 2021',
     tag: 'NHS Clinical Excellence',
     title: 'Bronze, then Silver. Recognised nationally, twice.',
     body: '',
@@ -90,8 +90,8 @@ export const milestones: Milestone[] = [
         body: 'The NHS Clinical Excellence Awards recognise consultants who deliver work over and above the standard expected of their role, assessed nationally against a competitive field of senior doctors. The Bronze level is itself uncommon.',
       },
       {
-        title: 'NHS Silver, 2022',
-        body: 'Five years after Bronze, only a small fraction of NHS consultants are recognised at this level. Silver reflects sustained national-level contribution: to clinical practice, research, teaching and the wider profession.',
+        title: 'NHS Silver, 2021',
+        body: 'Four years after Bronze, only a small fraction of NHS consultants are recognised at this level. Silver reflects sustained national-level contribution: to clinical practice, research, teaching and the wider profession.',
         highlight: true,
       },
     ],

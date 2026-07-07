@@ -71,26 +71,10 @@ export default function Home() {
       <StatsBand />
       <ConsultantProfile />
 
-      <section aria-labelledby="how-heading" className="bg-paper">
-        <div className="mx-auto max-w-6xl px-5 py-20">
-          <Reveal>
-            <ChapterEyebrow chapter="03" label="How the Mumbai clinic works" />
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 id="how-heading" className="mt-3 font-serif text-4xl">
-              London expertise. Mumbai care. Continuous follow-up.
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <Steps />
-          </div>
-        </div>
-      </section>
-
       <section aria-labelledby="services-heading" className="border-y border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="04" label="Conditions &amp; treatments" />
+            <ChapterEyebrow chapter="02" label="Conditions &amp; treatments" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="services-heading" className="mt-3 font-serif text-4xl">
@@ -130,10 +114,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="publications-heading" className="border-t border-line bg-paper">
+      <section aria-labelledby="how-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="05" label="Research" />
+            <ChapterEyebrow chapter="03" label="How the Mumbai clinic works" />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="how-heading" className="mt-3 font-serif text-4xl">
+              London expertise. Mumbai care. Continuous follow-up.
+            </h2>
+          </Reveal>
+          <div className="mt-12">
+            <Steps />
+          </div>
+          <Reveal delay={120}>
+            <Link href="/book" className="arrow-link interactive mt-10 inline-block font-semibold text-brass-deep hover:underline">
+              Book a consultation &rarr;
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section aria-labelledby="publications-heading" className="border-t border-line bg-paper-soft">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal>
+            <ChapterEyebrow chapter="04" label="Research" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
@@ -162,7 +167,7 @@ export default function Home() {
       <section aria-labelledby="map-heading" className="bg-night text-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="06" label="Where he works" dark />
+            <ChapterEyebrow chapter="05" label="Where he works" dark />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="map-heading" className="mt-3 max-w-xl font-serif text-4xl leading-tight">
@@ -178,10 +183,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="testimonials-heading" className="border-t border-line bg-paper-soft">
+      <section aria-labelledby="testimonials-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="07" label="In their words" />
+            <ChapterEyebrow chapter="06" label="In their words" />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="testimonials-heading" className="mt-3 font-serif text-4xl">
+              In their words.
+            </h2>
           </Reveal>
           {hospitalLetter ? (
             <Reveal delay={100}>
@@ -225,10 +235,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="visits-heading" className="border-t border-line bg-paper">
+      <section aria-labelledby="visits-heading" className="border-t border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
-            <ChapterEyebrow chapter="08" label="Plan ahead" />
+            <ChapterEyebrow chapter="07" label="Plan ahead" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="visits-heading" className="mt-3 font-serif text-4xl">
