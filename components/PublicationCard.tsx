@@ -11,7 +11,7 @@ export function PublicationCard({ p }: { p: Publication }) {
   return (
     <article className="card-hover flex h-full flex-col rounded-lg border border-line bg-white p-6">
       <div className="text-xs font-semibold uppercase tracking-widest text-brass-deep">{TAGS[p.category]}</div>
-      <h2 className="mt-3 font-serif text-xl leading-snug">{p.title}</h2>
+      <h2 className="mt-3 font-serif text-xl font-semibold leading-snug text-ink">{p.title}</h2>
       <p className="mt-3 flex-1 text-ink-soft">{p.summary}</p>
       <footer className="mt-4 text-sm">
         <strong className="block text-ink">{p.authors}</strong>

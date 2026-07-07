@@ -1,69 +1,92 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { Children, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 
 type Props = {
   ariaLabel: string;
-  children: ReactNode[];
+  children: ReactNode;
+  itemsPerPage?: number;
 };
 
-export function HorizontalCardGallery({ ariaLabel, children }: Props) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-  const count = children.length;
+function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path
+        d={direction === 'left' ? 'M10 3 L5 8 L10 13' : 'M6 3 L11 8 L6 13'}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-  const slideScrollLeft = useCallback((el: HTMLDivElement, slide: HTMLElement) => {
+export function HorizontalCardGallery({ ariaLabel, children, itemsPerPage = 1 }: Props) {
+  const slides = Children.toArray(children);
+  const count = slides.length;
+  const pageCount = Math.max(1, Math.ceil(count / itemsPerPage));
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activePage, setActivePage] = useState(0);
+
+  const getSlideScrollLeft = useCallback((el: HTMLDivElement, slide: HTMLElement) => {
     const containerRect = el.getBoundingClientRect();
     const slideRect = slide.getBoundingClientRect();
-    return el.scrollLeft + slideRect.left - containerRect.left - (containerRect.width - slideRect.width) / 2;
+    return el.scrollLeft + slideRect.left - containerRect.left;
   }, []);
 
-  const updateActive = useCallback(() => {
+  const updateActivePage = useCallback(() => {
     const el = scrollRef.current;
     if (!el || count === 0) return;
 
-    const slides = Array.from(el.children) as HTMLElement[];
-    const containerRect = el.getBoundingClientRect();
-    const viewportCenter = containerRect.left + containerRect.width / 2;
-    let nearest = 0;
-    let minDist = Infinity;
+    const slideEls = Array.from(el.children) as HTMLElement[];
+    const containerLeft = el.getBoundingClientRect().left;
 
-    slides.forEach((slide, i) => {
-      const slideRect = slide.getBoundingClientRect();
-      const slideCenter = slideRect.left + slideRect.width / 2;
-      const dist = Math.abs(viewportCenter - slideCenter);
-      if (dist < minDist) {
-        minDist = dist;
-        nearest = i;
+    let firstVisible = 0;
+    for (let i = 0; i < slideEls.length; i++) {
+      const slideRect = slideEls[i].getBoundingClientRect();
+      if (slideRect.right > containerLeft + 1) {
+        firstVisible = i;
+        break;
       }
-    });
+    }
 
-    setActive(nearest);
-  }, [count]);
+    const page = Math.min(Math.floor(firstVisible / itemsPerPage), pageCount - 1);
+    setActivePage(page);
+  }, [count, itemsPerPage, pageCount]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    updateActive();
-    el.addEventListener('scroll', updateActive, { passive: true });
-    window.addEventListener('resize', updateActive);
+    updateActivePage();
+    el.addEventListener('scroll', updateActivePage, { passive: true });
+    window.addEventListener('resize', updateActivePage);
 
     return () => {
-      el.removeEventListener('scroll', updateActive);
-      window.removeEventListener('resize', updateActive);
+      el.removeEventListener('scroll', updateActivePage);
+      window.removeEventListener('resize', updateActivePage);
     };
-  }, [updateActive]);
+  }, [updateActivePage]);
 
-  const scrollTo = (index: number) => {
+  const scrollToPage = (page: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    const slide = el.children[index] as HTMLElement | undefined;
+
+    const clamped = Math.max(0, Math.min(page, pageCount - 1));
+    const slideIndex = clamped * itemsPerPage;
+    const slide = el.children[slideIndex] as HTMLElement | undefined;
     if (!slide) return;
-    el.scrollTo({ left: slideScrollLeft(el, slide), behavior: 'smooth' });
+
+    el.scrollTo({ left: getSlideScrollLeft(el, slide), behavior: 'smooth' });
   };
 
   if (count === 0) return null;
+
+  const canGoPrev = activePage > 0;
+  const canGoNext = activePage < pageCount - 1;
 
   return (
     <div className="mt-10">
@@ -73,31 +96,57 @@ export function HorizontalCardGallery({ ariaLabel, children }: Props) {
         aria-label={ariaLabel}
         className="flex gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0"
       >
-        {children.map((child, i) => (
+        {slides.map((child, i) => (
           <div
             key={i}
-            className="w-[min(88vw,22rem)] shrink-0 snap-center sm:w-[min(78vw,24rem)] lg:w-[min(34vw,22rem)]"
+            className="w-[min(88vw,22rem)] shrink-0 snap-start sm:w-[min(78vw,24rem)] lg:w-[min(34vw,22rem)]"
           >
             {child}
           </div>
         ))}
       </div>
 
-      {count > 1 ? (
-        <div className="mt-5 flex justify-center gap-2 lg:hidden" role="tablist" aria-label={`${ariaLabel} pagination`}>
-          {children.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              aria-selected={i === active}
-              aria-label={`Show item ${i + 1} of ${count}`}
-              onClick={() => scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-200 ${
-                i === active ? 'w-6 bg-brass' : 'w-2 bg-line hover:bg-brass/50'
-              }`}
-            />
-          ))}
+      {pageCount > 1 ? (
+        <div
+          className="mt-5 flex items-center justify-center gap-3"
+          role="group"
+          aria-label={`${ariaLabel} pagination`}
+        >
+          <button
+            type="button"
+            onClick={() => scrollToPage(activePage - 1)}
+            disabled={!canGoPrev}
+            aria-label="Previous"
+            className="interactive flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-ink-soft disabled:pointer-events-none disabled:opacity-35"
+          >
+            <ChevronIcon direction="left" />
+          </button>
+
+          <div className="flex gap-2" role="tablist" aria-label={`${ariaLabel} pages`}>
+            {Array.from({ length: pageCount }, (_, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === activePage}
+                aria-label={`Page ${i + 1} of ${pageCount}`}
+                onClick={() => scrollToPage(i)}
+                className={`h-2 rounded-full transition-all duration-200 ${
+                  i === activePage ? 'w-6 bg-brass' : 'w-2 bg-line hover:bg-brass/50'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollToPage(activePage + 1)}
+            disabled={!canGoNext}
+            aria-label="Next"
+            className="interactive flex h-9 w-9 items-center justify-center rounded-full border border-line bg-white text-ink-soft disabled:pointer-events-none disabled:opacity-35"
+          >
+            <ChevronIcon direction="right" />
+          </button>
         </div>
       ) : null}
     </div>

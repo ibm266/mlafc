@@ -150,7 +150,7 @@ export default function EvidencePage() {
               standard of care.
             </p>
           </Reveal>
-          <HorizontalCardGallery ariaLabel="Selected publications">
+          <HorizontalCardGallery ariaLabel="Selected publications" itemsPerPage={3}>
             {publications.map((p) => (
               <div key={p.id} className="h-full">
                 <PublicationCard p={p} />

@@ -129,9 +129,9 @@ export default function Home() {
               standard.
             </p>
           </Reveal>
-          <HorizontalCardGallery ariaLabel="Published evidence highlights">
+          <HorizontalCardGallery ariaLabel="Published evidence highlights" itemsPerPage={3}>
             {publicationTeasers.map((p) => (
-              <div key={p.id} className="card-lift h-full">
+              <div key={p.id} className="h-full">
                 <PublicationCard p={p} />
               </div>
             ))}
