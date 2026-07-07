@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { Reveal } from '@/components/Reveal';
+import { YouTubeEmbed } from '@/components/YouTubeEmbed';
 
 const CREDENTIALS = [
   { n: 'i.', title: 'NHS National Silver Clinical Excellence Award', sub: 'Awarded 2021. Earlier Bronze in 2017.' },
@@ -42,6 +43,19 @@ export function ConsultantProfile() {
             cardiologists across the United Kingdom, United States and Europe in complex procedures. Consultations
             available in English, Hindi and Punjabi.
           </p>
+        </Reveal>
+        <Reveal delay={180} className="mt-10 max-w-3xl">
+          <h3 className="font-serif text-2xl">Hear him explain heart health in plain language.</h3>
+          <p className="mt-3 text-ink-soft">
+            Professor Gupta on the Lilavati Hospital podcast series, discussing atrial fibrillation, ablation, and what
+            patients should know before choosing a procedure.
+          </p>
+          <div className="mt-6">
+            <YouTubeEmbed
+              videoId="juKnv3sN2wM"
+              title="Everything About Heart Health | Lilavati Hospital Podcast Series"
+            />
+          </div>
         </Reveal>
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {CREDENTIALS.map((c, i) => (

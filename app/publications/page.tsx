@@ -19,7 +19,7 @@ export default function PublicationsPage() {
           </h1>
           <p className="mt-5 max-w-xl text-ink-soft">
             A selection of peer-reviewed work on catheter ablation, stroke prevention, and outcomes in atrial
-            fibrillation — from the operator who wrote them.
+            fibrillation, from the operator who wrote them.
           </p>
         </Reveal>
         <div className="mt-12">
