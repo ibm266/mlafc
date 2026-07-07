@@ -138,7 +138,7 @@ export function OperatorTrace() {
         </div>
       </Reveal>
       <Reveal delay={220}>
-        <p className="mx-auto max-w-xl px-5 pb-20 pt-7 text-center text-sm text-ink-mute">
+        <p className="mx-auto max-w-xl px-5 pb-20 pt-7 text-center text-lg text-ink-mute">
           The same heart, before and after ablation. In the largest head-to-head trials, RFA and PFA performed
           comparably. The strongest predictor of a safe, successful outcome is the experience of the hands performing
           it.
