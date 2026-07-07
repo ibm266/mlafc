@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
+import { site } from '@/data/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://mlafc.com';
+  const base = site.url;
 
   return ['/', '/evidence', '/conditions', '/journey', '/testimonials', '/book'].map((path) => ({
     url: `${base}${path}`,

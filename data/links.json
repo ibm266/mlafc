@@ -3,13 +3,13 @@
     {
       "label": "GMC Register",
       "sublabel": "General Medical Council",
-      "featured": true,
+      "featured": false,
       "url": "https://www.gmc-uk.org/registrants/5205561"
     },
     {
       "label": "MMC Register",
       "sublabel": "Maharashtra Medical Council",
-      "featured": true,
+      "featured": false,
       "url": "https://maharashtramedicalcouncil.org.in/doctors/b3ceb0c0-3bda-4ed6-98a0-5776047e5dd3"
     },
     {
@@ -27,7 +27,7 @@
     {
       "label": "Top Doctors",
       "sublabel": "Specialist profile",
-      "featured": true,
+      "featured": false,
       "url": "https://www.topdoctors.co.uk/doctor/dhiraj-gupta/"
     },
     {

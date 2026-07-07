@@ -43,9 +43,7 @@ export function VerifyRow({ profiles }: { profiles: ProfileLink[] }) {
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-brass">
             Verify his record
           </h2>
-          <p className="text-sm text-paper/50">
-            Independent registers, profiles and reviews. All links live in links.json.
-          </p>
+          <p className="text-sm text-paper/50">Independent registers, profiles and reviews.</p>
         </div>
         <div className="flex flex-wrap gap-2.5">
           {profiles.map((profile) => (

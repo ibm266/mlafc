@@ -1,6 +1,6 @@
 import { site } from '@/data/site';
 
-const BASE = 'https://www.mumbailondonaf.com';
+const BASE = site.url;
 
 const data = {
   '@context': 'https://schema.org',

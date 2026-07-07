@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { CountUp } from '@/components/CountUp';
 import { EvidenceChart } from '@/components/EvidenceChart';
 import { FaqConversation } from '@/components/FaqConversation';
+import { FaqJsonLd } from '@/components/FaqJsonLd';
 import { FloatingBookingPill } from '@/components/FloatingBookingPill';
 import { NightCtaCard } from '@/components/NightCtaCard';
 import { PageHeader } from '@/components/PageHeader';
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
 export default function EvidencePage() {
   return (
     <main id="main">
+      <FaqJsonLd />
       <ScrollProgress />
       <FloatingBookingPill />
       <PageHeader

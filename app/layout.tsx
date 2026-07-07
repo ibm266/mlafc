@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import { Nav } from '@/components/Nav';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
+import { site } from '@/data/site';
 import './globals.css';
 
 const newsreader = Newsreader({
@@ -20,7 +21,7 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.mumbailondonaf.com'),
+  metadataBase: new URL(site.url),
   title: { default: 'Mumbai London AF Clinic', template: '%s' },
   description:
     'Specialist atrial fibrillation care in Mumbai from Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital.',

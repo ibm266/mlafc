@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Hero } from '@/components/home/Hero';
 import { OperatorTrace } from '@/components/home/OperatorTrace';
 import { StatsBand } from '@/components/StatsBand';
 import { ConsultantProfile } from '@/components/home/ConsultantProfile';
-import { VerifyIndependentlyStrip } from '@/components/home/VerifyIndependentlyStrip';
+import { TopDoctorsRating } from '@/components/home/TopDoctorsRating';
 import { Steps } from '@/components/Steps';
 import { TestimonialCard } from '@/components/TestimonialCard';
 import { PublicationCard } from '@/components/PublicationCard';
@@ -23,6 +24,19 @@ import visitsJson from '@/data/visits.json';
 import { conditions } from '@/data/conditions';
 import type { Location, Publication, SiteLinks, Testimonial, Visit } from '@/data/types';
 
+export const metadata: Metadata = {
+  title: 'AF Ablation in Mumbai | London Consultant Electrophysiologist',
+  description:
+    'Expert atrial fibrillation care in Mumbai from Professor Dhiraj Gupta — consultant cardiologist and electrophysiologist at Liverpool Heart and Chest Hospital. Book a consultation.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'AF Ablation in Mumbai | Mumbai London AF Clinic',
+    description:
+      'London-level AF ablation expertise in Mumbai. Professor Dhiraj Gupta offers RFA and PFA with continuous local follow-up.',
+    url: '/',
+  },
+};
+
 const testimonials = testimonialsJson as Testimonial[];
 const publications = publicationsJson as Publication[];
 const locations = locationsJson as Location[];
@@ -41,9 +55,10 @@ const PROCEDURES = [
 
 export default function Home() {
   const hospitalLetter = testimonials.find((t) => t.id === 'hosp1');
-  const patientPeer = ['pat1', 'peer1']
+  const patientPeer = ['pat1', 'pat2', 'peer1', 'peer2']
     .map((id) => testimonials.find((t) => t.id === id))
     .filter(Boolean) as Testimonial[];
+  const topDoctorsProfile = links.profiles.find((p) => p.label === 'Top Doctors');
 
   const publicationTeasers = publications.filter((p) => p.featured);
 
@@ -185,14 +200,23 @@ export default function Home() {
               </blockquote>
             </Reveal>
           ) : null}
-          <HorizontalCardGallery ariaLabel="Patient and peer testimonials">
+          <div className="lg:hidden">
+            <HorizontalCardGallery ariaLabel="Patient and peer testimonials">
+              {patientPeer.map((t) => (
+                <div key={t.id} className="card-lift h-full">
+                  <TestimonialCard t={t} />
+                </div>
+              ))}
+            </HorizontalCardGallery>
+          </div>
+          <div className="mt-10 hidden gap-5 lg:grid lg:grid-cols-2">
             {patientPeer.map((t) => (
               <div key={t.id} className="card-lift h-full">
                 <TestimonialCard t={t} />
               </div>
             ))}
-          </HorizontalCardGallery>
-          <VerifyIndependentlyStrip profiles={links.profiles} />
+          </div>
+          {topDoctorsProfile?.url ? <TopDoctorsRating url={topDoctorsProfile.url} /> : null}
           <Reveal delay={200}>
             <Link href="/testimonials" className="arrow-link interactive mt-7 inline-block font-semibold text-brass-deep hover:underline">
               More voices: hospitals, patients, peers, and the press &rarr;

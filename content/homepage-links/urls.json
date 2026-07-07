@@ -13,8 +13,8 @@
       "section": "07 · In their words + footer",
       "label": "GMC Register",
       "sublabel": "General Medical Council",
-      "featured": true,
-      "showsOnHomepage": "Hero trust line + verify strip + footer",
+      "featured": false,
+      "showsOnHomepage": "Hero trust line + footer",
       "targetFile": "data/links.json",
       "url": "https://www.gmc-uk.org/registrants/5205561"
     },
@@ -22,8 +22,8 @@
       "section": "07 · In their words + footer",
       "label": "MMC Register",
       "sublabel": "Maharashtra Medical Council",
-      "featured": true,
-      "showsOnHomepage": "Hero trust line + verify strip + footer",
+      "featured": false,
+      "showsOnHomepage": "Hero trust line + footer",
       "targetFile": "data/links.json",
       "url": "https://maharashtramedicalcouncil.org.in/doctors/b3ceb0c0-3bda-4ed6-98a0-5776047e5dd3"
     },
@@ -40,8 +40,8 @@
       "section": "07 · In their words + footer",
       "label": "Top Doctors",
       "sublabel": "Specialist profile",
-      "featured": true,
-      "showsOnHomepage": "Verify independently strip + footer",
+      "featured": false,
+      "showsOnHomepage": "Top Doctors rating + footer",
       "targetFile": "data/links.json",
       "url": "https://www.topdoctors.co.uk/doctor/dhiraj-gupta/"
     },
