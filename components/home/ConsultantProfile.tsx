@@ -10,13 +10,13 @@ const links = linksJson as SiteLinks;
 
 function ConsultantPortrait() {
   return (
-    <figure className="overflow-hidden rounded-xl border border-line bg-paper shadow-[0_12px_28px_rgba(6,15,21,0.08)]">
+    <figure className="h-full min-h-[280px] overflow-hidden rounded-xl border border-line bg-paper shadow-[0_12px_28px_rgba(6,15,21,0.08)]">
       <Image
         src="/images/professor-gupta-profile.png"
-        alt="Professor Dhiraj Gupta in academic regalia"
-        width={174}
-        height={218}
-        className="aspect-[3/4] w-full object-cover object-top"
+        alt="Professor Dhiraj Gupta, consultant cardiologist and electrophysiologist"
+        width={450}
+        height={360}
+        className="h-full w-full object-cover object-top"
       />
     </figure>
   );
@@ -30,7 +30,7 @@ export function ConsultantProfile() {
           <ChapterEyebrow chapter="01" label="Meet your consultant" />
         </Reveal>
 
-        <div className="mt-3 grid items-start gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-12 lg:grid-cols-[3fr_2fr]">
+        <div className="mt-3 grid items-stretch gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-12 lg:grid-cols-[3fr_2fr]">
           <div>
             <Reveal delay={80}>
               <h2 id="profile-heading" className="font-serif text-4xl">
@@ -60,7 +60,7 @@ export function ConsultantProfile() {
             </Reveal>
           </div>
 
-          <Reveal delay={160} className="mx-auto w-full max-w-sm md:mx-0 md:max-w-none md:justify-self-end">
+          <Reveal delay={160} className="h-full md:justify-self-end">
             <ConsultantPortrait />
           </Reveal>
         </div>
