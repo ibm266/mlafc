@@ -7,7 +7,7 @@ export const CHART_DATA = [
   { label: 'Lower-volume centres', sublabel: 'under 50 ablations a year', value: 2.1, colour: '#8A97A3', x: 96 },
   {
     label: 'Higher-volume centres',
-    sublabel: '200+ ablations a year',
+    sublabel: '300+ ablations a year',
     value: 0.9,
     colour: '#B08D3E',
     x: 328,

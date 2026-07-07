@@ -84,7 +84,7 @@ export default function EvidencePage() {
           </div>
           <Reveal>
             <p className="mx-auto mt-9 max-w-xl text-center font-serif text-xl italic text-ink">
-              Professor Gupta has performed over 200 a year, every year since 2009.
+              Professor Gupta has performed over 300 a year, every year since 2009.
               <sup>
                 <a href="#ref-3" className="not-italic">3</a>
               </sup>
@@ -107,7 +107,7 @@ export default function EvidencePage() {
             <div className="mt-8 grid gap-0 sm:grid-cols-3">
               <div className="border-line sm:border-r sm:pr-6">
                 <div className="font-serif text-4xl text-ink">
-                  <CountUp to={200} suffix="+" />
+                  <CountUp to={300} suffix="+" />
                 </div>
                 <p className="mt-2 text-sm text-ink-soft">
                   ablations a year, every year since 2009

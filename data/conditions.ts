@@ -12,7 +12,7 @@ export const conditions: Condition[] = [
     happening:
       'The upper chambers of your heart, the atria, beat in a disorganised way instead of a steady rhythm. Blood does not move through as smoothly, which is why AF raises stroke risk if left unmanaged.',
     help:
-      'Professor Gupta has treated atrial fibrillation for more than thirty years and performs over 200 ablation procedures a year. At your consultation he will explain what is happening in your heart, whether a procedure is right for you, and which technology suits your situation, in plain language.',
+      'Professor Gupta has treated atrial fibrillation for more than thirty years and performs over 300 ablation procedures a year. At your consultation he will explain what is happening in your heart, whether a procedure is right for you, and which technology suits your situation, in plain language.',
     ecgVariant: 'af',
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside atrial fibrillation, with an irregular fibrillatory baseline between unevenly spaced beats.',

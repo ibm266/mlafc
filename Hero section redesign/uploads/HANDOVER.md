@@ -33,8 +33,8 @@ Brand tokens used throughout (match `app/globals.css`): night `#0C1F2B`, ink `#1
 - Page header (and Evidence header) carry the quiet ECG strip along the bottom edge as the house motif for page tops.
 
 ## Evidence page
-- 768px reading column; animated volume bar chart (bars scaleY + % count up on scroll: 2.1% vs 0.9%, annotated "under 50 / 200+ ablations a year").
-- Stats strip (200+/yr, <1%, 10,000+) with count-up.
+- 768px reading column; animated volume bar chart (bars scaleY + % count up on scroll: 2.1% vs 0.9%, annotated "under 50 / 300+ ablations a year").
+- Stats strip (300+/yr, <1%, 10,000+) with count-up.
 - FAQ rendered as a conversation (serif italic quoted questions, plain answers, no accordion).
 - Floating book pill + night CTA card + references with anchor links.
 

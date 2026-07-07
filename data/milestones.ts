@@ -43,12 +43,12 @@ export const milestones: Milestone[] = [
     markerSub: 'High-volume',
     yearLabel: '2009',
     tag: 'High-volume practice',
-    title: '200 ablations a year. Every year.',
-    body: 'From 2009 onwards, Professor Gupta consistently performs over 200 catheter ablation procedures for atrial fibrillation each year, placing him among the highest-volume operators in the United Kingdom. Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing under 50 ablations a year have measurably worse complication rates than those above 200.',
+    title: '300 ablations a year. Every year.',
+    body: 'From 2009 onwards, Professor Gupta consistently performs over 300 catheter ablation procedures for atrial fibrillation each year, placing him among the highest-volume operators in the United Kingdom. Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing under 50 ablations a year have measurably worse complication rates than those above 300.',
     meta: '10,000+ AF ablations · <1% complication rate',
     photoTitle: 'In theatre',
     photoCaption:
-      'Begins performing 200+ AF ablation cases every year, a pace he has maintained since.',
+      'Begins performing 300+ AF ablation cases every year, a pace he has maintained since.',
     photoFirst: true,
   },
   {
