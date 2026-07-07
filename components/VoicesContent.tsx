@@ -1,7 +1,11 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { NightCtaCard } from '@/components/NightCtaCard';
 import { Reveal } from '@/components/Reveal';
+import { TestimonialReviewDialog } from '@/components/TestimonialReviewDialog';
+import { VoicesFeaturedGallery } from '@/components/VoicesFeaturedGallery';
+import { VoicesQuoteCard } from '@/components/VoicesQuoteCard';
 import linksJson from '@/data/links.json';
 import testimonialsJson from '@/data/testimonials.json';
 import type { PressLink, SiteLinks, Testimonial } from '@/data/types';
@@ -9,50 +13,14 @@ import type { PressLink, SiteLinks, Testimonial } from '@/data/types';
 const testimonials = testimonialsJson as Testimonial[];
 const links = linksJson as SiteLinks;
 
-function HospitalLetter({ t }: { t: Testimonial }) {
-  if (!t.letter) return null;
+const FEATURED_IDS = {
+  hospital: 'hosp1',
+  patient: 'pat3',
+  peer: 'peer2',
+} as const;
 
-  return (
-    <div className="mx-auto mt-11 max-w-3xl rounded border border-line bg-[#FFFEFB] p-8 shadow-[0_24px_56px_rgba(18,43,58,0.1)] md:p-14">
-      <div className="flex items-baseline justify-between gap-4 border-b border-line pb-5">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brass-deep">{t.letter.tag}</p>
-          <p className="mt-2 font-serif text-xl text-ink md:text-2xl">{t.letter.org}</p>
-          <p className="text-sm text-ink-mute">{t.letter.subtitle}</p>
-        </div>
-        <p className="shrink-0 text-sm text-ink-mute">{t.letter.date}</p>
-      </div>
-      <div className="mt-7 space-y-4 font-serif text-lg leading-relaxed text-ink">
-        {t.letter.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
-      <div className="mt-8 flex items-center gap-3.5 text-sm text-ink-soft">
-        <span aria-hidden className="inline-block h-0.5 w-9 bg-brass" />
-        <p>
-          <strong className="text-ink">{t.letter.sigName}</strong> · {t.letter.sigRole}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function ReferenceCard({ t }: { t: Testimonial }) {
-  const tag = t.letter?.tag ?? 'Hospital reference';
-
-  return (
-    <article className="card-lift flex flex-col rounded-xl border border-line bg-white p-6">
-      <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brass-deep">{tag}</div>
-      <p className="mt-3 flex-1 text-ink-soft">&ldquo;{t.quote}&rdquo;</p>
-      <footer className="mt-4 text-sm">
-        <strong className="block text-ink">{t.attribution}</strong>
-        <span className="text-ink-mute">
-          {t.detail}
-          {t.letter?.date ? ` · ${t.letter.date.replace('Issued ', '')}` : ''}
-        </span>
-      </footer>
-    </article>
-  );
+function findTestimonial(id: string) {
+  return testimonials.find((t) => t.id === id)!;
 }
 
 function PressCard({ item }: { item: PressLink }) {
@@ -82,16 +50,58 @@ function PressCard({ item }: { item: PressLink }) {
 }
 
 export function VoicesContent() {
-  const leadLetter = testimonials.find((t) => t.id === 'hosp1');
-  const hospitalRefs = testimonials.filter((t) => t.category === 'hospital' && t.id !== 'hosp1');
+  const [review, setReview] = useState<Testimonial | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const hospitalRefs = testimonials.filter(
+    (t) => t.category === 'hospital' && t.id !== FEATURED_IDS.hospital,
+  );
   const patients = testimonials.filter((t) => t.category === 'patient');
   const peers = testimonials.filter((t) => t.category === 'peer');
   const pressFeatured = links.press.filter((p) => p.featured);
   const pressMore = links.press.filter((p) => !p.featured);
 
+  const featuredSlides = [
+    {
+      id: 'featured-hospitals',
+      eyebrow: 'From the hospitals',
+      title: 'What his own institutions put in writing.',
+      testimonial: findTestimonial(FEATURED_IDS.hospital),
+      seeAllLabel: 'See all hospitals',
+      sectionId: 'hospitals',
+    },
+    {
+      id: 'featured-patients',
+      eyebrow: 'From patients',
+      title: 'The people he has treated.',
+      testimonial: findTestimonial(FEATURED_IDS.patient),
+      seeAllLabel: 'See all patients',
+      sectionId: 'patients',
+    },
+    {
+      id: 'featured-peers',
+      eyebrow: 'From peers',
+      title: 'The doctors who refer to him.',
+      testimonial: findTestimonial(FEATURED_IDS.peer),
+      seeAllLabel: 'See all peers',
+      sectionId: 'peers',
+    },
+  ];
+
+  const openReview = (testimonial: Testimonial) => {
+    setReview(testimonial);
+    dialogRef.current?.showModal();
+  };
+
+  const closeReview = () => {
+    setReview(null);
+  };
+
   return (
     <>
-      <section aria-labelledby="hospitals-heading" className="bg-paper">
+      <VoicesFeaturedGallery slides={featuredSlides} />
+
+      <section id="hospitals" aria-labelledby="hospitals-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-brass-deep">
@@ -102,22 +112,17 @@ export function VoicesContent() {
               What his own institutions put in writing.
             </h2>
           </Reveal>
-          {leadLetter ? (
-            <Reveal delay={100}>
-              <HospitalLetter t={leadLetter} />
-            </Reveal>
-          ) : null}
-          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {hospitalRefs.map((t, i) => (
               <Reveal key={t.id} delay={i * 70}>
-                <ReferenceCard t={t} />
+                <VoicesQuoteCard t={t} onReadMore={openReview} />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="patients-heading" className="border-t border-line bg-paper-soft">
+      <section id="patients" aria-labelledby="patients-heading" className="border-t border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-brass-deep">
@@ -131,20 +136,14 @@ export function VoicesContent() {
           <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {patients.map((t, i) => (
               <Reveal key={t.id} delay={i * 60}>
-                <article className="card-lift flex flex-col rounded-xl border border-line bg-white p-6">
-                  <p className="flex-1 font-serif text-lg leading-relaxed text-ink">&ldquo;{t.quote}&rdquo;</p>
-                  <footer className="mt-4 text-sm">
-                    <strong className="block text-ink">{t.attribution}</strong>
-                    {t.detail ? <span className="text-ink-mute">{t.detail}</span> : null}
-                  </footer>
-                </article>
+                <VoicesQuoteCard t={t} onReadMore={openReview} quoteClassName="font-serif text-lg leading-relaxed text-ink" />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="peers-heading" className="border-t border-line bg-paper">
+      <section id="peers" aria-labelledby="peers-heading" className="border-t border-line bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-brass-deep">
@@ -155,16 +154,10 @@ export function VoicesContent() {
               The doctors who refer to him.
             </h2>
           </Reveal>
-          <div className="mt-11 grid gap-0 sm:grid-cols-2">
+          <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {peers.map((t, i) => (
               <Reveal key={t.id} delay={i * 60}>
-                <blockquote className="border-t border-line py-7 pr-0 sm:pr-7">
-                  <p className="text-ink-soft">&ldquo;{t.quote}&rdquo;</p>
-                  <footer className="mt-3 text-sm">
-                    <strong className="block text-ink">{t.attribution}</strong>
-                    {t.detail ? <span className="text-ink-mute">{t.detail}</span> : null}
-                  </footer>
-                </blockquote>
+                <VoicesQuoteCard t={t} onReadMore={openReview} />
               </Reveal>
             ))}
           </div>
@@ -233,6 +226,8 @@ export function VoicesContent() {
           />
         </div>
       </section>
+
+      <TestimonialReviewDialog testimonial={review} dialogRef={dialogRef} onClose={closeReview} />
     </>
   );
 }
