@@ -99,7 +99,7 @@ export function VoicesContent() {
 
   return (
     <>
-      <VoicesFeaturedGallery slides={featuredSlides} />
+      <VoicesFeaturedGallery slides={featuredSlides} onReadMore={openReview} />
 
       <section id="hospitals" aria-labelledby="hospitals-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">

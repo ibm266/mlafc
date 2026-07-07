@@ -24,6 +24,10 @@ function ChevronIcon({ direction }: { direction: 'left' | 'right' }) {
   );
 }
 
+function prefersReducedMotion() {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function HorizontalCardGallery({ ariaLabel, children, className = '', itemsPerPage = 1 }: Props) {
   const slides = Children.toArray(children);
   const count = slides.length;
@@ -32,10 +36,18 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activePage, setActivePage] = useState(0);
 
+  // Slides are centre-snapped on mobile and start-snapped from md up, so the
+  // target scroll position for a slide depends on its computed snap alignment.
   const getSlideScrollLeft = useCallback((el: HTMLDivElement, slide: HTMLElement) => {
     const containerRect = el.getBoundingClientRect();
     const slideRect = slide.getBoundingClientRect();
-    return el.scrollLeft + slideRect.left - containerRect.left;
+    const centered = getComputedStyle(slide).scrollSnapAlign.includes('center');
+
+    const left = centered
+      ? el.scrollLeft + (slideRect.left + slideRect.width / 2) - (containerRect.left + containerRect.width / 2)
+      : el.scrollLeft + slideRect.left - containerRect.left;
+
+    return Math.max(0, Math.min(left, el.scrollWidth - el.clientWidth));
   }, []);
 
   const updateActivePage = useCallback(() => {
@@ -49,7 +61,7 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
     }
 
     // The final page often has fewer slides than itemsPerPage, so max scroll
-    // cannot align that page's first slide to the viewport edge.
+    // cannot align that page's first slide to its snap position.
     if (el.scrollLeft >= maxScrollLeft - 1) {
       setActivePage(pageCount - 1);
       return;
@@ -60,20 +72,24 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
       return;
     }
 
+    // The active slide is the one whose centre is closest to the viewport
+    // centre, which matches both centre and start snap alignment well enough.
+    const containerRect = el.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
     const slideEls = Array.from(el.children) as HTMLElement[];
-    const containerLeft = el.getBoundingClientRect().left;
 
-    let firstVisible = 0;
+    let nearest = 0;
+    let nearestDistance = Infinity;
     for (let i = 0; i < slideEls.length; i++) {
-      const slideRect = slideEls[i].getBoundingClientRect();
-      if (slideRect.right > containerLeft + 1) {
-        firstVisible = i;
-        break;
+      const rect = slideEls[i].getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - containerCenter);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearest = i;
       }
     }
 
-    const page = Math.min(Math.floor(firstVisible / itemsPerPage), pageCount - 1);
-    setActivePage(page);
+    setActivePage(Math.min(Math.floor(nearest / itemsPerPage), pageCount - 1));
   }, [count, itemsPerPage, pageCount]);
 
   useEffect(() => {
@@ -95,18 +111,17 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
     if (!el) return;
 
     const clamped = Math.max(0, Math.min(page, pageCount - 1));
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
 
     if (clamped === pageCount - 1) {
-      const maxScrollLeft = el.scrollWidth - el.clientWidth;
-      el.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+      el.scrollTo({ left: el.scrollWidth - el.clientWidth, behavior });
       return;
     }
 
-    const slideIndex = clamped * itemsPerPage;
-    const slide = el.children[slideIndex] as HTMLElement | undefined;
+    const slide = el.children[clamped * itemsPerPage] as HTMLElement | undefined;
     if (!slide) return;
 
-    el.scrollTo({ left: getSlideScrollLeft(el, slide), behavior: 'smooth' });
+    el.scrollTo({ left: getSlideScrollLeft(el, slide), behavior });
   };
 
   if (count === 0) return null;
@@ -120,12 +135,12 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
         ref={scrollRef}
         role="region"
         aria-label={ariaLabel}
-        className="flex gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0"
+        className="flex gap-5 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0"
       >
         {slides.map((child, i) => (
           <div
             key={i}
-            className="w-[min(88vw,22rem)] shrink-0 snap-start sm:w-[min(78vw,24rem)] lg:w-[min(34vw,22rem)]"
+            className="w-[min(85vw,22rem)] shrink-0 snap-center sm:w-[min(78vw,24rem)] md:snap-start lg:w-[min(34vw,22rem)]"
           >
             {child}
           </div>

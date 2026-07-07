@@ -73,16 +73,24 @@ function MobileStepsGallery() {
     const el = scrollRef.current;
     if (!el) return;
 
+    // Cards are centre-snapped, so the active card is the one whose centre
+    // sits closest to the viewport centre.
     const cards = Array.from(el.querySelectorAll<HTMLElement>('[data-step-card]'));
-    const containerLeft = el.getBoundingClientRect().left;
+    const containerRect = el.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
 
+    let nearest = 0;
+    let nearestDistance = Infinity;
     for (let i = 0; i < cards.length; i++) {
       const rect = cards[i].getBoundingClientRect();
-      if (rect.left + rect.width / 2 >= containerLeft) {
-        setActiveStep(i);
-        break;
+      const distance = Math.abs(rect.left + rect.width / 2 - containerCenter);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearest = i;
       }
     }
+
+    setActiveStep(nearest);
   }, []);
 
   useEffect(() => {
@@ -106,11 +114,16 @@ function MobileStepsGallery() {
     const card = el.querySelector<HTMLElement>(`[data-step-card="${index}"]`);
     if (!card) return;
 
+    // Match the cards' snap-center alignment so the snap doesn't re-adjust
+    // after the programmatic scroll settles.
     const containerRect = el.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
-    const left = el.scrollLeft + cardRect.left - containerRect.left;
+    const left =
+      el.scrollLeft + (cardRect.left + cardRect.width / 2) - (containerRect.left + containerRect.width / 2);
+    const clamped = Math.max(0, Math.min(left, el.scrollWidth - el.clientWidth));
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 
-    el.scrollTo({ left, behavior: 'smooth' });
+    el.scrollTo({ left: clamped, behavior });
   };
 
   return (
@@ -119,7 +132,7 @@ function MobileStepsGallery() {
         ref={scrollRef}
         role="region"
         aria-label="How the Mumbai clinic works"
-        className="flex items-stretch gap-0 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5"
+        className="flex items-stretch gap-0 overflow-x-auto overscroll-x-contain pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory -mx-5 px-5"
       >
         {STEPS.map((step, i) => (
           <Fragment key={step.title}>

@@ -30,8 +30,10 @@ const EMPTY: EnquiryFields = {
   month: '',
 };
 
-const FIELD_CLASS =
-  'w-full rounded-md border border-line bg-white px-3 py-2.5 text-ink placeholder:text-ink-mute focus-visible:outline-2';
+const FIELD_BASE =
+  'rounded-md border border-line bg-white px-3 py-2.5 text-ink placeholder:text-ink-mute focus-visible:outline-2';
+
+const FIELD_CLASS = `w-full ${FIELD_BASE}`;
 
 type FieldErrors = Partial<Record<keyof EnquiryFields | 'recaptcha', string>>;
 
@@ -190,7 +192,7 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           <div className="flex gap-2">
             <select
               id="enq-phoneCountry"
-              className={`${FIELD_CLASS} w-[38%] min-w-[9rem] shrink-0 sm:w-[11rem]`}
+              className={`${FIELD_BASE} w-[38%] min-w-[8rem] shrink-0 sm:w-[11rem]`}
               value={fields.phoneCountry}
               onChange={set('phoneCountry')}
               autoComplete="tel-country-code"
