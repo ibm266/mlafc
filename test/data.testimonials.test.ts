@@ -1,9 +1,9 @@
 import testimonials from '@/data/testimonials.json';
 
-test('24 testimonials with exact category counts', () => {
-  expect(testimonials).toHaveLength(24);
+test('26 testimonials with exact category counts', () => {
+  expect(testimonials).toHaveLength(26);
   const count = (c: string) => testimonials.filter((t) => t.category === c).length;
-  expect(count('hospital')).toBe(6);
+  expect(count('hospital')).toBe(8);
   expect(count('patient')).toBe(8);
   expect(count('peer')).toBe(6);
   expect(count('news')).toBe(4);
@@ -28,10 +28,11 @@ test('news testimonials carry masthead, date and headline', () => {
 
 test('spot-check ported content is verbatim', () => {
   const hosp1 = testimonials.find((t) => t.id === 'hosp1')!;
-  expect(hosp1.quote).toContain('most reliable and skilled electrophysiologists');
-  expect(hosp1.letter!.org).toBe('Liverpool Heart and Chest Hospital NHS Foundation Trust');
+  expect(hosp1.quote).toContain('exceptional expertise in electrophysiology');
+  expect(hosp1.letter!.org).toBe('Post Graduate Institute of Medical Education and Research, Chandigarh');
   const pat1 = testimonials.find((t) => t.id === 'pat1')!;
-  expect(pat1.quote).toContain('just stress');
+  expect(pat1.quote).toContain('stubborn Atrial Fibrillation');
+  expect(pat1.detail).toContain('Top Doctors');
   const news1 = testimonials.find((t) => t.id === 'news1')!;
   expect(news1.masthead).toBe('The Indian Express');
 });

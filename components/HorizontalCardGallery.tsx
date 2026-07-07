@@ -42,6 +42,24 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
     const el = scrollRef.current;
     if (!el || count === 0) return;
 
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    if (maxScrollLeft <= 0) {
+      setActivePage(0);
+      return;
+    }
+
+    // The final page often has fewer slides than itemsPerPage, so max scroll
+    // cannot align that page's first slide to the viewport edge.
+    if (el.scrollLeft >= maxScrollLeft - 1) {
+      setActivePage(pageCount - 1);
+      return;
+    }
+
+    if (el.scrollLeft <= 1) {
+      setActivePage(0);
+      return;
+    }
+
     const slideEls = Array.from(el.children) as HTMLElement[];
     const containerLeft = el.getBoundingClientRect().left;
 
@@ -77,6 +95,13 @@ export function HorizontalCardGallery({ ariaLabel, children, className = '', ite
     if (!el) return;
 
     const clamped = Math.max(0, Math.min(page, pageCount - 1));
+
+    if (clamped === pageCount - 1) {
+      const maxScrollLeft = el.scrollWidth - el.clientWidth;
+      el.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+      return;
+    }
+
     const slideIndex = clamped * itemsPerPage;
     const slide = el.children[slideIndex] as HTMLElement | undefined;
     if (!slide) return;

@@ -39,12 +39,7 @@ function HospitalLetter({ t }: { t: Testimonial }) {
 }
 
 function ReferenceCard({ t }: { t: Testimonial }) {
-  const tag =
-    t.id === 'hosp6'
-      ? 'Society endorsement'
-      : t.id === 'hosp4' || t.id === 'hosp5'
-        ? 'Academic reference'
-        : 'Hospital reference';
+  const tag = t.letter?.tag ?? 'Hospital reference';
 
   return (
     <article className="card-lift flex flex-col rounded-xl border border-line bg-white p-6">
