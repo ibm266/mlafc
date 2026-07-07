@@ -1,15 +1,65 @@
 {
   "profiles": [
-    { "label": "GMC Register", "sublabel": "General Medical Council", "featured": true, "url": "" },
-    { "label": "Liverpool Heart and Chest Hospital", "sublabel": "Consultant profile", "featured": true, "url": "" },
-    { "label": "University of Liverpool", "sublabel": "Professor of Cardiology", "featured": false, "url": "" },
-    { "label": "Imperial College London", "sublabel": "Senior Lecturer", "featured": false, "url": "" },
-    { "label": "AF Association", "sublabel": "Medical advisor", "featured": false, "url": "" },
-    { "label": "Doctify", "sublabel": "Verified patient reviews", "featured": true, "url": "" },
-    { "label": "Top Doctors", "sublabel": "Specialist profile", "featured": false, "url": "" },
-    { "label": "LinkedIn", "sublabel": "Professional profile", "featured": false, "url": "" },
-    { "label": "ResearchGate", "sublabel": "Research output", "featured": false, "url": "" },
-    { "label": "ORCID", "sublabel": "Author identifier", "featured": false, "url": "" }
+    {
+      "label": "GMC Register",
+      "sublabel": "General Medical Council",
+      "featured": true,
+      "url": "https://www.gmc-uk.org/registrants/5205561"
+    },
+    {
+      "label": "Liverpool Heart and Chest Hospital",
+      "sublabel": "Consultant profile",
+      "featured": true,
+      "url": "https://www.lhch.nhs.uk/staff/consultants/35"
+    },
+    {
+      "label": "University of Liverpool",
+      "sublabel": "Honorary Clinical Professor",
+      "featured": false,
+      "url": "https://www.liverpool.ac.uk/clinical-research-and-training/about/our-honorary-clinical-academics/"
+    },
+    {
+      "label": "Top Doctors",
+      "sublabel": "Specialist profile",
+      "featured": true,
+      "url": "https://www.topdoctors.co.uk/doctor/dhiraj-gupta/"
+    },
+    {
+      "label": "PHIN",
+      "sublabel": "Private healthcare information",
+      "featured": false,
+      "url": "https://www.phin.org.uk/profiles/consultants/dhiraj-gupta-184956"
+    },
+    {
+      "label": "Bupa Finder",
+      "sublabel": "Consultant profile",
+      "featured": false,
+      "url": "https://www.finder.bupa.co.uk/Consultant/view/81711/professor_dhiraj_gupta"
+    },
+    {
+      "label": "LinkedIn",
+      "sublabel": "Professional profile",
+      "featured": false,
+      "url": "https://uk.linkedin.com/in/prof-dr-dhiraj-gupta-27b54626"
+    },
+    {
+      "label": "ResearchGate",
+      "sublabel": "Research output",
+      "featured": false,
+      "url": "https://www.researchgate.net/profile/Dhiraj_Gupta"
+    },
+    {
+      "label": "ORCID",
+      "sublabel": "Author identifier",
+      "featured": false,
+      "url": "https://orcid.org/0000-0002-3490-090X"
+    },
+    {
+      "label": "Liverpool Centre for Cardiovascular Science",
+      "sublabel": "Research centre",
+      "featured": false,
+      "url": "https://www.liverpool.ac.uk/liverpool-centre-for-cardiovascular-science/people/team/"
+    }
   ],
   "interview": {
     "title": "In conversation with Professor Gupta: everything about heart health with Lilavati Hospital",

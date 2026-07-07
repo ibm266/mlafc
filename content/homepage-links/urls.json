@@ -6,7 +6,7 @@
     "targetFile": "data/links.json",
     "targetPath": "interview.url",
     "url": "https://www.youtube.com/watch?v=juKnv3sN2wM",
-    "notes": "Already set. Change only if the video moves."
+    "notes": "Filled in."
   },
   "profiles": [
     {
@@ -16,7 +16,7 @@
       "featured": true,
       "showsOnHomepage": "Verify independently strip + footer",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.gmc-uk.org/registrants/5205561"
     },
     {
       "section": "07 · In their words + footer",
@@ -25,52 +25,43 @@
       "featured": true,
       "showsOnHomepage": "Verify independently strip + footer",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.lhch.nhs.uk/staff/consultants/35"
+    },
+    {
+      "section": "07 · In their words + footer",
+      "label": "Top Doctors",
+      "sublabel": "Specialist profile",
+      "featured": true,
+      "showsOnHomepage": "Verify independently strip + footer",
+      "targetFile": "data/links.json",
+      "url": "https://www.topdoctors.co.uk/doctor/dhiraj-gupta/"
     },
     {
       "section": "Footer only",
       "label": "University of Liverpool",
-      "sublabel": "Professor of Cardiology",
+      "sublabel": "Honorary Clinical Professor",
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.liverpool.ac.uk/clinical-research-and-training/about/our-honorary-clinical-academics/"
     },
     {
       "section": "Footer only",
-      "label": "Imperial College London",
-      "sublabel": "Senior Lecturer",
+      "label": "PHIN",
+      "sublabel": "Private healthcare information",
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.phin.org.uk/profiles/consultants/dhiraj-gupta-184956"
     },
     {
       "section": "Footer only",
-      "label": "AF Association",
-      "sublabel": "Medical advisor",
+      "label": "Bupa Finder",
+      "sublabel": "Consultant profile",
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
-    },
-    {
-      "section": "07 · In their words + footer",
-      "label": "Doctify",
-      "sublabel": "Verified patient reviews",
-      "featured": true,
-      "showsOnHomepage": "Verify independently strip + footer",
-      "targetFile": "data/links.json",
-      "url": ""
-    },
-    {
-      "section": "Footer only",
-      "label": "Top Doctors",
-      "sublabel": "Specialist profile",
-      "featured": false,
-      "showsOnHomepage": "Footer verify row",
-      "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.finder.bupa.co.uk/Consultant/view/81711/professor_dhiraj_gupta"
     },
     {
       "section": "Footer only",
@@ -79,7 +70,7 @@
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://uk.linkedin.com/in/prof-dr-dhiraj-gupta-27b54626"
     },
     {
       "section": "Footer only",
@@ -88,7 +79,7 @@
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://www.researchgate.net/profile/Dhiraj_Gupta"
     },
     {
       "section": "Footer only",
@@ -97,105 +88,30 @@
       "featured": false,
       "showsOnHomepage": "Footer verify row",
       "targetFile": "data/links.json",
-      "url": ""
+      "url": "https://orcid.org/0000-0002-3490-090X"
+    },
+    {
+      "section": "Footer only",
+      "label": "Liverpool Centre for Cardiovascular Science",
+      "sublabel": "Research centre",
+      "featured": false,
+      "showsOnHomepage": "Footer verify row",
+      "targetFile": "data/links.json",
+      "url": "https://www.liverpool.ac.uk/liverpool-centre-for-cardiovascular-science/people/team/"
     }
   ],
-  "mapLocations": [
+  "removedProfiles": [
     {
-      "section": "06 · Where he works",
-      "id": "liverpool",
-      "name": "Liverpool Heart and Chest Hospital",
-      "city": "Liverpool",
-      "targetFile": "data/locations.json",
-      "url": ""
+      "label": "Imperial College London",
+      "reason": "No individual staff profile URL found"
     },
     {
-      "section": "06 · Where he works",
-      "id": "london-imperial",
-      "name": "Imperial College London",
-      "city": "London",
-      "targetFile": "data/locations.json",
-      "url": ""
+      "label": "AF Association",
+      "reason": "No individual advisor profile URL found"
     },
     {
-      "section": "06 · Where he works",
-      "id": "manchester",
-      "name": "Manchester Royal Infirmary",
-      "city": "Manchester",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "leeds",
-      "name": "Leeds General Infirmary",
-      "city": "Leeds",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "birmingham",
-      "name": "Queen Elizabeth Hospital Birmingham",
-      "city": "Birmingham",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "brugge",
-      "name": "AZ Sint-Jan, Brugge",
-      "city": "Brugge",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "bordeaux",
-      "name": "Hopital Cardiologique Haut-Leveque, Bordeaux",
-      "city": "Bordeaux",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "prague",
-      "name": "IKEM, Prague",
-      "city": "Prague",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "hamburg",
-      "name": "Asklepios Klinik St. Georg, Hamburg",
-      "city": "Hamburg",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "boston",
-      "name": "Massachusetts General Hospital, Boston",
-      "city": "Boston",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "austin",
-      "name": "Texas Cardiac Arrhythmia Institute, Austin",
-      "city": "Austin",
-      "targetFile": "data/locations.json",
-      "url": ""
-    },
-    {
-      "section": "06 · Where he works",
-      "id": "mumbai",
-      "name": "Mumbai London AF Clinic, Mumbai",
-      "city": "Mumbai",
-      "targetFile": "data/locations.json",
-      "url": ""
+      "label": "Doctify",
+      "reason": "No Doctify listing found for this consultant"
     }
   ],
   "publicationTeasers": [
@@ -234,6 +150,7 @@
     "email": "",
     "whatsappNumber": "",
     "whatsappHref": "",
-    "notes": "whatsappHref is usually https://wa.me/<number without + or spaces>. Also update gmcLine GMC number placeholder when known."
+    "gmcNumber": "5205561",
+    "notes": "GMC number updated in data/site.ts. whatsappHref is usually https://wa.me/<number without + or spaces>."
   }
 }
