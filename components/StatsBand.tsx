@@ -1,12 +1,11 @@
 import { CountUp } from '@/components/CountUp';
-import Link from 'next/link';
 import { DotWall } from '@/components/home/DotWall';
 import { Reveal } from '@/components/Reveal';
 
 const STATS = [
   {
-    node: <CountUp to={10000} suffix="+" />,
-    label: 'AF ablations performed',
+    node: <CountUp to={300} suffix="+" />,
+    label: 'AF ablations every year',
     sub: 'Among the highest-volume operators worldwide',
   },
   {
@@ -46,17 +45,6 @@ export function StatsBand() {
             </Reveal>
           ))}
         </div>
-        <Reveal delay={320}>
-          <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-line pt-8">
-            <Link
-              href="/evidence"
-              className="interactive rounded-full bg-ink px-6 py-3 font-semibold text-paper hover:bg-night"
-            >
-              See the evidence
-            </Link>
-            <p className="text-sm text-ink-soft">Volume and experience matter more than the machine.</p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

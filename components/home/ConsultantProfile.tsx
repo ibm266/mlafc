@@ -48,17 +48,20 @@ export function ConsultantProfile() {
             available in English, Hindi and Punjabi.
           </p>
         </Reveal>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+
+        <InterviewVideoSection interview={links.interview} />
+
+        <div className="mt-9 grid gap-5 sm:grid-cols-2">
           {CREDENTIALS.map((c, i) => (
-            <Reveal key={c.n} delay={160 + i * 70} className="border-t border-line pt-5">
+            <Reveal key={c.n} delay={240 + i * 70} className="border-t border-line pt-5">
               <p className="text-sm font-semibold text-brass-deep">{c.n}</p>
               <p className="font-semibold">{c.title}</p>
               <p className="text-sm text-ink-mute">{c.sub}</p>
             </Reveal>
           ))}
         </div>
-        <InterviewVideoSection interview={links.interview} />
-        <Reveal delay={300}>
+
+        <Reveal delay={520}>
           <Link href="/journey" className="arrow-link interactive mt-9 inline-block font-semibold text-brass-deep hover:underline">
             Follow the journey, 1988 to 2026 &rarr;
           </Link>

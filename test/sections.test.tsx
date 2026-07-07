@@ -15,7 +15,8 @@ beforeEach(() => {
 test('StatsBand shows the four headline numbers', () => {
   render(<StatsBand />);
   act(() => MockIntersectionObserver.instances.forEach((io) => io.trigger(true)));
-  expect(screen.getByText('10,000+')).toBeInTheDocument();
+  expect(screen.getByText('10,000')).toBeInTheDocument();
+  expect(screen.getByText('300+')).toBeInTheDocument();
   expect(screen.getByText(/<1/)).toBeInTheDocument();
   expect(screen.getByText(/18/)).toBeInTheDocument();
   expect(screen.getByText(/350/)).toBeInTheDocument();
