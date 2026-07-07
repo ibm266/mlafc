@@ -43,12 +43,15 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
   const mapElRef = useRef<HTMLDivElement>(null);
   const storeRef = useRef<MapStore | null>(null);
 
-  const [region, setRegion] = useState<MapRegion>('All');
-  const [activeId, setActiveId] = useState<string | null>(locations[0]?.id ?? null);
+  const indiaLocations = useMemo(() => locations.filter((l) => l.region === 'India'), [locations]);
+  const defaultIndiaId = indiaLocations[0]?.id ?? locations[0]?.id ?? null;
+
+  const [region, setRegion] = useState<MapRegion>('India');
+  const [activeId, setActiveId] = useState<string | null>(defaultIndiaId);
   const [ready, setReady] = useState(false);
 
   const visibleLocations = useMemo(
-    () => (region === 'All' ? locations : locations.filter((l) => l.region === region)),
+    () => locations.filter((l) => l.region === region),
     [locations, region],
   );
 
@@ -63,7 +66,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       Object.entries(markers).forEach(([id, marker]) => {
         const loc = locations.find((l) => l.id === id);
         if (!loc) return;
-        const inRegion = nextRegion !== 'All' && loc.region === nextRegion;
+        const inRegion = loc.region === nextRegion;
         const isActive = id === nextActiveId;
         marker.unbindTooltip();
         marker.bindTooltip(loc.city, {
@@ -72,8 +75,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
           permanent: inRegion || isActive,
           opacity: 0.95,
         });
-        const visible = nextRegion === 'All' || inRegion;
-        if (visible) {
+        if (inRegion) {
           marker.setStyle(markerStyle(loc.role, isActive));
         } else {
           marker.setStyle({ opacity: 0.18, fillOpacity: 0.1 });
@@ -130,29 +132,21 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
 
   const selectRegion = useCallback(
     (nextRegion: MapRegion) => {
-      const locs = nextRegion === 'All' ? locations : locations.filter((l) => l.region === nextRegion);
+      const locs = locations.filter((l) => l.region === nextRegion);
       const nextActiveId = locs[0]?.id ?? null;
       setRegion(nextRegion);
       setActiveId(nextActiveId);
 
       const store = storeRef.current;
       if (store && locs.length) {
-        let bounds =
-          nextRegion === 'All' || !store.countries
-            ? null
-            : countryBounds(nextRegion, store.countries, store.L);
+        let bounds = store.countries ? countryBounds(nextRegion, store.countries, store.L) : null;
         if (!bounds || !bounds.isValid()) {
           bounds = store.L.latLngBounds(locs.map((l) => [l.lat, l.lng]));
-          if (nextRegion !== 'All') bounds = bounds.pad(nextRegion === 'United Kingdom' ? 0.55 : 0.35);
+          bounds = bounds.pad(nextRegion === 'United Kingdom' ? 0.55 : 0.35);
         }
         if (bounds.isValid()) {
           syncMapSize(store);
-          store.map.flyToBounds(
-            bounds,
-            nextRegion === 'All'
-              ? { padding: [56, 56], duration: 0.9 }
-              : { padding: [20, 20], maxZoom: 6.5, duration: 0.9 },
-          );
+          store.map.flyToBounds(bounds, { padding: [20, 20], maxZoom: 6.5, duration: 0.9 });
         }
       }
 
@@ -212,16 +206,17 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
         markers[loc.id] = marker;
       });
 
-      const fitAllPins = () => {
+      const fitIndia = () => {
         if (cancelled) return;
         syncMapSize(store);
-        const bounds = L.latLngBounds(locations.map((l) => [l.lat, l.lng]));
-        map.fitBounds(bounds, { padding: [56, 56] });
+        const indiaLocs = locations.filter((l) => l.region === 'India');
+        const bounds = L.latLngBounds(indiaLocs.map((l) => [l.lat, l.lng]));
+        map.flyToBounds(bounds.pad(0.35), { padding: [20, 20], maxZoom: 6.5, duration: 0.9 });
       };
 
-      requestAnimationFrame(fitAllPins);
-      setActiveId(locations[0]?.id ?? null);
-      styleMarkers(locations[0]?.id ?? null);
+      requestAnimationFrame(fitIndia);
+      setActiveId(defaultIndiaId);
+      styleMarkers(defaultIndiaId);
 
       resizeObserver = new ResizeObserver(onResize);
       resizeObserver.observe(el);
@@ -233,12 +228,14 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
         if (cancelled) return;
         const geo = countriesGeoJson(world, topojson);
         const countries = L.geoJSON(geo, {
-          style: (f) => countryStyle(f?.properties?.name ?? '', 'All'),
+          style: (f) => countryStyle(f?.properties?.name ?? '', 'India'),
           interactive: false,
         }).addTo(map);
         countries.bringToBack();
         store.countries = countries;
-        requestAnimationFrame(fitAllPins);
+        requestAnimationFrame(fitIndia);
+        styleCountries('India');
+        styleLabels('India', defaultIndiaId);
       } catch {
         // map still works with pins only
       }
@@ -253,7 +250,7 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
       storeRef.current?.map.remove();
       storeRef.current = null;
     };
-  }, [locations, styleMarkers]);
+  }, [defaultIndiaId, locations, styleCountries, styleLabels, styleMarkers]);
 
   const tabBase =
     'interactive cursor-pointer rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass';

@@ -1,13 +1,13 @@
 export type LocationRole = 'operated' | 'taught' | 'proctored';
 
-export type MapRegion = 'All' | 'United Kingdom' | 'Europe' | 'United States' | 'India';
+export type MapRegion = 'India' | 'United Kingdom' | 'Europe' | 'United States';
 
 export type Location = {
   id: string;
   name: string;
   city: string;
   country: string;
-  region: Exclude<MapRegion, 'All'>;
+  region: MapRegion;
   lat: number;
   lng: number;
   role: LocationRole;

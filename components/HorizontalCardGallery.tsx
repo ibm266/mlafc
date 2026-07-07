@@ -12,18 +12,26 @@ export function HorizontalCardGallery({ ariaLabel, children }: Props) {
   const [active, setActive] = useState(0);
   const count = children.length;
 
+  const slideScrollLeft = useCallback((el: HTMLDivElement, slide: HTMLElement) => {
+    const containerRect = el.getBoundingClientRect();
+    const slideRect = slide.getBoundingClientRect();
+    return el.scrollLeft + slideRect.left - containerRect.left - (containerRect.width - slideRect.width) / 2;
+  }, []);
+
   const updateActive = useCallback(() => {
     const el = scrollRef.current;
     if (!el || count === 0) return;
 
     const slides = Array.from(el.children) as HTMLElement[];
-    const center = el.scrollLeft + el.clientWidth / 2;
+    const containerRect = el.getBoundingClientRect();
+    const viewportCenter = containerRect.left + containerRect.width / 2;
     let nearest = 0;
     let minDist = Infinity;
 
     slides.forEach((slide, i) => {
-      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-      const dist = Math.abs(center - slideCenter);
+      const slideRect = slide.getBoundingClientRect();
+      const slideCenter = slideRect.left + slideRect.width / 2;
+      const dist = Math.abs(viewportCenter - slideCenter);
       if (dist < minDist) {
         minDist = dist;
         nearest = i;
@@ -52,7 +60,7 @@ export function HorizontalCardGallery({ ariaLabel, children }: Props) {
     if (!el) return;
     const slide = el.children[index] as HTMLElement | undefined;
     if (!slide) return;
-    el.scrollTo({ left: slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2, behavior: 'smooth' });
+    el.scrollTo({ left: slideScrollLeft(el, slide), behavior: 'smooth' });
   };
 
   if (count === 0) return null;
@@ -76,7 +84,7 @@ export function HorizontalCardGallery({ ariaLabel, children }: Props) {
       </div>
 
       {count > 1 ? (
-        <div className="mt-5 flex justify-center gap-2" role="tablist" aria-label={`${ariaLabel} pagination`}>
+        <div className="mt-5 flex justify-center gap-2 lg:hidden" role="tablist" aria-label={`${ariaLabel} pagination`}>
           {children.map((_, i) => (
             <button
               key={i}

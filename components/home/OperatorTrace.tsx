@@ -59,8 +59,10 @@ export function OperatorTrace() {
   }, [visible]);
 
   const afLabelX = mobileCrop ? 430 : 4;
-  const steadyLabelX = mobileCrop ? 970 : 1396;
+  const steadyLabelX = mobileCrop ? 910 : 1396;
   const steadyAnchor = mobileCrop ? 'middle' : 'end';
+  const labelFontSize = mobileCrop ? 9 : 12;
+  const labelLetterSpacing = mobileCrop ? '0.1em' : '0.16em';
 
   return (
     <section aria-labelledby="constant-heading" className="overflow-hidden bg-paper">
@@ -90,9 +92,9 @@ export function OperatorTrace() {
               x={afLabelX}
               y="30"
               fill="#556675"
-              fontSize="12"
+              fontSize={labelFontSize}
               fontWeight="600"
-              letterSpacing="0.16em"
+              letterSpacing={labelLetterSpacing}
               className="font-sans"
             >
               ATRIAL FIBRILLATION
@@ -102,9 +104,9 @@ export function OperatorTrace() {
               y="30"
               textAnchor={steadyAnchor}
               fill="#556675"
-              fontSize="12"
+              fontSize={labelFontSize}
               fontWeight="600"
-              letterSpacing="0.16em"
+              letterSpacing={labelLetterSpacing}
               className="font-sans"
             >
               STEADY RHYTHM

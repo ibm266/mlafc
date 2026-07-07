@@ -4,34 +4,30 @@ import type { GeoJSON as LeafletGeoJSON, LatLngBounds, Layer } from 'leaflet';
 
 type CountryFeature = Feature<Geometry, { name: string }>;
 
-export const MAP_REGIONS: MapRegion[] = ['All', 'United Kingdom', 'Europe', 'United States', 'India'];
+export const MAP_REGIONS: MapRegion[] = ['India', 'United Kingdom', 'Europe', 'United States'];
 
 export function regionCountries(region: MapRegion): string[] {
-  const map: Record<Exclude<MapRegion, 'All'>, string[]> = {
+  const map: Record<MapRegion, string[]> = {
+    India: ['India'],
     'United Kingdom': ['United Kingdom'],
     Europe: ['Belgium', 'France', 'Czechia', 'Germany'],
     'United States': ['United States of America'],
-    India: ['India'],
   };
 
-  if (region === 'All') {
-    return Object.values(map).flat();
-  }
   return map[region] ?? [];
 }
 
 export function countryStyle(name: string, region: MapRegion) {
-  const lit = region !== 'All' && regionCountries(region).includes(name);
+  const lit = regionCountries(region).includes(name);
   if (lit) {
     return { fillColor: '#1B3949', fillOpacity: 0.85, color: '#B08D3E', weight: 1.2, opacity: 0.85 };
   }
-  const dim = region !== 'All';
   return {
     fillColor: '#122B3A',
-    fillOpacity: dim ? 0.35 : 0.55,
+    fillOpacity: 0.35,
     color: '#2A4254',
     weight: 0.6,
-    opacity: dim ? 0.5 : 0.8,
+    opacity: 0.5,
   };
 }
 
