@@ -31,7 +31,7 @@ export function ConsultantProfile() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h2 id="profile-heading" className="font-serif text-4xl">
+          <h2 id="profile-heading" className="mt-3 font-serif text-4xl">
             Professor Dhiraj Gupta
           </h2>
           <p className="mt-1 font-semibold text-ink-soft">MB BS, MD, DM, FRCP (London)</p>
