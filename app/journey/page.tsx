@@ -18,11 +18,7 @@ export default function JourneyPage() {
       <PageHeader
         idPrefix="journey"
         eyebrow="The journey · 1988 to 2026"
-        title={
-          <>
-            Thirty-eight years, one specialty, <em className="text-brass">one line</em>.
-          </>
-        }
+        title="Thirty-eight years, one specialty."
         description="From a medical student in India to one of the UK's highest-volume electrophysiologists, and now back to Mumbai. Follow the line."
       />
       <section className="py-6">
