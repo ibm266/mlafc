@@ -4,14 +4,31 @@ import type { GeoJSON as LeafletGeoJSON, LatLngBounds, Layer } from 'leaflet';
 
 type CountryFeature = Feature<Geometry, { name: string }>;
 
-export const MAP_REGIONS: MapRegion[] = ['India', 'United Kingdom', 'Europe', 'United States'];
+export const MAP_REGIONS: MapRegion[] = ['India', 'United Kingdom', 'Europe', 'United States', 'Asia'];
 
 export function regionCountries(region: MapRegion): string[] {
   const map: Record<MapRegion, string[]> = {
     India: ['India'],
     'United Kingdom': ['United Kingdom'],
-    Europe: ['Austria', 'Ireland'],
+    Europe: [
+      'Austria',
+      'Croatia',
+      'Czechia',
+      'Denmark',
+      'France',
+      'Germany',
+      'Hungary',
+      'Ireland',
+      'Israel',
+      'Italy',
+      'Poland',
+      'Portugal',
+      'Spain',
+      'Switzerland',
+      'Turkey',
+    ],
     'United States': ['United States of America'],
+    Asia: ['Australia', 'China', 'Japan', 'South Korea'],
   };
 
   return map[region] ?? [];
@@ -32,14 +49,34 @@ export function countryStyle(name: string, region: MapRegion) {
 }
 
 export function markerStyle(role: string, active: boolean) {
-  const base = { radius: active ? 6 : 4, weight: active ? 2 : 1.5, className: 'mlafc-pin' };
+  const base = {
+    radius: active ? 9 : 7,
+    weight: active ? 2.5 : 2,
+    className: 'mlafc-pin',
+    fillOpacity: 1,
+    opacity: 1,
+    interactive: true,
+    bubblingMouseEvents: true,
+  };
   if (role === 'operated') {
-    return { ...base, color: active ? '#F7F5F1' : '#B08D3E', fillColor: '#B08D3E', fillOpacity: 1 };
+    return {
+      ...base,
+      fillColor: '#B08D3E',
+      color: active ? '#F7F5F1' : '#8A6A2E',
+    };
   }
   if (role === 'taught') {
-    return { ...base, color: '#D8B15A', fillColor: '#0C1F2B', fillOpacity: active ? 0.9 : 0.5 };
+    return {
+      ...base,
+      fillColor: '#F7F5F1',
+      color: active ? '#B08D3E' : '#C8C4BC',
+    };
   }
-  return { ...base, color: '#8A97A3', fillColor: '#0C1F2B', fillOpacity: active ? 0.9 : 0.5 };
+  return {
+    ...base,
+    fillColor: '#5BA4B5',
+    color: active ? '#F7F5F1' : '#3E7A88',
+  };
 }
 
 function ringArea(ring: number[][]): number {

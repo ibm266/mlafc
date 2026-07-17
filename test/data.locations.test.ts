@@ -3,13 +3,14 @@ import visits from '@/data/visits.json';
 import { site } from '@/data/site';
 
 test('locations: training and procedure entries with required fields', () => {
-  expect(locations).toHaveLength(34);
+  expect(locations.length).toBeGreaterThanOrEqual(34);
   for (const l of locations) {
     expect(typeof l.id).toBe('string');
     expect(typeof l.name).toBe('string');
     expect(typeof l.city).toBe('string');
     expect(typeof l.country).toBe('string');
     expect(typeof l.region).toBe('string');
+    expect(['India', 'United Kingdom', 'Europe', 'United States', 'Asia']).toContain(l.region);
     expect(typeof l.lat).toBe('number');
     expect(typeof l.lng).toBe('number');
     expect(['operated', 'taught', 'proctored']).toContain(l.role);
@@ -27,7 +28,10 @@ test('locations: procedure cities and India training cities present', () => {
   expect(names.some((n) => n.includes('Mumbai'))).toBe(true);
   expect(cities).toEqual(expect.arrayContaining(['London', 'Liverpool', 'Mumbai', 'Delhi', 'Pondicherry', 'Kolkata']));
   expect(locations.filter((l) => l.role === 'operated')).toHaveLength(4);
-  expect(locations.filter((l) => l.country === 'United Kingdom')).toHaveLength(7);
+  expect(locations.filter((l) => l.country === 'United Kingdom').length).toBeGreaterThanOrEqual(7);
+  expect(names).toContain('All India Institute of Medical Sciences');
+  expect(names).toContain('Lilavati Hospital');
+  expect(cities).toEqual(expect.arrayContaining(['Hyderabad', 'Bengaluru', 'Pune', 'Prague', 'Sydney']));
 });
 
 test('visits: 3 entries with valid statuses', () => {

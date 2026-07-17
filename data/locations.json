@@ -12,7 +12,7 @@
     "blurb": "Consultant cardiologist and electrophysiologist at the UK's largest specialist cardiothoracic centre, performing 300+ AF ablations a year.",
     "images": [],
     "readMore": "/journey",
-    "url": ""
+    "url": "https://www.lhch.nhs.uk/"
   },
   {
     "id": "london-procedures",
@@ -26,7 +26,7 @@
     "years": "Procedure location",
     "blurb": "London remains one of the core procedure locations in Professor Gupta's clinical practice.",
     "images": [],
-    "url": ""
+    "url": "https://www.rbht.nhs.uk/"
   },
   {
     "id": "barts-heart-institute",
@@ -40,7 +40,7 @@
     "years": "12 May 2016; 11 Aug 2016",
     "blurb": "Cardiology training visit in London as part of Dr Gupta's wider programme of specialist teaching work.",
     "images": [],
-    "url": ""
+    "url": "https://www.bartshealth.nhs.uk/barts-heart-centre"
   },
   {
     "id": "harley-street-hospital",
@@ -54,7 +54,7 @@
     "years": "08 Dec 2018",
     "blurb": "Cardiology training work delivered in London for clinicians involved in advanced rhythm care.",
     "images": [],
-    "url": ""
+    "url": "https://www.hcahealthcare.co.uk/locations/hospitals/the-harley-street-clinic"
   },
   {
     "id": "blackpool-victoria-hospital",
@@ -68,7 +68,7 @@
     "years": "26 Feb 2019; 26 Mar 2019; 4 June 2019; 25 Aug 2020",
     "blurb": "Repeated cardiology training visits in Blackpool, supporting local rhythm teams across multiple sessions.",
     "images": [],
-    "url": ""
+    "url": "https://www.blackpoolteachinghospitals.nhs.uk/"
   },
   {
     "id": "qe-hospital-birmingham",
@@ -82,7 +82,7 @@
     "years": "27 Aug 2020",
     "blurb": "Cardiology training session delivered at Queen Elizabeth Hospital Birmingham.",
     "images": [],
-    "url": ""
+    "url": "https://www.uhb.nhs.uk/"
   },
   {
     "id": "new-cross-hospital-wolverhampton",
@@ -96,7 +96,7 @@
     "years": "07 Oct 2022; 16 Dec 2023",
     "blurb": "Cardiology training work with the Wolverhampton team across two later visits.",
     "images": [],
-    "url": ""
+    "url": "https://www.royalwolverhampton.nhs.uk/"
   },
   {
     "id": "university-hospital-wels",
@@ -110,7 +110,7 @@
     "years": "1 Sep 2016",
     "blurb": "European cardiology training visit supporting electrophysiology practice in Wels.",
     "images": [],
-    "url": ""
+    "url": "https://www.klinikum-wegr.at/"
   },
   {
     "id": "blackrock-clinic",
@@ -124,7 +124,7 @@
     "years": "23 Feb 2018",
     "blurb": "Cardiology training visit in Dublin for clinicians involved in arrhythmia care.",
     "images": [],
-    "url": ""
+    "url": "https://www.blackrockhealth.com/"
   },
   {
     "id": "st-vincents-indianapolis",
@@ -138,7 +138,7 @@
     "years": "7 Aug 2017",
     "blurb": "US cardiology training visit in Indianapolis as part of Dr Gupta's teaching programme.",
     "images": [],
-    "url": ""
+    "url": "https://healthcare.ascension.org/locations/indiana/inasc/indianapolis-ascension-st-vincent-hospital"
   },
   {
     "id": "vanderbilt-hospital",
@@ -152,7 +152,7 @@
     "years": "8 Aug 2017",
     "blurb": "Cardiology training work with clinicians at Vanderbilt in Nashville.",
     "images": [],
-    "url": ""
+    "url": "https://www.vanderbilthealth.com/"
   },
   {
     "id": "crj-wichita",
@@ -166,7 +166,7 @@
     "years": "22 Aug 2017",
     "blurb": "Cardiology training visit in Wichita, Kansas, supporting advanced rhythm care.",
     "images": [],
-    "url": ""
+    "url": "https://healthcare.ascension.org/locations/kansas/kswic/wichita-ascension-via-christi-st-francis"
   },
   {
     "id": "ochsner-hospital",
@@ -180,7 +180,7 @@
     "years": "23 Aug 2017",
     "blurb": "Cardiology training work in New Orleans with the Ochsner team.",
     "images": [],
-    "url": ""
+    "url": "https://www.ochsner.org/"
   },
   {
     "id": "emory-hospital",
@@ -194,7 +194,7 @@
     "years": "25 Aug 2017",
     "blurb": "US cardiology training visit with the Emory Hospital team in Atlanta.",
     "images": [],
-    "url": ""
+    "url": "https://www.emoryhealthcare.org/locations/hospitals/emory-university-hospital"
   },
   {
     "id": "baylor-hospital-fort-worth",
@@ -208,7 +208,7 @@
     "years": "12 Dec 2017",
     "blurb": "Cardiology training work in Fort Worth, Texas, as part of the US teaching programme.",
     "images": [],
-    "url": ""
+    "url": "https://www.bswhealth.com/locations/hospital/fort-worth"
   },
   {
     "id": "winthrop-medical-center",
@@ -222,7 +222,7 @@
     "years": "23 May 2018",
     "blurb": "Cardiology training visit in New York for clinicians involved in rhythm services.",
     "images": [],
-    "url": ""
+    "url": "https://nyulangone.org/locations/nyu-langone-hospital-long-island"
   },
   {
     "id": "baptist-hospital-jacksonville",
@@ -236,7 +236,7 @@
     "years": "24 May 2018",
     "blurb": "US cardiology training visit with the Baptist Hospital team in Jacksonville.",
     "images": [],
-    "url": ""
+    "url": "https://www.baptistjax.com/"
   },
   {
     "id": "baptist-hospital-miami",
@@ -250,7 +250,7 @@
     "years": "25 May 2018",
     "blurb": "Cardiology training visit in Miami as part of Dr Gupta's US teaching work.",
     "images": [],
-    "url": ""
+    "url": "https://www.baptisthealth.net/locations/hospitals/baptist-hospital-of-miami"
   },
   {
     "id": "marin-health-medical-center",
@@ -264,7 +264,7 @@
     "years": "10 Jan 2022",
     "blurb": "Cardiology training work at Marin Health Medical Center in California.",
     "images": [],
-    "url": ""
+    "url": "https://www.mymarinhealth.org/"
   },
   {
     "id": "sutter-health-sacramento",
@@ -278,7 +278,7 @@
     "years": "11 Jan 2022",
     "blurb": "Cardiology training visit with the Sutter Health team in Sacramento.",
     "images": [],
-    "url": ""
+    "url": "https://www.sutterhealth.org/smcs"
   },
   {
     "id": "st-charles-hospital-bend",
@@ -292,7 +292,7 @@
     "years": "12 Jan 2022; 13 Jan 2022",
     "blurb": "Two cardiology training sessions delivered at St. Charles Hospital in Bend, Oregon.",
     "images": [],
-    "url": ""
+    "url": "https://www.stcharleshealthcare.org/locations/st-charles-bend"
   },
   {
     "id": "stanford-hospital",
@@ -306,7 +306,7 @@
     "years": "14 Jan 2022",
     "blurb": "Cardiology training visit at Stanford Hospital in California.",
     "images": [],
-    "url": ""
+    "url": "https://stanfordhealthcare.org/"
   },
   {
     "id": "woodlands-hospital-houston",
@@ -320,7 +320,7 @@
     "years": "02 May 2022",
     "blurb": "Cardiology training work in the Woodlands area of Houston.",
     "images": [],
-    "url": ""
+    "url": "https://www.houstonmethodist.org/locations/the-woodlands/"
   },
   {
     "id": "aurora-st-luke-milwaukee",
@@ -334,7 +334,7 @@
     "years": "03 May 2022",
     "blurb": "Cardiology training visit at Aurora St Luke in Milwaukee.",
     "images": [],
-    "url": ""
+    "url": "https://www.aurorahealthcare.org/locations/hospital/aurora-st-lukes-medical-center"
   },
   {
     "id": "university-of-michigan-ann-arbor",
@@ -348,7 +348,7 @@
     "years": "04 May 2022",
     "blurb": "Cardiology training work at the University of Michigan in Ann Arbor.",
     "images": [],
-    "url": ""
+    "url": "https://www.uofmhealth.org/"
   },
   {
     "id": "texas-medical-centre-houston",
@@ -362,7 +362,7 @@
     "years": "05 May 2022",
     "blurb": "Cardiology training visit at the Texas Medical Centre in Houston.",
     "images": [],
-    "url": ""
+    "url": "https://www.tmc.edu/"
   },
   {
     "id": "university-of-colorado-hospital",
@@ -376,7 +376,7 @@
     "years": "06 May 2022",
     "blurb": "Cardiology training work at the University of Colorado Hospital in Denver.",
     "images": [],
-    "url": ""
+    "url": "https://www.uchealth.org/locations/uchealth-university-of-colorado-hospital-uch/"
   },
   {
     "id": "mercy-south-st-louis",
@@ -390,7 +390,7 @@
     "years": "16 May 2022",
     "blurb": "Cardiology training visit at Mercy South in St Louis.",
     "images": [],
-    "url": ""
+    "url": "https://www.mercy.net/practice/mercy-hospital-south/"
   },
   {
     "id": "memorial-medical-centre-lufkin",
@@ -404,7 +404,7 @@
     "years": "17 May 2022",
     "blurb": "Proctoring visit at Memorial Medical Centre in Lufkin, supporting local operators during clinical work.",
     "images": [],
-    "url": ""
+    "url": "https://www.commonspirit.org/stlukes-memorial"
   },
   {
     "id": "st-cloud-minnesota",
@@ -418,7 +418,7 @@
     "years": "20 May 2022",
     "blurb": "Proctoring visit in St. Cloud, Minnesota, supporting clinicians during advanced cardiology procedures.",
     "images": [],
-    "url": ""
+    "url": "https://www.centracare.com/locations/profile/st-cloud-hospital/"
   },
   {
     "id": "mumbai-procedures",
@@ -432,7 +432,7 @@
     "years": "2026 - present",
     "blurb": "In-person consultations and ablation procedures during scheduled Mumbai visits, with local follow-up between visits.",
     "images": [],
-    "url": ""
+    "url": "https://www.mumbailondonaf.com"
   },
   {
     "id": "delhi-procedures",
@@ -446,7 +446,7 @@
     "years": "Procedure location",
     "blurb": "Delhi is included as one of the procedure locations connected to Professor Gupta's India work.",
     "images": [],
-    "url": ""
+    "url": "https://www.aiims.edu/"
   },
   {
     "id": "pondicherry-training",
@@ -460,19 +460,705 @@
     "years": "Training work in India",
     "blurb": "Training work in Pondicherry, supporting local cardiologists in advanced rhythm care.",
     "images": [],
-    "url": ""
+    "url": "https://jipmer.edu.in/"
   },
   {
     "id": "kolkata-training",
-    "name": "Kolkata training work",
+    "name": "Cardiological Society of India conference",
     "city": "Kolkata",
     "country": "India",
     "region": "India",
     "lat": 22.5726,
     "lng": 88.3639,
     "role": "taught",
-    "years": "Training work in India",
-    "blurb": "Training work in Kolkata, supporting local cardiologists in advanced rhythm care.",
+    "years": "18 Dec 2023",
+    "blurb": "Faculty lecture at the 75th annual conference of the Cardiological Society of India in Kolkata.",
+    "images": [],
+    "url": "https://www.narayanahealth.org/hospitals-clinics/kolkata/rabindranath-tagore-international-institute-cardiac-sciences"
+  },
+  {
+    "id": "aiims-new-delhi",
+    "name": "All India Institute of Medical Sciences",
+    "city": "Delhi",
+    "country": "India",
+    "region": "India",
+    "lat": 28.5672,
+    "lng": 77.21,
+    "role": "taught",
+    "years": "4 Feb 2023; 8 Feb 2025",
+    "blurb": "Visiting faculty lectures and cardiology training work at AIIMS New Delhi.",
+    "images": [],
+    "url": "https://www.aiims.edu/"
+  },
+  {
+    "id": "aig-hyderabad",
+    "name": "Asian Institute of Gastroenterology",
+    "city": "Hyderabad",
+    "country": "India",
+    "region": "India",
+    "lat": 17.4239,
+    "lng": 78.3772,
+    "role": "taught",
+    "years": "7-9 Apr 2022; 27-28 Feb 2025; 1 Mar 2025; 24-25 Oct 2025",
+    "blurb": "Repeated teaching visits in Hyderabad, including the AFib Heart and Brain Symposium and EP training sessions.",
+    "images": [],
+    "url": "https://aigindia.in/"
+  },
+  {
+    "id": "jayadeva-bengaluru",
+    "name": "Jayadeva Hospital",
+    "city": "Bengaluru",
+    "country": "India",
+    "region": "India",
+    "lat": 12.9175,
+    "lng": 77.599,
+    "role": "taught",
+    "years": "26-27 Oct 2025",
+    "blurb": "Cardiology training visit at Jayadeva Hospital in Bengaluru.",
+    "images": [],
+    "url": "https://jayadevacardiology.com/"
+  },
+  {
+    "id": "blk-max-new-delhi",
+    "name": "BLK Max Hospital",
+    "city": "Delhi",
+    "country": "India",
+    "region": "India",
+    "lat": 28.6431,
+    "lng": 77.177,
+    "role": "taught",
+    "years": "28 Oct 2025",
+    "blurb": "Cardiology teaching visit at BLK Max Hospital in New Delhi.",
+    "images": [],
+    "url": "https://www.blkmaxhospital.com/"
+  },
+  {
+    "id": "vmmc-new-delhi",
+    "name": "Vardhman Mahavir Medical College",
+    "city": "Delhi",
+    "country": "India",
+    "region": "India",
+    "lat": 28.588,
+    "lng": 77.168,
+    "role": "taught",
+    "years": "29 Oct 2025",
+    "blurb": "Cardiology teaching visit at Vardhman Mahavir Medical College in New Delhi.",
+    "images": [],
+    "url": "https://www.vmmc-sjh.nic.in/"
+  },
+  {
+    "id": "lilavati-mumbai",
+    "name": "Lilavati Hospital",
+    "city": "Mumbai",
+    "country": "India",
+    "region": "India",
+    "lat": 19.0508,
+    "lng": 72.829,
+    "role": "taught",
+    "years": "28-29 Dec 2025; 2-4 Apr 2026; 27-29 May 2026",
+    "blurb": "Repeated cardiology teaching visits at Lilavati Hospital in Mumbai.",
+    "images": [],
+    "url": "https://www.lilavatihospital.com/"
+  },
+  {
+    "id": "fortis-escorts-new-delhi",
+    "name": "Fortis Escorts Hospital",
+    "city": "Delhi",
+    "country": "India",
+    "region": "India",
+    "lat": 28.5615,
+    "lng": 77.247,
+    "role": "taught",
+    "years": "26 Mar 2026",
+    "blurb": "Cardiology teaching visit at Fortis Escorts Hospital in New Delhi.",
+    "images": [],
+    "url": "https://www.fortishealthcare.com/hospitals/fortis-escorts-heart-institute-okhla-road-new-delhi"
+  },
+  {
+    "id": "zydus-ahmedabad",
+    "name": "Zydus Hospitals",
+    "city": "Ahmedabad",
+    "country": "India",
+    "region": "India",
+    "lat": 23.0405,
+    "lng": 72.53,
+    "role": "taught",
+    "years": "31 Mar - 1 Apr 2026",
+    "blurb": "Cardiology teaching visit at Zydus Hospitals in Ahmedabad.",
+    "images": [],
+    "url": "https://zydushospitals.com/"
+  },
+  {
+    "id": "deenanath-pune",
+    "name": "Deenanath Mangeshkar Hospital",
+    "city": "Pune",
+    "country": "India",
+    "region": "India",
+    "lat": 18.502,
+    "lng": 73.815,
+    "role": "taught",
+    "years": "6-7 Apr 2026",
+    "blurb": "Cardiology teaching visit at Deenanath Mangeshkar Hospital in Pune.",
+    "images": [],
+    "url": "https://www.dmhospital.org/"
+  },
+  {
+    "id": "wadia-pune",
+    "name": "Wadia Hospital",
+    "city": "Pune",
+    "country": "India",
+    "region": "India",
+    "lat": 18.528,
+    "lng": 73.874,
+    "role": "taught",
+    "years": "26 May 2026",
+    "blurb": "Cardiology teaching visit at Wadia Hospital in Pune.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "pgimer-chandigarh",
+    "name": "PGIMER",
+    "city": "Chandigarh",
+    "country": "India",
+    "region": "India",
+    "lat": 30.7649,
+    "lng": 76.775,
+    "role": "taught",
+    "years": "4 Feb 2025",
+    "blurb": "Visiting faculty lecture at the Postgraduate Institute of Medical Education and Research in Chandigarh.",
+    "images": [],
+    "url": "https://pgimer.edu.in/"
+  },
+  {
+    "id": "ihrs-new-delhi",
+    "name": "Indian Heart Rhythm Society Annual Meeting",
+    "city": "Delhi",
+    "country": "India",
+    "region": "India",
+    "lat": 28.6139,
+    "lng": 77.209,
+    "role": "taught",
+    "years": "27 Oct 2023",
+    "blurb": "Faculty at the Annual Meeting of the Indian Heart Rhythm Society in New Delhi.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "ihrs-vizag",
+    "name": "Indian Heart Rhythm Society Annual Sessions",
+    "city": "Vizag",
+    "country": "India",
+    "region": "India",
+    "lat": 17.6868,
+    "lng": 83.2185,
+    "role": "taught",
+    "years": "31 Oct 2025",
+    "blurb": "Faculty at the Indian Heart Rhythm Society Annual Sessions in Vizag.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-manchester",
+    "name": "British Association of Cardiac Prevention and Rehabilitation",
+    "city": "Manchester",
+    "country": "United Kingdom",
+    "region": "United Kingdom",
+    "lat": 53.4808,
+    "lng": -2.2426,
+    "role": "taught",
+    "years": "1 Oct 2015",
+    "blurb": "Scientific lecture at the Annual Conference of the British Association of Cardiac Prevention and Rehabilitation in Manchester.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-birmingham-hrc",
+    "name": "Heart Rhythm Congress",
+    "city": "Birmingham",
+    "country": "United Kingdom",
+    "region": "United Kingdom",
+    "lat": 52.4862,
+    "lng": -1.8904,
+    "role": "taught",
+    "years": "8 Oct 2016",
+    "blurb": "Scientific lecture at Heart Rhythm Congress in Birmingham.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-london",
+    "name": "Scientific lectures, London",
+    "city": "London",
+    "country": "United Kingdom",
+    "region": "United Kingdom",
+    "lat": 51.5072,
+    "lng": -0.1276,
+    "role": "taught",
+    "years": "16 Dec 2016; 16 Jun 2023; 28 Aug 2024",
+    "blurb": "Scientific lectures in London including A Year in Cardiology, the London Arrhythmia Summit, and the European Society of Cardiology annual meeting.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-lenzerheide",
+    "name": "New Swiss Horizons in EP",
+    "city": "Lenzerheide",
+    "country": "Switzerland",
+    "region": "Europe",
+    "lat": 46.727,
+    "lng": 9.557,
+    "role": "taught",
+    "years": "18 Sep 2015",
+    "blurb": "Scientific lecture at New Swiss Horizons in EP in Lenzerheide, Switzerland.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-venice",
+    "name": "Venice Arrhythmias Meeting",
+    "city": "Venice",
+    "country": "Italy",
+    "region": "Europe",
+    "lat": 45.4408,
+    "lng": 12.3155,
+    "role": "taught",
+    "years": "15 Oct 2015; 25 Oct 2017",
+    "blurb": "Scientific lectures at the Venice Arrhythmias Meeting in Venice, Italy.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-tel-aviv",
+    "name": "Dead Sea EP and International Symposium",
+    "city": "Tel Aviv",
+    "country": "Israel",
+    "region": "Europe",
+    "lat": 32.0853,
+    "lng": 34.7818,
+    "role": "taught",
+    "years": "2015; 20 Mar 2021",
+    "blurb": "Scientific lectures at the Dead Sea EP symposium and the International Dead Sea Symposium in Tel Aviv.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-copenhagen",
+    "name": "Scientific lectures, Copenhagen",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "region": "Europe",
+    "lat": 55.6761,
+    "lng": 12.5683,
+    "role": "taught",
+    "years": "2 Feb 2017; 7 Feb 2019; 25 May 2022",
+    "blurb": "Scientific lectures in Copenhagen including the Global LAAO summit and Annual Atrial Fibrillation Symposium meetings.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-vienna",
+    "name": "Scientific lectures, Vienna",
+    "city": "Vienna",
+    "country": "Austria",
+    "region": "Europe",
+    "lat": 48.2082,
+    "lng": 16.3738,
+    "role": "taught",
+    "years": "18 Jun 2017; 8 Oct 2021",
+    "blurb": "Scientific lectures in Vienna for the European Heart Rhythm Association, including an advanced ablation course focused on AF.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-cape-town",
+    "name": "Cardiology at the Limits Meeting",
+    "city": "Cape Town",
+    "country": "South Africa",
+    "region": "Europe",
+    "lat": -33.9249,
+    "lng": 18.4241,
+    "role": "taught",
+    "years": "7 Apr 2017",
+    "blurb": "Scientific lecture at the Cardiology at the Limits Meeting in Cape Town, South Africa.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-barcelona",
+    "name": "Scientific lectures, Barcelona",
+    "city": "Barcelona",
+    "country": "Spain",
+    "region": "Europe",
+    "lat": 41.3874,
+    "lng": 2.1686,
+    "role": "taught",
+    "years": "18 Mar 2018; 16 Apr 2023; 26 Aug 2023",
+    "blurb": "Scientific lectures in Barcelona for EHRA and the European Society of Cardiology.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-prague",
+    "name": "Scientific lectures, Prague",
+    "city": "Prague",
+    "country": "Czechia",
+    "region": "Europe",
+    "lat": 50.0755,
+    "lng": 14.4378,
+    "role": "taught",
+    "years": "9 Feb 2018; 19 May 2023; 5 Mar 2024; 18 May 2025",
+    "blurb": "Scientific lectures in Prague including Atrial Fibrillation Symposium meetings, ESC Heart Failure, and Prague Rhythm.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-munich",
+    "name": "European Society of Cardiology",
+    "city": "Munich",
+    "country": "Germany",
+    "region": "Europe",
+    "lat": 48.1351,
+    "lng": 11.582,
+    "role": "taught",
+    "years": "25 Aug 2018",
+    "blurb": "Scientific lecture at the annual scientific meeting of the European Society of Cardiology in Munich.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-lisbon",
+    "name": "European Heart Rhythm Association",
+    "city": "Lisbon",
+    "country": "Portugal",
+    "region": "Europe",
+    "lat": 38.7223,
+    "lng": -9.1393,
+    "role": "taught",
+    "years": "17 Mar 2019",
+    "blurb": "Scientific lecture at the Annual Scientific Sessions of the European Heart Rhythm Association in Lisbon.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-paris",
+    "name": "European Society of Cardiology",
+    "city": "Paris",
+    "country": "France",
+    "region": "Europe",
+    "lat": 48.8566,
+    "lng": 2.3522,
+    "role": "taught",
+    "years": "31 Aug 2019",
+    "blurb": "Scientific lecture at the annual scientific sessions of the European Society of Cardiology in Paris.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-dead-sea",
+    "name": "Anglo-Israel Cardiovascular symposium",
+    "city": "Dead Sea",
+    "country": "Israel",
+    "region": "Europe",
+    "lat": 31.5,
+    "lng": 35.5,
+    "role": "taught",
+    "years": "12 Dec 2019",
+    "blurb": "Scientific lecture at the Anglo-Israel Cardiovascular symposium at the Dead Sea, Israel.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-dubrovnik",
+    "name": "CroRhythm Meeting",
+    "city": "Dubrovnik",
+    "country": "Croatia",
+    "region": "Europe",
+    "lat": 42.6507,
+    "lng": 18.0944,
+    "role": "taught",
+    "years": "26 Apr 2021",
+    "blurb": "Scientific lecture at the CroRhythm Meeting in Dubrovnik.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-budapest",
+    "name": "Hungarian Arrhythmia Society",
+    "city": "Budapest",
+    "country": "Hungary",
+    "region": "Europe",
+    "lat": 47.4979,
+    "lng": 19.0402,
+    "role": "taught",
+    "years": "29 Sep 2022; 19 Sep 2024",
+    "blurb": "Scientific lectures at the biennial scientific sessions of the Hungarian Arrhythmia Society in Budapest.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-madrid",
+    "name": "Scientific lectures, Madrid",
+    "city": "Madrid",
+    "country": "Spain",
+    "region": "Europe",
+    "lat": 40.4168,
+    "lng": -3.7038,
+    "role": "taught",
+    "years": "9 Mar 2023; 5 Nov 2024; 13 Feb 2025",
+    "blurb": "Scientific lectures in Madrid including Annual Atrial Fibrillation Symposium meetings and New Horizons in AF.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-frankfurt",
+    "name": "Frankfurt Academy for Arrhythmias",
+    "city": "Frankfurt",
+    "country": "Germany",
+    "region": "Europe",
+    "lat": 50.1109,
+    "lng": 8.6821,
+    "role": "taught",
+    "years": "16 Sep 2023",
+    "blurb": "Scientific lecture at the Annual Frankfurt Academy for Arrhythmias meeting.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-dublin",
+    "name": "Irish Cardiac Society",
+    "city": "Dublin",
+    "country": "Ireland",
+    "region": "Europe",
+    "lat": 53.3498,
+    "lng": -6.2603,
+    "role": "taught",
+    "years": "13 Oct 2023",
+    "blurb": "Scientific lecture at the annual meeting of the Irish Cardiac Society in Dublin.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-warsaw",
+    "name": "EHRA Advanced EP course",
+    "city": "Warsaw",
+    "country": "Poland",
+    "region": "Europe",
+    "lat": 52.2297,
+    "lng": 21.0122,
+    "role": "taught",
+    "years": "19 Oct 2023",
+    "blurb": "Scientific teaching at the Advanced EP course for the European Heart Rhythm Association in Warsaw.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-istanbul",
+    "name": "Scientific lectures, Istanbul",
+    "city": "Istanbul",
+    "country": "Turkey",
+    "region": "Europe",
+    "lat": 41.0082,
+    "lng": 28.9784,
+    "role": "taught",
+    "years": "2 Nov 2023; 5 Oct 2024",
+    "blurb": "Scientific lectures in Istanbul including the World Society of Arrhythmias congress and the IEPI conference.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-berlin",
+    "name": "Scientific lectures, Berlin",
+    "city": "Berlin",
+    "country": "Germany",
+    "region": "Europe",
+    "lat": 52.52,
+    "lng": 13.405,
+    "role": "taught",
+    "years": "7 Apr 2024; 11 Mar 2026",
+    "blurb": "Scientific lectures in Berlin for EHRA and the Annual Atrial Fibrillation Symposium.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-malaga",
+    "name": "EHRA Advanced EP course",
+    "city": "Malaga",
+    "country": "Spain",
+    "region": "Europe",
+    "lat": 36.7213,
+    "lng": -4.4214,
+    "role": "taught",
+    "years": "11 Oct 2024",
+    "blurb": "Scientific teaching at the EHRA Advanced EP course with special emphasis on AF ablation in Malaga.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-washington-dc",
+    "name": "American College of Cardiology",
+    "city": "Washington DC",
+    "country": "United States",
+    "region": "United States",
+    "lat": 38.9072,
+    "lng": -77.0369,
+    "role": "taught",
+    "years": "16 Mar 2017",
+    "blurb": "Scientific lecture at the American College of Cardiology Annual Scientific Sessions in Washington DC.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-boston",
+    "name": "Heart Rhythm Society",
+    "city": "Boston",
+    "country": "United States",
+    "region": "United States",
+    "lat": 42.3601,
+    "lng": -71.0589,
+    "role": "taught",
+    "years": "9 May 2018; 16 May 2024",
+    "blurb": "Scientific lectures at the annual scientific sessions of the Heart Rhythm Society in Boston.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-san-francisco",
+    "name": "Heart Rhythm Society",
+    "city": "San Francisco",
+    "country": "United States",
+    "region": "United States",
+    "lat": 37.7749,
+    "lng": -122.4194,
+    "role": "taught",
+    "years": "8 May 2019",
+    "blurb": "Scientific lecture at the Annual Heart Rhythm Society Sessions in San Francisco.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-kansas-city",
+    "name": "Kansas City EP symposium",
+    "city": "Kansas City",
+    "country": "United States",
+    "region": "United States",
+    "lat": 39.0997,
+    "lng": -94.5786,
+    "role": "taught",
+    "years": "17-18 Aug 2019",
+    "blurb": "Scientific lecture at the Kansas City EP symposium.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-park-city",
+    "name": "Western AF symposium",
+    "city": "Park City",
+    "country": "United States",
+    "region": "United States",
+    "lat": 40.6461,
+    "lng": -111.498,
+    "role": "taught",
+    "years": "26 Feb 2021; 26 Feb 2022",
+    "blurb": "Scientific lectures at the Western AF symposium in Park City, Utah.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-toronto",
+    "name": "Canadian AF summit",
+    "city": "Toronto",
+    "country": "Canada",
+    "region": "United States",
+    "lat": 43.6532,
+    "lng": -79.3832,
+    "role": "taught",
+    "years": "9 Oct 2022",
+    "blurb": "Scientific lecture at the Canadian AF summit in Toronto.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-shanghai",
+    "name": "Asian Anticoagulation Academy",
+    "city": "Shanghai",
+    "country": "China",
+    "region": "Asia",
+    "lat": 31.2304,
+    "lng": 121.4737,
+    "role": "taught",
+    "years": "9 Mar 2019",
+    "blurb": "Scientific lecture at the Asian Anticoagulation Academy in Shanghai, China.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-beijing",
+    "name": "Lecture tour, Beijing",
+    "city": "Beijing",
+    "country": "China",
+    "region": "Asia",
+    "lat": 39.9042,
+    "lng": 116.4074,
+    "role": "taught",
+    "years": "11-14 Mar 2019",
+    "blurb": "Scientific lectures delivered as part of a lecture tour in Beijing, China.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-shenyang",
+    "name": "Lecture tour, Shenyang",
+    "city": "Shenyang",
+    "country": "China",
+    "region": "Asia",
+    "lat": 41.8057,
+    "lng": 123.4315,
+    "role": "taught",
+    "years": "11-14 Mar 2019",
+    "blurb": "Scientific lectures delivered as part of a lecture tour in Shenyang, China.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-seoul",
+    "name": "Korean Heart Rhythm Society",
+    "city": "Seoul",
+    "country": "South Korea",
+    "region": "Asia",
+    "lat": 37.5665,
+    "lng": 126.978,
+    "role": "taught",
+    "years": "20-22 Jun 2019",
+    "blurb": "Scientific lecture at the annual meeting of the Korean Heart Rhythm Society in Seoul.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-osaka",
+    "name": "Japanese Heart Rhythm Society",
+    "city": "Osaka",
+    "country": "Japan",
+    "region": "Asia",
+    "lat": 34.6937,
+    "lng": 135.5023,
+    "role": "taught",
+    "years": "26 Jul 2019",
+    "blurb": "Scientific lecture at the annual meeting of the Japanese Heart Rhythm Society in Osaka, Japan.",
+    "images": [],
+    "url": ""
+  },
+  {
+    "id": "lectures-sydney",
+    "name": "Asia Pacific Heart Rhythm Society",
+    "city": "Sydney",
+    "country": "Australia",
+    "region": "Asia",
+    "lat": -33.8688,
+    "lng": 151.2093,
+    "role": "taught",
+    "years": "26 Sep 2024",
+    "blurb": "Scientific lecture at the 17th Annual Meeting of the Asia Pacific Heart Rhythm Society in Sydney.",
     "images": [],
     "url": ""
   }

@@ -1,6 +1,6 @@
 export type LocationRole = 'operated' | 'taught' | 'proctored';
 
-export type MapRegion = 'India' | 'United Kingdom' | 'Europe' | 'United States';
+export type MapRegion = 'India' | 'United Kingdom' | 'Europe' | 'United States' | 'Asia';
 
 export type Location = {
   id: string;
