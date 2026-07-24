@@ -25,7 +25,7 @@ test('sitemap lists all routes on canonical domain', () => {
   const entries = sitemap();
   const routes = entries.map((e) => new URL(e.url).pathname);
   expect(routes.sort()).toEqual(
-    ['/', '/book', '/conditions', '/evidence', '/journey', '/testimonials'].sort(),
+    ['/', '/book', '/certifications', '/conditions', '/evidence', '/journey', '/testimonials'].sort(),
   );
   expect(entries.every((e) => e.url.startsWith(site.url))).toBe(true);
 });

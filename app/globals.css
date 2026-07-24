@@ -423,6 +423,80 @@ body {
   }
 }
 
+/* Certification wall: real certificates already set in ornate gilt frames.
+   drop-shadow (not box-shadow) follows the transparent frame silhouette. */
+.cert-photo {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.28s ease;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.5));
+}
+
+.cert-photo:hover,
+.cert-photo:focus-visible {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.62));
+}
+
+/* Certification wall: typeset placeholder plates in a gilt frame + mat */
+.cert-frame {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.28s ease;
+  background: linear-gradient(
+    145deg,
+    var(--color-brass-bright),
+    var(--color-brass) 46%,
+    var(--color-brass-deep)
+  );
+  padding: 8px;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 2px rgba(6, 15, 21, 0.5),
+    0 14px 30px rgba(6, 15, 21, 0.3);
+}
+
+@media (min-width: 768px) {
+  .cert-frame {
+    padding: 10px;
+  }
+}
+
+.cert-frame:hover,
+.cert-frame:focus-visible {
+  transform: translateY(-5px);
+  box-shadow:
+    0 2px 4px rgba(6, 15, 21, 0.5),
+    0 24px 48px rgba(6, 15, 21, 0.44);
+}
+
+.cert-frame-mat {
+  background: var(--color-paper);
+  padding: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(18, 43, 58, 0.14),
+    inset 0 1px 5px rgba(18, 43, 58, 0.1);
+}
+
+@media (min-width: 768px) {
+  .cert-frame-mat {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-photo,
+  .cert-frame {
+    transition: none;
+  }
+  .cert-photo:hover,
+  .cert-photo:focus-visible,
+  .cert-frame:hover,
+  .cert-frame:focus-visible {
+    transform: none;
+  }
+}
+
 .faq-panel {
   display: grid;
   transition: grid-template-rows 200ms ease, opacity 200ms ease;

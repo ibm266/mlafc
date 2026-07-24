@@ -11,6 +11,7 @@ const pageLinks = [
   { href: '/conditions', label: 'Conditions' },
   { href: '/evidence', label: 'The Evidence' },
   { href: '/journey', label: 'The Journey' },
+  { href: '/certifications', label: 'Certifications' },
   { href: '/testimonials', label: 'Voices' },
 ] as const;
 

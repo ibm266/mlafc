@@ -68,6 +68,47 @@ export type Milestone = {
   photoFirst?: boolean;
 };
 
+export type CertificationCategory = 'india' | 'uk' | 'fellowships' | 'recognition';
+
+export type CertificationImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+export type CertificationVerify = {
+  label: string;
+  url: string;
+};
+
+export type Certification = {
+  id: string;
+  /** Short label shown under the frame and used for the seal initial, e.g. "MD", "FRCP". */
+  postnominal: string;
+  /** Full credential name shown as the frame and dialog title. */
+  title: string;
+  awardingBody: string;
+  location?: string;
+  /** Display year or short year phrase, e.g. "1997". */
+  year: string;
+  category: CertificationCategory;
+  /** 'scan' renders the restored photograph; 'plate' renders a typeset certificate. */
+  kind: 'scan' | 'plate';
+  image?: CertificationImage;
+  /** Dialog body paragraphs, in the site voice. */
+  story: string[];
+  /** Small factual line shown in the dialog. */
+  meta?: string;
+  verify?: CertificationVerify;
+};
+
+export type CertificationSection = {
+  id: CertificationCategory;
+  label: string;
+  blurb: string;
+};
+
 export type Faq = { question: string; answer: string };
 
 export type Citation = { id: number; text: string };
