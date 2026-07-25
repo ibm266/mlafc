@@ -1,4 +1,5 @@
 import { validateEnquiry } from '@/lib/validateEnquiry';
+import { rateLimit, resetRateLimits } from '@/lib/rateLimit';
 import { submitEnquiry } from '@/app/book/actions';
 
 const valid = {
@@ -51,4 +52,29 @@ test('submitEnquiry rejects invalid form data', async () => {
   fd.set('name', '');
   const res = await submitEnquiry(fd);
   expect(res.ok).toBe(false);
+});
+
+test('rateLimit allows a burst up to the limit and then blocks', () => {
+  resetRateLimits();
+  expect(rateLimit('k', 3, 60_000).ok).toBe(true);
+  expect(rateLimit('k', 3, 60_000).ok).toBe(true);
+  expect(rateLimit('k', 3, 60_000).ok).toBe(true);
+
+  const blocked = rateLimit('k', 3, 60_000);
+  expect(blocked.ok).toBe(false);
+  expect(blocked.retryAfterMs).toBeGreaterThan(0);
+
+  // Other keys keep their own count.
+  expect(rateLimit('other', 3, 60_000).ok).toBe(true);
+});
+
+test('rateLimit starts a fresh window once the old one expires', () => {
+  resetRateLimits();
+  expect(rateLimit('k', 1, 1).ok).toBe(true);
+  expect(rateLimit('k', 1, 1).ok).toBe(false);
+
+  vi.useFakeTimers();
+  vi.setSystemTime(Date.now() + 10);
+  expect(rateLimit('k', 1, 1).ok).toBe(true);
+  vi.useRealTimers();
 });

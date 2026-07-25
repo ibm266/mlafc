@@ -11,5 +11,5 @@ export const site = {
   gmcLine: 'Professor Dhiraj Gupta is registered with the UK General Medical Council (GMC no. 5205561).',
   disclaimer:
     'Information on this site is for general education and is not a substitute for individual medical advice. Always consult a doctor about your own condition.',
-  responseDays: 'X [placeholder]',
+  responseDays: '2',
 } as const;

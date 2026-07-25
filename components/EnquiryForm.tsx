@@ -1,7 +1,7 @@
 'use client';
 
 import Script from 'next/script';
-import { useState, useTransition, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, useTransition, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
 import { submitEnquiry } from '@/app/book/actions';
 import {
   enquiryConditions,
@@ -35,13 +35,27 @@ const FIELD_BASE =
 
 const FIELD_CLASS = `w-full ${FIELD_BASE}`;
 
-type FieldErrors = Partial<Record<keyof EnquiryFields | 'recaptcha', string>>;
+type FieldErrors = Partial<Record<keyof EnquiryFields | 'recaptcha' | 'form', string>>;
 
 export function EnquiryForm() {
   const [fields, setFields] = useState<EnquiryFields>(() => ({ ...EMPTY }));
   const [errors, setErrors] = useState<FieldErrors>({});
   const [done, setDone] = useState(false);
   const [pending, startTransition] = useTransition();
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // The form is long, so on success bring the confirmation into view rather
+  // than leaving the reader wherever the submit button happened to be.
+  useEffect(() => {
+    const node = successRef.current;
+    if (!done || !node?.scrollIntoView) {
+      return;
+    }
+
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    node.scrollIntoView({ behavior, block: 'center' });
+    node.focus({ preventScroll: true });
+  }, [done]);
 
   const set =
     (key: keyof EnquiryFields) =>
@@ -118,7 +132,12 @@ export function EnquiryForm() {
 
   if (done) {
     return (
-      <div role="status" className="px-2 py-8 text-center md:py-10">
+      <div
+        ref={successRef}
+        role="status"
+        tabIndex={-1}
+        className="px-2 py-8 text-center focus-visible:outline-2 md:py-10"
+      >
         <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" className="mx-auto block">
           <circle cx="28" cy="28" r="27" fill="none" stroke="currentColor" className="text-brass" strokeWidth="2" />
           <path
@@ -150,6 +169,8 @@ export function EnquiryForm() {
       </div>
     );
   }
+
+  const formError = errors.form ?? errors.recaptcha;
 
   return (
     <>
@@ -295,9 +316,9 @@ export function EnquiryForm() {
           </select>,
         )}
 
-        {errors.recaptcha ? (
+        {formError ? (
           <p className="text-sm text-brass-deep" role="alert">
-            {errors.recaptcha}
+            {formError}
           </p>
         ) : null}
 
