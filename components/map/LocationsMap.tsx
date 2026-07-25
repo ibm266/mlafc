@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Location, LocationRole, MapRegion } from '@/data/types';
-import { LinkNeededFlag } from '@/components/LinkNeededFlag';
 import {
   MAP_REGIONS,
   countryBounds,
@@ -355,6 +354,9 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
                   <span className="ml-2">{active.years}</span>
                 </p>
                 <p className="mt-4 leading-relaxed text-paper/85">{active.blurb}</p>
+                {/* Pins cover hospitals, societies and one-off congresses, and a
+                    third of them have no page worth linking to, so the label
+                    stays neutral and a missing link simply shows nothing. */}
                 {active.url ? (
                   <a
                     href={active.url}
@@ -362,14 +364,9 @@ export default function LocationsMap({ locations }: { locations: Location[] }) {
                     rel="noopener noreferrer"
                     className="arrow-link interactive mt-4 inline-block font-semibold text-brass hover:underline"
                   >
-                    Hospital ↗
+                    Visit website ↗
                   </a>
-                ) : (
-                  <LinkNeededFlag
-                    label="hospital link needed · locations.json"
-                    className="mt-4 inline-block"
-                  />
-                )}
+                ) : null}
                 {active.readMore ? (
                   <Link href={active.readMore} className="arrow-link interactive mt-4 inline-block font-semibold text-brass hover:underline">
                     Read more &rarr;

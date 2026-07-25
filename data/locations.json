@@ -604,7 +604,7 @@
   },
   {
     "id": "wadia-pune",
-    "name": "Wadia Hospital",
+    "name": "N. M. Wadia Institute of Cardiology",
     "city": "Pune",
     "country": "India",
     "region": "India",
@@ -612,9 +612,9 @@
     "lng": 73.874,
     "role": "taught",
     "years": "26 May 2026",
-    "blurb": "Cardiology teaching visit at Wadia Hospital in Pune.",
+    "blurb": "Cardiology teaching visit at the N. M. Wadia Institute of Cardiology on Sassoon Road, Pune.",
     "images": [],
-    "url": ""
+    "url": "https://www.nmwcardiology.org/"
   },
   {
     "id": "pgimer-chandigarh",
@@ -642,7 +642,7 @@
     "years": "27 Oct 2023",
     "blurb": "Faculty at the Annual Meeting of the Indian Heart Rhythm Society in New Delhi.",
     "images": [],
-    "url": ""
+    "url": "https://ihrs.in/"
   },
   {
     "id": "ihrs-vizag",
@@ -656,7 +656,7 @@
     "years": "31 Oct 2025",
     "blurb": "Faculty at the Indian Heart Rhythm Society Annual Sessions in Vizag.",
     "images": [],
-    "url": ""
+    "url": "https://ihrs.in/"
   },
   {
     "id": "lectures-manchester",
@@ -670,7 +670,7 @@
     "years": "1 Oct 2015",
     "blurb": "Scientific lecture at the Annual Conference of the British Association of Cardiac Prevention and Rehabilitation in Manchester.",
     "images": [],
-    "url": ""
+    "url": "https://www.bacpr.org/"
   },
   {
     "id": "lectures-birmingham-hrc",
@@ -684,7 +684,7 @@
     "years": "8 Oct 2016",
     "blurb": "Scientific lecture at Heart Rhythm Congress in Birmingham.",
     "images": [],
-    "url": ""
+    "url": "https://www.heartrhythmcongress.org/"
   },
   {
     "id": "lectures-london",
@@ -768,7 +768,7 @@
     "years": "18 Jun 2017; 8 Oct 2021",
     "blurb": "Scientific lectures in Vienna for the European Heart Rhythm Association, including an advanced ablation course focused on AF.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/communities/associations/ehra/"
   },
   {
     "id": "lectures-cape-town",
@@ -796,7 +796,7 @@
     "years": "18 Mar 2018; 16 Apr 2023; 26 Aug 2023",
     "blurb": "Scientific lectures in Barcelona for EHRA and the European Society of Cardiology.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/"
   },
   {
     "id": "lectures-prague",
@@ -824,7 +824,7 @@
     "years": "25 Aug 2018",
     "blurb": "Scientific lecture at the annual scientific meeting of the European Society of Cardiology in Munich.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/"
   },
   {
     "id": "lectures-lisbon",
@@ -838,7 +838,7 @@
     "years": "17 Mar 2019",
     "blurb": "Scientific lecture at the Annual Scientific Sessions of the European Heart Rhythm Association in Lisbon.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/communities/associations/ehra/"
   },
   {
     "id": "lectures-paris",
@@ -852,7 +852,7 @@
     "years": "31 Aug 2019",
     "blurb": "Scientific lecture at the annual scientific sessions of the European Society of Cardiology in Paris.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/"
   },
   {
     "id": "lectures-dead-sea",
@@ -922,7 +922,7 @@
     "years": "16 Sep 2023",
     "blurb": "Scientific lecture at the Annual Frankfurt Academy for Arrhythmias meeting.",
     "images": [],
-    "url": ""
+    "url": "https://fafa-symposium.de/"
   },
   {
     "id": "lectures-dublin",
@@ -936,7 +936,7 @@
     "years": "13 Oct 2023",
     "blurb": "Scientific lecture at the annual meeting of the Irish Cardiac Society in Dublin.",
     "images": [],
-    "url": ""
+    "url": "https://irishcardiacsociety.ie/"
   },
   {
     "id": "lectures-warsaw",
@@ -950,7 +950,7 @@
     "years": "19 Oct 2023",
     "blurb": "Scientific teaching at the Advanced EP course for the European Heart Rhythm Association in Warsaw.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/communities/associations/ehra/"
   },
   {
     "id": "lectures-istanbul",
@@ -978,7 +978,7 @@
     "years": "7 Apr 2024; 11 Mar 2026",
     "blurb": "Scientific lectures in Berlin for EHRA and the Annual Atrial Fibrillation Symposium.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/communities/associations/ehra/"
   },
   {
     "id": "lectures-malaga",
@@ -992,7 +992,7 @@
     "years": "11 Oct 2024",
     "blurb": "Scientific teaching at the EHRA Advanced EP course with special emphasis on AF ablation in Malaga.",
     "images": [],
-    "url": ""
+    "url": "https://www.escardio.org/communities/associations/ehra/"
   },
   {
     "id": "lectures-washington-dc",
@@ -1006,7 +1006,7 @@
     "years": "16 Mar 2017",
     "blurb": "Scientific lecture at the American College of Cardiology Annual Scientific Sessions in Washington DC.",
     "images": [],
-    "url": ""
+    "url": "https://www.acc.org/"
   },
   {
     "id": "lectures-boston",
@@ -1020,7 +1020,7 @@
     "years": "9 May 2018; 16 May 2024",
     "blurb": "Scientific lectures at the annual scientific sessions of the Heart Rhythm Society in Boston.",
     "images": [],
-    "url": ""
+    "url": "https://www.hrsonline.org/"
   },
   {
     "id": "lectures-san-francisco",
@@ -1034,7 +1034,7 @@
     "years": "8 May 2019",
     "blurb": "Scientific lecture at the Annual Heart Rhythm Society Sessions in San Francisco.",
     "images": [],
-    "url": ""
+    "url": "https://www.hrsonline.org/"
   },
   {
     "id": "lectures-kansas-city",
@@ -1062,7 +1062,7 @@
     "years": "26 Feb 2021; 26 Feb 2022",
     "blurb": "Scientific lectures at the Western AF symposium in Park City, Utah.",
     "images": [],
-    "url": ""
+    "url": "https://www.hmpglobalevents.com/wafib"
   },
   {
     "id": "lectures-toronto",
@@ -1132,7 +1132,7 @@
     "years": "20-22 Jun 2019",
     "blurb": "Scientific lecture at the annual meeting of the Korean Heart Rhythm Society in Seoul.",
     "images": [],
-    "url": ""
+    "url": "https://k-hrs.org/eng"
   },
   {
     "id": "lectures-osaka",
@@ -1146,7 +1146,7 @@
     "years": "26 Jul 2019",
     "blurb": "Scientific lecture at the annual meeting of the Japanese Heart Rhythm Society in Osaka, Japan.",
     "images": [],
-    "url": ""
+    "url": "https://new.jhrs.or.jp/en/"
   },
   {
     "id": "lectures-sydney",
@@ -1160,6 +1160,6 @@
     "years": "26 Sep 2024",
     "blurb": "Scientific lecture at the 17th Annual Meeting of the Asia Pacific Heart Rhythm Society in Sydney.",
     "images": [],
-    "url": ""
+    "url": "https://www.aphrs.org/"
   }
 ]
