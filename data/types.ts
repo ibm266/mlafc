@@ -20,7 +20,7 @@ export type Location = {
 
 export type Visit = {
   id: string;
-  month: string; // e.g. "[March] 2026" until client confirms
+  month: string; // display label, e.g. "August 2026" or "27 Sep to 4 Oct 2026"
   status: 'open' | 'waitlist' | 'tbc';
   note: string;
 };
@@ -53,6 +53,30 @@ export type MilestoneAward = {
   highlight?: boolean;
 };
 
+export type MilestonePhoto = {
+  src: string;
+  /** Intrinsic pixel size of the derivative in public/, needed by next/image. */
+  width: number;
+  height: number;
+  /** Descriptive alt text. Not a repeat of photoCaption. */
+  alt: string;
+};
+
+export type MilestoneVideo = {
+  src: string;
+  /** Still frame shown until the viewer presses play. Nothing loads before that. */
+  posterSrc: string;
+  /** Intrinsic pixel size of the video, so the window reserves the right shape. */
+  width: number;
+  height: number;
+  /** What the film shows, for the play control and the video's accessible name. */
+  label: string;
+  /** Duration as minutes and seconds, e.g. "0:46". Shown on the play control. */
+  duration: string;
+  /** Who produced it, shown under the frame. */
+  credit?: string;
+};
+
 export type Milestone = {
   markerYear: string;
   markerSub: string;
@@ -63,6 +87,15 @@ export type Milestone = {
   meta?: string;
   photoTitle: string;
   photoCaption: string;
+  /** A real photograph. Milestones without one fall back to the ECG placeholder. */
+  photo?: MilestonePhoto;
+  /** A film, shown in place of the photograph. Takes precedence over `photo`. */
+  video?: MilestoneVideo;
+  /**
+   * A set of photographs. A milestone with one runs full width, with the
+   * carousel below the prose rather than in the narrow photo column.
+   */
+  gallery?: GalleryPhoto[];
   variant?: 'awards-band' | 'finale';
   awards?: MilestoneAward[];
   photoFirst?: boolean;
@@ -107,6 +140,23 @@ export type CertificationSection = {
   id: CertificationCategory;
   label: string;
   blurb: string;
+};
+
+export type GalleryPhoto = {
+  /** Slug, also the filename stem under public/images/gallery. */
+  id: string;
+  src: string;
+  /** Intrinsic pixel size of the derivative in public/, needed by next/image. */
+  width: number;
+  height: number;
+  /** Descriptive alt text: what is happening and where. Not the caption. */
+  alt: string;
+  /** Short label shown as the heading beneath the carousel stage. */
+  title: string;
+  /** One factual sentence shown beneath the carousel stage. */
+  caption: string;
+  /** When the photograph was taken, e.g. "October 2025". */
+  meta: string;
 };
 
 export type Faq = { question: string; answer: string };

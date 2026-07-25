@@ -10,7 +10,7 @@ const STATUS: Record<Visit['status'], { label: string; cls: string }> = {
 
 export function VisitDates({ visits }: { visits: Visit[] }) {
   return (
-    <ul className="grid gap-5 md:grid-cols-3">
+    <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {visits.map((v, i) => (
         <Reveal as="li" key={v.id} delay={i * 80} className="card-hover rounded-lg border border-line bg-white p-6">
           <div className="flex items-center justify-between gap-3">

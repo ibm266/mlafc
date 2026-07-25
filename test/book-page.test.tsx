@@ -16,5 +16,5 @@ test('book page shows form fields, contact channels and visit dates', () => {
   expect(screen.getByLabelText(/how did you hear about professor gupta/i)).toBeInTheDocument();
   expect(screen.getByLabelText(/preferred visit month/i)).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /whatsapp/i })).toBeInTheDocument();
-  expect(screen.getByText('Booking open')).toBeInTheDocument();
+  expect(screen.getAllByText('Booking open').length).toBeGreaterThan(0);
 });

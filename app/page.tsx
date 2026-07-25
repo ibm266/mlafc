@@ -15,6 +15,7 @@ import { ScrollProgress } from '@/components/ScrollProgress';
 import { FloatingBookingPill } from '@/components/FloatingBookingPill';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { HorizontalCardGallery } from '@/components/HorizontalCardGallery';
+import { InActionGallery } from '@/components/home/InActionGallery';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import publicationsJson from '@/data/publications.json';
@@ -154,10 +155,38 @@ export default function Home() {
         </div>
       </section>
 
+      <section aria-labelledby="in-action-heading" className="bg-paper-soft">
+        <div className="mx-auto max-w-6xl px-5 py-14">
+          <Reveal>
+            <ChapterEyebrow chapter="05" label="Dr Gupta in action" />
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="in-action-heading" className="mt-3 font-serif text-4xl">
+              The programme, in photographs.
+            </h2>
+            <p className="mt-4 max-w-xl text-ink-soft">
+              Under the Indo-UK proctoring programme he runs free workshops across India, operating alongside
+              the local cardiologists and their teams. These are the days themselves.
+            </p>
+          </Reveal>
+          <InActionGallery />
+          <Reveal delay={120}>
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <Link href="/book" className="arrow-link interactive inline-block font-semibold text-brass-deep hover:underline">
+                Book a consultation &rarr;
+              </Link>
+              <Link href="/journey" className="arrow-link interactive inline-block font-semibold text-brass-deep hover:underline">
+                How the programme came about &rarr;
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section aria-label="In their words" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="05" label="In their words" />
+            <ChapterEyebrow chapter="06" label="In their words" />
           </Reveal>
           {hospitalLetter ? (
             <Reveal delay={80}>
@@ -204,7 +233,7 @@ export default function Home() {
       <section aria-labelledby="publications-heading" className="bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="06" label="Research" />
+            <ChapterEyebrow chapter="07" label="Research" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
@@ -242,7 +271,7 @@ export default function Home() {
       <section aria-labelledby="visits-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="07" label="Plan ahead" />
+            <ChapterEyebrow chapter="08" label="Plan ahead" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="visits-heading" className="mt-3 font-serif text-4xl">

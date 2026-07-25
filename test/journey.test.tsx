@@ -10,7 +10,7 @@ beforeEach(() => {
 
 test('renders all timeline milestones with years and decorative placeholders', () => {
   render(<JourneyTimeline milestones={milestones} />);
-  expect(screen.getAllByRole('article')).toHaveLength(11);
+  expect(screen.getAllByRole('article')).toHaveLength(10);
   for (const m of milestones) {
     expect(screen.getAllByText(m.yearLabel).length).toBeGreaterThan(0);
   }

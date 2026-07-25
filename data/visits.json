@@ -1,5 +1,6 @@
 [
-  { "id": "visit-1", "month": "[March] 2026", "status": "open", "note": "Consultations and procedures. Limited slots. [placeholder dates]" },
-  { "id": "visit-2", "month": "[June] 2026", "status": "waitlist", "note": "Consultation list full - join the waitlist. [placeholder dates]" },
-  { "id": "visit-3", "month": "[October] 2026", "status": "tbc", "note": "Dates to be confirmed. Register interest. [placeholder dates]" }
+  { "id": "visit-aug-2026", "month": "August 2026", "status": "waitlist", "note": "Fully booked. Join the waitlist in case of a cancellation." },
+  { "id": "visit-sep-oct-2026", "month": "27 Sep to 4 Oct 2026", "status": "open", "note": "Consultations and procedures. Filling fast." },
+  { "id": "visit-nov-2026", "month": "11 to 17 Nov 2026", "status": "open", "note": "Consultations and procedures. Filling fast." },
+  { "id": "visit-dec-2026", "month": "15 to 26 Dec 2026", "status": "open", "note": "Consultations and procedures. Filling fast." }
 ]

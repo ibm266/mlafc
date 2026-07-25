@@ -1,3 +1,4 @@
+import { academicPhotos, proctoringPhotos } from './gallery';
 import type { Milestone } from './types';
 
 export const milestones: Milestone[] = [
@@ -12,6 +13,12 @@ export const milestones: Milestone[] = [
     photoTitle: 'Medical school',
     photoCaption:
       'A young student in India, beginning a six-year MB BS programme with cardiology already in mind. 1988 to 1994.',
+    photo: {
+      src: '/images/journey/mbbs-convocation-1994.webp',
+      width: 1019,
+      height: 1400,
+      alt: 'Dhiraj Gupta in academic cap and gown at his MB BS convocation in India, 1994.',
+    },
   },
   {
     markerYear: '1994',
@@ -23,6 +30,12 @@ export const milestones: Milestone[] = [
     photoTitle: 'Post graduation',
     photoCaption:
       'MD at PGIMER Chandigarh and DM at AIIMS New Delhi, after All India 2nd rank in the national entrance examination.',
+    photo: {
+      src: '/images/journey/dm-aiims-convocation-2000.webp',
+      width: 1400,
+      height: 1050,
+      alt: 'Dhiraj Gupta in scarlet doctoral robes receiving his DM in Cardiology on stage at the AIIMS New Delhi convocation, 2000.',
+    },
   },
   {
     markerYear: '2000',
@@ -36,6 +49,12 @@ export const milestones: Milestone[] = [
     photoCaption:
       'Awarded the Commonwealth Fellowship in Cardiac Electrophysiology. Six years of super-specialist EP training in London.',
     photoFirst: true,
+    photo: {
+      src: '/images/journey/commonwealth-fellowship-2000.webp',
+      width: 1294,
+      height: 1140,
+      alt: 'Dr Dhiraj Gupta, wearing a delegate badge reading New Delhi, India, with a senior cardiologist at a scientific meeting in 2000.',
+    },
   },
   {
     markerYear: '2006',
@@ -48,19 +67,35 @@ export const milestones: Milestone[] = [
     photoTitle: 'LHCH',
     photoCaption:
       'Appointed Consultant Electrophysiologist at Liverpool Heart and Chest Hospital in 2006.',
+    video: {
+      src: '/videos/lhch-overview.mp4',
+      posterSrc: '/videos/lhch-overview-poster.webp',
+      width: 848,
+      height: 480,
+      label:
+        "A short film on Liverpool Heart and Chest Hospital, the regional electrophysiology service it runs for 2.8 million people, and Professor Gupta's work there.",
+      duration: '0:46',
+      credit: 'Film: Liverpool Heart and Chest Hospital NHS Foundation Trust.',
+    },
   },
   {
     markerYear: '2009',
     markerSub: 'High-volume',
     yearLabel: '2009',
     tag: 'High-volume practice',
-    title: 'More than 250 ablations a year. Every year.',
-    body: 'Professor Gupta consistently performs over 250 catheter ablation procedures for atrial fibrillation each year, placing him among the highest-volume operators in the United Kingdom. Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing over 200 ablations a year have measurably better outcomes than those below 50.',
+    title: 'More than 300 ablations a year. Every year.',
+    body: 'Professor Gupta consistently performs over 300 catheter ablation procedures for atrial fibrillation each year, placing him among the highest-volume operators in the United Kingdom. Volume matters in electrophysiology. The literature is clear: outcomes are tightly correlated with operator experience, and centres performing over 200 ablations a year have measurably better outcomes than those below 50.',
     meta: '10,000+ AF ablations · <1% complication rate',
     photoTitle: 'In theatre',
     photoCaption:
-      'Begins performing more than 250 AF ablation cases every year, a pace he has maintained since.',
+      'Begins performing more than 300 AF ablation cases every year, a pace he has maintained since.',
     photoFirst: true,
+    photo: {
+      src: '/images/journey/in-theatre.webp',
+      width: 1600,
+      height: 900,
+      alt: 'Professor Gupta, gowned and masked at the ablation table, points to the mapping screen while a colleague beside him follows the direction. The X-ray C-arm and the draped patient are in view.',
+    },
   },
   {
     markerYear: '2012',
@@ -73,6 +108,12 @@ export const milestones: Milestone[] = [
     photoTitle: 'FRCP, London',
     photoCaption:
       "Elected Fellow of the Royal College of Physicians, one of British medicine's senior distinctions.",
+    photo: {
+      src: '/images/journey/frcp-london-2012.webp',
+      width: 1165,
+      height: 1400,
+      alt: 'Dr Dhiraj Gupta in the purple and gold gown of the Royal College of Physicians, holding his fellowship scroll, London 2012.',
+    },
   },
   {
     markerYear: '2014',
@@ -86,17 +127,12 @@ export const milestones: Milestone[] = [
     photoCaption:
       'Receives the Arrhythmia Alliance Excellence in Practice Award for outstanding contribution to UK arrhythmia services.',
     photoFirst: true,
-  },
-  {
-    markerYear: '2017',
-    markerSub: 'NHS Bronze',
-    yearLabel: '2017',
-    tag: 'NHS Bronze',
-    title: 'NHS National Clinical Excellence Award.',
-    body: 'The NHS Clinical Excellence Awards recognise consultants who deliver work over and above the standard expected of their role, assessed nationally against a competitive field of senior doctors. The Bronze level is itself uncommon; Professor Gupta would receive it in 2017.',
-    meta: 'National Bronze Award, 2017',
-    photoTitle: 'NHS Bronze',
-    photoCaption: 'Awarded the NHS National Clinical Excellence Bronze Award in 2017.',
+    photo: {
+      src: '/images/journey/arrhythmia-alliance-2014.webp',
+      width: 1400,
+      height: 989,
+      alt: 'Arrhythmia Alliance award certificate to Prof Dhiraj Gupta, October 2014, for outstanding individual contribution to arrhythmia services in the UK, signed by Trudie Lobban and Prof A John Camm.',
+    },
   },
   {
     markerYear: '2019',
@@ -109,17 +145,27 @@ export const milestones: Milestone[] = [
     photoTitle: 'Professorship',
     photoCaption: 'Appointed honorary Professor of Cardiology at the University of Liverpool.',
     photoFirst: true,
+    gallery: academicPhotos,
   },
   {
     markerYear: '2022',
     markerSub: 'NHS Silver',
+    // Anchored to the Silver, which is the 2022 event. The Bronze it supersedes
+    // is carried in the body and the meta line rather than in its own milestone.
     yearLabel: '2022',
-    tag: 'NHS Silver',
-    title: 'Promoted to NHS Silver.',
-    body: 'Just five years after the Bronze Award, Professor Gupta is awarded the highly coveted NHS National Silver Clinical Excellence Award. Only a small fraction of NHS consultants (<1%) are recognised at this level. The Silver award reflects sustained national-level contribution, not just to clinical practice, but to research, teaching and the wider profession.',
-    meta: 'National Silver Award, 2022',
+    tag: 'NHS Clinical Excellence',
+    title: 'NHS National Clinical Excellence Awards, Bronze then Silver.',
+    body: 'The NHS Clinical Excellence Awards recognise consultants who deliver work over and above the standard expected of their role, assessed nationally against a competitive field of senior doctors. The Bronze level is itself uncommon, and Professor Gupta receives it in 2017. Five years later he is awarded the highly coveted National Silver, confirmed by the Advisory Committee on Clinical Excellence Awards in January 2022. Only a small fraction of NHS consultants (<1%) are recognised at this level. The Silver award reflects sustained national-level contribution, not just to clinical practice, but to research, teaching and the wider profession.',
+    meta: 'National Bronze 2017 · National Silver 2022',
     photoTitle: 'NHS Silver',
-    photoCaption: 'Awarded the NHS National Clinical Excellence Silver Award in 2022.',
+    photoCaption:
+      'The Silver award letter from the Advisory Committee on Clinical Excellence Awards, January 2022.',
+    photo: {
+      src: '/images/journey/nhs-silver-letter-2022.webp',
+      width: 630,
+      height: 683,
+      alt: 'Letter from the Advisory Committee on Clinical Excellence Awards and the Department of Health and Social Care to Dr Dhiraj Gupta at Liverpool Heart and Chest Hospital, dated 10 January 2022, confirming a Silver award under the Clinical Excellence Awards 2021.',
+    },
   },
   {
     markerYear: '2022-india',
@@ -132,6 +178,7 @@ export const milestones: Milestone[] = [
     photoCaption:
       'Formal mentoring programme training cardiologists across India, with free workshops for patients, hospitals and doctors.',
     photoFirst: true,
+    gallery: proctoringPhotos,
   },
 ];
 
@@ -140,11 +187,17 @@ export const finaleMilestone: Milestone = {
   markerSub: 'Mumbai',
   yearLabel: '2025',
   tag: 'Mumbai London AF Clinic',
-  title: 'And now, home.',
-  body: 'Mumbai London AF Clinic opens, bringing more than twenty five years of UK electrophysiology practice back to where the journey began. Over the years, Professor Gupta treats AF patients from Mumbai in the UK because of lack of provision of AF ablation in the city. He is approached by local cardiologists at Lilavati Hospital to start a regular AF service in Mumbai itself so as to reach many more patients at their doorstep. In December 2025, he starts the Mumbai London AF clinic with Drs Malav Jhala and Darshan Jhala. This involves regular visits to Mumbai every few weeks for in-person consultations and procedures. Drs Jhala provide excellent continuity of care between visits, with his ongoing input and supervision. This offers Indian patients the same standard of arrhythmia care he provides in the UK, with the convenience of being treated close to home.',
+  title: 'And now, Mumbai.',
+  body: 'For years, Mumbai families flew to the United Kingdom to be treated by Professor Gupta, because the ablation they needed was not available at home. Cardiologists at Lilavati Hospital asked him to bring the service to Mumbai instead. Mumbai London AF Clinic opened there in December 2025, with Drs Malav Jhala and Darshan Jhala. He returns every few weeks for consultations and procedures, and between visits Drs Jhala look after continuity of care with his input and supervision throughout. Twenty five years of UK electrophysiology practice, back where it started, and no longer a flight away.',
   meta: 'Specialist atrial fibrillation care · Mumbai',
   photoTitle: 'Mumbai',
   photoCaption:
     'Mumbai London AF Clinic opens in December 2025 with Drs Malav Jhala and Darshan Jhala.',
   variant: 'finale',
+  photo: {
+    src: '/images/journey/lilavati-mumbai-2026.webp',
+    width: 1400,
+    height: 1050,
+    alt: 'Professor Gupta scrubbed in with the cardiology team in the catheter laboratory at Lilavati Hospital, Mumbai.',
+  },
 };

@@ -42,3 +42,11 @@ next-env.d.ts
 
 # Source certificate scans (only web derivatives in public/ are tracked)
 /Certificates/
+
+# Source photographs (only web derivatives in public/ are tracked)
+/Website Photos/
+
+# Machine-local Claude Code permissions. Entries record whole signed upload
+# URLs, which carry AWS session tokens, so this must not be published.
+# .claude/launch.json is shared and stays tracked.
+.claude/settings.local.json

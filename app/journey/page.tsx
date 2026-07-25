@@ -29,11 +29,12 @@ export default function JourneyPage() {
           idPrefix="journey-finale"
           title={
             <>
-              And now, <em className="text-brass">home</em>.
+              And now, <em className="text-brass">Mumbai</em>.
             </>
           }
           description={finaleMilestone.body}
           footnote={finaleMilestone.meta}
+          image={finaleMilestone.photo}
         />
       </section>
     </main>

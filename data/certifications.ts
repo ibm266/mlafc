@@ -38,7 +38,13 @@ export const certifications: Certification[] = [
     location: 'India',
     year: '1994',
     category: 'india',
-    kind: 'plate',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/mbbs-1994.webp',
+      width: 1605,
+      height: 2000,
+      alt: 'Bachelor of Medicine and Bachelor of Surgery degree certificate awarded to Dhiraj Gupta of Moti Lal Nehru Medical College by the University of Allahabad, for the examination of March 1993.',
+    },
     story: [
       'The first medical degree, and the beginning of a career pointed at cardiology from the outset.',
       'Professor Gupta was a Gold Medallist in each of the three professional examinations and topped his batch in the final examinations, for which he was awarded the Kamla Nehru Medal.',
@@ -189,6 +195,27 @@ export const certifications: Certification[] = [
   },
   // National recognition
   {
+    id: 'acc-young-investigator-2000',
+    postnominal: 'Young Investigator',
+    title: 'Young Investigator Award',
+    awardingBody: 'American Association of Cardiologists of Indian Origin',
+    location: 'Anaheim, United States',
+    year: '2000',
+    category: 'recognition',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/acc-young-investigator-2000.webp',
+      width: 1663,
+      height: 2000,
+      alt: 'Engraved black plaque awarded to Dhiraj Gupta by the American Association of Cardiologists of Indian Origin, Young Investigator Award for Excellence in Scientific Pursuit, 12 March 2000.',
+    },
+    story: [
+      'Presented at the Annual Scientific Congress of the American College of Cardiology in Anaheim, where Dr Gupta presented four original research papers while still a senior resident at AIIMS.',
+      'The plaque is engraved for excellence in scientific pursuit, and it is the first international recognition of a research career that would go on to produce more than 350 peer-reviewed publications.',
+    ],
+    meta: 'Four papers presented, ACC Congress 2000',
+  },
+  {
     id: 'arrhythmia-alliance-2014',
     postnominal: 'Excellence in Practice',
     title: 'Excellence in Practice Award',
@@ -196,13 +223,78 @@ export const certifications: Certification[] = [
     location: 'United Kingdom',
     year: '2014',
     category: 'recognition',
-    kind: 'plate',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/arrhythmia-alliance-2014.webp',
+      width: 2000,
+      height: 1610,
+      alt: 'Arrhythmia Alliance certificate awarded to Prof Dhiraj Gupta in October 2014 for outstanding individual contribution to arrhythmia services in the UK, signed by Trudie Lobban and Prof A John Camm.',
+    },
     story: [
       'Awarded annually to the outstanding individual who has contributed to arrhythmia services in the United Kingdom.',
       'In the same year, the Primary Care Atrial Fibrillation pathway Professor Gupta helped develop won Anticoagulation Innovation of the Year from the British Medical Association, and he was invited to speak at the All-Party Parliamentary Group on Atrial Fibrillation in Westminster.',
     ],
     meta: 'National practice award, 2014',
   },
+  {
+    id: 'pgimer-appreciation-2025',
+    postnominal: 'PGIMER',
+    title: 'Certificate of Appreciation',
+    awardingBody: 'Postgraduate Institute of Medical Education and Research',
+    location: 'Chandigarh, India',
+    year: '2025',
+    category: 'recognition',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/pgimer-appreciation-2025.webp',
+      width: 2000,
+      height: 1594,
+      alt: 'Certificate of Appreciation presented by PGIMER Chandigarh to Prof. Dhiraj Gupta on 4 February 2025 for a lecture on interventional management of atrial fibrillation, signed by Dr Yash Paul Sharma.',
+    },
+    story: [
+      'Presented for a lecture on the interventional management of atrial fibrillation, delivered to the Department of Cardiology on the fourth of February 2025.',
+      'PGIMER is where Professor Gupta trained for his MD in Internal Medicine almost thirty years earlier. He now returns as visiting faculty.',
+    ],
+    meta: 'Invited lecture, Department of Cardiology',
+  },
+  {
+    id: 'aig-appreciation-2025',
+    postnominal: 'AIG Hospitals',
+    title: 'Plaque of Appreciation',
+    awardingBody: 'AIG Hospitals',
+    location: 'Hyderabad, India',
+    year: '2025',
+    category: 'recognition',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/aig-appreciation-2025.webp',
+      width: 1616,
+      height: 2000,
+      alt: 'Plaque of Appreciation presented by AIG Hospitals Hyderabad to Prof Dhiraj Gupta on 28 February and 1 March 2025 for outstanding services to cardiology and cardiac research, signed by Dr D Nageshwar Reddy and Dr Narasimhan.',
+    },
+    story: [
+      'Presented for outstanding services to cardiology and cardiac research, over two days of proctoring at AIG Hospitals in February and March 2025.',
+      'Signed by Dr D Nageshwar Reddy, Chairman, and Dr Narasimhan, Organising Secretary. Hyderabad is one of the cities Professor Gupta returns to regularly under the Indo-UK proctoring programme.',
+    ],
+    meta: 'Indo-UK proctoring programme, Hyderabad',
+  },
+];
+
+/**
+ * Held back from the wall for now.
+ *
+ * The NHS Bronze and Silver Clinical Excellence Awards and the Liverpool
+ * professorship are conferred by letter rather than by certificate, and we do
+ * not yet have those letters to scan. Rather than hang three typeset plates
+ * with no document behind them, they sit here until the letters are in hand.
+ *
+ * To reinstate one: move the entry back into `certifications` above, in year
+ * order within the recognition section. If a letter has been scanned by then,
+ * follow docs/adding-certificates.md and switch it to `kind: 'scan'` with an
+ * `image` block. Nothing else needs to change: the wall and the catalogue both
+ * flow from the array.
+ */
+export const pendingCertifications: Certification[] = [
   {
     id: 'nhs-bronze-2017',
     postnominal: 'NHS Bronze',

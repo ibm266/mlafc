@@ -32,7 +32,7 @@ export default function CertificationsPage() {
     <main id="main" className="bg-paper">
       <PageHeader
         idPrefix="certifications"
-        eyebrow="The record · 1994 to 2022"
+        eyebrow="The record · 1994 to 2025"
         title="Every letter after the name, earned."
         description="Degrees, fellowships and awards, in the order they were conferred. Click any frame to read the story behind it."
       />

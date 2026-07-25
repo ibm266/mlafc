@@ -26,11 +26,18 @@ export function Hero() {
               </Reveal>
             </h1>
             <Reveal delay={450}>
-              <p className="mt-6 max-w-xl text-lg text-paper/85">
-                Professor Dhiraj Gupta has performed more than 10,000 AF ablations at the UK&apos;s largest heart
-                centre, using both radiofrequency and pulsed field technology. He now sees patients in Mumbai.
-                Whatever the machine, the hands holding it matter more.
-              </p>
+              <div className="mt-6 max-w-xl space-y-4 text-lg text-paper/85">
+                <p>
+                  Professor Dr Dhiraj Gupta is one of the most experienced and highly regarded cardiac
+                  electrophysiologists globally. Over a span of 25 years in the UK, he has performed more than
+                  10,000 catheter ablations, and has pioneered several advances in AF ablation with both
+                  radiofrequency (RF) and pulsed field ablation (PFA) technology.
+                </p>
+                <p>
+                  Dr Gupta now sees patients and performs ablation procedures in Mumbai, and promises the same
+                  excellent outcomes as in the United Kingdom.
+                </p>
+              </div>
             </Reveal>
             <Reveal delay={600}>
               <div className="mt-8 flex flex-wrap gap-4">

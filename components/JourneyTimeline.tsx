@@ -1,18 +1,45 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+import { MilestoneVideo } from '@/components/journey/MilestoneVideo';
 import { MilestonePlaceholder } from '@/components/MilestonePlaceholder';
+import { PhotoCarousel } from '@/components/PhotoCarousel';
 import { Reveal } from '@/components/Reveal';
 import type { Milestone } from '@/data/types';
+
+/** The photo column is roughly half of the 72rem timeline grid from md up. */
+const PHOTO_SIZES = '(min-width: 768px) 46vw, 92vw';
 
 function PhotoFrame({ m }: { m: Milestone }) {
   return (
     <figure className="rounded-xl border border-line bg-paper-soft p-4 md:p-0 md:border-0 md:bg-transparent">
       <div className="overflow-hidden rounded-xl border border-line bg-paper-soft">
-        <MilestonePlaceholder />
+        {m.video ? (
+          <MilestoneVideo video={m.video} />
+        ) : m.photo ? (
+          // Contained on the same dark field the placeholder uses, so portrait
+          // and landscape milestones sit in one consistent 4:3 window and no
+          // photograph is ever cropped.
+          <div className="flex aspect-[4/3] items-center justify-center bg-night-soft">
+            <Image
+              src={m.photo.src}
+              alt={m.photo.alt}
+              width={m.photo.width}
+              height={m.photo.height}
+              sizes={PHOTO_SIZES}
+              className="h-full w-full object-contain"
+            />
+          </div>
+        ) : (
+          <MilestonePlaceholder />
+        )}
       </div>
       <figcaption className="mt-3">
         <p className="text-sm text-ink-mute">{m.photoCaption}</p>
+        {m.video?.credit ? (
+          <p className="mt-1 text-xs text-ink-mute/80">{m.video.credit}</p>
+        ) : null}
       </figcaption>
     </figure>
   );
@@ -109,7 +136,9 @@ export function JourneyTimeline({ milestones }: { milestones: Milestone[] }) {
 
       {milestones.map((m, index) => {
         const photoFirst = m.photoFirst ?? index % 2 === 1;
-        const showPhoto = m.variant !== 'awards-band';
+        // A gallery needs the width, so it runs under the prose rather than
+        // squeezing a carousel into the narrow photo column.
+        const showPhoto = m.variant !== 'awards-band' && !m.gallery;
         return (
           <article
             key={m.markerYear}
@@ -142,6 +171,9 @@ export function JourneyTimeline({ milestones }: { milestones: Milestone[] }) {
                 </Reveal>
               ) : null}
             </div>
+            {m.gallery ? (
+              <PhotoCarousel photos={m.gallery} label={m.photoTitle} className="mt-9" />
+            ) : null}
           </article>
         );
       })}

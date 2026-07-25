@@ -98,17 +98,45 @@ generated; the certificate itself is never regenerated.
 1. Upload the PNG master and run it through GPT Image 2 (model `gpt_image_2`,
    quality `high`) with a prompt that says: place this exact certificate,
    unchanged, inside an ornate gilded frame; do not alter, redraw or re-letter
-   any text, seals, signatures or faces; only add the frame. Pick an aspect
-   ratio close to the certificate's. Vary the frame style per certificate
-   (baroque, neoclassical fluted, rococo shell, etc.) so no two match.
+   any text, seals, signatures or faces; only add the frame. Ask for a flat
+   dark charcoal background with no gradient, vignette or cast shadow, so the
+   transparency step has a clean field to flood-fill. Pick an aspect ratio
+   close to the certificate's. Vary the frame style per certificate (baroque,
+   neoclassical fluted, rococo shell, Empire, etc.) so no two match.
 2. Review the result at full size against the original. Every character, seal,
    signature and face must be identical. If anything drifted, regenerate.
-3. Remove the dark background so the frame floats on the wall. The Higgsfield
+
+   Expect body text to survive and **expect small circular seals and crests to
+   drift**. GPT Image reliably re-letters the ring text of an institutional
+   crest into plausible looking nonsense: the PGIMER crest came back reading
+   "HELOAL EDIOKTAI" across two separate generations. It will also silently
+   correct a typo that is genuinely printed on the document. Neither is
+   acceptable on a credentials page, so do not try to prompt your way out of
+   it. Go to step 3.
+3. Put the real document back with `scripts/certificates/reinstate.py`. This
+   pastes the master into the frame's mount opening, so only the frame is
+   generated and every character, seal and signature is the original
+   photograph again. Read the opening off a coordinate grid, measured just
+   inside the gold inner lip:
+
+   ```bash
+   python3 scripts/certificates/reinstate.py \
+     framed.png my-cert-master.png my-cert-framed.png \
+     '{"rect":[left,top,right,bottom]}'
+   ```
+
+   The document is never stretched. Default `pad` mode extends the master's
+   outermost pixels to meet the opening, which is right when the master has
+   blank margin. If the design bleeds to its edge (a ribbon, a printed border)
+   `pad` smears it into streaks, so use `"mode":"fit"` instead, which fits the
+   document and fills the leftover band with the frame's own mount colour.
+   `"mode":"cover"` centre-crops, and is only safe with generous blank margin.
+4. Remove the dark background so the frame floats on the wall. The Higgsfield
    background remover works for most frames; if it eats the ornate frame (it can
    mistake the inner document for the subject), use the deterministic
    `scripts/certificates/frame_transparent.py` instead, which flood-fills the
    flat background from the borders and keeps the whole frame.
-4. Export a transparent WebP to `public/images/certificates/{slug}.webp`
+5. Export a transparent WebP to `public/images/certificates/{slug}.webp`
    (~2000px long edge). Note its final width and height.
 
 ### 4. Add the data entry
@@ -152,6 +180,26 @@ npm test
 image file that actually exists, so a typo in `src` fails the build rather than
 shipping a broken image.
 
+## Items held back until the letters arrive
+
+Three credentials are written up but not on the wall. They sit in
+`pendingCertifications` at the bottom of `data/certifications.ts`, which nothing
+imports, so they render nowhere:
+
+- NHS National Clinical Excellence Award, Bronze (2017)
+- Honorary Professor of Cardiology, University of Liverpool (2019)
+- NHS National Clinical Excellence Award, Silver (2022)
+
+All three are conferred by letter rather than by certificate, and we do not have
+those letters to scan yet. Rather than hang typeset plates with no document
+behind them, they wait.
+
+To put one back, move the entry from `pendingCertifications` into
+`certifications`, in year order within the recognition section. If the letter
+has been scanned by then, run it through the recipe above and switch the entry
+to `kind: 'scan'` with an `image` block. Nothing else needs changing: the wall,
+the catalogue and the structured data all flow from the array.
+
 ## House rules
 
 - No em dashes anywhere in this repo (see `AGENTS.md`). Use commas, full stops,
@@ -179,3 +227,39 @@ transparency steps (3) to become the `.webp` on the wall. Run each as
   `{"crop":[0.008,0.008,0.008,0.008],"wb":false,"levels_pct":[0.8,99.5],"denoise_amt":0.28,"sharpen_amt":80,"grain":0.3}`
 - `fesc-2018` from `FESC degree certificate 2018.jpg`:
   `{"corners":[[605,640],[4465,610],[4450,3298],[605,3300]],"out_w":3840,"out_h":2660,"paper_pct":85,"levels_pct":[0.5,99.7],"denoise_amt":0.3,"sharpen_amt":90}`
+
+The four added later also needed the reinstate step (3), with the mount
+opening measured on the generated frame:
+
+- `arrhythmia-alliance-2014` from the award PDF. Render the page first
+  (`sips -s format png --resampleWidth 4000`), then restore with everything off,
+  since a born-digital PDF needs no correction:
+  `{"wb":false,"levels":false,"denoise":false,"sharpen":false}`.
+  Reinstate `{"rect":[683,476,2635,1942]}`.
+- `acc-young-investigator-2000` from `ACC Young Investigators Award 2000.jpg`.
+  A glossy black plaque, so white balance and levels must be off or the stone
+  blows out:
+  `{"corners":[[275,360],[2858,312],[2846,3698],[243,3766]],"out_w":2590,"out_h":3390,"wb":false,"levels":false,"denoise_amt":0.25,"sharpen_amt":70}`,
+  then a second pass `{"crop":[0.014,0.026,0.022,0.012]}` to clear the marble.
+  Reinstate `{"rect":[627,793,1844,2417]}`.
+- `pgimer-appreciation-2025` from `Certificate of Appreciation PGI Chandigarh 2025.jpg`:
+  `{"rotate":-0.6,"crop":[0.030,0.035,0.036,0.064],"paper_pct":86,"levels_pct":[0.5,99.5],"denoise_amt":0.3,"sharpen_amt":95}`.
+  Reinstate `{"rect":[632,491,2695,1918]}`.
+- `mbbs-1994` from `MBBS degree certificate Allahabad 1993.jpg`. The source is a
+  phone screenshot of a scanning-app export, not a photograph of the document,
+  so the paper is already flattened to near-white and the usual corrections
+  would only chew at it. White balance and levels off, light denoise and
+  unsharp, and the crop just balances an off-centre text block:
+  `{"crop":[62,14,0,0],"wb":false,"levels":false,"denoise_amt":0.22,"sharpen_amt":70}`.
+  Reinstate `{"rect":[370,470,1373,1796],"mode":"fit"}`. `fit`, not `pad`,
+  because the screenshot is clipped mid-line at the bottom edge and `pad` would
+  smear the last date into vertical streaks. Two known defects ride along in the
+  source and are visible on the wall: the iOS Live Text button sits over the
+  "llor" of "Vice-Chancellor", and the date line below "05th, February, 2026"
+  is cut off. Both go away if the physical certificate is ever rephotographed;
+  nothing but the master and these two configs would need to change.
+- `aig-appreciation-2025` from `Plaque of Appreciation Hyderabad 2025.jpg`:
+  `{"corners":[[845,1015],[3472,977],[3486,4736],[852,4770]],"out_w":2630,"out_h":3760,"paper_pct":84,"levels_pct":[0.5,99.6],"denoise_amt":0.3,"sharpen_amt":90}`,
+  then `{"crop":[0.006,0.004,0.032,0.040]}` to clear the physical frame lip.
+  Reinstate `{"rect":[604,676,1867,2581],"mode":"fit"}`, because the ribbon
+  bleeds to the top edge and `pad` streaks it.

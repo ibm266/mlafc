@@ -34,12 +34,17 @@ test('locations: procedure cities and India training cities present', () => {
   expect(cities).toEqual(expect.arrayContaining(['Hyderabad', 'Bengaluru', 'Pune', 'Prague', 'Sydney']));
 });
 
-test('visits: 3 entries with valid statuses', () => {
-  expect(visits).toHaveLength(3);
+test('visits: confirmed 2026 dates with valid statuses', () => {
+  expect(visits).toHaveLength(4);
   for (const v of visits) {
     expect(['open', 'waitlist', 'tbc']).toContain(v.status);
     expect(v.month).toMatch(/2026/);
+    // Dates are confirmed now, so no bracketed stubs should survive here.
+    expect(v.month).not.toMatch(/[[\]]/);
+    expect(v.note).not.toMatch(/placeholder/i);
   }
+  // At least one bookable visit, otherwise the booking pill has nothing to point at.
+  expect(visits.some((v) => v.status === 'open')).toBe(true);
 });
 
 test('site config has contact placeholders', () => {
@@ -48,6 +53,8 @@ test('site config has contact placeholders', () => {
   expect(site.whatsappHref).toBe('[placeholder]');
   // email is live: enquiries are forwarded here and it is shown on the book page.
   expect(site.email).toBe('contact@mumbai-london-af.clinic');
-  expect(site.address).toContain('[placeholder]');
+  // address is live: the clinic runs from Lilavati Hospital, Bandra West.
+  expect(site.address).toContain('Lilavati Hospital');
+  expect(site.address).not.toContain('[placeholder]');
   expect(site.gmcLine).toMatch(/GMC/);
 });

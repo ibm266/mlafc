@@ -2,6 +2,18 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import visitsJson from '@/data/visits.json';
+import type { Visit } from '@/data/types';
+
+const visits = visitsJson as Visit[];
+
+// The pill exists to convert, so it advertises the next visit somebody can
+// actually book, not simply the next one in the calendar. Reading it from the
+// data means it cannot drift out of date the way a hardcoded month did.
+const nextBookable = visits.find((v) => v.status === 'open');
+const pillLabel = nextBookable
+  ? `Next Mumbai visit: ${nextBookable.month} · Booking open`
+  : 'Book a consultation';
 
 export function FloatingBookingPill() {
   const [visible, setVisible] = useState(false);
@@ -21,7 +33,7 @@ export function FloatingBookingPill() {
       }`}
     >
       <span aria-hidden className="pulse-dot inline-block h-2 w-2 rounded-full bg-brass" />
-      Next Mumbai visit: March 2026 · Booking open
+      {pillLabel}
     </Link>
   );
 }

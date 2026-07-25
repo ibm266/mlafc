@@ -23,11 +23,27 @@ test('StatsBand shows the four headline numbers', () => {
 });
 
 test('VisitDates renders one card per visit with status and booking link', () => {
-  render(<VisitDates visits={visits as Visit[]} />);
+  // A fixture rather than the live dates, so the three status styles stay
+  // covered however the real visit calendar changes.
+  const fixture: Visit[] = [
+    { id: 'a', month: 'August 2026', status: 'waitlist', note: 'Fully booked.' },
+    { id: 'b', month: '27 Sep to 4 Oct 2026', status: 'open', note: 'Filling fast.' },
+    { id: 'c', month: 'March 2027', status: 'tbc', note: 'Dates to be confirmed.' },
+  ];
+  render(<VisitDates visits={fixture} />);
+  expect(screen.getAllByRole('listitem')).toHaveLength(3);
   expect(screen.getByText('Booking open')).toBeInTheDocument();
   expect(screen.getByText('Waitlist')).toBeInTheDocument();
   expect(screen.getByText('TBC')).toBeInTheDocument();
+  // Only a bookable visit offers a slot request.
+  expect(screen.getAllByRole('link', { name: /request a slot/i })).toHaveLength(1);
   expect(screen.getByRole('link', { name: /request a slot/i })).toHaveAttribute('href', '/book');
+});
+
+test('the live visit calendar has bookable dates on the page', () => {
+  render(<VisitDates visits={visits as Visit[]} />);
+  expect(screen.getAllByRole('listitem')).toHaveLength((visits as Visit[]).length);
+  expect(screen.getAllByText('Booking open').length).toBeGreaterThan(0);
 });
 
 test('TestimonialCard renders each category shape', () => {

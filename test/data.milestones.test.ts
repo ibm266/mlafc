@@ -3,7 +3,7 @@ import { faqs } from '@/data/faqs';
 import { citations } from '@/data/citations';
 
 test('timeline milestones covering 1988-2022 plus separate finale', () => {
-  expect(milestones).toHaveLength(11);
+  expect(milestones).toHaveLength(10);
   expect(milestones.map((m) => m.markerYear)).toEqual([
     '1988',
     '1994',
@@ -12,16 +12,16 @@ test('timeline milestones covering 1988-2022 plus separate finale', () => {
     '2009',
     '2012',
     '2014',
-    '2017',
     '2019',
     '2022',
     '2022-india',
   ]);
   expect(milestones[0].yearLabel).toBe('1988');
   expect(milestones[0].meta).toBe('MB BS qualified, 1994');
-  expect(milestones[7].yearLabel).toBe('2017');
-  expect(milestones[7].meta).toBe('National Bronze Award, 2017');
-  expect(milestones[9].meta).toBe('National Silver Award, 2022');
+  // Bronze and Silver share one milestone, so both awards must stay in its meta.
+  expect(milestones[8].yearLabel).toBe('2022');
+  expect(milestones[8].meta).toContain('Bronze 2017');
+  expect(milestones[8].meta).toContain('Silver 2022');
   for (const m of milestones) {
     expect(m.title.length).toBeGreaterThan(3);
     expect(m.photoTitle.length).toBeGreaterThan(2);
