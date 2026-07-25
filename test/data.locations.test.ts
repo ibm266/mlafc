@@ -46,7 +46,8 @@ test('site config has contact placeholders', () => {
   expect(site.phone).toBe('[placeholder]');
   expect(site.whatsappNumber).toBe('[placeholder]');
   expect(site.whatsappHref).toBe('[placeholder]');
-  expect(site.email).toBe('[placeholder]');
+  // email is live: enquiries are forwarded here and it is shown on the book page.
+  expect(site.email).toBe('contact@mumbai-london-af.clinic');
   expect(site.address).toContain('[placeholder]');
   expect(site.gmcLine).toMatch(/GMC/);
 });

@@ -6,7 +6,7 @@ export const site = {
   phone: '[placeholder]',
   whatsappNumber: '[placeholder]',
   whatsappHref: '[placeholder]',
-  email: '[placeholder]',
+  email: 'contact@mumbai-london-af.clinic',
   address: 'Clinic address, Mumbai [placeholder]',
   gmcLine: 'Professor Dhiraj Gupta is registered with the UK General Medical Council (GMC no. 5205561).',
   disclaimer:

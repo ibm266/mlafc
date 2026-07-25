@@ -36,34 +36,36 @@ function buildEnquiryEmailBody(fields: EnquiryFields): string {
 }
 
 /**
- * Sends a clinic notification when RESEND_API_KEY and ENQUIRY_NOTIFY_EMAIL are set.
- * Until then, submissions are accepted and logged from the server action only.
+ * Emails the enquiry to the clinic inbox through the clinic's own Microsoft 365
+ * mailbox over SMTP. Sending is off until SMTP_USER and SMTP_PASS are set, so
+ * local and test runs accept the submission and log it without sending.
+ *
+ * Exchange Online requires the From address to be the authenticated mailbox,
+ * so the enquirer goes on Reply-To instead.
  */
 export async function sendEnquiryEmail(fields: EnquiryFields): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.ENQUIRY_NOTIFY_EMAIL;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
 
-  if (!apiKey || !to) {
+  if (!user || !pass) {
     return;
   }
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: process.env.ENQUIRY_FROM_EMAIL ?? `enquiries@${new URL(site.url).hostname}`,
-      to: [to],
-      reply_to: fields.email,
-      subject: `New enquiry: ${fields.name} (${labelFor(enquiryConditions, fields.condition)})`,
-      text: buildEnquiryEmailBody(fields),
-    }),
+  const { createTransport } = await import('nodemailer');
+
+  const transport = createTransport({
+    host: process.env.SMTP_HOST ?? 'smtp.office365.com',
+    port: Number(process.env.SMTP_PORT ?? 587),
+    secure: false,
+    requireTLS: true,
+    auth: { user, pass },
   });
 
-  if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(`Enquiry email failed (${response.status}): ${detail}`);
-  }
+  await transport.sendMail({
+    from: { name: `${site.name} website`, address: user },
+    to: process.env.ENQUIRY_NOTIFY_EMAIL ?? site.email,
+    replyTo: fields.email,
+    subject: `New enquiry: ${fields.name} (${labelFor(enquiryConditions, fields.condition)})`,
+    text: buildEnquiryEmailBody(fields),
+  });
 }

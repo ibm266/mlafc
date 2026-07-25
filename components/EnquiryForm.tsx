@@ -37,22 +37,8 @@ const FIELD_CLASS = `w-full ${FIELD_BASE}`;
 
 type FieldErrors = Partial<Record<keyof EnquiryFields | 'recaptcha', string>>;
 
-function initialFields(compact: boolean): EnquiryFields {
-  if (!compact) {
-    return EMPTY;
-  }
-
-  return {
-    ...EMPTY,
-    email: 'not-collected@compact.form',
-    condition: 'not-sure',
-    referralSource: 'other',
-    month: visits[0]?.month ?? 'any',
-  };
-}
-
-export function EnquiryForm({ compact = false }: { compact?: boolean }) {
-  const [fields, setFields] = useState<EnquiryFields>(() => initialFields(compact));
+export function EnquiryForm() {
+  const [fields, setFields] = useState<EnquiryFields>(() => ({ ...EMPTY }));
   const [errors, setErrors] = useState<FieldErrors>({});
   const [done, setDone] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -154,7 +140,7 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           type="button"
           onClick={() => {
             setDone(false);
-            setFields(initialFields(compact));
+            setFields({ ...EMPTY });
             setErrors({});
           }}
           className="interactive mt-6 rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-ink-soft hover:text-ink"
@@ -224,38 +210,34 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           ) : null}
         </fieldset>
 
-        {!compact
-          ? field(
-              'email',
-              'Email',
-              <input
-                id="enq-email"
-                type="email"
-                className={FIELD_CLASS}
-                value={fields.email}
-                onChange={set('email')}
-                autoComplete="email"
-                aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? 'enq-email-error' : undefined}
-              />,
-            )
-          : null}
+        {field(
+          'email',
+          'Email',
+          <input
+            id="enq-email"
+            type="email"
+            className={FIELD_CLASS}
+            value={fields.email}
+            onChange={set('email')}
+            autoComplete="email"
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? 'enq-email-error' : undefined}
+          />,
+        )}
 
-        {!compact
-          ? selectField(
-              'condition',
-              'What would you like to ask about?',
-              enquiryConditions,
-              'Choose a condition or topic',
-            )
-          : null}
+        {selectField(
+          'condition',
+          'What would you like to ask about?',
+          enquiryConditions,
+          'Choose a condition or topic',
+        )}
 
         {field(
           'message',
           'Briefly, what is the problem?',
           <textarea
             id="enq-message"
-            rows={compact ? 3 : 5}
+            rows={5}
             className={FIELD_CLASS}
             value={fields.message}
             onChange={set('message')}
@@ -264,62 +246,54 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
           />,
         )}
 
-        {!compact
-          ? selectField(
-              'referralSource',
-              'How did you hear about Professor Gupta?',
-              enquiryReferralSources,
-              'Choose an option',
-            )
-          : null}
+        {selectField(
+          'referralSource',
+          'How did you hear about Professor Gupta?',
+          enquiryReferralSources,
+          'Choose an option',
+        )}
 
-        {!compact
-          ? field(
-              'location',
-              'Where are you based? (optional)',
-              <input
-                id="enq-location"
-                className={FIELD_CLASS}
-                value={fields.location}
-                onChange={set('location')}
-                placeholder="City and country, for example Mumbai, India"
-                autoComplete="address-level2"
-                aria-invalid={Boolean(errors.location)}
-                aria-describedby={errors.location ? 'enq-location-error' : undefined}
-              />,
-            )
-          : null}
+        {field(
+          'location',
+          'Where are you based? (optional)',
+          <input
+            id="enq-location"
+            className={FIELD_CLASS}
+            value={fields.location}
+            onChange={set('location')}
+            placeholder="City and country, for example Mumbai, India"
+            autoComplete="address-level2"
+            aria-invalid={Boolean(errors.location)}
+            aria-describedby={errors.location ? 'enq-location-error' : undefined}
+          />,
+        )}
 
-        {!compact
-          ? selectField(
-              'contactPreference',
-              'How should we contact you? (optional)',
-              enquiryContactPreferences,
-              'No preference',
-            )
-          : null}
+        {selectField(
+          'contactPreference',
+          'How should we contact you? (optional)',
+          enquiryContactPreferences,
+          'No preference',
+        )}
 
-        {!compact
-          ? field(
-              'month',
-              'Preferred visit month',
-              <select
-                id="enq-month"
-                className={FIELD_CLASS}
-                value={fields.month}
-                onChange={set('month')}
-                aria-invalid={Boolean(errors.month)}
-                aria-describedby={errors.month ? 'enq-month-error' : undefined}
-              >
-                <option value="">Choose a month</option>
-                {visits.map((visit) => (
-                  <option key={visit.id} value={visit.month}>
-                    {visit.month}
-                  </option>
-                ))}
-              </select>,
-            )
-          : null}
+        {field(
+          'month',
+          'Preferred visit month',
+          <select
+            id="enq-month"
+            className={FIELD_CLASS}
+            value={fields.month}
+            onChange={set('month')}
+            aria-invalid={Boolean(errors.month)}
+            aria-describedby={errors.month ? 'enq-month-error' : undefined}
+          >
+            <option value="">Choose a month</option>
+            {visits.map((visit) => (
+              <option key={visit.id} value={visit.month}>
+                {visit.month}
+              </option>
+            ))}
+          </select>,
+        )}
 
         {errors.recaptcha ? (
           <p className="text-sm text-brass-deep" role="alert">
