@@ -182,17 +182,17 @@ shipping a broken image.
 
 ## Items held back until the letters arrive
 
-Three credentials are written up but not on the wall. They sit in
+Two credentials are written up but not on the wall. They sit in
 `pendingCertifications` at the bottom of `data/certifications.ts`, which nothing
 imports, so they render nowhere:
 
 - NHS National Clinical Excellence Award, Bronze (2017)
 - Honorary Professor of Cardiology, University of Liverpool (2019)
-- NHS National Clinical Excellence Award, Silver (2022)
 
-All three are conferred by letter rather than by certificate, and we do not have
+Both are conferred by letter rather than by certificate, and we do not have
 those letters to scan yet. Rather than hang typeset plates with no document
-behind them, they wait.
+behind them, they wait. The Silver award (2022) was in this list until its
+ACCEA letter turned up; it is now a framed scan on the wall.
 
 To put one back, move the entry from `pendingCertifications` into
 `certifications`, in year order within the recognition section. If the letter
@@ -206,13 +206,14 @@ the catalogue and the structured data all flow from the array.
   colons or parentheses.
 - Keep the wall to authentic documents. Do not generate replica certificates or
   institution crests; a typeset `plate` is the honest stand-in until a real scan
-  exists.
+  exists. `acc-young-investigator-2000` is the single logged exception, for the
+  reasons recorded against it below.
 
-## Restore configs used for the current six scans
+## Restore configs used for the current scans
 
 These produce the restored, un-framed PNG masters from the originals in
-`Certificates/` (step 2). Each master then goes through the framing and
-transparency steps (3) to become the `.webp` on the wall. Run each as
+`Certificates/` or `Website Photos/` (step 2). Each master then goes through the
+framing and transparency steps (3) to become the `.webp` on the wall. Run each as
 `python3 scripts/certificates/restore.py "<source>" "<slug>-master.png" '<config>'`.
 
 - `md-pgimer-1997` from `MD Medicine degree certificate PGIMER 1997.jpg`:
@@ -228,7 +229,7 @@ transparency steps (3) to become the `.webp` on the wall. Run each as
 - `fesc-2018` from `FESC degree certificate 2018.jpg`:
   `{"corners":[[605,640],[4465,610],[4450,3298],[605,3300]],"out_w":3840,"out_h":2660,"paper_pct":85,"levels_pct":[0.5,99.7],"denoise_amt":0.3,"sharpen_amt":90}`
 
-The four added later also needed the reinstate step (3), with the mount
+The ones added later also needed the reinstate step (3), with the mount
 opening measured on the generated frame:
 
 - `arrhythmia-alliance-2014` from the award PDF. Render the page first
@@ -236,12 +237,26 @@ opening measured on the generated frame:
   since a born-digital PDF needs no correction:
   `{"wb":false,"levels":false,"denoise":false,"sharpen":false}`.
   Reinstate `{"rect":[683,476,2635,1942]}`.
-- `acc-young-investigator-2000` from `ACC Young Investigators Award 2000.jpg`.
-  A glossy black plaque, so white balance and levels must be off or the stone
-  blows out:
-  `{"corners":[[275,360],[2858,312],[2846,3698],[243,3766]],"out_w":2590,"out_h":3390,"wb":false,"levels":false,"denoise_amt":0.25,"sharpen_amt":70}`,
-  then a second pass `{"crop":[0.014,0.026,0.022,0.012]}` to clear the marble.
-  Reinstate `{"rect":[627,793,1844,2417]}`.
+- `acc-young-investigator-2000` from `Website Photos/ACC Young Investigators
+  Award 2000.jpg`. A glossy black plaque, so white balance and levels must be
+  off or the stone blows out. The corners are the dark engraved face, read just
+  inside the cream stone bevel, so the warp lands on the face and no marble
+  bleeds in at the edges:
+  `{"corners":[[301,474],[2791,392],[2750,3698],[428,3648]],"out_w":2440,"out_h":3253,"wb":false,"levels":false,"denoise_amt":0.25,"sharpen_amt":70}`.
+  No second crop pass and no reinstate: see the note below.
+
+  **This is the one item on the wall whose document face is generated rather
+  than photographed.** The source is a phone photo taken well off-axis, with
+  hard diagonal shadow bands, specular streaks and the photographer's
+  silhouette mirrored in the polished stone, and no deterministic step can
+  remove a reflection. So GPT Image 2 was asked to re-present the plaque
+  square-on and evenly lit as well as to frame it, and the result was kept
+  as-is instead of reinstating the master over it, because reinstating would
+  put the glare straight back. Every line of the engraving, the flourish and
+  the AACIO crest were checked character by character against the master and
+  match, ring text included, which is not the usual outcome (see step 3) and is
+  why this exception was allowed to stand. If the plaque is ever rephotographed
+  square-on under diffuse light, redo it the normal way with a reinstate step.
 - `pgimer-appreciation-2025` from `Certificate of Appreciation PGI Chandigarh 2025.jpg`:
   `{"rotate":-0.6,"crop":[0.030,0.035,0.036,0.064],"paper_pct":86,"levels_pct":[0.5,99.5],"denoise_amt":0.3,"sharpen_amt":95}`.
   Reinstate `{"rect":[632,491,2695,1918]}`.
@@ -258,6 +273,16 @@ opening measured on the generated frame:
   "llor" of "Vice-Chancellor", and the date line below "05th, February, 2026"
   is cut off. Both go away if the physical certificate is ever rephotographed;
   nothing but the master and these two configs would need to change.
+- `nhs-silver-2022` from `Website Photos/NHS Silver ACCEA award letter
+  2022.jpeg`. A born-digital letter, so every correction is off:
+  `{"wb":false,"levels":false,"denoise":false,"sharpen":false}`.
+  Reinstate `{"rect":[626,409,2248,2471]}` in the default `pad` mode, which only
+  extends the letter's own white margin to meet a slightly taller opening.
+  The source is a 630x683 crop of the first page, so the letter is upscaled
+  about 1.9x into the frame and reads a little soft next to the other scans, and
+  the page ends after "this very significant achievement" with the signature
+  block below the crop. Both go away if the full page is ever scanned: only the
+  master and the reinstate rect would need to change.
 - `aig-appreciation-2025` from `Plaque of Appreciation Hyderabad 2025.jpg`:
   `{"corners":[[845,1015],[3472,977],[3486,4736],[852,4770]],"out_w":2630,"out_h":3760,"paper_pct":84,"levels_pct":[0.5,99.6],"denoise_amt":0.3,"sharpen_amt":90}`,
   then `{"crop":[0.006,0.004,0.032,0.040]}` to clear the physical frame lip.

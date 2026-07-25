@@ -205,7 +205,7 @@ export const certifications: Certification[] = [
     kind: 'scan',
     image: {
       src: '/images/certificates/acc-young-investigator-2000.webp',
-      width: 1663,
+      width: 1617,
       height: 2000,
       alt: 'Engraved black plaque awarded to Dhiraj Gupta by the American Association of Cardiologists of Indian Origin, Young Investigator Award for Excellence in Scientific Pursuit, 12 March 2000.',
     },
@@ -235,6 +235,27 @@ export const certifications: Certification[] = [
       'In the same year, the Primary Care Atrial Fibrillation pathway Professor Gupta helped develop won Anticoagulation Innovation of the Year from the British Medical Association, and he was invited to speak at the All-Party Parliamentary Group on Atrial Fibrillation in Westminster.',
     ],
     meta: 'National practice award, 2014',
+  },
+  {
+    id: 'nhs-silver-2022',
+    postnominal: 'NHS Silver',
+    title: 'National Clinical Excellence Award, Silver',
+    awardingBody: 'National Health Service',
+    location: 'United Kingdom',
+    year: '2022',
+    category: 'recognition',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/nhs-silver-2022.webp',
+      width: 1674,
+      height: 2000,
+      alt: 'Letter from the Advisory Committee on Clinical Excellence Awards and the Department of Health and Social Care to Dr Dhiraj Gupta at Liverpool Heart and Chest Hospital, dated 10 January 2022, confirming a Silver award under the Clinical Excellence Awards 2021.',
+    },
+    story: [
+      'Just five years after the Bronze Award, Professor Gupta was awarded the highly coveted NHS National Silver Clinical Excellence Award.',
+      'Only a small fraction of NHS consultants, fewer than one percent, are recognised at this level. The Silver award reflects sustained national contribution to clinical practice, research and teaching.',
+    ],
+    meta: 'National Silver Award, 2022',
   },
   {
     id: 'pgimer-appreciation-2025',
@@ -283,10 +304,11 @@ export const certifications: Certification[] = [
 /**
  * Held back from the wall for now.
  *
- * The NHS Bronze and Silver Clinical Excellence Awards and the Liverpool
- * professorship are conferred by letter rather than by certificate, and we do
- * not yet have those letters to scan. Rather than hang three typeset plates
- * with no document behind them, they sit here until the letters are in hand.
+ * The NHS Bronze Clinical Excellence Award and the Liverpool professorship are
+ * conferred by letter rather than by certificate, and we do not yet have those
+ * letters to scan. Rather than hang two typeset plates with no document behind
+ * them, they sit here until the letters are in hand. The Silver award letter
+ * arrived and now hangs on the wall above.
  *
  * To reinstate one: move the entry back into `certifications` above, in year
  * order within the recognition section. If a letter has been scanned by then,
@@ -324,20 +346,5 @@ export const pendingCertifications: Certification[] = [
       'Professor Gupta has authored more than 350 peer-reviewed publications, cited over 13,000 times, and has secured around five million pounds in competitive research grants from the NIHR, British Heart Foundation and industry.',
     ],
     meta: '350+ publications, 13,000+ citations',
-  },
-  {
-    id: 'nhs-silver-2022',
-    postnominal: 'NHS Silver',
-    title: 'National Clinical Excellence Award, Silver',
-    awardingBody: 'National Health Service',
-    location: 'United Kingdom',
-    year: '2022',
-    category: 'recognition',
-    kind: 'plate',
-    story: [
-      'Just five years after the Bronze Award, Professor Gupta was awarded the highly coveted NHS National Silver Clinical Excellence Award.',
-      'Only a small fraction of NHS consultants, fewer than one percent, are recognised at this level. The Silver award reflects sustained national contribution to clinical practice, research and teaching.',
-    ],
-    meta: 'National Silver Award, 2022',
   },
 ];
