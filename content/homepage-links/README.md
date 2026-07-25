@@ -26,7 +26,7 @@ Once a URL is set in the data file, the dashed **link needed** flags on the live
 
 ### Sitewide (footer on homepage)
 - **Verify his record**: all profile pills in the footer row
-- **Contact**: phone, email, WhatsApp (footer + floating WhatsApp button)
+- **Contact**: phone, email (footer). WhatsApp is not wired up anywhere yet.
 
 Map hospital site links are not used on the homepage verify strip. Location pins do not require outbound URLs.
 

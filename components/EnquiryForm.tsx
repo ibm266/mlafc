@@ -152,8 +152,11 @@ export function EnquiryForm() {
         </svg>
         <h2 className="mt-6 font-serif text-2xl">Thank you. Your enquiry is with us.</h2>
         <p className="mx-auto mt-3 max-w-md text-ink-soft">
-          The clinic team will contact you within {site.responseDays} working days. If it is urgent, please use
-          WhatsApp or phone instead.
+          The clinic team will contact you within {site.responseDays} working days. If it is urgent, email us at{' '}
+          <a href={`mailto:${site.email}`} className="interactive font-semibold text-brass-deep hover:underline">
+            {site.email}
+          </a>
+          .
         </p>
         <button
           type="button"

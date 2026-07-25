@@ -4,8 +4,6 @@ export const site = {
   url: 'https://www.mumbailondonaf.com',
   tagline: 'London expertise. Mumbai care. Continuous follow-up.',
   phone: '[placeholder]',
-  whatsappNumber: '[placeholder]',
-  whatsappHref: '[placeholder]',
   email: 'contact@mumbai-london-af.clinic',
   address: 'Lilavati Hospital, A-791, Bandra Reclamation, Bandra West, Mumbai 400050',
   gmcLine: 'Professor Dhiraj Gupta is registered with the UK General Medical Council (GMC no. 5205561).',

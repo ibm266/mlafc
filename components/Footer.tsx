@@ -70,15 +70,15 @@ export function Footer() {
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-brass">Contact</h2>
           <ul className="space-y-2 text-sm text-paper/85">
             <li>{site.address}</li>
-            <li>
-              {contactHref('tel', site.phone) ? (
+            {/* The phone number is still a placeholder, so email is the only
+                channel worth showing a patient until a real line is live. */}
+            {contactHref('tel', site.phone) ? (
+              <li>
                 <a href={contactHref('tel', site.phone)} className="interactive hover:text-brass">
                   {site.phone}
                 </a>
-              ) : (
-                site.phone
-              )}
-            </li>
+              </li>
+            ) : null}
             <li>
               {contactHref('mailto', site.email) ? (
                 <a href={contactHref('mailto', site.email)} className="interactive hover:text-brass">

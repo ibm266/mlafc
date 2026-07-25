@@ -156,13 +156,11 @@
     }
   ],
   "contact": {
-    "section": "Footer + WhatsApp button",
+    "section": "Footer contact block",
     "targetFile": "data/site.ts",
     "phone": "",
     "email": "",
-    "whatsappNumber": "",
-    "whatsappHref": "",
     "gmcNumber": "5205561",
-    "notes": "GMC number updated in data/site.ts. whatsappHref is usually https://wa.me/<number without + or spaces>."
+    "notes": "GMC number updated in data/site.ts. The phone number is still a placeholder, so only the email is shown to patients. WhatsApp has been taken off the site until a business number is set up."
   }
 }

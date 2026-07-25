@@ -13,7 +13,7 @@ const visits = visitsJson as Visit[];
 export const metadata: Metadata = {
   title: 'Book a Consultation - Mumbai London AF Clinic',
   description:
-    'Send an enquiry or message the clinic on WhatsApp to book a consultation with Professor Dhiraj Gupta in Mumbai.',
+    'Send an enquiry or email the clinic to book a consultation with Professor Dhiraj Gupta in Mumbai.',
 };
 
 export default function BookPage() {
@@ -42,27 +42,15 @@ export default function BookPage() {
 
           <div className="space-y-5">
             <Reveal delay={100} className="rounded-xl border border-line bg-paper-soft p-8">
-              <h2 className="font-serif text-2xl">Prefer to talk directly?</h2>
+              <h2 className="font-serif text-2xl">Prefer to write to us?</h2>
               <ul className="mt-5 divide-y divide-line">
-                <li>
-                  <a
-                    href={site.whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="interactive block py-3.5 font-semibold text-brass-deep hover:underline"
-                  >
-                    Message on WhatsApp &rarr;
-                  </a>
-                </li>
-                <li>
-                  {phoneHref ? (
+                {phoneHref ? (
+                  <li>
                     <a href={phoneHref} className="interactive block py-3.5 font-semibold text-brass-deep hover:underline">
                       {site.phone}
                     </a>
-                  ) : (
-                    <span className="block py-3.5 font-semibold text-brass-deep">{site.phone}</span>
-                  )}
-                </li>
+                  </li>
+                ) : null}
                 <li>
                   {emailHref ? (
                     <a href={emailHref} className="interactive block py-3.5 font-semibold text-brass-deep hover:underline">

@@ -11,7 +11,7 @@ export function CtaBand() {
             Take the first step. <em className="text-brass">It costs nothing to ask.</em>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-paper/85">
-            Send a short enquiry and the clinic team will come back to you, or message us directly on WhatsApp.
+            Send a short enquiry and the clinic team will come back to you, or email the clinic directly.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -21,12 +21,10 @@ export function CtaBand() {
               Send an enquiry
             </Link>
             <a
-              href={site.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${site.email}`}
               className="interactive inline-block rounded-full border border-brass px-6 py-3 font-semibold text-brass hover:bg-brass hover:text-night"
             >
-              Message on WhatsApp
+              Email the clinic
             </a>
           </div>
         </Reveal>

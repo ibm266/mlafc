@@ -1,3 +1,5 @@
+import { site } from '@/data/site';
+
 type RecaptchaVerifyResponse = {
   success: boolean;
   score?: number;
@@ -36,7 +38,7 @@ export async function verifyRecaptchaToken(token: string | null | undefined): Pr
   }
 
   if (typeof data.score === 'number' && data.score < MIN_SCORE) {
-    return 'We could not verify this submission. Please try again or contact us on WhatsApp.';
+    return `We could not verify this submission. Please try again or email us at ${site.email}.`;
   }
 
   return null;

@@ -49,8 +49,8 @@ test('visits: confirmed 2026 dates with valid statuses', () => {
 
 test('site config has contact placeholders', () => {
   expect(site.phone).toBe('[placeholder]');
-  expect(site.whatsappNumber).toBe('[placeholder]');
-  expect(site.whatsappHref).toBe('[placeholder]');
+  // WhatsApp is not set up yet, so the site carries no WhatsApp channel at all.
+  expect(Object.keys(site)).not.toContain('whatsappHref');
   // email is live: enquiries are forwarded here and it is shown on the book page.
   expect(site.email).toBe('contact@mumbai-london-af.clinic');
   // address is live: the clinic runs from Lilavati Hospital, Bandra West.

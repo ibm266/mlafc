@@ -21,7 +21,9 @@ const data = {
       name: site.name,
       url: BASE,
       email: site.email,
-      telephone: site.phone,
+      // Only publish a telephone once a real one exists: a placeholder in
+      // structured data is worse than the field being absent.
+      ...(site.phone.includes('[placeholder]') ? {} : { telephone: site.phone }),
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Lilavati Hospital, A-791, Bandra Reclamation, Bandra West',

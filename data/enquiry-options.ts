@@ -19,7 +19,6 @@ export const enquiryReferralSources = [
 export const enquiryContactPreferences = [
   { id: 'phone', label: 'Phone call' },
   { id: 'email', label: 'Email' },
-  { id: 'whatsapp', label: 'WhatsApp' },
 ] as const;
 
 export const enquiryConditionIds = new Set<string>(enquiryConditions.map((option) => option.id));

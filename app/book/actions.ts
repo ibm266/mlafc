@@ -1,6 +1,7 @@
 'use server';
 
 import { headers } from 'next/headers';
+import { site } from '@/data/site';
 import { toE164, formatPhoneDisplay } from '@/lib/phone';
 import { rateLimit } from '@/lib/rateLimit';
 import { sendEnquiryEmail } from '@/lib/sendEnquiryEmail';
@@ -15,8 +16,7 @@ const PER_IP = { limit: 5, windowMs: 15 * MINUTE };
 /** Backstop for the clinic inbox when submissions arrive from many addresses. */
 const OVERALL = { limit: 40, windowMs: 60 * MINUTE };
 
-const TOO_MANY =
-  'We have already received several enquiries from you. Please give the clinic team a little time to reply, or message us on WhatsApp if it is urgent.';
+const TOO_MANY = `We have already received several enquiries from you. Please give the clinic team a little time to reply, or email ${site.email} if it is urgent.`;
 
 /**
  * The proxy address of the sender, or null when no proxy header is present.
@@ -80,7 +80,7 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
     console.error('[enquiry] email failed', error);
     return {
       ok: false,
-      errors: { form: 'We could not send your enquiry just now. Please try WhatsApp or phone instead.' },
+      errors: { form: `We could not send your enquiry just now. Please email us at ${site.email} instead.` },
     };
   }
 
