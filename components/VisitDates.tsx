@@ -8,6 +8,16 @@ const STATUS: Record<Visit['status'], { label: string; cls: string }> = {
   tbc: { label: 'TBC', cls: 'border border-line bg-paper-soft text-ink-soft' },
 };
 
+/**
+ * A card names a specific visit, so its call to action carries that visit
+ * through to the enquiry form rather than making the reader pick the month
+ * again. `#enquiry` matters on /book itself, where the form is above these
+ * cards and nothing would visibly happen otherwise.
+ */
+export function bookHrefForVisit(visit: Visit) {
+  return `/book?month=${encodeURIComponent(visit.month)}#enquiry`;
+}
+
 export function VisitDates({ visits }: { visits: Visit[] }) {
   return (
     <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -22,7 +32,7 @@ export function VisitDates({ visits }: { visits: Visit[] }) {
           <p className="mt-3 text-sm text-ink-soft">{v.note}</p>
           {v.status === 'open' ? (
             <Link
-              href="/book"
+              href={bookHrefForVisit(v)}
               className="interactive mt-4 inline-block text-sm font-semibold text-brass-deep hover:underline"
             >
               Request a slot &rarr;

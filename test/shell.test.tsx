@@ -44,12 +44,16 @@ test('booking pill collapses to a labelled circle that still points at the enqui
   window.sessionStorage.clear();
   render(<FloatingBookingPill />);
 
-  expect(screen.getByRole('link', { name: /next mumbai visit|book a consultation/i })).toHaveAttribute('href', '/book');
+  // The pill advertises a month, so it hands that month to the form.
+  const bookHref = expect.stringMatching(/^\/book(\?month=.+#enquiry)?$/);
+  expect(screen.getByRole('link', { name: /next mumbai visit|book a consultation/i }).getAttribute('href')).toEqual(
+    bookHref,
+  );
 
   await user.click(screen.getByRole('button', { name: /collapse the booking prompt/i }));
 
   expect(screen.queryByRole('button', { name: /collapse the booking prompt/i })).not.toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /send an enquiry/i })).toHaveAttribute('href', '/book');
+  expect(screen.getByRole('link', { name: /send an enquiry/i }).getAttribute('href')).toEqual(bookHref);
   expect(window.sessionStorage.getItem('mlafc:booking-pill-collapsed')).toBe('1');
 });
 
