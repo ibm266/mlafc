@@ -159,6 +159,54 @@ export type GalleryPhoto = {
   meta: string;
 };
 
+export type TeamPhoto = {
+  src: string;
+  /** Intrinsic pixel size of the derivative in public/, needed by next/image. */
+  width: number;
+  height: number;
+  /** Descriptive alt text. Not a repeat of the name and role beside it. */
+  alt: string;
+};
+
+export type TeamTraining = {
+  /** Years as shown, e.g. "2022 to 2023" or "1983". */
+  period: string;
+  qualification: string;
+  institution: string;
+  /** Optional distinction earned, e.g. "First rank in the cohort". */
+  note?: string;
+};
+
+export type TeamWork = {
+  title: string;
+  /** Where and when it was published or presented. */
+  detail: string;
+};
+
+export type TeamMember = {
+  id: string;
+  name: string;
+  /** Letters after the name, as they should read on the page. */
+  postnominals: string;
+  /** One-line role, e.g. "Consultant Cardiologist, Mumbai". */
+  role: string;
+  photo: TeamPhoto;
+  /** One or two sentences, used on the home page card. */
+  excerpt: string;
+  /** Full profile paragraphs for the team page. */
+  bio: string[];
+  /** Where they see patients. */
+  appointments: string[];
+  /** Training, most recent first. */
+  training: TeamTraining[];
+  /** Why this consultant is the right person to have on an AF case. */
+  afFocus: string[];
+  /** A short, checkable selection of published or presented work. */
+  selectedWork: TeamWork[];
+  /** Optional line about the person away from the clinic. */
+  interests?: string;
+};
+
 export type Faq = { question: string; answer: string };
 
 export type Citation = { id: number; text: string };

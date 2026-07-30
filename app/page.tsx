@@ -16,6 +16,7 @@ import { FloatingBookingPill } from '@/components/FloatingBookingPill';
 import { ChapterEyebrow } from '@/components/ChapterEyebrow';
 import { HorizontalCardGallery } from '@/components/HorizontalCardGallery';
 import { InActionGallery } from '@/components/home/InActionGallery';
+import { TeamSection } from '@/components/home/TeamSection';
 import { LocationsMapLazy } from '@/components/map/LocationsMapLazy';
 import testimonialsJson from '@/data/testimonials.json';
 import publicationsJson from '@/data/publications.json';
@@ -284,6 +285,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TeamSection />
 
       <CtaBand />
     </main>
