@@ -36,9 +36,14 @@ export default function BookPage() {
 
       <section className="bg-paper">
         <div className="mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 lg:grid-cols-[3fr_2fr] lg:gap-12">
-          <Reveal className="rounded-xl border border-line bg-white p-8 md:p-10">
-            <EnquiryForm />
-          </Reveal>
+          {/* Anchored so a call to action carrying a visit date lands on the
+              form itself, which matters most on this page, where the visit
+              cards sit below the form. */}
+          <div id="enquiry" className="scroll-mt-24">
+            <Reveal className="rounded-xl border border-line bg-white p-8 md:p-10">
+              <EnquiryForm />
+            </Reveal>
+          </div>
 
           <div className="space-y-5">
             <Reveal delay={100} className="rounded-xl border border-line bg-paper-soft p-8">

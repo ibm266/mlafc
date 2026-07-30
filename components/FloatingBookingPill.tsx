@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { bookHrefForVisit } from '@/components/VisitDates';
 import visitsJson from '@/data/visits.json';
 import type { Visit } from '@/data/types';
 
@@ -14,6 +15,8 @@ const nextBookable = visits.find((v) => v.status === 'open');
 const pillLabel = nextBookable
   ? `Next Mumbai visit: ${nextBookable.month} · Booking open`
   : 'Book a consultation';
+// The pill names a month, so it carries that month into the enquiry form.
+const pillHref = nextBookable ? bookHrefForVisit(nextBookable) : '/book';
 
 // A phone screen is mostly reading space, so somebody who has seen the prompt
 // can shrink it to a circle. The choice rides out the session so it does not
@@ -58,7 +61,7 @@ export function FloatingBookingPill() {
     >
       <div className="relative">
         <Link
-          href="/book"
+          href={pillHref}
           aria-label={collapsed ? 'Send an enquiry' : undefined}
           className={`flex items-center rounded-full bg-night font-semibold text-paper shadow-[0_12px_32px_rgba(6,15,21,0.35)] transition-colors hover:bg-night-soft md:h-auto md:w-auto md:gap-2.5 md:px-5 md:py-3.5 md:text-sm ${
             collapsed

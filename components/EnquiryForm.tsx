@@ -1,7 +1,18 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect, useRef, useState, useTransition, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+  type ChangeEvent,
+  type FormEvent,
+  type ReactNode,
+} from 'react';
 import { submitEnquiry } from '@/app/book/actions';
 import {
   enquiryConditions,
@@ -16,6 +27,7 @@ import { getRecaptchaToken, recaptchaSiteKey } from '@/lib/useRecaptcha';
 import { validateEnquiry, type EnquiryFields } from '@/lib/validateEnquiry';
 
 const visits = visitsJson as Visit[];
+const visitMonths = new Set(visits.map((visit) => visit.month));
 
 const EMPTY: EnquiryFields = {
   name: '',
@@ -37,12 +49,49 @@ const FIELD_CLASS = `w-full ${FIELD_BASE}`;
 
 type FieldErrors = Partial<Record<keyof EnquiryFields | 'recaptcha' | 'form', string>>;
 
+/**
+ * Reads the visit month a call to action passed along, and reports it up.
+ *
+ * It renders nothing and lives behind its own Suspense boundary on purpose:
+ * useSearchParams makes its subtree client-rendered, and this way that subtree
+ * is one empty component rather than the whole form.
+ *
+ * The hook is only used to notice that the query changed, which happens when
+ * somebody picks a second visit from the cards further down /book. The value
+ * itself is read from the live URL, which is true whether this subtree was
+ * rendered on the server or the client. Anything that is not a real visit
+ * month is dropped: the query string is not to be trusted.
+ */
+function MonthFromQuery({ onMonth }: { onMonth: (month: string) => void }) {
+  const searchParams = useSearchParams();
+  const queryKey = searchParams?.toString() ?? '';
+
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('month') ?? '';
+    if (visitMonths.has(requested)) {
+      onMonth(requested);
+    }
+  }, [queryKey, onMonth]);
+
+  return null;
+}
+
 export function EnquiryForm() {
   const [fields, setFields] = useState<EnquiryFields>(() => ({ ...EMPTY }));
   const [errors, setErrors] = useState<FieldErrors>({});
   const [done, setDone] = useState(false);
   const [pending, startTransition] = useTransition();
   const successRef = useRef<HTMLDivElement>(null);
+
+  // Someone who arrived from a call to action naming a visit has already told
+  // us the month, so fill it in rather than asking twice. Held in state as
+  // well so that "Send another enquiry" starts from the same place.
+  const [prefilledMonth, setPrefilledMonth] = useState('');
+
+  const applyMonth = useCallback((month: string) => {
+    setPrefilledMonth(month);
+    setFields((current) => (current.month === month ? current : { ...current, month }));
+  }, []);
 
   // The form is long, so on success bring the confirmation into view rather
   // than leaving the reader wherever the submit button happened to be.
@@ -162,7 +211,7 @@ export function EnquiryForm() {
           type="button"
           onClick={() => {
             setDone(false);
-            setFields({ ...EMPTY });
+            setFields({ ...EMPTY, month: prefilledMonth });
             setErrors({});
           }}
           className="interactive mt-6 rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-ink-soft hover:text-ink"
@@ -177,6 +226,10 @@ export function EnquiryForm() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <MonthFromQuery onMonth={applyMonth} />
+      </Suspense>
+
       {recaptchaSiteKey ? (
         <Script src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`} strategy="lazyOnload" />
       ) : null}

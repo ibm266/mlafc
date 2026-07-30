@@ -4,6 +4,9 @@ import { expect, vi } from 'vitest';
 
 vi.mock('next/navigation', () => ({
   usePathname: () => '/',
+  // Derived from jsdom's own URL so a test can drive it with
+  // history.replaceState rather than re-mocking the module.
+  useSearchParams: () => new URLSearchParams(window.location.search),
 }));
 
 expect.extend(axeMatchers);

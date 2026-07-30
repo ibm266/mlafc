@@ -35,9 +35,13 @@ test('VisitDates renders one card per visit with status and booking link', () =>
   expect(screen.getByText('Booking open')).toBeInTheDocument();
   expect(screen.getByText('Waitlist')).toBeInTheDocument();
   expect(screen.getByText('TBC')).toBeInTheDocument();
-  // Only a bookable visit offers a slot request.
+  // Only a bookable visit offers a slot request, and it carries its own month
+  // through to the enquiry form so nobody is asked for the date twice.
   expect(screen.getAllByRole('link', { name: /request a slot/i })).toHaveLength(1);
-  expect(screen.getByRole('link', { name: /request a slot/i })).toHaveAttribute('href', '/book');
+  expect(screen.getByRole('link', { name: /request a slot/i })).toHaveAttribute(
+    'href',
+    '/book?month=27%20Sep%20to%204%20Oct%202026#enquiry',
+  );
 });
 
 test('the live visit calendar has bookable dates on the page', () => {
