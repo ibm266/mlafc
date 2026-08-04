@@ -14,7 +14,7 @@ export const certificationSections: CertificationSection[] = [
   {
     id: 'uk',
     label: 'United Kingdom, specialist accreditation',
-    blurb: 'The Commonwealth Fellowship and the formal completion of specialist training in Britain.',
+    blurb: 'The formal completion of specialist training in Britain, after six years of electrophysiology across four London teaching hospitals.',
   },
   {
     id: 'fellowships',
@@ -114,21 +114,6 @@ export const certifications: Certification[] = [
     meta: 'Doctorate conferred February 2000',
   },
   // United Kingdom, specialist accreditation
-  {
-    id: 'commonwealth-fellowship-2000',
-    postnominal: 'Commonwealth Fellow',
-    title: 'Commonwealth Fellowship in Cardiac Electrophysiology',
-    awardingBody: 'Commonwealth Scholarship Commission',
-    location: 'United Kingdom',
-    year: '2000',
-    category: 'uk',
-    kind: 'plate',
-    story: [
-      'One of the small handful of awards each year that brings exceptional doctors from across the Commonwealth to the United Kingdom for advanced training.',
-      "The Fellowship marked the formal beginning of Professor Gupta's electrophysiology career, and took him to St George's, St Bartholomew's, the Royal London and the London Chest Hospital, where he trained with Professor John Camm and Professor Richard Schilling.",
-    ],
-    meta: 'The start of six years of super-specialist EP training in London',
-  },
   {
     id: 'cct-pmetb-2006',
     postnominal: 'CCT',
@@ -325,19 +310,38 @@ export const certifications: Certification[] = [
 /**
  * Held back from the wall for now.
  *
- * The NHS Bronze Clinical Excellence Award and the Liverpool professorship are
- * conferred by letter rather than by certificate, and we do not yet have those
- * letters to scan. Rather than hang two typeset plates with no document behind
- * them, they sit here until the letters are in hand. The Silver award letter
- * arrived and now hangs on the wall above.
+ * The Commonwealth Fellowship, the NHS Bronze Clinical Excellence Award and the
+ * Liverpool professorship are all conferred by letter rather than by
+ * certificate, and we do not yet have those letters to scan. Rather than hang
+ * three typeset plates with no document behind them, they sit here until the
+ * letters are in hand. The Silver award letter arrived and now hangs on the
+ * wall above.
+ *
+ * The Commonwealth Fellowship still tells its story on the journey page, where
+ * it does not need a document to stand behind it.
  *
  * To reinstate one: move the entry back into `certifications` above, in year
- * order within the recognition section. If a letter has been scanned by then,
- * follow docs/adding-certificates.md and switch it to `kind: 'scan'` with an
- * `image` block. Nothing else needs to change: the wall and the catalogue both
- * flow from the array.
+ * order within its own section. If a letter has been scanned by then, follow
+ * docs/adding-certificates.md and switch it to `kind: 'scan'` with an `image`
+ * block. Nothing else needs to change: the wall and the catalogue both flow
+ * from the array.
  */
 export const pendingCertifications: Certification[] = [
+  {
+    id: 'commonwealth-fellowship-2000',
+    postnominal: 'Commonwealth Fellow',
+    title: 'Commonwealth Fellowship in Cardiac Electrophysiology',
+    awardingBody: 'Commonwealth Scholarship Commission',
+    location: 'United Kingdom',
+    year: '2000',
+    category: 'uk',
+    kind: 'plate',
+    story: [
+      'One of the small handful of awards each year that brings exceptional doctors from across the Commonwealth to the United Kingdom for advanced training.',
+      "The Fellowship marked the formal beginning of Professor Gupta's electrophysiology career, and took him to St George's, St Bartholomew's, the Royal London and the London Chest Hospital, where he trained with Professor John Camm and Professor Richard Schilling.",
+    ],
+    meta: 'The start of six years of super-specialist EP training in London',
+  },
   {
     id: 'nhs-bronze-2017',
     postnominal: 'NHS Bronze',
