@@ -84,8 +84,18 @@ python3 scripts/certificates/restore.py \
 
 Open the output and check it. Every character, seal and signature must match the
 original exactly. If the paper is a grey security stock rather than white, add
-`"wb": false`. If the file is over the size budget because of heavy paper
+`"wb": false`. If the photo was taken under a lamp, so the paper carries a
+colour cast, a corner shadow or a soft reflection, add `"flatten": 0.85`: it
+divides out the lighting and leaves the document itself untouched. If the file
+is over the size budget because of heavy paper
 texture, add `"grain": 0.4` (edge-preserving smoothing that keeps text crisp).
+If the photograph clipped a margin the sheet really has, so the document sits
+lopsided in its own paper, give the margin back with `"pad"`, which mirror
+tiles the blank paper just inside that edge. Pair it with `"pad_src"` whenever
+the clear strip is thinner than the pad, or the mirror drags the printed border
+back into the margin as a ghost. Never pad an edge a border or a ribbon
+reaches.
+
 All config keys are documented at the top of `scripts/certificates/restore.py`.
 Export a full-resolution PNG master here (end the output path in `.png`); you
 feed that into the framing step next.
@@ -288,3 +298,21 @@ opening measured on the generated frame:
   then `{"crop":[0.006,0.004,0.032,0.040]}` to clear the physical frame lip.
   Reinstate `{"rect":[604,676,1867,2581],"mode":"fit"}`, because the ribbon
   bleeds to the top edge and `pad` streaks it.
+- `facc-2022` from `Fellow American College of Cardiology 2022.jpg`, converted
+  from the phone's HEIC first (`sips -s format jpeg -s formatOptions best`).
+  Mottled parchment shot under a warm lamp, off axis, with a soft reflection
+  across the top right, so this is the first item to use `flatten`. The corners
+  are not the sheet, which runs off frame at the left and is clipped at the
+  bottom, but the printed gold rule offset outwards by the sheet's own margin,
+  which is 88px at the sides and 340px at the top to make room for the seal
+  straddling the rule:
+  `{"corners":[[78,15],[3666,32],[3665,2774],[43,2764]],"out_w":3607,"out_h":2746,"flatten":0.85,"wb":false,"levels_pct":[0.5,99.6],"denoise_amt":0.3,"sharpen_amt":90,"pad":[0,0,0,64],"pad_src":[0,0,0,18]}`.
+  The photo cut about a quarter inch off the foot of the sheet, so the `pad`
+  puts the bottom margin back from the 18px of clear paper below the rule.
+  Reinstate `{"rect":[655,527,2659,1952],"mode":"fit"}`. `fit`, not `pad`,
+  because GPT Image cut the mount window wider than the sheet and `pad` would
+  stretch the paper margins sideways into streaks; `fit` keeps the sheet at its
+  true 11 by 8.5 shape and fills the leftover with the mount's own cream.
+  Exported with `frame_transparent.py ... 42 2000 60`: the carved laurel frame
+  is dense enough that the default quality lands well over the size of every
+  other file on the wall.

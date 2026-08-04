@@ -17,6 +17,12 @@ Config keys (all optional):
   out_w,out_h target size for the perspective warp (required with corners)
   rotate      fine deskew in degrees (positive = counter-clockwise)
   crop        [left,top,right,bottom] as fractions (<1) or pixels to trim
+  flatten     even out uneven lighting 0..1 (default 0, off). Divides out a
+              smooth shading field, so a tungsten cast, a corner shadow or a
+              soft reflection on the paper flattens away. Low frequency only:
+              text, seals, signatures and faces keep every pixel of shape.
+  flatten_pct percentile that counts as paper when estimating the field
+              (default 88); lower it if the document is mostly ink
   wb          bool, white-balance to neutralise paper cast (default true)
   paper_pct   percentile that counts as paper for white balance (default 90)
   levels      bool, per-channel percentile stretch (default true)
@@ -25,6 +31,15 @@ Config keys (all optional):
   denoise_amt median-blend strength 0..1 (default 0.35)
   sharpen     bool (default true)
   sharpen_amt unsharp percent (default 110)
+  pad         [left,top,right,bottom] px of blank margin to add back, mirror
+              tiled from the paper just inside each edge, so the grain carries
+              on instead of streaking. For a photograph that clipped a margin
+              the sheet really has. Blank paper only, never an edge a printed
+              border or a ribbon reaches.
+  pad_src     [left,top,right,bottom] thickness of the clear strip each pad is
+              tiled from (default: the pad itself). Set it when the blank
+              margin is thinner than the pad, or the mirror pulls the printed
+              border back into the margin as a ghost.
   grain       extra edge-preserving smoothing for jpg export 0..1 (default 0)
   long_edge   web long edge in px (default 2000)
   max_kb      web size budget in KB (default 350)
@@ -49,6 +64,44 @@ def do_perspective(im, corners, out_w, out_h):
     dst = [(0, 0), (out_w, 0), (out_w, out_h), (0, out_h)]
     return im.transform((out_w, out_h), Image.PERSPECTIVE,
                         perspective_coeffs(dst, corners), Image.BICUBIC)
+
+
+def mirror_pad(arr, n, src):
+    """Extend the bottom edge by n rows, mirror-tiled from the last src rows.
+
+    Only those rows are ever mirrored, so a printed border further up cannot
+    reappear as a ghost in the margin. Rotate the array to reach another edge.
+    """
+    if n <= 0:
+        return arr
+    src = max(1, min(src, arr.shape[0]))
+    band = np.pad(arr[-src:], ((0, n), (0, 0), (0, 0)), mode='symmetric')[src:]
+    return np.concatenate([arr, band], axis=0)
+
+
+def flatten_illumination(arr, amount, paper_pct=88):
+    """Divide out the lighting so the paper reads evenly across the sheet.
+
+    The shading field is a high percentile taken over a coarse grid of blocks,
+    not a blur, so ink never drags the field down and no halo appears around
+    the lettering. Every block is far bigger than a glyph, so what is removed
+    is the lamp, the shadow and the sheen, never the document.
+    """
+    h, w, _ = arr.shape
+    # estimate on a small copy: cheap, and averages away the paper texture
+    small = np.asarray(
+        Image.fromarray(arr.astype(np.uint8)).resize((max(w // 8, 8), max(h // 8, 8)), Image.BOX)
+    ).astype(np.float32)
+    sh, sw, _ = small.shape
+    by, bx = max(sh // 40, 1), max(sw // 40, 1)
+    gh, gw = sh // by, sw // bx
+    tiles = small[:gh * by, :gw * bx].reshape(gh, by, gw, bx, 3)
+    field = np.percentile(tiles, paper_pct, axis=(1, 3)).astype(np.float32)
+    field = Image.fromarray(np.clip(field, 1, 255).astype(np.uint8)).resize((w, h), Image.BICUBIC)
+    field = np.asarray(field.filter(ImageFilter.GaussianBlur(max(w, h) / 90))).astype(np.float32)
+    ref = np.percentile(field.reshape(-1, 3), 65, axis=0)
+    gain = 1.0 + (ref[None, None, :] / np.maximum(field, 1.0) - 1.0) * amount
+    return np.clip(arr * gain, 0, 255)
 
 
 def white_balance(arr, paper_pct=90):
@@ -88,6 +141,8 @@ def restore(src, out, cfg):
         im = im.crop((px(l, W), px(t, H), W - px(r, W), H - px(b, H)))
 
     arr = np.asarray(im).astype(np.float32)
+    if cfg.get('flatten'):
+        arr = flatten_illumination(arr, cfg['flatten'], cfg.get('flatten_pct', 88))
     if cfg.get('wb', True):
         arr = white_balance(arr, cfg.get('paper_pct', 90))
     if cfg.get('levels', True):
@@ -98,6 +153,17 @@ def restore(src, out, cfg):
         im = Image.blend(im, im.filter(ImageFilter.MedianFilter(3)), cfg.get('denoise_amt', 0.35))
     if cfg.get('sharpen', True):
         im = im.filter(ImageFilter.UnsharpMask(2.2, cfg.get('sharpen_amt', 110), 2))
+
+    if cfg.get('pad'):
+        pad = [int(v) for v in cfg['pad']]
+        src = cfg.get('pad_src') or pad
+        src = [int(v) for v in src]
+        a = np.asarray(im)
+        a = mirror_pad(a, pad[3], src[3])                                  # bottom
+        a = mirror_pad(a[::-1], pad[1], src[1])[::-1]                      # top
+        a = mirror_pad(a.swapaxes(0, 1), pad[2], src[2]).swapaxes(0, 1)    # right
+        a = mirror_pad(a.swapaxes(0, 1)[::-1], pad[0], src[0])[::-1].swapaxes(0, 1)
+        im = Image.fromarray(a)
 
     lower = out.lower()
     if lower.endswith('.jpg') or lower.endswith('.jpeg'):

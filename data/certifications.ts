@@ -19,7 +19,7 @@ export const certificationSections: CertificationSection[] = [
   {
     id: 'fellowships',
     label: 'Fellowships',
-    blurb: 'Election to the senior fellowships of the Royal College of Physicians and the European Society of Cardiology.',
+    blurb: 'Election to the senior fellowships of the Royal College of Physicians, the European Society of Cardiology and the American College of Cardiology.',
   },
   {
     id: 'recognition',
@@ -192,6 +192,27 @@ export const certifications: Certification[] = [
       'Fellowship of the European Society of Cardiology recognises cardiologists who have qualified through education and experience and made a contribution to the specialty across Europe.',
       'Professor Gupta was certified as a Fellow at the ESC Congress in Munich in 2018.',
     ],
+  },
+  {
+    id: 'facc-2022',
+    postnominal: 'FACC',
+    title: 'Fellow of the American College of Cardiology',
+    awardingBody: 'American College of Cardiology',
+    location: 'United States',
+    year: '2022',
+    category: 'fellowships',
+    kind: 'scan',
+    image: {
+      src: '/images/certificates/facc-2022.webp',
+      width: 2000,
+      height: 1568,
+      alt: 'Certificate of the American College of Cardiology welcoming Dhiraj Gupta as a Fellow on 1 May 2022, signed by Edward T.A. Fry, President, and Malissa J. Wood, Secretary.',
+    },
+    story: [
+      'Fellowship of the American College of Cardiology is granted by peer review, to cardiologists whose clinical practice, teaching and research meet the College standard and who are put forward by existing Fellows.',
+      'Professor Gupta first stood in front of the College in 2000, presenting four papers at its Annual Scientific Session as a senior resident at AIIMS. He was welcomed as a Fellow twenty two years later, on the first of May 2022.',
+    ],
+    meta: 'Fellow since May 2022',
   },
   // National recognition
   {
