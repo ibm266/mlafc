@@ -50,3 +50,13 @@ next-env.d.ts
 # URLs, which carry AWS session tokens, so this must not be published.
 # .claude/launch.json is shared and stays tracked.
 .claude/settings.local.json
+
+# Remotion agent skills, fetched from github rather than written here, plus
+# the lockfile that pins them. .claude/skills/ is only symlinks into .agents/.
+/.agents/
+/.claude/skills/
+/skills-lock.json
+
+# The Remotion reel is its own workspace, with its own dependencies and its own
+# ignore rules. It is not part of what Vercel builds and ships.
+/video/

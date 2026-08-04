@@ -7,6 +7,13 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "reel",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["remotion", "studio", "--no-open", "--port", "3333"],
+      "cwd": "video",
+      "port": 3333
     }
   ]
 }
