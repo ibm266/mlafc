@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { EcgHeroMonitor } from '@/components/ecg/EcgHeroMonitor';
-import { HeroPortraitBubble } from '@/components/home/HeroPortraitBubble';
+import { HeroPortrait, HeroQuote } from '@/components/home/HeroPortraitBubble';
 import { Reveal } from '@/components/Reveal';
 import linksJson from '@/data/links.json';
 import type { SiteLinks } from '@/data/types';
@@ -15,7 +15,7 @@ export function Hero() {
     <section className="bg-paper px-5 pb-8 pt-6 md:pb-12 md:pt-10">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl border border-line-dark bg-night text-paper shadow-[0_28px_64px_rgba(6,15,21,0.28),0_0_0_1px_rgba(58,84,104,0.22)]">
         <EcgHeroMonitor />
-        <div className="relative z-[2] grid items-center gap-10 px-5 py-16 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:px-10 md:py-20 lg:px-12 lg:py-24">
+        <div className="relative z-[2] grid items-center gap-8 px-5 py-10 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:px-10 md:py-20 lg:px-12 lg:py-24">
           <div>
             <h1 className="font-serif text-[clamp(2.2rem,5.5vw,3.8rem)] leading-[1.12]">
               <Reveal as="span" delay={150} className="block">
@@ -90,9 +90,16 @@ export function Hero() {
             </Reveal>
           </div>
 
-          <Reveal delay={650} className="mx-auto w-full max-w-md md:mx-0 md:justify-self-end">
-            <HeroPortraitBubble />
-          </Reveal>
+          {/* On mobile this wrapper is display:contents, so the portrait and the quote
+              become grid items in their own right: portrait first, quote last. */}
+          <div className="contents md:block md:w-full md:max-w-md md:justify-self-end">
+            <Reveal delay={120} className="order-first mx-auto w-full max-w-sm md:order-none md:mx-0 md:max-w-none">
+              <HeroPortrait />
+            </Reveal>
+            <Reveal delay={650} className="order-last md:order-none">
+              <HeroQuote />
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
