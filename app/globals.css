@@ -128,12 +128,21 @@ body {
 
 /* On mobile the hero is tall and narrow, so the slice-scaled SVG shows only a
    thin central band of the 1440-unit trace, roughly x 630-810 at 375px wide.
-   Lift the trace above the fold and run the sweep over a shorter range so the
-   beat re-enters the visible strip quickly instead of spending most of the
-   loop off-screen. Units are SVG user units (viewBox 1440x720). */
+   Run the sweep over a shorter range so the beat re-enters the visible strip
+   quickly instead of spending most of the loop off-screen. Units are SVG user
+   units (viewBox 1440x720). */
 @media (max-width: 767px) {
-  .ecg-hero-trace { transform: translateY(-200px); }
   .ecg-sweep { animation: ecg-sweep-x-mobile 3s linear infinite; }
+}
+
+/* Phones stack the tallest card of the lot, so a trace centred in it lands
+   halfway down the opening paragraph. Lift it to run just under the headline.
+   The portrait that leads the stacked hero ends around a quarter of the way
+   down, so the beat still clears it comfortably. Wider stacked layouts keep the
+   centred trace, which already reads under the headline there: their cards are
+   shorter and the portrait takes a larger share of the height. */
+@media (max-width: 479px) {
+  .ecg-hero-trace { transform: translateY(-50px); }
 }
 
 @keyframes ecg-sweep-x-mobile {
