@@ -1,7 +1,8 @@
 # Outstanding items and placeholders
 
-Audit date: 25 July 2026. Covers everything on the site that is still empty, a
-placeholder, or wired but unverified. Grouped by what a visitor can see today.
+Audit date: 25 July 2026, revised 12 August 2026. Covers everything on the site
+that is still empty, a placeholder, or wired but unverified. Grouped by what a
+visitor can see today.
 
 ## A. Visible to visitors right now
 
@@ -83,13 +84,13 @@ a link, splitting the multi-meeting entries is the first step.
 | `lectures-madrid` | Scientific lectures, Madrid | AF Symposium meetings plus New Horizons in AF |
 | `lectures-prague` | Scientific lectures, Prague | AF Symposium, ESC Heart Failure, Prague Rhythm |
 
-### A2. Clinic phone number
+### A2. Clinic phone number: DONE
 
-`data/site.ts` still has `phone: '[placeholder]'`. As of the last change the
-footer row, the book page row and the JSON-LD `telephone` field are all hidden
-while it is a placeholder, so nothing broken is on show, but the site currently
-offers no phone number at all. Set a real number and all three appear
-automatically, or confirm the clinic stays email-only.
+`data/site.ts` now carries the live clinic line, `+91 81695 23196`, with
+`phoneHref: 'tel:+918169523196'` for dialling. It shows in the footer, on the
+book page, in the homepage call to action band, in the mobile menu, and in the
+JSON-LD `telephone` field. The placeholder guards that hid all of those are
+gone.
 
 ### A3. Press articles with no link
 
@@ -100,12 +101,26 @@ Three entries in `data/links.json` have an empty `url`, so their cards on
 - The Pioneer, March 2025, "UK Heart Rhythm Expert Begins India Tour from Chd"
 - Punjab Kesari, March 2025, "Global heart expert to give free treatment, train doctors across India"
 
-### A4. WhatsApp
+### A4. WhatsApp: DONE
 
-Taken off the site on 25 July 2026. To bring it back: add the number to
-`data/site.ts`, restore the floating button, and add the contact-preference
-option in `data/enquiry-options.ts`. See commit f4a5f4e for exactly what was
-removed.
+Taken off the site on 25 July 2026 in commit f4a5f4e, and put back on 12 August
+2026 against the clinic line, `+91 81695 23196`. The same number answers calls
+and WhatsApp, so a patient only ever learns one.
+
+Where it now appears:
+
+- `components/WhatsAppFab.tsx`, the floating brass button, mounted sitewide in
+  `app/layout.tsx`. The booking pill is offset to `bottom-[5.5rem]` so the two
+  stack rather than overlap.
+- Footer contact block, book page contact card, homepage call to action band,
+  the mobile menu, and the enquiry form confirmation.
+- `data/enquiry-options.ts` offers WhatsApp as a contact preference again, so it
+  reaches the clinic inbox through `lib/sendEnquiryEmail.ts`.
+- The rate limit, send failure and reCAPTCHA fallback messages name WhatsApp as
+  the urgent channel again.
+
+`lib/contact.ts` builds every wa.me link and prefills the opening line, so the
+encoding lives in one place.
 
 ## B. Configuration that can fail silently
 
@@ -128,13 +143,12 @@ entirely, so the form is unprotected. Confirm both keys are set in Vercel.
   profile in `data/links.json` has `featured: false`, so it would render an
   empty strip even if it were. Either mount it with GMC Register, MMC Register
   and Top Doctors marked featured, or delete the component.
-- `scripts/generate-outstanding-items-pdf.mjs` still reads `whatsappNumber` and
-  `whatsappHref` from `data/site.ts`, which no longer exist, so it prints
-  "unknown" for them. `docs/outstanding-placeholders.pdf` is stale as a result.
-- `docs/seo-audit.md` rows 1 and 2 and the "Verify WhatsApp FAB" checkbox are
-  out of date: the enquiry form is wired to email, and WhatsApp is gone.
-- `content/homepage-links/urls.json` still has empty `contact.phone` and
-  `contact.email`, though the email is live in `data/site.ts`.
+- `docs/seo-audit.md` rows 1 and 2 are out of date: the enquiry form is wired to
+  email, and no contact field is a placeholder any more.
+- `docs/outstanding-placeholders.pdf` predates both the phone number and the
+  WhatsApp restore. Regenerate it with
+  `node scripts/generate-outstanding-items-pdf.mjs`; the script reads
+  `whatsappNumber` and `whatsappHref` again, so it no longer prints "unknown".
 
 ## D. SEO and content backlog
 

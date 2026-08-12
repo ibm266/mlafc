@@ -47,14 +47,19 @@ test('visits: confirmed 2026 dates with valid statuses', () => {
   expect(visits.some((v) => v.status === 'open')).toBe(true);
 });
 
-test('site config has contact placeholders', () => {
-  expect(site.phone).toBe('[placeholder]');
-  // WhatsApp is not set up yet, so the site carries no WhatsApp channel at all.
-  expect(Object.keys(site)).not.toContain('whatsappHref');
+test('site config carries real contact details', () => {
+  // The clinic line is live, and the same number answers WhatsApp.
+  expect(site.phone).toBe('+91 81695 23196');
+  expect(site.whatsappNumber).toBe(site.phone);
+  // tel: and wa.me both need the digits without spaces or a plus sign.
+  expect(site.phoneHref).toBe('tel:+918169523196');
+  expect(site.whatsappHref).toBe('https://wa.me/918169523196');
   // email is live: enquiries are forwarded here and it is shown on the book page.
   expect(site.email).toBe('contact@mumbai-london-af.clinic');
   // address is live: the clinic runs from Lilavati Hospital, Bandra West.
   expect(site.address).toContain('Lilavati Hospital');
   expect(site.address).not.toContain('[placeholder]');
   expect(site.gmcLine).toMatch(/GMC/);
+  // Nothing on the site should be a stub any more.
+  expect(Object.values(site).join(' ')).not.toContain('[placeholder]');
 });

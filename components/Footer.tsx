@@ -4,6 +4,7 @@ import { VerifyRow } from '@/components/VerifyRow';
 import linksJson from '@/data/links.json';
 import { site } from '@/data/site';
 import type { SiteLinks } from '@/data/types';
+import { whatsappLink } from '@/lib/contact';
 
 const links = linksJson as SiteLinks;
 
@@ -23,13 +24,11 @@ const patientLinks = [
   { href: '/book', label: 'Request an appointment' },
 ] as const;
 
-function contactHref(kind: 'tel' | 'mailto', value: string) {
-  return value.includes('[placeholder]') ? undefined : `${kind}:${value}`;
-}
-
 export function Footer() {
+  // The bottom padding keeps the closing strip clear of the floating WhatsApp
+  // button, and of the booking pill stacked above it.
   return (
-    <footer className="border-t border-line-dark bg-night pb-20 text-paper md:pb-14">
+    <footer className="border-t border-line-dark bg-night pb-28 text-paper md:pb-20">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
           <Logo variant="dark" />
@@ -71,23 +70,25 @@ export function Footer() {
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-brass">Contact</h2>
           <ul className="space-y-2 text-sm text-paper/85">
             <li>{site.address}</li>
-            {/* The phone number is still a placeholder, so email is the only
-                channel worth showing a patient until a real line is live. */}
-            {contactHref('tel', site.phone) ? (
-              <li>
-                <a href={contactHref('tel', site.phone)} className="interactive hover:text-brass">
-                  {site.phone}
-                </a>
-              </li>
-            ) : null}
             <li>
-              {contactHref('mailto', site.email) ? (
-                <a href={contactHref('mailto', site.email)} className="interactive hover:text-brass">
-                  {site.email}
-                </a>
-              ) : (
-                site.email
-              )}
+              <a href={site.phoneHref} className="interactive hover:text-brass">
+                {site.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="interactive hover:text-brass"
+              >
+                WhatsApp {site.whatsappNumber}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${site.email}`} className="interactive hover:text-brass">
+                {site.email}
+              </a>
             </li>
           </ul>
         </div>

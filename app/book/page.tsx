@@ -7,19 +7,16 @@ import { VisitDates } from '@/components/VisitDates';
 import { site } from '@/data/site';
 import visitsJson from '@/data/visits.json';
 import type { Visit } from '@/data/types';
+import { whatsappLink } from '@/lib/contact';
 
 const visits = visitsJson as Visit[];
 
 export const metadata: Metadata = {
   title: 'Book a Consultation - Mumbai London AF Clinic',
-  description:
-    'Send an enquiry or email the clinic to book a consultation with Professor Dhiraj Gupta in Mumbai.',
+  description: `Send an enquiry, call or message the clinic on WhatsApp on ${site.phone} to book a consultation with Professor Dhiraj Gupta in Mumbai.`,
 };
 
 export default function BookPage() {
-  const phoneHref = site.phone.includes('[placeholder]') ? undefined : `tel:${site.phone}`;
-  const emailHref = site.email.includes('[placeholder]') ? undefined : `mailto:${site.email}`;
-
   return (
     <main id="main" className="bg-paper">
       <ScrollProgress />
@@ -47,23 +44,33 @@ export default function BookPage() {
 
           <div className="space-y-5">
             <Reveal delay={100} className="rounded-xl border border-line bg-paper-soft p-8">
-              <h2 className="font-serif text-2xl">Prefer to write to us?</h2>
+              <h2 className="font-serif text-2xl">Prefer to talk directly?</h2>
+              <p className="mt-2 text-sm text-ink-soft">
+                One number reaches the clinic, by call or by WhatsApp.
+              </p>
               <ul className="mt-5 divide-y divide-line">
-                {phoneHref ? (
-                  <li>
-                    <a href={phoneHref} className="interactive block py-3.5 font-semibold text-brass-deep hover:underline">
-                      {site.phone}
-                    </a>
-                  </li>
-                ) : null}
                 <li>
-                  {emailHref ? (
-                    <a href={emailHref} className="interactive block py-3.5 font-semibold text-brass-deep hover:underline">
-                      {site.email}
-                    </a>
-                  ) : (
-                    <span className="block py-3.5 font-semibold text-brass-deep">{site.email}</span>
-                  )}
+                  <a
+                    href={whatsappLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="interactive block py-3.5 font-semibold text-brass-deep hover:underline"
+                  >
+                    Message on WhatsApp: {site.whatsappNumber}
+                  </a>
+                </li>
+                <li>
+                  <a href={site.phoneHref} className="interactive block py-3.5 font-semibold text-brass-deep hover:underline">
+                    Call {site.phone}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="interactive block py-3.5 font-semibold text-brass-deep hover:underline"
+                  >
+                    {site.email}
+                  </a>
                 </li>
               </ul>
             </Reveal>

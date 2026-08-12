@@ -55,7 +55,9 @@ export function FloatingBookingPill() {
 
   return (
     <div
-      className={`fixed bottom-5 right-5 z-[55] transition-[opacity,transform] duration-300 ${
+      // Offset above the sitewide WhatsApp button, which owns the bottom
+      // right corner, so the two stack rather than sit on top of each other.
+      className={`fixed bottom-[5.5rem] right-5 z-[55] transition-[opacity,transform] duration-300 ${
         visible ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
       }`}
     >

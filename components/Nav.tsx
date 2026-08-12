@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Logo } from '@/components/Logo';
+import { site } from '@/data/site';
+import { whatsappLink } from '@/lib/contact';
 
 const LINKS = [
   { href: '/conditions', label: 'Conditions' },
@@ -168,6 +170,31 @@ export function Nav() {
               >
                 Book a consultation
               </Link>
+            </li>
+          </ul>
+
+          {/* The menu is open on a phone, so the two channels that need one tap
+              sit here rather than making somebody scroll to the footer. */}
+          <ul className="mt-6 flex flex-col gap-3 border-t border-line pt-5 text-sm font-semibold">
+            <li>
+              <a
+                href={site.phoneHref}
+                onClick={() => setOpen(false)}
+                className="interactive block py-1 text-brass-deep"
+              >
+                Call {site.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="interactive block py-1 text-brass-deep"
+              >
+                WhatsApp {site.whatsappNumber}
+              </a>
             </li>
           </ul>
         </nav>

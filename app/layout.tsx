@@ -3,6 +3,7 @@ import { Newsreader, Archivo } from 'next/font/google';
 import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import { Nav } from '@/components/Nav';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { site } from '@/data/site';
 import './globals.css';
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         {children}
         <Footer />
+        <WhatsAppFab />
       </body>
     </html>
   );

@@ -156,11 +156,13 @@
     }
   ],
   "contact": {
-    "section": "Footer contact block",
+    "section": "Footer contact block, book page, CTA band, mobile menu, WhatsApp button",
     "targetFile": "data/site.ts",
-    "phone": "",
-    "email": "",
+    "phone": "+91 81695 23196",
+    "email": "contact@mumbai-london-af.clinic",
+    "whatsappNumber": "+91 81695 23196",
+    "whatsappHref": "https://wa.me/918169523196",
     "gmcNumber": "5205561",
-    "notes": "GMC number updated in data/site.ts. The phone number is still a placeholder, so only the email is shown to patients. WhatsApp has been taken off the site until a business number is set up."
+    "notes": "All contact fields are live. One number answers both the phone and WhatsApp. whatsappHref is https://wa.me/<number without + or spaces>; lib/contact.ts adds the prefilled opening message."
   }
 }

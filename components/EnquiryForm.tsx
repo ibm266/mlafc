@@ -23,6 +23,7 @@ import { defaultPhoneCountry, phoneCountries } from '@/data/phone-countries';
 import { site } from '@/data/site';
 import type { Visit } from '@/data/types';
 import visitsJson from '@/data/visits.json';
+import { whatsappLink } from '@/lib/contact';
 import { getRecaptchaToken, recaptchaSiteKey } from '@/lib/useRecaptcha';
 import { validateEnquiry, type EnquiryFields } from '@/lib/validateEnquiry';
 
@@ -201,9 +202,18 @@ export function EnquiryForm() {
         </svg>
         <h2 className="mt-6 font-serif text-2xl">Thank you. Your enquiry is with us.</h2>
         <p className="mx-auto mt-3 max-w-md text-ink-soft">
-          The clinic team will contact you within {site.responseDays} working days. If it is urgent, email us at{' '}
-          <a href={`mailto:${site.email}`} className="interactive font-semibold text-brass-deep hover:underline">
-            {site.email}
+          The clinic team will contact you within {site.responseDays} working days. If it is urgent, message us on{' '}
+          <a
+            href={whatsappLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="interactive font-semibold text-brass-deep hover:underline"
+          >
+            WhatsApp
+          </a>{' '}
+          or call{' '}
+          <a href={site.phoneHref} className="interactive font-semibold text-brass-deep hover:underline">
+            {site.phone}
           </a>
           .
         </p>

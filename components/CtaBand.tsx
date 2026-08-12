@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
+import { WhatsAppIcon } from '@/components/WhatsAppIcon';
 import { site } from '@/data/site';
+import { whatsappLink } from '@/lib/contact';
 
 export function CtaBand() {
   return (
@@ -11,7 +13,7 @@ export function CtaBand() {
             Take the first step. <em className="text-brass">It costs nothing to ask.</em>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-paper/85">
-            Send a short enquiry and the clinic team will come back to you, or email the clinic directly.
+            Send a short enquiry and the clinic team will come back to you, or reach us straight away on WhatsApp.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -21,12 +23,26 @@ export function CtaBand() {
               Send an enquiry
             </Link>
             <a
-              href={`mailto:${site.email}`}
-              className="interactive inline-block rounded-full border border-brass px-6 py-3 font-semibold text-brass hover:bg-brass hover:text-night"
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="interactive inline-flex items-center gap-2 rounded-full border border-brass px-6 py-3 font-semibold text-brass hover:bg-brass hover:text-night"
             >
-              Email the clinic
+              <WhatsAppIcon size={20} />
+              Message on WhatsApp
             </a>
           </div>
+          <p className="mt-6 text-sm text-paper/70">
+            Or call{' '}
+            <a href={site.phoneHref} className="interactive font-semibold text-brass hover:underline">
+              {site.phone}
+            </a>{' '}
+            and email{' '}
+            <a href={`mailto:${site.email}`} className="interactive font-semibold text-brass hover:underline">
+              {site.email}
+            </a>
+            .
+          </p>
         </Reveal>
       </div>
     </section>

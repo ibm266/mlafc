@@ -49,13 +49,13 @@ The main gaps are **technical plumbing, missing structured data, and conversion 
 
 ## Part 1: Conversion blockers (Batch 2)
 
-### 1a. Enquiry form doesn't send
+### 1a. Enquiry form doesn't send: RESOLVED
 
-`app/book/actions.ts` logs enquiries to console and returns success. Wire to email/CRM before driving traffic.
+`app/book/actions.ts` sends through `lib/sendEnquiryEmail.ts` over SMTP, and delivery is confirmed on the live site.
 
-### 1b. Contact placeholders
+### 1b. Contact placeholders: RESOLVED
 
-`data/site.ts` still has `[placeholder]` for phone, WhatsApp, email, address, response days. This poisons JSON-LD `telephone`/`email` and kills patient trust.
+`data/site.ts` carries real values for phone, WhatsApp, email, address and response days, so JSON-LD publishes a genuine `telephone` and `email`. One number, `+91 81695 23196`, answers both the phone and WhatsApp.
 
 ---
 
@@ -144,9 +144,9 @@ Test across: Google AI Overviews, ChatGPT, Perplexity, Claude.
 
 ### Batch 2: Conversion (next)
 
-- [ ] Wire enquiry form (`app/book/actions.ts`) to email/CRM
-- [ ] Fill in `data/site.ts` contact details
-- [ ] Verify WhatsApp FAB and footer links work
+- [x] Wire enquiry form (`app/book/actions.ts`) to email/CRM
+- [x] Fill in `data/site.ts` contact details
+- [x] Verify WhatsApp FAB and footer links work
 
 ### Batch 3: Content + structure (after Batch 2)
 

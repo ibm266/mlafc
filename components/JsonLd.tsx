@@ -21,9 +21,16 @@ const data = {
       name: site.name,
       url: BASE,
       email: site.email,
-      // Only publish a telephone once a real one exists: a placeholder in
-      // structured data is worse than the field being absent.
-      ...(site.phone.includes('[placeholder]') ? {} : { telephone: site.phone }),
+      telephone: site.phone,
+      // The clinic line also answers WhatsApp, which is how most patients in
+      // India will actually make contact.
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Patient enquiries',
+        telephone: site.phone,
+        email: site.email,
+        url: site.whatsappHref,
+      },
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Lilavati Hospital, A-791, Bandra Reclamation, Bandra West',

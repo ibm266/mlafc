@@ -38,7 +38,7 @@ export async function verifyRecaptchaToken(token: string | null | undefined): Pr
   }
 
   if (typeof data.score === 'number' && data.score < MIN_SCORE) {
-    return `We could not verify this submission. Please try again or email us at ${site.email}.`;
+    return `We could not verify this submission. Please try again, or message us on WhatsApp on ${site.whatsappNumber}.`;
   }
 
   return null;

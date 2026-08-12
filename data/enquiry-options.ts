@@ -18,6 +18,7 @@ export const enquiryReferralSources = [
 
 export const enquiryContactPreferences = [
   { id: 'phone', label: 'Phone call' },
+  { id: 'whatsapp', label: 'WhatsApp' },
   { id: 'email', label: 'Email' },
 ] as const;
 
