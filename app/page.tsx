@@ -45,11 +45,16 @@ const locations = locationsJson as Location[];
 const visits = visitsJson as Visit[];
 const links = linksJson as SiteLinks;
 
-const CONDITION_LINKS = conditions.map((c) => ({ id: c.id, title: c.title }));
+const CONDITION_LINKS = conditions.map((c) => ({
+  id: c.id,
+  title: c.title,
+  indiaExpertise: Boolean(c.indiaExpertise),
+}));
 const PROCEDURES = [
   'Catheter ablation for atrial fibrillation',
   'Ablation for SVT and other arrhythmias',
-  'Left atrial appendage occlusion (LAAO)',
+  'LAAO with Amulet and Watchman',
+  'Cardioneuroablation for syncope and dysautonomias',
   'Pacemaker implantation',
   'Implantable defibrillators (ICDs)',
   'Cardiac resynchronisation therapy',
@@ -93,6 +98,12 @@ export default function Home() {
                     <Link href={`/conditions#${c.id}`} className="hover:text-ink hover:underline">
                       {c.title}
                     </Link>
+                    {c.indiaExpertise ? (
+                      <p className="mt-1 text-sm text-ink-mute">
+                        Professor Gupta is one of the only consultants in the country who can confirm and
+                        perform this procedure.
+                      </p>
+                    ) : null}
                   </li>
                 ))}
               </ul>

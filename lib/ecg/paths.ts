@@ -242,7 +242,9 @@ export type EcgVariant =
   | 'svt'
   | 'palpitations'
   | 'blackouts'
-  | 'bradycardia';
+  | 'bradycardia'
+  | 'laao'
+  | 'cardioneuroablation';
 
 /** Brief pause after both strips finish before the loop restarts (~ms at LOOP_MS). */
 export const ECG_COMPLETE_HOLD = 0.035;
@@ -281,6 +283,16 @@ export const ECG_VARIANTS: Record<
     label: 'Bradycardia',
     buildAbnormal: buildBradycardiaRhythmPath,
     abnormalPhaseEnd: 0.95,
+  },
+  laao: {
+    label: 'AF',
+    buildAbnormal: buildAfRhythmPath,
+    abnormalPhaseEnd: 0.9,
+  },
+  cardioneuroablation: {
+    label: 'Pause',
+    buildAbnormal: buildBlackoutsRhythmPath,
+    abnormalPhaseEnd: 0.9,
   },
 };
 

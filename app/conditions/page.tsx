@@ -11,7 +11,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Conditions We Treat - Mumbai London AF Clinic',
   description:
-    'Plain-language guides to heart rhythm conditions Professor Dhiraj Gupta treats, starting with atrial fibrillation.',
+    'Plain-language guides to heart rhythm conditions and specialist procedures Professor Dhiraj Gupta treats, including atrial fibrillation, LAAO, and cardioneuroablation.',
 };
 
 export default function ConditionsPage() {

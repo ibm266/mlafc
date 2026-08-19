@@ -52,6 +52,23 @@ test('conditions page renders bradycardia section with ECG animation', () => {
   expect(screen.getByRole('figure', { name: bradycardia.videoAlt })).toBeInTheDocument();
 });
 
+test('conditions page renders LAAO section with ECG animation', () => {
+  render(<ConditionsPage />);
+  const laao = conditions.find((c) => c.id === 'laao')!;
+  expect(screen.getByRole('heading', { name: laao.title })).toBeInTheDocument();
+  expect(screen.getByRole('figure', { name: laao.videoAlt })).toBeInTheDocument();
+  expect(screen.getByText(/Amulet or a Watchman/i)).toBeInTheDocument();
+  expect(screen.getAllByText(/one of the only consultants in the country/i).length).toBeGreaterThan(0);
+});
+
+test('conditions page renders cardioneuroablation section with ECG animation', () => {
+  render(<ConditionsPage />);
+  const cna = conditions.find((c) => c.id === 'cardioneuroablation')!;
+  expect(screen.getByRole('heading', { name: cna.title })).toBeInTheDocument();
+  expect(screen.getByRole('figure', { name: cna.videoAlt })).toBeInTheDocument();
+  expect(screen.getByText(/syncope or dysautonomia/i)).toBeInTheDocument();
+});
+
 test('every condition has an ECG animation variant', () => {
   for (const condition of conditions) {
     expect(condition.ecgVariant, condition.id).toBeTruthy();

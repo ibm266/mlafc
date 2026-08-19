@@ -44,7 +44,7 @@ export function ConditionSection({ condition, index }: Props) {
     <div className="min-w-0">
       <Reveal delay={90}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brass-deep">
-          {condition.isSymptom ? 'Symptom guide' : 'Condition'}
+          {condition.isProcedure ? 'Procedure' : condition.isSymptom ? 'Symptom guide' : 'Condition'}
         </p>
         <h2 id={`${condition.id}-heading`} className="mt-2 font-serif text-3xl leading-tight md:text-4xl">
           {condition.title}
@@ -52,6 +52,11 @@ export function ConditionSection({ condition, index }: Props) {
         {condition.isSymptom ? (
           <p className="mt-3 text-sm font-medium text-ink-mute">
             A symptom, not a single diagnosis. Many possible causes.
+          </p>
+        ) : null}
+        {condition.isProcedure ? (
+          <p className="mt-3 text-sm font-medium text-ink-mute">
+            A specialist procedure. Rarely available in India.
           </p>
         ) : null}
       </Reveal>

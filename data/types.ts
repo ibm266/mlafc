@@ -233,9 +233,20 @@ export type Condition = {
   help: string;
   videoSrc?: string;
   posterSrc?: string;
-  ecgVariant?: 'af' | 'atrial-flutter' | 'svt' | 'palpitations' | 'blackouts' | 'bradycardia';
+  ecgVariant?:
+    | 'af'
+    | 'atrial-flutter'
+    | 'svt'
+    | 'palpitations'
+    | 'blackouts'
+    | 'bradycardia'
+    | 'laao'
+    | 'cardioneuroablation';
   videoAlt: string;
   isSymptom?: boolean;
+  isProcedure?: boolean;
+  /** Show the India-rarity note next to this item on the home page. */
+  indiaExpertise?: boolean;
 };
 
 export type ProfileLink = {
