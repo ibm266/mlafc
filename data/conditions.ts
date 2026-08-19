@@ -110,12 +110,13 @@ export const conditions: Condition[] = [
     happening:
       'The left atrial appendage is a small pouch on the upper left chamber of the heart. In AF, blood can pool there and form clots that may travel to the brain. Left atrial appendage occlusion, LAAO, closes that pouch with a small implanted device, most often an Amulet or a Watchman, so clots cannot leave it. The procedure is done through a thin tube from a vein in the leg, without opening the chest. It can be combined with AF ablation in the same sitting when that is the right plan.',
     help:
-      'Professor Gupta offers LAAO with both Amulet and Watchman devices, and can combine occlusion with AF ablation when both are needed. Combined AF ablation with LAAO is still rarely available in India. He is one of the only consultants in the country who can confirm that the procedure is appropriate for you and perform it. At your consultation he will explain whether closing the appendage, continuing blood-thinning, or both, fits your situation, in plain language.',
+      'Professor Gupta offers LAAO with both Amulet and Watchman devices, and can combine occlusion with AF ablation when both are needed. Combined AF ablation with LAAO is still rarely available in India. He is one of the only consultants in the country who can confirm that the procedure is appropriate for you and perform it, and he has published specifically on doing both in the same sitting. At your consultation he will explain whether closing the appendage, continuing blood-thinning, or both, fits your situation, in plain language.',
     ecgVariant: 'laao',
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside atrial fibrillation, the usual setting in which LAAO is considered, with an irregular fibrillatory baseline between unevenly spaced beats.',
     isProcedure: true,
     indiaExpertise: true,
+    publicationIds: ['pub21', 'pub22'],
   },
   {
     id: 'cardioneuroablation',
@@ -128,11 +129,12 @@ export const conditions: Condition[] = [
     happening:
       'Some faints happen because the nerves that slow the heart overreact, causing a sudden pause or a sharp drop in blood pressure. Dysautonomias are a related group of problems in that same automatic control of heart rate and blood pressure. Cardioneuroablation is a catheter procedure that carefully interrupts selected nerve fibres on the outside of the heart, so the heart is less likely to pause or slow to the point of fainting.',
     help:
-      'Cardioneuroablation is still a specialised procedure, and few operators in India currently offer it. Professor Gupta is one of the only consultants in the country who can confirm whether it is right for your syncope or dysautonomia, and perform it. He will first establish that the problem is driven by the heart\u2019s nerve supply, then explain in plain language what the day of the procedure involves and what to expect afterwards.',
+      'Cardioneuroablation is still a specialised procedure, and few operators in India currently offer it. Professor Gupta is one of the only consultants in the country who can confirm whether it is right for your syncope or dysautonomia, and perform it. He has published specifically on this procedure, including practical guidance on treating syncope and nerve-driven heart block. He will first establish that the problem is driven by the heart\u2019s nerve supply, then explain in plain language what the day of the procedure involves and what to expect afterwards.',
     ecgVariant: 'cardioneuroablation',
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside a prolonged pause, the pattern cardioneuroablation is used to prevent in cardioinhibitory syncope.',
     isProcedure: true,
     indiaExpertise: true,
+    publicationIds: ['pub23'],
   },
 ];

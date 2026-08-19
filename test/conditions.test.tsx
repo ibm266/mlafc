@@ -59,6 +59,14 @@ test('conditions page renders LAAO section with ECG animation', () => {
   expect(screen.getByRole('figure', { name: laao.videoAlt })).toBeInTheDocument();
   expect(screen.getByText(/Amulet or a Watchman/i)).toBeInTheDocument();
   expect(screen.getAllByText(/one of the only consultants in the country/i).length).toBeGreaterThan(0);
+  expect(screen.getByRole('link', { name: /concurrent percutaneous left atrial appendage occlusion/i })).toHaveAttribute(
+    'href',
+    'https://doi.org/10.1016/j.tcm.2023.11.003',
+  );
+  expect(screen.getByRole('link', { name: /pulsed-field ablation on the left atrial appendage diameter/i })).toHaveAttribute(
+    'href',
+    'https://doi.org/10.1111/jce.70111',
+  );
 });
 
 test('conditions page renders cardioneuroablation section with ECG animation', () => {
@@ -67,6 +75,10 @@ test('conditions page renders cardioneuroablation section with ECG animation', (
   expect(screen.getByRole('heading', { name: cna.title })).toBeInTheDocument();
   expect(screen.getByRole('figure', { name: cna.videoAlt })).toBeInTheDocument();
   expect(screen.getByText(/syncope or dysautonomia/i)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /cardioneuroablation for vasovagal syncope/i })).toHaveAttribute(
+    'href',
+    'https://doi.org/10.1111/jce.15480',
+  );
 });
 
 test('every condition has an ECG animation variant', () => {

@@ -201,5 +201,35 @@
     "authors": "Gupta D, et al.",
     "summary": "Shows that freezing the pulmonary veins can treat atrial flutter as a first option, a less invasive alternative to conventional ablation.",
     "url": "https://doi.org/10.1136/heartjnl-2022-321729"
+  },
+  {
+    "id": "pub21",
+    "category": "review",
+    "title": "Concurrent percutaneous left atrial appendage occlusion and catheter ablation for atrial fibrillation: state-of-the-art review",
+    "journal": "Trends in Cardiovascular Medicine",
+    "year": "2024",
+    "authors": "Gupta D, et al.",
+    "summary": "Reviews when AF ablation and LAAO can be done in the same sitting, how the two procedures are sequenced, and what blood-thinning looks like afterwards.",
+    "url": "https://doi.org/10.1016/j.tcm.2023.11.003"
+  },
+  {
+    "id": "pub22",
+    "category": "original",
+    "title": "Impact of pulsed-field ablation on the left atrial appendage diameter: insights from intra-procedural echocardiography",
+    "journal": "Journal of Cardiovascular Electrophysiology",
+    "year": "2025",
+    "authors": "Gupta D, et al.",
+    "summary": "Measures the left atrial appendage before and after pulsed-field ablation, showing the pouch size does not change, which matters when ablation and LAAO are planned together.",
+    "url": "https://doi.org/10.1111/jce.70111"
+  },
+  {
+    "id": "pub23",
+    "category": "review",
+    "title": "Cardioneuroablation for vasovagal syncope and atrioventricular block: a step-by-step guide",
+    "journal": "Journal of Cardiovascular Electrophysiology",
+    "year": "2022",
+    "authors": "Gupta D, et al.",
+    "summary": "Practical guidance on cardioneuroablation for fainting and nerve-driven heart block: who it suits, how the procedure is done, and what to expect afterwards.",
+    "url": "https://doi.org/10.1111/jce.15480"
   }
 ]

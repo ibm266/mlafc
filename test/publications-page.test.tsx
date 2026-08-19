@@ -11,9 +11,18 @@ beforeEach(() => {
   mockReducedMotion(true);
 });
 
-test('publications dataset has twenty curated entries', () => {
-  expect(pubs).toHaveLength(20);
+test('publications dataset has curated entries with urls', () => {
+  expect(pubs.length).toBeGreaterThanOrEqual(20);
   expect(pubs.filter((p) => p.featured)).toHaveLength(3);
+  expect(pubs.every((p) => p.url)).toBe(true);
+});
+
+test('publications include the LAAO and cardioneuroablation papers', () => {
+  expect(pubs.some((p) => p.id === 'pub21')).toBe(true);
+  expect(pubs.some((p) => p.id === 'pub22')).toBe(true);
+  expect(pubs.some((p) => p.id === 'pub23')).toBe(true);
+  expect(pubs.find((p) => p.id === 'pub21')?.url).toBe('https://doi.org/10.1016/j.tcm.2023.11.003');
+  expect(pubs.find((p) => p.id === 'pub22')?.url).toBe('https://doi.org/10.1111/jce.70111');
 });
 
 test('PublicationCard links out when url is provided', () => {

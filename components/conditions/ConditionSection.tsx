@@ -3,7 +3,10 @@ import { ConditionMedia } from '@/components/conditions/ConditionMedia';
 import { ConditionMediaPlaceholder } from '@/components/conditions/ConditionMediaPlaceholder';
 import { EcgComparisonAnimation } from '@/components/conditions/EcgComparisonAnimation';
 import { Reveal } from '@/components/Reveal';
-import type { Condition } from '@/data/types';
+import publicationsJson from '@/data/publications.json';
+import type { Condition, Publication } from '@/data/types';
+
+const publicationsById = new Map((publicationsJson as Publication[]).map((p) => [p.id, p]));
 
 type Props = {
   condition: Condition;
@@ -13,6 +16,9 @@ type Props = {
 export function ConditionSection({ condition, index }: Props) {
   const band = index % 2 === 0 ? 'bg-paper' : 'bg-paper-soft';
   const textFirst = index % 2 === 0;
+  const relatedPubs = (condition.publicationIds ?? [])
+    .map((id) => publicationsById.get(id))
+    .filter((p): p is Publication => Boolean(p));
 
   const figure = (
     <div className="md:sticky md:top-24">
@@ -83,6 +89,38 @@ export function ConditionSection({ condition, index }: Props) {
         </h3>
         <p className="mt-3 text-ink-soft">{condition.help}</p>
       </Reveal>
+
+      {relatedPubs.length > 0 ? (
+        <Reveal delay={330}>
+          <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-brass-deep">
+            His published work
+          </h3>
+          <p className="mt-3 text-ink-soft">
+            Professor Gupta has written peer-reviewed papers specifically on this procedure.
+          </p>
+          <ul className="mt-3 space-y-3">
+            {relatedPubs.map((p) => (
+              <li key={p.id} className="border-b border-line pb-3">
+                {p.url ? (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-brass-deep hover:underline"
+                  >
+                    {p.title}
+                  </a>
+                ) : (
+                  <span className="font-semibold text-ink">{p.title}</span>
+                )}
+                <p className="mt-1 text-sm text-ink-mute">
+                  {p.journal} · {p.year}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      ) : null}
 
       {condition.id === 'af' ? (
         <Reveal delay={330}>

@@ -247,6 +247,8 @@ export type Condition = {
   isProcedure?: boolean;
   /** Show the India-rarity note next to this item on the home page. */
   indiaExpertise?: boolean;
+  /** IDs from data/publications.json, shown as papers on this condition. */
+  publicationIds?: string[];
 };
 
 export type ProfileLink = {
