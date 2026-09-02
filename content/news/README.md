@@ -23,7 +23,15 @@ Staging file for news coverage: online article links and snippets from print or 
 | `credit` | Who the snippet is attributed to (e.g. Prof. Gupta, quoted or Reporting in The Tribune) |
 | `featured` | `true` = large card (max 4 on Voices page); `false` = compact list row |
 | `url` | Full article URL if online; leave `""` for print-only |
+| `language` | Only when the piece is not in English (e.g. Marathi). The card shows an "In Marathi" chip |
+| `story` | An id shared by every report of one event (e.g. `india-first-pfa-laao`). It ties the coverage to a `TripFeature.storyId` in `data/trips.ts`, so the visit section can find its own press |
+| `syndicated` | Other outlets that ran the same wire copy, each with its own `outlet` and `url`. Add one entry per wire story, not one per carrier |
 | `notes` | Your own notes only; not shown on the site |
+
+**One entry per wire story.** When a piece goes out on a wire such as ANI and a
+dozen sites republish it word for word, do not add a row for each. Add the wire
+agency once and list every other carrier under `syndicated[]`. The card then
+shows them as "Also carried by" chips instead of a wall of near-identical rows.
 
 ## Where it appears on the site
 
@@ -47,9 +55,15 @@ The filterable testimonial cards (category News) come from **`data/testimonials.
   "note": "<snippet>",
   "credit": "<credit>",
   "featured": <featured>,
-  "url": "<url>"
+  "url": "<url>",
+  "language": "<language, only when not English>",
+  "story": "<story id, only when this covers a tracked event>",
+  "syndicated": [{ "outlet": "<carrier>", "url": "<carrier url>" }]
 }
 ```
+
+`language`, `story` and `syndicated` are all optional. Leave them out entirely
+for an ordinary English article that nobody else carried.
 
 While `url` is empty, the site shows a dashed **link needed** flag instead of "Read article".
 

@@ -524,3 +524,64 @@ body {
 .faq-panel-inner {
   overflow: hidden;
 }
+
+/* Latest visit: the route line draws itself on reveal, the pins light as it
+   passes, and the "first in India" seal turns slowly. All of it stops under
+   reduced motion, where the finished state is shown at once. */
+@keyframes seal-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.seal-turn {
+  animation: seal-turn 40s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes route-pin-in {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.route-pin {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.route-pin-lit {
+  animation: route-pin-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes route-pin-halo {
+  0% { r: 6; opacity: 0.55; }
+  100% { r: 20; opacity: 0; }
+}
+
+.route-pin-halo {
+  animation: route-pin-halo 1.6s ease-out infinite;
+}
+
+@keyframes ticker-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ticker-in {
+  animation: ticker-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.9s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-turn,
+  .route-pin-halo {
+    animation: none;
+  }
+  .route-pin,
+  .route-pin-lit {
+    opacity: 1;
+    animation: none;
+  }
+  .ticker-in {
+    animation: none;
+  }
+}

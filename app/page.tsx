@@ -4,6 +4,7 @@ import { Hero } from '@/components/home/Hero';
 import { OperatorTrace } from '@/components/home/OperatorTrace';
 import { StatsBand } from '@/components/StatsBand';
 import { ConsultantProfile } from '@/components/home/ConsultantProfile';
+import { LatestVisit } from '@/components/home/LatestVisit';
 import { TopDoctorsRating } from '@/components/home/TopDoctorsRating';
 import { Steps } from '@/components/Steps';
 import { TestimonialCard } from '@/components/TestimonialCard';
@@ -49,6 +50,7 @@ const CONDITION_LINKS = conditions.map((c) => ({
   id: c.id,
   title: c.title,
   indiaExpertise: Boolean(c.indiaExpertise),
+  milestone: c.milestone,
 }));
 const PROCEDURES = [
   'Catheter ablation for atrial fibrillation',
@@ -77,11 +79,12 @@ export default function Home() {
       <OperatorTrace />
       <StatsBand />
       <ConsultantProfile />
+      <LatestVisit chapter="02" />
 
-      <section aria-labelledby="services-heading" className="bg-paper">
+      <section aria-labelledby="services-heading" className="bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="02" label="Conditions &amp; treatments" />
+            <ChapterEyebrow chapter="03" label="Conditions &amp; treatments" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="services-heading" className="mt-3 font-serif text-4xl">
@@ -103,6 +106,15 @@ export default function Home() {
                         Professor Gupta is one of the only consultants in the country who can confirm and
                         perform this procedure.
                       </p>
+                    ) : null}
+                    {c.milestone ? (
+                      <Link
+                        href={c.milestone.href}
+                        className="interactive mt-2 inline-flex items-center gap-2 rounded-full border border-brass/50 bg-brass/10 px-3 py-1 text-xs font-semibold text-brass-deep hover:bg-brass/20"
+                      >
+                        <span aria-hidden className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brass" />
+                        {c.milestone.label} &rarr;
+                      </Link>
                     ) : null}
                   </li>
                 ))}
@@ -127,10 +139,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="how-heading" className="bg-paper-soft">
+      <section aria-labelledby="how-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="03" label="How the Mumbai clinic works" />
+            <ChapterEyebrow chapter="04" label="How the Mumbai clinic works" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="how-heading" className="mt-3 font-serif text-4xl">
@@ -151,7 +163,7 @@ export default function Home() {
       <section aria-labelledby="map-heading" className="bg-night text-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="04" label="Where he works" dark />
+            <ChapterEyebrow chapter="05" label="Where he works" dark />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="map-heading" className="mt-3 max-w-xl font-serif text-4xl leading-tight">
@@ -170,7 +182,7 @@ export default function Home() {
       <section aria-labelledby="in-action-heading" className="bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="05" label="Dr Gupta in action" />
+            <ChapterEyebrow chapter="06" label="Dr Gupta in action" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="in-action-heading" className="mt-3 font-serif text-4xl">
@@ -198,7 +210,7 @@ export default function Home() {
       <section aria-label="In their words" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="06" label="In their words" />
+            <ChapterEyebrow chapter="07" label="In their words" />
           </Reveal>
           {hospitalLetter ? (
             <Reveal delay={80}>
@@ -245,7 +257,7 @@ export default function Home() {
       <section aria-labelledby="publications-heading" className="bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="07" label="Research" />
+            <ChapterEyebrow chapter="08" label="Research" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="publications-heading" className="mt-3 font-serif text-4xl">
@@ -283,7 +295,7 @@ export default function Home() {
       <section aria-labelledby="visits-heading" className="bg-paper">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <Reveal>
-            <ChapterEyebrow chapter="08" label="Plan ahead" />
+            <ChapterEyebrow chapter="09" label="Plan ahead" />
           </Reveal>
           <Reveal delay={80}>
             <h2 id="visits-heading" className="mt-3 font-serif text-4xl">

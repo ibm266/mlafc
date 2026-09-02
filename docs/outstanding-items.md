@@ -1,173 +1,228 @@
 # Outstanding items and placeholders
 
-Audit date: 25 July 2026, revised 12 August 2026. Covers everything on the site
-that is still empty, a placeholder, or wired but unverified. Grouped by what a
-visitor can see today.
+Audit date: 12 August 2026, last updated 2 September 2026. Supersedes the 25 July 2026 audit.
 
-## A. Visible to visitors right now
+This is the single source of truth for what is and is not finished. If you are
+an agent starting a task, read this before telling anybody something is missing,
+and verify against the code rather than against an older revision of this file.
 
-### A1. Map location links: DONE
+**How to check a claim here without getting it wrong.** Two traps have already
+caught people:
 
-Previously 39 of the 83 entries in `data/locations.json` had no `url`, and
-`components/map/LocationsMap.tsx` showed a dashed `hospital link needed ·
-locations.json` badge for each one in production.
+- Milestone photos live at `photo: { src, width, height, alt }`. There is no
+  `photoSrc` field. Grepping for one returns nothing and looks like "no photos".
+- Every milestone has a `photoTitle` and `photoCaption` whether or not it has an
+  image, because those are caption text. Counting `photoTitle` counts captions,
+  not photographs.
 
-Resolved on 25 July 2026:
+When a grep returns zero, open the file before believing it.
 
-- 22 URLs added, listed below for the record.
-- The badge is gone. A location with no `url` now renders no link at all.
-- The link label changed from `Hospital ↗` to `Visit website ↗`, because most of
-  these pins are societies and congresses rather than hospitals.
+## A. Blocking, and live right now
 
-17 entries remain deliberately linkless, listed at the end of this section.
+### A1. Canonical host (resolved 19 August 2026)
 
-**Hospital (added)**
+`data/site.ts` now sets `url: 'https://www.mumbai-london-af.clinic'`, which is
+the registered live host. Sitemap, `robots.txt`, `metadataBase` and JSON-LD
+`@id`s all derive from that. `next.config.ts` 301s `mlafc.vercel.app` to the
+same host. This ships on the next push to `main`.
 
-| id | Entry | URL |
-|----|-------|-----|
-| `wadia-pune` | N. M. Wadia Institute of Cardiology, Pune | https://www.nmwcardiology.org/ |
+`mumbailondonaf.com` is still unregistered. Do not point `site.url` back at it.
+Do not point `site.url` at `mlafc.vercel.app`.
 
-The cardiac super-speciality hospital at 32 Sassoon Road, Pune. The entry was
-renamed from "Wadia Hospital" to the hospital's own name so it is not confused
-with Bai Jerbai Wadia Hospital for Children in Mumbai.
+### A2. reCAPTCHA is not configured in production
 
-**Societies and congresses (added)**
+The live `/book` serves no reCAPTCHA script and no "protected by reCAPTCHA"
+notice, so `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` is unset in Vercel.
+`lib/verifyRecaptcha.ts` returns `null` and skips verification entirely when
+`RECAPTCHA_SECRET_KEY` is missing, so the form is very likely unprotected at
+both ends.
 
-| id | Entry | URL |
-|----|-------|-----|
-| `ihrs-new-delhi` | Indian Heart Rhythm Society Annual Meeting | https://ihrs.in/ |
-| `ihrs-vizag` | Indian Heart Rhythm Society Annual Sessions | https://ihrs.in/ |
-| `lectures-manchester` | British Association of Cardiac Prevention and Rehabilitation | https://www.bacpr.org/ |
-| `lectures-birmingham-hrc` | Heart Rhythm Congress | https://www.heartrhythmcongress.org/ |
-| `lectures-dublin` | Irish Cardiac Society | https://irishcardiacsociety.ie/ |
-| `lectures-frankfurt` | Frankfurt Academy for Arrhythmias | https://fafa-symposium.de/ |
-| `lectures-park-city` | Western AF symposium | https://www.hmpglobalevents.com/wafib |
-| `lectures-boston` | Heart Rhythm Society | https://www.hrsonline.org/ |
-| `lectures-san-francisco` | Heart Rhythm Society | https://www.hrsonline.org/ |
-| `lectures-washington-dc` | American College of Cardiology | https://www.acc.org/ |
-| `lectures-sydney` | Asia Pacific Heart Rhythm Society | https://www.aphrs.org/ |
-| `lectures-osaka` | Japanese Heart Rhythm Society | https://new.jhrs.or.jp/en/ |
-| `lectures-seoul` | Korean Heart Rhythm Society | https://k-hrs.org/eng |
-| `lectures-munich` | European Society of Cardiology | https://www.escardio.org/ |
-| `lectures-paris` | European Society of Cardiology | https://www.escardio.org/ |
-| `lectures-lisbon` | European Heart Rhythm Association | https://www.escardio.org/communities/associations/ehra/ |
-| `lectures-warsaw` | EHRA Advanced EP course | https://www.escardio.org/communities/associations/ehra/ |
-| `lectures-malaga` | EHRA Advanced EP course | https://www.escardio.org/communities/associations/ehra/ |
-| `lectures-vienna` | Scientific lectures, Vienna (EHRA) | https://www.escardio.org/communities/associations/ehra/ |
-| `lectures-berlin` | Scientific lectures, Berlin (EHRA and AF Symposium) | https://www.escardio.org/communities/associations/ehra/ |
-| `lectures-barcelona` | Scientific lectures, Barcelona (EHRA and ESC) | https://www.escardio.org/ |
+The remaining defence is `lib/rateLimit.ts`, which its own docstring notes is
+held in process memory, so on serverless each instance keeps separate counts and
+the effective limit is per instance.
 
-**No single official page found (left linkless)**
+Fix: set both keys in Vercel, or accept the exposure deliberately and record
+that decision here. Only the Vercel dashboard confirms the secret key.
 
-These are either one-off meetings with no surviving site, multi-meeting city
-entries that cannot resolve to one URL, or private lecture tours. Their panels
-now show no link, which is the intended end state. If any of them later deserves
-a link, splitting the multi-meeting entries is the first step.
+### A3. The visit list does not expire
 
-| id | Entry | Note |
-|----|-------|------|
-| `lectures-venice` | Venice Arrhythmias Meeting | Now listed through Arrhythmia Academy event pages, no stable own domain |
-| `lectures-lenzerheide` | New Swiss Horizons in EP | No current site found |
-| `lectures-cape-town` | Cardiology at the Limits | No current site found |
-| `lectures-dubrovnik` | CroRhythm Meeting | No current site found |
-| `lectures-budapest` | Hungarian Arrhythmia Society | Hungarian-language society, needs a check for the right page |
-| `lectures-tel-aviv` | Dead Sea EP and International Symposium | Two different meetings in one entry |
-| `lectures-dead-sea` | Anglo-Israel Cardiovascular symposium | No current site found |
-| `lectures-kansas-city` | Kansas City EP symposium | No current site found |
-| `lectures-toronto` | Canadian AF summit | No current site found |
-| `lectures-shanghai` | Asian Anticoagulation Academy | No current site found |
-| `lectures-beijing` | Lecture tour, Beijing | Private tour, no host site |
-| `lectures-shenyang` | Lecture tour, Shenyang | Private tour, no host site |
-| `lectures-istanbul` | Scientific lectures, Istanbul | Two meetings in one entry (WSA congress, IEPI) |
-| `lectures-london` | Scientific lectures, London | Three meetings in one entry |
-| `lectures-copenhagen` | Scientific lectures, Copenhagen | Global LAAO summit plus AF Symposium meetings |
-| `lectures-madrid` | Scientific lectures, Madrid | AF Symposium meetings plus New Horizons in AF |
-| `lectures-prague` | Scientific lectures, Prague | AF Symposium, ESC Heart Failure, Prague Rhythm |
+`data/visits.json` is rendered verbatim. `components/VisitDates.tsx` applies no
+date filter, `components/EnquiryForm.tsx` lists every entry in the month
+dropdown, and `components/FloatingBookingPill.tsx` advertises the first entry
+with `status: 'open'`.
 
-### A2. Clinic phone number: DONE
+As of this audit the file still offers **August 2026**, which is now in
+progress, and the pill advertises 27 September to 4 October 2026. Nothing drops
+off by itself, so a past visit stays bookable until somebody edits the file.
 
-`data/site.ts` now carries the live clinic line, `+91 81695 23196`, with
-`phoneHref: 'tel:+918169523196'` for dialling. It shows in the footer, on the
-book page, in the homepage call to action band, in the mobile menu, and in the
-JSON-LD `telephone` field. The placeholder guards that hid all of those are
-gone.
+Fix: either keep editing the file by hand each time a visit passes, or add
+date-based filtering so past visits fall away. This is the item most likely to
+embarrass the clinic quietly.
 
-### A3. Press articles with no link
+## B. Visible gaps, not blocking
 
-Three entries in `data/links.json` have an empty `url`, so their cards on
-`/testimonials` render without a "Read article" link:
+### B1. Press articles with no link
+
+Unchanged on 2 September 2026. The same three `press` entries in
+`data/links.json` still have an empty `url`, so their cards on `/testimonials`
+render without a "Read article" link:
 
 - The Indian Express, 27 March 2025, "Global heart rhythm expert conducts free training at PGIMER"
 - The Pioneer, March 2025, "UK Heart Rhythm Expert Begins India Tour from Chd"
 - Punjab Kesari, March 2025, "Global heart expert to give free treatment, train doctors across India"
 
-### A4. WhatsApp: DONE
+The August 2026 coverage added since then is not affected: The Indian Express,
+Sakal and ANI all carry URLs, as do the seven syndicated outlets under the ANI
+entry. All 11 entries under `profiles` and all 20 in `data/publications.json`
+have URLs.
 
-Taken off the site on 25 July 2026 in commit f4a5f4e, and put back on 12 August
-2026 against the clinic line, `+91 81695 23196`. The same number answers calls
-and WhatsApp, so a patient only ever learns one.
+### B2. No Open Graph images anywhere
 
-Where it now appears:
+No `opengraph-image` or `twitter-image` file exists under `app/`; the only assets
+are the favicon files (`app/favicon.ico`, `app/icon.png`, `app/apple-icon.png`).
+Only `/` sets `openGraph` in its metadata, and only `/` and
+`/team` set `alternates` for a canonical. No route sets `twitter`. All 8 routes
+do export a `metadata` block with title and description.
+
+This costs most on WhatsApp shares, which is now the channel the site pushes
+hardest.
+
+### B3. Map locations left linkless on purpose
+
+17 of the 83 entries in `data/locations.json` have no `url`. This is deliberate
+and was decided on 25 July 2026: they are one-off meetings with no surviving
+site, multi-meeting city entries that cannot resolve to a single URL, or private
+lecture tours. A location with no `url` renders no link, which is the intended
+end state, not a bug. The full list is in git history for this file at the
+25 July revision.
+
+### B4. Three August 2026 photographs are not matched to a city
+
+Added 2 September 2026. `indiaAugust2026Photos` in `data/trips.ts` holds eight
+photographs. Five carry a `cityId` and pin themselves to a stop on the route
+map. Three do not:
+
+- `live-case-2026`, "A live case"
+- `cath-lab-team-2026`, "The cath lab team"
+- `first-pfa-case-cake-2026`, "A hospital's first"
+
+A photograph with no `cityId` is not a bug and nothing breaks: it simply shows
+in the visit carousel and nowhere else. To place one, set `cityId` to one of
+`mumbai`, `kolkata`, `hyderabad`, `chennai`, `trichy` or `bengaluru`. Only
+somebody who was there can say which, so leave it unset rather than guess.
+
+In the same file, the number of cases done on the visit is not published
+anywhere on the site. If the clinic wants it shown, add it to `stats` in
+`data/trips.ts` alongside days, cities, hospitals and the first for India.
+
+## C. Dead code
+
+Confirmed 12 August 2026 by resolving every component name against `app/`,
+`components/` and `test/`.
+
+Never referenced by a page or a test:
+
+- `components/PublicationsGrid.tsx`
+- `components/PublicationsList.tsx`
+- `components/TestimonialsGrid.tsx`
+- `components/home/AwardsTimeline.tsx`
+- `components/home/VerifyIndependentlyStrip.tsx`
+
+Referenced only by tests, mounted on no page:
+
+- `components/FaqAccordion.tsx`. `/evidence` uses `FaqConversation` instead.
+- `components/LocationList.tsx`
+- `components/home/ComparisonCards.tsx`
+
+Also dead in the data: `Location.images` is typed `string[]` in `data/types.ts`
+and is empty on all 83 entries, and nothing reads it. `Location.readMore` is
+read by `components/map/LocationsMap.tsx` and is set on 1 of 83.
+
+Every profile in `data/links.json` has `featured: false`, so
+`VerifyIndependentlyStrip` would render an empty strip even if it were mounted.
+
+`pendingCertifications` in `data/certifications.ts` is exported and deliberately
+not rendered. It holds three awards conferred by letter rather than certificate
+(Commonwealth Fellowship, National Clinical Excellence Award Bronze, Honorary
+Professor of Cardiology) which stay off the wall until a letter is scanned. That
+is intended behaviour, not an oversight.
+
+## D. Checked and correct, do not re-audit
+
+Recorded here because each of these has been wrongly reported as missing before.
+
+- **The journey is fully illustrated.** All 11 milestones in `data/milestones.ts`
+  carry media: 8 have a `photo`, the 2006 LHCH milestone has a `video`
+  (`/videos/lhch-overview.mp4` with a poster), and the 2019 professorship and
+  2022 Indo-UK milestones have `gallery` carousels. Across `milestones.ts` and
+  `gallery.ts` there are 34 referenced asset paths and none are missing from
+  `public/`. The live `/journey` serves 22 distinct journey images plus the
+  video. `MilestonePlaceholder` is only the fallback for a milestone with
+  neither video nor photo, and `JourneyTimeline.tsx` excludes the `awards-band`
+  variant from the photo column, so in practice it does not render.
+- **Contact details are live and complete.** One number, `+91 81695 23196`,
+  answers both the phone and WhatsApp. See section E.
+- **The enquiry form sends.** `app/book/actions.ts` sends through
+  `lib/sendEnquiryEmail.ts` over SMTP. `SMTP_USER` and `SMTP_PASS` are set in
+  Vercel and delivery was confirmed on the live site. They are deliberately
+  absent from `.env.local`, so a local dev server cannot send and the form shows
+  its "could not send" error when tested locally. That is expected, not a bug.
+  Note this is a recorded confirmation, not something re-verified in this audit:
+  re-testing means sending a real enquiry to the clinic inbox.
+- **Map location links.** Resolved 25 July 2026. 22 URLs were added and the
+  dashed "hospital link needed" badge was removed. See B3 for the deliberate
+  remainder.
+- All 20 entries in `data/publications.json` have URLs.
+- The interview video URL is set, so the homepage video block shows no flag.
+- `data/testimonials.json` holds 30 entries, all letters and quotes that need no
+  links.
+- `data/links.json` `press` holds 9 entries, 4 of them `featured`. Three of the
+  nine carry no `url`; see B1.
+- `galleryPhotos` in `data/gallery.ts` now leads with the 8 visit photographs
+  spread from `latestTrip.photos` in `data/trips.ts`, so the album and the
+  home page visit section cannot drift apart. That makes 19 photographs in the
+  home carousel and 33 distinct photographs across the `galleryPhotos`,
+  `academicPhotos` and `proctoringPhotos` lists.
+- No empty fields in `data/certifications.ts`, `data/gallery.ts` or
+  `data/milestones.ts`. Current counts: 8 conditions, 2 team members, 6 FAQs,
+  16 certifications, 11 milestones, 83 map locations.
+
+## E. Resolved on 12 August 2026
+
+### Clinic phone number
+
+`data/site.ts` carries the live clinic line, `+91 81695 23196`, with
+`phoneHref: 'tel:+918169523196'` for dialling. The `[placeholder]` guards that
+used to hide it in the footer, on the book page and in the JSON-LD `telephone`
+field are gone, because there is nothing left to hide.
+
+### WhatsApp
+
+Removed on 25 July 2026 in commit `f4a5f4e`, restored on 12 August 2026 in
+commit `ad5546d` against the same clinic line, so a patient only ever learns one
+number.
+
+Where it appears:
 
 - `components/WhatsAppFab.tsx`, the floating brass button, mounted sitewide in
-  `app/layout.tsx`. The booking pill is offset to `bottom-[5.5rem]` so the two
-  stack rather than overlap.
+  `app/layout.tsx`. `FloatingBookingPill` is offset to `bottom-[5.5rem]` so the
+  two stack rather than overlap, and the footer padding clears both.
 - Footer contact block, book page contact card, homepage call to action band,
   the mobile menu, and the enquiry form confirmation.
 - `data/enquiry-options.ts` offers WhatsApp as a contact preference again, so it
   reaches the clinic inbox through `lib/sendEnquiryEmail.ts`.
 - The rate limit, send failure and reCAPTCHA fallback messages name WhatsApp as
-  the urgent channel again.
+  the urgent channel.
 
-`lib/contact.ts` builds every wa.me link and prefills the opening line, so the
-encoding lives in one place.
+`lib/contact.ts` builds every `wa.me` link and prefills the opening line, so the
+encoding lives in one place. JSON-LD publishes a real `telephone` plus a
+`contactPoint` carrying the WhatsApp link.
 
-## B. Configuration that can fail silently
+## F. SEO and content backlog
 
-### B1. Enquiry email delivery: confirmed working
+Nothing here is a placeholder on the live site. Detail in `docs/seo-audit.md`.
 
-`lib/sendEnquiryEmail.ts` needs `SMTP_USER` and `SMTP_PASS`. Both are set in
-Vercel and delivery is confirmed working on the live site. They are deliberately
-absent from `.env.local`, so a local dev server cannot send: the form will show
-the "could not send" error when testing locally. Not a bug.
-
-### B2. reCAPTCHA
-
-`NEXT_PUBLIC_RECAPTCHA_SITE_KEY` and `RECAPTCHA_SECRET_KEY` are not set locally.
-When the secret is missing, `lib/verifyRecaptcha.ts` skips verification
-entirely, so the form is unprotected. Confirm both keys are set in Vercel.
-
-## C. Stale code and docs
-
-- `components/home/VerifyIndependentlyStrip.tsx` is never mounted, and every
-  profile in `data/links.json` has `featured: false`, so it would render an
-  empty strip even if it were. Either mount it with GMC Register, MMC Register
-  and Top Doctors marked featured, or delete the component.
-- `docs/seo-audit.md` rows 1 and 2 are out of date: the enquiry form is wired to
-  email, and no contact field is a placeholder any more.
-- `docs/outstanding-placeholders.pdf` predates both the phone number and the
-  WhatsApp restore. Regenerate it with
-  `node scripts/generate-outstanding-items-pdf.mjs`; the script reads
-  `whatsappNumber` and `whatsappHref` again, so it no longer prints "unknown".
-
-## D. SEO and content backlog
-
-Unchanged from `docs/seo-audit.md`, nothing here is a placeholder on the live
-site: OG images per page, extended JSON-LD (WebSite, Organization,
-MedicalWebPage, BreadcrumbList), per-page canonical and OG tags, PFA vs RFA as
-a real table, `ComparisonCards` on the homepage, definition blocks per
-condition, an `/about` page, a cost page, and an expanded FAQ.
-
-## E. Checked and clean
-
-No action needed on these, recorded so they are not re-audited:
-
-- All 20 entries in `data/publications.json` have URLs.
-- All 11 profiles in `data/links.json` have URLs, so the footer verify row shows
-  no flags.
-- The interview video URL is set, so the homepage video block shows no flag.
-- No visit is marked TBC: August 2026 is waitlist, the other three are open.
-  Nothing is scheduled beyond December 2026.
-- `data/testimonials.json` entries are letters and quotes that need no links.
-- No empty fields in `data/certifications.ts`, `data/gallery.ts` or
-  `data/milestones.ts`.
+Extended JSON-LD (WebSite, Organization, MedicalWebPage, BreadcrumbList),
+per-page canonical and OG tags, PFA vs RFA as a real table, `ComparisonCards`
+mounted on the homepage, definition blocks per condition, an `/about` page, a
+cost page, and an expanded FAQ.

@@ -308,5 +308,25 @@
     "quote": "The purpose of this initiative is to ensure that advanced treatment reaches as many people as possible and to enhance the capabilities of local doctors. Performing these procedures without charging patients or hospitals, and bearing his own travel expenses.",
     "attribution": "Prof. Gupta",
     "detail": "quoted in Punjab Kesari"
+  },
+  {
+    "id": "news7",
+    "category": "news",
+    "masthead": "The Indian Express",
+    "date": "1 September 2026",
+    "headline": "At 77, he couldn't take blood thinners: How docs treated his heart in a rare procedure",
+    "quote": "Mumbai doctors combine two procedures to treat irregular heartbeat and reduce stroke risk in a patient who could not safely remain on blood-thinning medicines.",
+    "attribution": "The Indian Express",
+    "detail": "Reporting in The Indian Express"
+  },
+  {
+    "id": "news8",
+    "category": "news",
+    "masthead": "ANI",
+    "date": "1 September 2026",
+    "headline": "India's first combined pulsed field ablation and LAAO procedure successfully treats 77-year-old AF patient",
+    "quote": "Our objective was to address both the issues in a single procedure. During the procedure, we eliminated the primary source of clot formation with LAAO and treated the abnormal heart rhythm with PFA.",
+    "attribution": "Prof. Gupta",
+    "detail": "quoted by ANI"
   }
 ]

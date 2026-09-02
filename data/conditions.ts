@@ -117,6 +117,10 @@ export const conditions: Condition[] = [
     isProcedure: true,
     indiaExpertise: true,
     publicationIds: ['pub21', 'pub22'],
+    milestone: {
+      label: "India's first combined PFA and LAAO, 14 August 2026",
+      href: '/conditions#india-first',
+    },
   },
   {
     id: 'cardioneuroablation',

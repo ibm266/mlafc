@@ -1,12 +1,12 @@
 import testimonials from '@/data/testimonials.json';
 
-test('28 testimonials with exact category counts', () => {
-  expect(testimonials).toHaveLength(28);
+test('30 testimonials with exact category counts', () => {
+  expect(testimonials).toHaveLength(30);
   const count = (c: string) => testimonials.filter((t) => t.category === c).length;
   expect(count('hospital')).toBe(8);
   expect(count('patient')).toBe(8);
   expect(count('peer')).toBe(6);
-  expect(count('news')).toBe(6);
+  expect(count('news')).toBe(8);
 });
 
 test('every hospital testimonial carries a full letter', () => {

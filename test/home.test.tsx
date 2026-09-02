@@ -33,7 +33,8 @@ test('comparison section presents both technologies factually and elevates the o
 
 test('home services list includes LAAO and cardioneuroablation with India expertise note', () => {
   render(<Home />);
-  expect(screen.getByRole('link', { name: /left atrial appendage occlusion/i })).toHaveAttribute(
+  // The hero ticker also names the procedure, so match the condition link exactly.
+  expect(screen.getByRole('link', { name: 'Left atrial appendage occlusion (LAAO)' })).toHaveAttribute(
     'href',
     '/conditions#laao',
   );
@@ -44,4 +45,13 @@ test('home services list includes LAAO and cardioneuroablation with India expert
   expect(screen.getByText('LAAO with Amulet and Watchman')).toBeInTheDocument();
   expect(screen.getAllByText('Cardioneuroablation for syncope and dysautonomias').length).toBeGreaterThanOrEqual(2);
   expect(screen.getAllByText(/one of the only consultants in the country who can confirm and/i)).toHaveLength(2);
+});
+
+test('hero ticker and the LAAO chip both lead to the case study on the conditions page', () => {
+  render(<Home />);
+  expect(screen.getAllByRole('link', { name: /read the story/i })[0]).toHaveAttribute('href', '/conditions#india-first');
+  expect(screen.getAllByRole('link', { name: /India's first combined PFA and LAAO/i })[0]).toHaveAttribute(
+    'href',
+    '/conditions#india-first',
+  );
 });

@@ -65,6 +65,15 @@ export function ConditionSection({ condition, index }: Props) {
             A specialist procedure. Rarely available in India.
           </p>
         ) : null}
+        {condition.milestone ? (
+          <Link
+            href={condition.milestone.href}
+            className="interactive mt-2 inline-flex items-center gap-2 rounded-full border border-brass/50 bg-brass/10 px-3 py-1 text-xs font-semibold text-brass-deep hover:bg-brass/20"
+          >
+            <span aria-hidden className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brass" />
+            {condition.milestone.label} &rarr;
+          </Link>
+        ) : null}
       </Reveal>
 
       <Reveal delay={150}>

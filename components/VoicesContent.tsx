@@ -8,10 +8,16 @@ import { VoicesFeaturedGallery } from '@/components/VoicesFeaturedGallery';
 import { VoicesQuoteCard } from '@/components/VoicesQuoteCard';
 import linksJson from '@/data/links.json';
 import testimonialsJson from '@/data/testimonials.json';
-import type { PressLink, SiteLinks, Testimonial } from '@/data/types';
+import visitsJson from '@/data/visits.json';
+import type { PressLink, SiteLinks, Testimonial, Visit } from '@/data/types';
 
 const testimonials = testimonialsJson as Testimonial[];
 const links = linksJson as SiteLinks;
+const visits = visitsJson as Visit[];
+
+// The card used to name a hardcoded month, which went stale. Reading the next
+// bookable visit from the data means it cannot drift again.
+const nextBookable = visits.find((v) => v.status === 'open');
 
 const FEATURED_IDS = {
   hospital: 'hosp1',
@@ -26,8 +32,15 @@ function findTestimonial(id: string) {
 function PressCard({ item }: { item: PressLink }) {
   return (
     <article className="flex flex-col rounded-xl border border-line bg-white p-6">
-      <div className="flex items-baseline justify-between gap-2 border-b border-line pb-3">
-        <span className="font-serif text-lg text-ink">{item.outlet}</span>
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
+        <span className="flex flex-wrap items-baseline gap-2">
+          <span className="font-serif text-lg text-ink">{item.outlet}</span>
+          {item.language ? (
+            <span className="rounded-full border border-line px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-mute">
+              In {item.language}
+            </span>
+          ) : null}
+        </span>
         <span className="text-xs text-ink-mute">{item.date}</span>
       </div>
       <h3 className="mt-3 text-base leading-snug text-ink">{item.headline}</h3>
@@ -45,6 +58,24 @@ function PressCard({ item }: { item: PressLink }) {
           </a>
         ) : null}
       </footer>
+      {item.syndicated?.length ? (
+        <div>
+          <p className="mt-4 border-t border-line pt-3 text-xs text-ink-mute">Also carried by</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {item.syndicated.map((carrier) => (
+              <a
+                key={carrier.url}
+                href={carrier.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[36px] items-center rounded-full border border-line bg-paper px-2.5 py-2 text-xs font-medium text-ink-soft hover:border-brass hover:text-ink"
+              >
+                {carrier.outlet} ↗
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </article>
   );
 }
@@ -164,7 +195,7 @@ export function VoicesContent() {
         </div>
       </section>
 
-      <section aria-labelledby="press-heading" className="border-t border-line bg-paper-soft">
+      <section id="press" aria-labelledby="press-heading" className="scroll-mt-24 border-t border-line bg-paper-soft">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-brass-deep">
@@ -204,6 +235,10 @@ export function VoicesContent() {
                         Read ↗
                       </a>
                     ) : null}
+                    {item.syndicated?.length ? (
+                      <span className="text-xs text-ink-mute">and {item.syndicated.length} more outlets</span>
+                    ) : null}
+                    {item.language ? <span className="text-xs text-ink-mute">(In {item.language})</span> : null}
                   </div>
                 ))}
               </div>
@@ -222,7 +257,7 @@ export function VoicesContent() {
               </>
             }
             description="A short enquiry costs nothing, and every one is answered."
-            footnote="Next Mumbai visit: March 2026 · Booking open"
+            footnote={nextBookable ? `Next Mumbai visit: ${nextBookable.month} · Booking open` : undefined}
           />
         </div>
       </section>

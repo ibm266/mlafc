@@ -3,9 +3,12 @@ import { EcgHeroMonitor } from '@/components/ecg/EcgHeroMonitor';
 import { HeroPortrait, HeroQuote } from '@/components/home/HeroPortraitBubble';
 import { Reveal } from '@/components/Reveal';
 import linksJson from '@/data/links.json';
+import { latestTrip } from '@/data/trips';
 import type { SiteLinks } from '@/data/types';
 
 const links = linksJson as SiteLinks;
+
+const feature = latestTrip.feature;
 
 const gmcUrl = links.profiles.find((p) => p.label === 'GMC Register')?.url;
 const mmcUrl = links.profiles.find((p) => p.label === 'MMC Register')?.url;
@@ -101,6 +104,21 @@ export function Hero() {
             </Reveal>
           </div>
         </div>
+
+        {feature ? (
+          <Link
+            href={feature.href}
+            className="ticker-in relative z-[2] flex min-h-[44px] flex-col items-start gap-x-3 gap-y-1 border-t border-line-dark/60 bg-night-soft/40 px-5 py-3 text-sm text-paper/85 transition-colors hover:bg-night-soft/70 hover:text-paper md:flex-row md:flex-wrap md:items-baseline md:px-10 lg:px-12"
+          >
+            <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-brass">
+              <span aria-hidden className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-brass" />
+              Latest
+            </span>
+            <span className="font-serif text-base leading-snug lg:text-lg">{feature.title}</span>
+            <span className="text-paper/60 md:hidden">{feature.eyebrow}</span>
+            <span className="whitespace-nowrap font-semibold text-brass md:ml-auto">Read the story &rarr;</span>
+          </Link>
+        ) : null}
       </div>
     </section>
   );

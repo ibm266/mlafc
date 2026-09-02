@@ -4,17 +4,18 @@
 
 ## About
 
-Mumbai London AF Clinic offers London-level electrophysiology expertise during scheduled visits to Mumbai. Professor Dhiraj Gupta performs catheter ablation (RFA and PFA), treats atrial fibrillation, atrial flutter, SVT, and related rhythm disorders, and coordinates continuous follow-up with local cardiologists between visits.
+Mumbai London AF Clinic offers London-level electrophysiology expertise during scheduled visits to Mumbai. Professor Dhiraj Gupta performs catheter ablation (RFA and PFA), treats atrial fibrillation, atrial flutter, SVT, and related rhythm disorders, and coordinates continuous follow-up with local cardiologists between visits. In August 2026 Professor Gupta performed India's first combined pulsed field ablation and left atrial appendage occlusion at Lilavati Hospital, Mumbai, reported by The Indian Express, Sakal and ANI.
 
 ## Key pages
 
-- Home: https://www.mumbailondonaf.com/
-- Conditions we treat: https://www.mumbailondonaf.com/conditions
-- Evidence (PFA vs RFA, outcomes, FAQs): https://www.mumbailondonaf.com/evidence
-- Professor Gupta's career: https://www.mumbailondonaf.com/journey
-- Meet the team: https://www.mumbailondonaf.com/team
-- Testimonials and press: https://www.mumbailondonaf.com/testimonials
-- Book a consultation / enquiry: https://www.mumbailondonaf.com/book
+- Home: https://www.mumbai-london-af.clinic/
+- India's first combined PFA and LAAO, the case in full: https://www.mumbai-london-af.clinic/conditions#india-first
+- Conditions we treat: https://www.mumbai-london-af.clinic/conditions
+- Evidence (PFA vs RFA, outcomes, FAQs): https://www.mumbai-london-af.clinic/evidence
+- Professor Gupta's career: https://www.mumbai-london-af.clinic/journey
+- Meet the team: https://www.mumbai-london-af.clinic/team
+- Testimonials and press: https://www.mumbai-london-af.clinic/testimonials
+- Book a consultation / enquiry: https://www.mumbai-london-af.clinic/book
 
 ## Common questions
 
@@ -26,4 +27,4 @@ Mumbai London AF Clinic offers London-level electrophysiology expertise during s
 
 ## Contact
 
-Book a consultation at https://www.mumbailondonaf.com/book
+Book a consultation at https://www.mumbai-london-af.clinic/book

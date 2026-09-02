@@ -74,6 +74,67 @@
   },
   "press": [
     {
+      "outlet": "The Indian Express",
+      "date": "1 September 2026",
+      "headline": "At 77, he couldn't take blood thinners: How docs treated his heart in a rare procedure",
+      "note": "Mumbai doctors combine two procedures to treat irregular heartbeat and reduce stroke risk in a patient who could not safely remain on blood-thinning medicines.",
+      "credit": "Purnima Sah, reporting in The Indian Express",
+      "featured": true,
+      "url": "https://indianexpress.com/article/health-wellness/atrial-fibrillation-lilavati-hospital-mumbai-blood-thinners-stroke-procedure-10857992/",
+      "story": "india-first-pfa-laao"
+    },
+    {
+      "outlet": "Sakal",
+      "date": "31 August 2026",
+      "headline": "AF रुग्णांसाठी मोठी आशा! PFA आणि LAAOची भारतातील पहिली संयुक्त प्रक्रिया यशस्वी",
+      "note": "Big hope for AF patients: India's first combined PFA and LAAO procedure succeeds. Reported in Marathi.",
+      "credit": "Sakal News Service",
+      "featured": false,
+      "url": "https://www.esakal.com/health/india-first-combined-pfa-and-laao-procedure-successfully-performed-on-77-year-old-af-patient",
+      "language": "Marathi",
+      "story": "india-first-pfa-laao"
+    },
+    {
+      "outlet": "ANI",
+      "date": "1 September 2026",
+      "headline": "India's first combined pulsed field ablation and LAAO procedure successfully treats 77-year-old AF patient at Lilavati Hospital and Research Centre",
+      "note": "Our objective was to address both the issues in a single procedure. During the procedure, we eliminated the primary source of clot formation with LAAO and treated the abnormal heart rhythm with PFA.",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": "https://www.aninews.in/news/business/indias-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre20260901115138/",
+      "story": "india-first-pfa-laao",
+      "syndicated": [
+        {
+          "outlet": "Business Standard",
+          "url": "https://www.business-standard.com/content/press-releases-ani/india-s-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre-126090100515_1.html"
+        },
+        {
+          "outlet": "Punjab Kesari",
+          "url": "https://english.punjabkesari.com/business/indias-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre/"
+        },
+        {
+          "outlet": "Lokmat Times",
+          "url": "https://www.lokmattimes.com/business/indias-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre/"
+        },
+        {
+          "outlet": "Big News Network",
+          "url": "https://www.bignewsnetwork.com/news/279278733/india-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre"
+        },
+        {
+          "outlet": "WebIndia123",
+          "url": "https://news.webindia123.com/news/newsvoir.asp?c_article_id=36622&c_author_id=25511&type=old&originurl=https%3a%2f%2fnews.webindia123.com%2fnews%2fnewsvoir.asp"
+        },
+        {
+          "outlet": "The Covai Post",
+          "url": "https://www.covaipost.com/news-cache/?c_article_id=36622&c_author_id=25511&type=old&originurl=https%3a%2f%2fwww.covaipost.com%2fnews-cache%2f"
+        },
+        {
+          "outlet": "Daily Hunt",
+          "url": "https://m.dailyhunt.in/news/india/english/newsvoir-epaper-newsvoir/indias+first+combined+pulsed+field+ablation+and+laao+procedure+successfully+treats+77yearold+af+patient+at+lilavati+hospital+and+research+centre-newsid-n725287997?listname=newspaperLanding&topic=business&index=9&topicIndex=0&mode=pwa&action=click"
+        }
+      ]
+    },
+    {
       "outlet": "Health Dialogues",
       "date": "4 April 2026",
       "headline": "UK Heart Rhythm Expert Performs Advanced Procedures in India",
@@ -88,7 +149,7 @@
       "headline": "UK heart rhythm expert now performing procedures in India",
       "note": "Performing complex atrial fibrillation procedures on tour across India while training local cardiologists during live cases.",
       "credit": "Reporting in The Hawk",
-      "featured": true,
+      "featured": false,
       "url": "https://www.thehawk.in/news/health/uk-heart-rhythm-expert-now-performing-procedures-in-india"
     },
     {

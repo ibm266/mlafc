@@ -159,6 +159,88 @@ export type GalleryPhoto = {
   meta: string;
 };
 
+/** A stop on a visit. Coordinates project onto the route map. */
+export type TripCity = {
+  /** Slug, referenced from `Trip.route` and `TripPhoto.cityId`. */
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  /** Display dates for this city, e.g. "12 to 14 August" or "22, 23 and 26 August". */
+  dates: string;
+  hospitals: string[];
+  /** One factual sentence on what happened here. */
+  note: string;
+  /** Which side of the pin the label sits, so labels never cross the route. */
+  labelSide?: 'left' | 'right' | 'top' | 'bottom';
+};
+
+/** A gallery photograph that also knows which stop it was taken at. */
+export type TripPhoto = GalleryPhoto & {
+  /** Matches a `TripCity.id`. Leave unset until the location is confirmed. */
+  cityId?: string;
+};
+
+export type TripFact = {
+  value: string;
+  label: string;
+};
+
+export type TripStep = {
+  label: string;
+  detail: string;
+};
+
+/**
+ * The headline moment of a visit, when there is one: a first, a milestone
+ * case. Rendered as the feature card in the latest-visit section.
+ */
+export type TripFeature = {
+  /** Anchor id, so the hero ticker and other pages can deep-link to it. */
+  id: string;
+  /** Short stamp text, e.g. "First in India". */
+  stamp: string;
+  eyebrow: string;
+  title: string;
+  body: string[];
+  quote: { text: string; attribution: string; detail?: string };
+  facts: TripFact[];
+  /** The procedures combined, in order, for the one-sitting diagram. */
+  steps: TripStep[];
+  /** How long the combined procedure took, e.g. "1 h 30 min". */
+  duration: string;
+  /** Matches `PressLink.story` in data/links.json, which supplies the coverage. */
+  storyId: string;
+  /** One or two sentences for the home page card, where only the headline runs. */
+  summary: string;
+  /** Where the full case study lives, e.g. "/conditions#india-first". */
+  href: string;
+  /** The condition on /conditions the case study sits under, e.g. "laao". */
+  conditionId?: string;
+};
+
+export type TripStat = {
+  value: number;
+  suffix?: string;
+  label: string;
+};
+
+export type Trip = {
+  id: string;
+  /** Accessible and eyebrow label, e.g. "August 2026 India visit". */
+  label: string;
+  dates: string;
+  /** Section heading. */
+  title: string;
+  summary: string;
+  stats: TripStat[];
+  cities: TripCity[];
+  /** City ids in travel order. A city may appear more than once. */
+  route: string[];
+  feature?: TripFeature;
+  photos: TripPhoto[];
+};
+
 export type TeamPhoto = {
   src: string;
   /** Intrinsic pixel size of the derivative in public/, needed by next/image. */
@@ -249,6 +331,11 @@ export type Condition = {
   indiaExpertise?: boolean;
   /** IDs from data/publications.json, shown as papers on this condition. */
   publicationIds?: string[];
+  /**
+   * A dated first worth flagging beside the procedure, e.g. India's first
+   * combined PFA and LAAO. Rendered as a brass chip linking to the story.
+   */
+  milestone?: { label: string; href: string };
 };
 
 export type ProfileLink = {
@@ -264,6 +351,11 @@ export type InterviewLink = {
   url: string;
 };
 
+export type PressSyndication = {
+  outlet: string;
+  url: string;
+};
+
 export type PressLink = {
   outlet: string;
   date: string;
@@ -272,6 +364,15 @@ export type PressLink = {
   credit?: string;
   featured: boolean;
   url: string;
+  /** Language of the piece when it is not English, e.g. "Marathi". */
+  language?: string;
+  /**
+   * Groups every report of one event, so a feature can count and list them.
+   * Matches `TripFeature.storyId`.
+   */
+  story?: string;
+  /** Other outlets that carried this same wire copy, each with its own link. */
+  syndicated?: PressSyndication[];
 };
 
 export type SiteLinks = {

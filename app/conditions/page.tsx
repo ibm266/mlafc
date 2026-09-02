@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
+import { CaseStudySection } from '@/components/conditions/CaseStudySection';
 import { ConditionSection } from '@/components/conditions/ConditionSection';
 import { CtaBand } from '@/components/CtaBand';
 import { PageHeader } from '@/components/PageHeader';
 import { Reveal } from '@/components/Reveal';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { conditions } from '@/data/conditions';
+import { trips } from '@/data/trips';
+import type { TripFeature } from '@/data/types';
 import { site } from '@/data/site';
 import Link from 'next/link';
 
@@ -13,6 +17,14 @@ export const metadata: Metadata = {
   description:
     'Plain-language guides to heart rhythm conditions and specialist procedures Professor Dhiraj Gupta treats, including atrial fibrillation, LAAO, and cardioneuroablation.',
 };
+
+/** Headline cases from every visit, filed under the condition each belongs to. */
+const caseStudies = new Map<string, TripFeature[]>();
+for (const trip of trips) {
+  const feature = trip.feature;
+  if (!feature?.conditionId) continue;
+  caseStudies.set(feature.conditionId, [...(caseStudies.get(feature.conditionId) ?? []), feature]);
+}
 
 export default function ConditionsPage() {
   return (
@@ -30,7 +42,12 @@ export default function ConditionsPage() {
       />
 
       {conditions.map((condition, index) => (
-        <ConditionSection key={condition.id} condition={condition} index={index} />
+        <Fragment key={condition.id}>
+          <ConditionSection condition={condition} index={index} />
+          {(caseStudies.get(condition.id) ?? []).map((feature) => (
+            <CaseStudySection key={feature.id} feature={feature} />
+          ))}
+        </Fragment>
       ))}
 
       <section className="border-t border-line bg-paper">

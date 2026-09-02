@@ -46,7 +46,7 @@ export function TeamSection() {
     <section aria-labelledby="team-heading" className="bg-paper-soft">
       <div className="mx-auto max-w-6xl px-5 py-14">
         <Reveal>
-          <ChapterEyebrow chapter="09" label="The rest of the team" />
+          <ChapterEyebrow chapter="10" label="The rest of the team" />
         </Reveal>
         <Reveal delay={80}>
           <h2 id="team-heading" className="mt-3 font-serif text-4xl">

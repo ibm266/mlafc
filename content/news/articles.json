@@ -5,9 +5,43 @@
     "For print or physical clippings: leave url empty and paste the relevant quote or paragraph in snippet.",
     "featured: true shows as a large card on the Voices page (keep to 4). Everything else goes in the More coverage list.",
     "Each article also needs a matching entry in data/testimonials.json if you want it in the News filter on the Voices grid.",
-    "Do not use em dashes in any copy."
+    "Do not use em dashes in any copy.",
+    "One wire story carried by many outlets is one entry with the other carriers listed under syndicated[] in data/links.json, not one row per outlet."
   ],
   "articles": [
+    {
+      "status": "live",
+      "outlet": "The Indian Express",
+      "date": "1 September 2026",
+      "headline": "At 77, he couldn't take blood thinners: How docs treated his heart in a rare procedure",
+      "snippet": "Mumbai doctors combine two procedures to treat irregular heartbeat and reduce stroke risk in a patient who could not safely remain on blood-thinning medicines.",
+      "credit": "Purnima Sah, reporting in The Indian Express",
+      "featured": true,
+      "url": "https://indianexpress.com/article/health-wellness/atrial-fibrillation-lilavati-hospital-mumbai-blood-thinners-stroke-procedure-10857992/",
+      "notes": "Original reporting on the India-first combined PFA and LAAO case, 14 August 2026. Synced to data/links.json with story india-first-pfa-laao."
+    },
+    {
+      "status": "live",
+      "outlet": "Sakal",
+      "date": "31 August 2026",
+      "headline": "AF रुग्णांसाठी मोठी आशा! PFA आणि LAAOची भारतातील पहिली संयुक्त प्रक्रिया यशस्वी",
+      "snippet": "Big hope for AF patients: India's first combined PFA and LAAO procedure succeeds. Reported in Marathi.",
+      "credit": "Sakal News Service",
+      "featured": true,
+      "url": "https://www.esakal.com/health/india-first-combined-pfa-and-laao-procedure-successfully-performed-on-77-year-old-af-patient",
+      "notes": "Marathi. Synced with language: Marathi."
+    },
+    {
+      "status": "live",
+      "outlet": "ANI",
+      "date": "1 September 2026",
+      "headline": "India's first combined pulsed field ablation and LAAO procedure successfully treats 77-year-old AF patient at Lilavati Hospital and Research Centre",
+      "snippet": "Our objective was to address both the issues in a single procedure. During the procedure, we eliminated the primary source of clot formation with LAAO and treated the abnormal heart rhythm with PFA.",
+      "credit": "Prof. Gupta, quoted",
+      "featured": true,
+      "url": "https://www.aninews.in/news/business/indias-first-combined-pulsed-field-ablation-and-laao-procedure-successfully-treats-77-year-old-af-patient-at-lilavati-hospital-and-research-centre20260901115138/",
+      "notes": "NewsVoir wire carried by ANI. The same copy ran on Business Standard, Punjab Kesari, Lokmat Times, Big News Network, WebIndia123, The Covai Post and Daily Hunt; those sit under syndicated[] on the ANI entry in data/links.json rather than as separate rows."
+    },
     {
       "status": "live",
       "outlet": "Health Dialogues",

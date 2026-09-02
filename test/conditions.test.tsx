@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MockIntersectionObserver, mockReducedMotion } from './mocks';
 import ConditionsPage from '@/app/conditions/page';
 import { conditions } from '@/data/conditions';
+import { latestTrip } from '@/data/trips';
 
 beforeEach(() => {
   MockIntersectionObserver.install();
@@ -67,6 +68,24 @@ test('conditions page renders LAAO section with ECG animation', () => {
     'href',
     'https://doi.org/10.1111/jce.70111',
   );
+  expect(screen.getByRole('link', { name: /India's first combined PFA and LAAO/i })).toHaveAttribute(
+    'href',
+    '/conditions#india-first',
+  );
+});
+
+test('the India first case study sits on the conditions page under LAAO', () => {
+  render(<ConditionsPage />);
+  const feature = latestTrip.feature!;
+  const card = document.getElementById(feature.id)!;
+  expect(card).toBeInTheDocument();
+  expect(card.textContent).toContain(feature.quote.text);
+  // The case study follows the LAAO guide, not any other condition.
+  const laao = document.getElementById('laao')!;
+  expect(laao.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  const cna = document.getElementById('cardioneuroablation')!;
+  expect(card.compareDocumentPosition(cna) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(screen.getByRole('heading', { name: /First in India, in practice/i })).toBeInTheDocument();
 });
 
 test('conditions page renders cardioneuroablation section with ECG animation', () => {

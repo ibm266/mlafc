@@ -1,11 +1,16 @@
+import { latestTrip } from './trips';
 import type { GalleryPhoto } from './types';
 
 /**
  * Photographs from the Indo-UK proctoring programme, ordered deliberately:
  * the strongest frame first. Files are web derivatives (1600px long edge,
  * WebP) built from the untracked originals in "Website Photos/".
+ *
+ * The latest visit's photographs lead, straight from data/trips.ts, so the
+ * album and the visit section never drift apart.
  */
 export const galleryPhotos: GalleryPhoto[] = [
+  ...latestTrip.photos,
   {
     id: 'jayadeva-lab-2025',
     src: '/images/gallery/jayadeva-lab-2025.webp',
