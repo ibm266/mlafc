@@ -13,6 +13,18 @@ const nextConfig: NextConfig = {
         destination: '/#map-heading',
         permanent: true,
       },
+      {
+        source: '/',
+        has: [{ type: 'host', value: 'mlafc.vercel.app' }],
+        destination: 'https://www.mumbai-london-af.clinic/',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'mlafc.vercel.app' }],
+        destination: 'https://www.mumbai-london-af.clinic/:path*',
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,5 +1,10 @@
 # Mumbai London AF Clinic, Website Design Spec
 
+> **HISTORICAL RECORD, BUILT 2026-07.** The design direction still holds, but
+> the details have moved on: the site has 8 routes rather than 6, and contact
+> details are live rather than "placeholder, client supplies". For current state
+> read `AGENTS.md`, then `docs/outstanding-items.md`.
+
 **Date:** 2026-07-04
 **Status:** Approved direction, "Midnight Atlas"
 **Scope:** Full site rebuild (6 pages) in Next.js + Tailwind

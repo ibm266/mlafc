@@ -1,5 +1,17 @@
 # Mumbai London AF Clinic Website Implementation Plan
 
+> **HISTORICAL RECORD, COMPLETED 2026-07. DO NOT IMPLEMENT.**
+>
+> This plan was executed and the site has moved on considerably since. Treat it
+> as a record of the original intent, not as a description of the code.
+>
+> Known ways it now misleads: `data/site.ts` no longer holds `[placeholder]`
+> contact values, and its shape has changed; the site has 8 routes, not 6;
+> `WhatsAppFab` was removed and later restored differently; the enquiry form is
+> no longer a stub and sends over SMTP.
+>
+> For current state read `AGENTS.md`, then `docs/outstanding-items.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the full 6-page "Midnight Atlas" website for the Mumbai London AF Clinic (Prof Dhiraj Gupta) in Next.js + Tailwind v4, per the approved spec `docs/superpowers/specs/2026-07-04-mlafc-website-design.md`.

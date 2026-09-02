@@ -1,7 +1,7 @@
 export const site = {
   name: 'Mumbai London AF Clinic',
   /** Canonical production URL: keep in sync across sitemap, metadata, JSON-LD, and robots. */
-  url: 'https://www.mumbailondonaf.com',
+  url: 'https://www.mumbai-london-af.clinic',
   tagline: 'London expertise. Mumbai care. Continuous follow-up.',
   phone: '+91 81695 23196',
   /** Dialable form with no spaces, so a tel: link works on every handset. */

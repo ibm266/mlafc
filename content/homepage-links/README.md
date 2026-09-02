@@ -2,6 +2,10 @@
 
 Outbound URLs used on the homepage. Fill in any remaining `url` fields in **`urls.json`**, then copy each value into the target data file listed below.
 
+> **Status, 12 August 2026:** everything here is filled in except three press
+> articles in `data/links.json`, which have no online copy to link to. Contact
+> details are live. See `docs/outstanding-items.md`.
+
 ## How to apply
 
 | This folder | Copy into |
@@ -22,7 +26,7 @@ Once a URL is set in the data file, the dashed **link needed** flags on the live
 - **Publication teasers**: entries with `featured: true` in `data/publications.json` (currently three)
 
 ### 07 · In their words
-- **Verify independently**: featured profile pills: GMC Register, MMC Register, Top Doctors
+- **Verify independently**: not on the live site. `components/home/VerifyIndependentlyStrip.tsx` is never mounted, and every profile in `data/links.json` has `featured: false`, so it would render empty even if it were. The footer verify row is what actually ships.
 
 ### Sitewide (footer on homepage)
 - **Verify his record**: all profile pills in the footer row

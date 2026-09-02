@@ -1,9 +1,17 @@
 # SEO + AI SEO Audit: Mumbai London AF Clinic
 
-**Date:** 7 July 2026  
+**Date:** 7 July 2026, status column revised 12 August 2026  
 **Goal:** Convert potential AF patients into enquiries  
 **Scope:** Codebase audit (Next.js 15 App Router)  
 **Skills used:** `seo-audit`, `ai-seo` (installed globally at `~/.cursor/skills/`)
+
+> **Read `docs/outstanding-items.md` first.** It is the current source of truth.
+> This file is a July snapshot with its statuses brought up to date; its prose
+> below the summary table still describes the site as it was in July.
+>
+> The July 2026 canonical problem (every page pointed at unregistered
+> `mumbailondonaf.com`) was closed on 19 August 2026. `site.url` is now
+> `https://www.mumbai-london-af.clinic`. See `docs/outstanding-items.md` A1.
 
 ---
 
@@ -17,9 +25,10 @@ The main gaps are **technical plumbing, missing structured data, and conversion 
 
 | # | Issue | Type | Impact | Effort | Status |
 |---|-------|------|:------:|:------:|:------:|
-| 1 | Enquiry form is a stub: leads are `console.log`ged | Conversion | Critical | Low | Pending (Batch 2) |
-| 2 | Contact details are `[placeholder]` in `data/site.ts` | Conversion + Local SEO | Critical | Low | Pending (Batch 2) |
-| 3 | Domain mismatch: sitemap used `mlafc.com`, rest used `mumbailondonaf.com` | Technical | Critical | Low | **Done (Batch 1)** |
+| 0 | **Canonical pointed at unregistered `mumbailondonaf.com`** | Technical | Critical | Low | **Done (19 Aug 2026): `site.url` is `https://www.mumbai-london-af.clinic`** |
+| 1 | Enquiry form is a stub: leads are `console.log`ged | Conversion | Critical | Low | **Done: sends over SMTP** |
+| 2 | Contact details are `[placeholder]` in `data/site.ts` | Conversion + Local SEO | Critical | Low | **Done (12 Aug 2026)** |
+| 3 | Domain mismatch: sitemap used `mlafc.com`, rest used `mumbailondonaf.com` | Technical | Critical | Low | **Done (Batch 1), but see row 0** |
 | 4 | Homepage had no unique title/description | On-page | High | Low | **Done (Batch 1)** |
 | 5 | No FAQPage schema despite 6 cited FAQs | AI SEO | High | Low | **Done (Batch 1)** |
 | 6 | No per-page canonical / OG / Twitter tags | On-page + Social | High | Med | Partial |
@@ -43,7 +52,7 @@ The main gaps are **technical plumbing, missing structured data, and conversion 
 
 **Redirects:** `/publications` → `/evidence#publications`, `/locations` → `/#map-heading`
 
-**Canonical domain:** `https://www.mumbailondonaf.com` (now centralized in `data/site.ts` as `site.url`)
+**Canonical domain:** `https://www.mumbai-london-af.clinic` (centralized in `data/site.ts` as `site.url`)
 
 ---
 

@@ -23,20 +23,46 @@ function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf8'));
 }
 
+/**
+ * Reports the media each milestone actually carries.
+ *
+ * Read the `media` field, never `photoTitle`. Every milestone has a
+ * `photoTitle` and `photoCaption` whether or not it has an image, because those
+ * are caption text. This function used to key off `photoTitle` and so reported
+ * all 11 milestones as awaiting a photograph long after the photographs landed,
+ * which put a false claim into the generated PDF and into two later audits.
+ */
 function parseMilestonePhotos() {
   const src = fs.readFileSync(path.join(ROOT, 'data/milestones.ts'), 'utf8');
-  const milestonesOnly = src.split('export const finaleMilestone')[0];
-  const blocks = milestonesOnly.split(/markerYear:\s*'/).slice(1);
+  // The finale is a separate export, rendered by NightCtaCard rather than the
+  // timeline, but it carries a photo like any other milestone. Include it, so
+  // nobody reads its absence here as a missing photograph.
+  const blocks = src.split(/markerYear:\s*'/).slice(1);
   const items = [];
 
   for (const block of blocks) {
     const year = block.match(/^([^']+)/)?.[1];
+    if (!year) continue;
+
     const variant = block.includes("variant: 'awards-band'") ? 'awards-band' : null;
     const photoTitle = block.match(/photoTitle:\s*'([^']+)'/)?.[1];
     const photoCaption = block.match(/photoCaption:\s*\n?\s*'([^']+)/)?.[1];
-    if (year && photoTitle) {
-      items.push({ year, photoTitle, photoCaption, variant });
-    }
+    const photoSrc = block.match(/photo:\s*\{[\s\S]*?src:\s*'([^']+)'/)?.[1];
+    const videoSrc = block.match(/video:\s*\{[\s\S]*?src:\s*'([^']+)'/)?.[1];
+    const hasGallery = /gallery:/.test(block);
+
+    // An awards band has no photo slot by design, so it is not a gap.
+    const media = photoSrc
+      ? `photo ${photoSrc}`
+      : videoSrc
+        ? `video ${videoSrc}`
+        : hasGallery
+          ? 'gallery carousel'
+          : variant === 'awards-band'
+            ? 'no photo slot by design'
+            : null;
+
+    items.push({ year, photoTitle, photoCaption, variant, media });
   }
 
   return items;
@@ -46,6 +72,7 @@ function parseSitePlaceholders() {
   const src = fs.readFileSync(path.join(ROOT, 'data/site.ts'), 'utf8');
   const fields = [
     ['phone', /phone:\s*'([^']+)'/],
+    ['phoneHref', /phoneHref:\s*'([^']+)'/],
     ['whatsappNumber', /whatsappNumber:\s*'([^']+)'/],
     ['whatsappHref', /whatsappHref:\s*'([^']+)'/],
     ['email', /email:\s*'([^']+)'/],
@@ -135,17 +162,17 @@ async function main() {
     'Homepage floating pill (components/FloatingBookingPill.tsx): hardcoded "Next Mumbai visit: March 2026 · Booking open" (not wired to visits.json)',
   );
 
+  const milestonesMissingMedia = milestonePhotos.filter((m) => !m.media);
+
   heading(doc, '3. Journey page photos (data/milestones.ts)', 14);
   body(
     doc,
-    'Every milestone below renders a decorative placeholder frame (MilestonePlaceholder) instead of a real photograph. The 2017 NHS awards block has no photo slot. The 2026 finale is text-only (NightCtaCard, no photo).',
+    milestonesMissingMedia.length === 0
+      ? 'Every milestone carries real media: a photograph, a video, or a gallery carousel. Nothing on the journey page renders a decorative placeholder frame. The 2025 finale is listed last; it sits outside the timeline and is rendered by NightCtaCard, but it carries a photograph too.'
+      : `${milestonesMissingMedia.length} milestone(s) still render a decorative placeholder frame (MilestonePlaceholder) instead of real media.`,
   );
   for (const m of milestonePhotos) {
-    if (m.variant === 'awards-band') {
-      bullet(doc, `${m.year}: no photo slot (awards-band layout only)`);
-      continue;
-    }
-    bullet(doc, `${m.year} (${m.photoTitle}): ${m.photoCaption ?? 'caption pending'}`);
+    bullet(doc, `${m.year} (${m.photoTitle}): ${m.media ?? 'NO MEDIA, renders a placeholder frame'}`);
   }
 
   heading(doc, '4. Press articles missing online links (data/links.json)', 14);
@@ -189,13 +216,14 @@ async function main() {
     }
   }
 
+  // Count what is actually outstanding. These used to print bare totals, so a
+  // resolved section still reported every row as pending.
   heading(doc, '7. Summary counts', 14);
   bullet(doc, `Contact fields pending: ${siteFields.filter((f) => f.value.includes('[placeholder]')).length}`);
-  bullet(doc, `Mumbai visit rows pending real dates: ${visits.length}`);
-  bullet(doc, `Journey photos pending: ${milestonePhotos.filter((m) => m.variant !== 'awards-band').length}`);
+  bullet(doc, `Mumbai visit rows pending real dates: ${visits.filter((v) => v.status === 'tbc' || /\[|\]/.test(v.month)).length}`);
+  bullet(doc, `Journey milestones without real media: ${milestonesMissingMedia.length}`);
   bullet(doc, `Press articles without URL: ${pressMissingUrl.length}`);
-  bullet(doc, `Map locations without hospital URL: ${locations.length}`);
-  bullet(doc, `Map locations without images: ${locations.length}`);
+  bullet(doc, `Map locations without an outbound URL: ${locations.filter((l) => !l.url?.trim()).length} of ${locations.length} (deliberate: no single official page exists)`);
 
   body(
     doc,
