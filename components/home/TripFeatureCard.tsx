@@ -133,6 +133,19 @@ export function TripFeatureCard({ feature }: { feature: TripFeature }) {
                 {feature.quote.detail ? <span className="text-ink-mute">{feature.quote.detail}</span> : null}
               </footer>
             </blockquote>
+            {feature.patientQuote ? (
+              <blockquote className="mt-6 border-l-2 border-line pl-5">
+                <p className="font-serif text-base italic leading-relaxed text-ink-soft md:text-lg">
+                  &ldquo;{feature.patientQuote.text}&rdquo;
+                </p>
+                <footer className="mt-3 text-sm">
+                  <strong className="block text-ink">{feature.patientQuote.attribution}</strong>
+                  {feature.patientQuote.detail ? (
+                    <span className="text-ink-mute">{feature.patientQuote.detail}</span>
+                  ) : null}
+                </footer>
+              </blockquote>
+            ) : null}
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link

@@ -491,6 +491,17 @@ export function TripCard({ trip }: { trip: Trip }) {
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-paper/75">{feature.summary}</p>
+                {feature.patientQuote ? (
+                  <blockquote className="mt-4 border-l-2 border-brass pl-4">
+                    <p className="font-serif text-base italic leading-relaxed text-paper/90 md:text-[1.05rem]">
+                      &ldquo;{feature.patientQuote.short ?? feature.patientQuote.text}&rdquo;
+                    </p>
+                    <footer className="mt-2 text-xs text-paper/60">
+                      <strong className="font-semibold text-paper/85">{feature.patientQuote.attribution}</strong>
+                      {feature.patientQuote.detail ? `, ${feature.patientQuote.detail}` : ''}
+                    </footer>
+                  </blockquote>
+                ) : null}
 
                 <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
                   <Link

@@ -93,3 +93,13 @@ test('has no axe violations', async () => {
   const { container } = render(<TripCard trip={latestTrip} />);
   expect(await axe(container)).toHaveNoViolations();
 });
+
+test('the family quote sits under the description on the home card', () => {
+  render(<TripCard trip={latestTrip} />);
+  const quote = latestTrip.feature!.patientQuote!;
+  const shown = quote.short ?? quote.text;
+  expect(screen.getByText(new RegExp(shown.slice(0, 40)))).toBeInTheDocument();
+  expect(screen.getByText(quote.attribution)).toBeInTheDocument();
+  const text = document.body.textContent!;
+  expect(text.indexOf(latestTrip.feature!.summary)).toBeLessThan(text.indexOf(shown));
+});

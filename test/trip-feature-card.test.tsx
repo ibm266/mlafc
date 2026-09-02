@@ -105,3 +105,10 @@ test('has no axe violations', async () => {
   const { container } = render(<TripFeatureCard feature={feature} />);
   expect(await axe(container)).toHaveNoViolations();
 });
+
+test('the case study carries the family quote after the clinician quote', () => {
+  render(<TripFeatureCard feature={feature} />);
+  const text = document.body.textContent!;
+  expect(text.indexOf(feature.quote.text)).toBeLessThan(text.indexOf(feature.patientQuote!.text));
+  expect(screen.getByText(feature.patientQuote!.attribution)).toBeInTheDocument();
+});

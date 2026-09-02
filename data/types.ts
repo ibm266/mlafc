@@ -204,6 +204,11 @@ export type TripFeature = {
   title: string;
   body: string[];
   quote: { text: string; attribution: string; detail?: string };
+  /**
+   * What the patient or their family said afterwards, in their words. `short`
+   * is the excerpt the home card runs; the case study runs the full `text`.
+   */
+  patientQuote?: { text: string; short?: string; attribution: string; detail?: string };
   facts: TripFact[];
   /** The procedures combined, in order, for the one-sitting diagram. */
   steps: TripStep[];

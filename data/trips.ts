@@ -192,6 +192,13 @@ export const trips: Trip[] = [
         attribution: 'Professor Dhiraj Gupta',
         detail: 'quoted by ANI, 1 September 2026',
       },
+      patientQuote: {
+        text: 'Simple activities became a source of everyday worry. Since undergoing the procedure, he has regained his confidence to get back to his routine and enjoy life without the same constant fear. It has given him and all of us a new sense of hope.',
+        short:
+          'Since undergoing the procedure, he has regained his confidence to get back to his routine and enjoy life without the same constant fear. It has given him and all of us a new sense of hope.',
+        attribution: 'Kaushal Shah',
+        detail: "the patient's son, in the hospital's statement",
+      },
       facts: [
         { value: '77', label: 'years old' },
         { value: '90', label: 'minutes, start to finish' },
