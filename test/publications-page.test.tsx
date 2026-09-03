@@ -12,9 +12,26 @@ beforeEach(() => {
 });
 
 test('publications dataset has curated entries with urls', () => {
-  expect(pubs.length).toBeGreaterThanOrEqual(20);
+  expect(pubs.length).toBeGreaterThanOrEqual(40);
   expect(pubs.filter((p) => p.featured)).toHaveLength(3);
   expect(pubs.every((p) => p.url)).toBe(true);
+  expect(new Set(pubs.map((p) => p.id)).size).toBe(pubs.length);
+});
+
+test('every publication carries a plain-language title for the condition bubbles', () => {
+  for (const p of pubs) {
+    expect(p.plainTitle, p.id).toBeTruthy();
+    expect(p.plainTitle, p.id).not.toBe(p.title);
+    expect(p.plainTitle.length, p.id).toBeLessThan(70);
+  }
+});
+
+test('publications include the COCONUT study on combined PFA and LAAO', () => {
+  const coconut = pubs.find((p) => p.id === 'pub24')!;
+  expect(coconut.title).toMatch(/COCONUT/);
+  expect(coconut.journal).toBe('Europace');
+  expect(coconut.year).toBe('2026');
+  expect(coconut.url).toBe('https://doi.org/10.1093/europace/euag198');
 });
 
 test('publications include the LAAO and cardioneuroablation papers', () => {

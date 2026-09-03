@@ -91,8 +91,10 @@ function FeatureSeal({ feature }: { feature: TripFeature }) {
 
 /**
  * The headline moment of a visit: the story on the left, the evidence for it
- * on the right. Below lg the two stack, story first, with the seal sitting at
- * the head of the evidence column instead of over the card's corner.
+ * on the right. Below lg the two stack, story first. The seal heads the
+ * evidence column at every width, inside its cream panel: on /conditions the
+ * card sits on the night band, where a seal hung over the corner read as
+ * floating loose.
  *
  * Press coverage is looked up from data/links.json by `feature.storyId`: every
  * direct report is listed whether or not the Voices page features it, and the
@@ -163,11 +165,8 @@ export function TripFeatureCard({ feature }: { feature: TripFeature }) {
             </div>
           </div>
 
-          <div className="relative flex flex-col gap-8 rounded-bl-2xl rounded-br-2xl border-t border-line bg-paper-soft/60 p-6 md:p-10 lg:rounded-bl-none lg:rounded-tr-2xl lg:border-l lg:border-t-0 lg:pt-40">
-            {/* The overhang stops at 16px: the card sits 20px from the page
-                edge, so a wider one would push the page sideways on a
-                laptop-width window. */}
-            <div className="pointer-events-none lg:absolute lg:-right-4 lg:-top-7">
+          <div className="flex flex-col gap-8 rounded-bl-2xl rounded-br-2xl border-t border-line bg-paper-soft/60 p-6 md:p-10 lg:rounded-bl-none lg:rounded-tr-2xl lg:border-l lg:border-t-0">
+            <div className="pointer-events-none lg:self-end">
               <FeatureSeal feature={feature} />
             </div>
 

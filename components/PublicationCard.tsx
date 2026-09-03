@@ -7,12 +7,32 @@ const TAGS: Record<Publication['category'], string> = {
   guideline: 'Guideline',
 };
 
-export function PublicationCard({ p }: { p: Publication }) {
+type Props = {
+  p: Publication;
+  /**
+   * Lead with the plain-language title and give the published one in small
+   * print beneath the summary. The guides on /conditions use this.
+   */
+  plain?: boolean;
+  /** The evidence page runs cards under an h2; under a guide's h3 they take h4. */
+  headingLevel?: 'h2' | 'h3' | 'h4';
+};
+
+export function PublicationCard({ p, plain = false, headingLevel = 'h2' }: Props) {
+  const Heading = headingLevel;
+
   return (
     <article className="card-hover flex h-full flex-col rounded-lg border border-line bg-white p-6">
       <div className="text-xs font-semibold uppercase tracking-widest text-brass-deep">{TAGS[p.category]}</div>
-      <h2 className="mt-3 font-serif text-xl font-semibold leading-snug text-ink">{p.title}</h2>
+      <Heading className="mt-3 font-serif text-xl font-semibold leading-snug text-ink">
+        {plain ? p.plainTitle : p.title}
+      </Heading>
       <p className="mt-3 flex-1 text-ink-soft">{p.summary}</p>
+      {plain ? (
+        <p className="mt-3 text-xs text-ink-mute">
+          Published as: <span className="italic">{p.title}</span>
+        </p>
+      ) : null}
       <footer className="mt-4 text-sm">
         <strong className="block text-ink">{p.authors}</strong>
         <span className="text-ink-mute">

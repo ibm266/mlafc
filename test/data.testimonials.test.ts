@@ -1,10 +1,10 @@
 import testimonials from '@/data/testimonials.json';
 
-test('30 testimonials with exact category counts', () => {
-  expect(testimonials).toHaveLength(30);
+test('32 testimonials with exact category counts', () => {
+  expect(testimonials).toHaveLength(32);
   const count = (c: string) => testimonials.filter((t) => t.category === c).length;
   expect(count('hospital')).toBe(8);
-  expect(count('patient')).toBe(8);
+  expect(count('patient')).toBe(10);
   expect(count('peer')).toBe(6);
   expect(count('news')).toBe(8);
 });
@@ -35,4 +35,18 @@ test('spot-check ported content is verbatim', () => {
   expect(pat1.detail).toContain('Top Doctors');
   const news1 = testimonials.find((t) => t.id === 'news1')!;
   expect(news1.masthead).toBe('Health Dialogues');
+});
+
+test('the patients treated in India lead the patient voices', () => {
+  const patients = testimonials.filter((t) => t.category === 'patient');
+  expect(patients.slice(0, 2).map((t) => t.id)).toEqual(['pat9', 'pat10']);
+
+  const rudresh = patients[0];
+  expect(rudresh.attribution).toBe('Rudresh Tendulkar');
+  expect(rudresh.quote).toContain('I had accepted that I would probably need a pacemaker');
+  expect(rudresh.detail).toContain('Pune');
+
+  const shah = patients[1];
+  expect(shah.attribution).toBe('Jagdip Shah and family');
+  expect(shah.quote).toContain('a new lease of life');
 });

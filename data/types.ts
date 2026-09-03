@@ -303,7 +303,13 @@ export type PublicationCategory = 'original' | 'review' | 'trial' | 'guideline';
 export type Publication = {
   id: string;
   category: PublicationCategory;
+  /** The title as published. */
   title: string;
+  /**
+   * What the paper is about in a patient's words, e.g. "Four years after
+   * LAAO". The bubbles under each condition on /conditions show this.
+   */
+  plainTitle: string;
   journal: string;
   year: string;
   authors: string;
@@ -336,6 +342,11 @@ export type Condition = {
   indiaExpertise?: boolean;
   /** IDs from data/publications.json, shown as papers on this condition. */
   publicationIds?: string[];
+  /**
+   * How the related publications panel names the subject, e.g. "atrial
+   * flutter". Falls back to the title when unset.
+   */
+  publicationTopic?: string;
   /**
    * A dated first worth flagging beside the procedure, e.g. India's first
    * combined PFA and LAAO. Rendered as a brass chip linking to the story.

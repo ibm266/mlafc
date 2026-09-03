@@ -7,7 +7,7 @@ you add a stub, mark it `[placeholder]` and record it in
 `docs/outstanding-items.md`; several guards used to hide such values on the
 front end and have since been removed as dead code.
 
-## Current state, 19 August 2026
+## Current state, 3 September 2026
 
 **Live and confirmed**
 
@@ -34,8 +34,17 @@ front end and have since been removed as dead code.
   web derivatives (1600px long edge, WebP) built from the untracked originals
   in "Website Photos/" with
   `node scripts/build-photo-derivatives.mjs <outDir> "<original>=<slug>"`.
-- `publications.json` (20 entries) and the `profiles` in `links.json` (11): all
-  have URLs. A `press` entry can also carry `language` (when the piece is not
+- `publications.json` (41 entries) and the `profiles` in `links.json` (11): all
+  have URLs. Every publication carries a `plainTitle`, the paper's subject in a
+  patient's words, and that is what the "Related publications" card gallery
+  under each guide on `/conditions` leads with; `title` stays the title as
+  published. `conditions.ts` chooses the papers for each guide through
+  `publicationIds`, in display order, with the papers most likely to reassure
+  a patient reading that guide first, and names the subject with
+  `publicationTopic`. The COCONUT study (`pub24`)
+  has a pre-registered DOI that lands on Crossref's "manuscript accepted"
+  page until Oxford University Press publishes the article; leave the link as
+  it is, it will redirect on its own. A `press` entry can also carry `language` (when the piece is not
   in English, e.g. Marathi), `story` (an id shared by every report of one
   event, matching `TripFeature.storyId` in `trips.ts`) and `syndicated` (the
   other outlets that ran the same wire copy, each with its own `outlet` and

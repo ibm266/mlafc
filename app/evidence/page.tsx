@@ -16,7 +16,11 @@ import { faqs } from '@/data/faqs';
 import publicationsJson from '@/data/publications.json';
 import type { Publication } from '@/data/types';
 
-const publications = publicationsJson as Publication[];
+// Featured papers lead; the rest run newest first, so the latest work is never
+// buried behind older entries as the list grows.
+const publications = [...(publicationsJson as Publication[])]
+  .sort((a, b) => Number(b.year) - Number(a.year))
+  .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 
 export const metadata: Metadata = {
   title: 'The Evidence - Mumbai London AF Clinic',

@@ -1,6 +1,6 @@
 # Outstanding items and placeholders
 
-Audit date: 12 August 2026, last updated 2 September 2026. Supersedes the 25 July 2026 audit.
+Audit date: 12 August 2026, last updated 3 September 2026. Supersedes the 25 July 2026 audit.
 
 This is the single source of truth for what is and is not finished. If you are
 an agent starting a task, read this before telling anybody something is missing,
@@ -73,7 +73,7 @@ render without a "Read article" link:
 
 The August 2026 coverage added since then is not affected: The Indian Express,
 Sakal and ANI all carry URLs, as do the seven syndicated outlets under the ANI
-entry. All 11 entries under `profiles` and all 20 in `data/publications.json`
+entry. All 11 entries under `profiles` and all 41 in `data/publications.json`
 have URLs.
 
 ### B2. No Open Graph images anywhere
@@ -114,6 +114,17 @@ somebody who was there can say which, so leave it unset rather than guess.
 In the same file, the number of cases done on the visit is not published
 anywhere on the site. If the clinic wants it shown, add it to `stats` in
 `data/trips.ts` alongside days, cities, hospitals and the first for India.
+
+### B5. The COCONUT paper's DOI is not live yet
+
+Added 3 September 2026. `pub24` in `data/publications.json` is the COCONUT
+study (Europace 2026, DOI `10.1093/europace/euag198`), on which Professor Gupta
+is a co-author. The DOI is pre-registered with Crossref and shows "manuscript
+has been accepted", but Oxford University Press has not published the article
+page, so the "Read the paper" link on `/conditions` and `/evidence` lands on
+Crossref's holding page for now. Nothing to change: the DOI redirects to the
+article automatically once it is online. Re-check it in a few weeks and delete
+this item when it resolves.
 
 ## C. Dead code
 
@@ -172,10 +183,16 @@ Recorded here because each of these has been wrongly reported as missing before.
 - **Map location links.** Resolved 25 July 2026. 22 URLs were added and the
   dashed "hospital link needed" badge was removed. See B3 for the deliberate
   remainder.
-- All 20 entries in `data/publications.json` have URLs.
+- All 41 entries in `data/publications.json` have URLs, and every one carries
+  a `plainTitle` for the "Related publications" gallery that sits folded under
+  each guide on `/conditions`, ordered so the most reassuring papers lead. Eighteen papers were added on 3 September 2026
+  from a PubMed sweep of his work on atrial flutter, SVT, palpitations,
+  syncope, pacing and LAAO, so that every condition has papers to show.
 - The interview video URL is set, so the homepage video block shows no flag.
-- `data/testimonials.json` holds 30 entries, all letters and quotes that need no
-  links.
+- `data/testimonials.json` holds 32 entries, all letters and quotes that need no
+  links. The two patient letters added on 3 September 2026 (Rudresh Tendulkar,
+  treated in Pune; Jagdip Shah and family) carry no date because the letters
+  themselves give none.
 - `data/links.json` `press` holds 9 entries, 4 of them `featured`. Three of the
   nine carry no `url`; see B1.
 - `galleryPhotos` in `data/gallery.ts` now leads with the 8 visit photographs

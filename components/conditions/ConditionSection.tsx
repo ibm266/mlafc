@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ConditionMedia } from '@/components/conditions/ConditionMedia';
 import { ConditionMediaPlaceholder } from '@/components/conditions/ConditionMediaPlaceholder';
 import { EcgComparisonAnimation } from '@/components/conditions/EcgComparisonAnimation';
+import { RelatedPublications } from '@/components/conditions/RelatedPublications';
 import { Reveal } from '@/components/Reveal';
 import publicationsJson from '@/data/publications.json';
 import type { Condition, Publication } from '@/data/types';
@@ -99,38 +100,6 @@ export function ConditionSection({ condition, index }: Props) {
         <p className="mt-3 text-ink-soft">{condition.help}</p>
       </Reveal>
 
-      {relatedPubs.length > 0 ? (
-        <Reveal delay={330}>
-          <h3 className="mt-8 text-sm font-semibold uppercase tracking-widest text-brass-deep">
-            His published work
-          </h3>
-          <p className="mt-3 text-ink-soft">
-            Professor Gupta has written peer-reviewed papers specifically on this procedure.
-          </p>
-          <ul className="mt-3 space-y-3">
-            {relatedPubs.map((p) => (
-              <li key={p.id} className="border-b border-line pb-3">
-                {p.url ? (
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-brass-deep hover:underline"
-                  >
-                    {p.title}
-                  </a>
-                ) : (
-                  <span className="font-semibold text-ink">{p.title}</span>
-                )}
-                <p className="mt-1 text-sm text-ink-mute">
-                  {p.journal} · {p.year}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      ) : null}
-
       {condition.id === 'af' ? (
         <Reveal delay={330}>
           <Link href="/evidence" className="mt-6 inline-block font-semibold text-brass-deep hover:underline">
@@ -141,9 +110,15 @@ export function ConditionSection({ condition, index }: Props) {
     </div>
   );
 
+  const hasPapers = relatedPubs.length > 0;
+
   return (
     <section id={condition.id} aria-labelledby={`${condition.id}-heading`} className={`border-t border-line ${band}`}>
-      <div className="mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 md:grid-cols-2 md:gap-12 md:py-20">
+      <div
+        className={`mx-auto grid max-w-6xl items-start gap-10 px-5 pt-16 md:grid-cols-2 md:gap-12 md:pt-20 ${
+          hasPapers ? 'pb-10 md:pb-12' : 'pb-16 md:pb-20'
+        }`}
+      >
         {textFirst ? (
           <>
             {copy}
@@ -156,6 +131,15 @@ export function ConditionSection({ condition, index }: Props) {
           </>
         )}
       </div>
+      {/* The papers run the full width under both columns, so the gallery has
+          room for three cards on a desktop and a swipeable row on a phone. */}
+      {hasPapers ? (
+        <div className="mx-auto max-w-6xl px-5 pb-16 md:pb-20">
+          <Reveal>
+            <RelatedPublications topic={condition.publicationTopic ?? condition.title} publications={relatedPubs} />
+          </Reveal>
+        </div>
+      ) : null}
     </section>
   );
 }

@@ -14,6 +14,8 @@ export const conditions: Condition[] = [
     help:
       'Professor Gupta has treated atrial fibrillation for more than thirty years and performs over 300 ablation procedures a year. At your consultation he will explain what is happening in your heart, whether a procedure is right for you, and which technology suits your situation, in plain language.',
     ecgVariant: 'af',
+    publicationTopic: 'atrial fibrillation',
+    publicationIds: ['pub17', 'pub12', 'pub16', 'pub1', 'pub4', 'pub3', 'pub7', 'pub15', 'pub2', 'pub11'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside atrial fibrillation, with an irregular fibrillatory baseline between unevenly spaced beats.',
   },
@@ -30,6 +32,8 @@ export const conditions: Condition[] = [
     help:
       'Because the electrical circuit follows a predictable, mappable path, atrial flutter often responds very well to catheter ablation, a small procedure that interrupts the loop at one precise point. Professor Gupta will confirm the diagnosis with an ECG, explain how likely ablation is to work for your specific type of flutter, and discuss whether blood-thinning treatment is also needed.',
     ecgVariant: 'atrial-flutter',
+    publicationTopic: 'atrial flutter',
+    publicationIds: ['pub20', 'pub25', 'pub26', 'pub29'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside atrial flutter, with regular sawtooth flutter waves and evenly spaced QRS complexes.',
   },
@@ -46,6 +50,8 @@ export const conditions: Condition[] = [
     help:
       'Most types of SVT can be located precisely with a heart rhythm test called an electrophysiology study, and treated in the same sitting with catheter ablation, often ending the problem for good. Professor Gupta will explain which type of SVT you have, how likely ablation is to succeed for it, and what the day of the procedure involves.',
     ecgVariant: 'svt',
+    publicationTopic: 'SVT',
+    publicationIds: ['pub29', 'pub30', 'pub27', 'pub28'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside supraventricular tachycardia, with fast regular narrow QRS complexes and no visible P waves.',
   },
@@ -62,6 +68,8 @@ export const conditions: Condition[] = [
     help:
       'Professor Gupta will take a careful history, then usually arrange an ECG and a period of heart rhythm monitoring, sometimes a few days, sometimes longer, to capture an episode as it happens. Once there is a clear diagnosis, he will explain in plain language exactly what is going on and which treatment, if any, fits your situation.',
     ecgVariant: 'palpitations',
+    publicationTopic: 'palpitations and rhythm monitoring',
+    publicationIds: ['pub6', 'pub32', 'pub31'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside palpitations, with mostly normal beats interrupted by an early ectopic beat and a brief compensatory pause.',
     isSymptom: true,
@@ -79,6 +87,8 @@ export const conditions: Condition[] = [
     help:
       'Professor Gupta will look for a rhythm problem around the time your blackouts happen, using ECG monitoring and, where needed, a small implantable loop recorder that watches your heart continuously for months at a time. If a cause such as bradycardia or heart block is found, he will explain clearly whether a pacemaker or another treatment is the right next step.',
     ecgVariant: 'blackouts',
+    publicationTopic: 'blackouts and fainting',
+    publicationIds: ['pub33', 'pub23', 'pub34'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside a prolonged pause, when blood flow to the brain can briefly fall during a blackout.',
     isSymptom: true,
@@ -96,6 +106,8 @@ export const conditions: Condition[] = [
     help:
       'Professor Gupta will establish whether your slow rhythm is a normal variant or something that needs treatment, usually with an ECG and a period of heart rate monitoring. Where a pacemaker is the right answer, he will explain in plain language how it works, what the procedure to fit one involves, and what daily life with one is like afterwards.',
     ecgVariant: 'bradycardia',
+    publicationTopic: 'slow heart rhythms and pacemakers',
+    publicationIds: ['pub35', 'pub33', 'pub37', 'pub36'],
     videoAlt:
       'ECG comparison showing a regular heartbeat rhythm alongside bradycardia, with the same beat shape at a slower, wider-spaced rate.',
   },
@@ -116,7 +128,8 @@ export const conditions: Condition[] = [
       'ECG comparison showing a regular heartbeat rhythm alongside atrial fibrillation, the usual setting in which LAAO is considered, with an irregular fibrillatory baseline between unevenly spaced beats.',
     isProcedure: true,
     indiaExpertise: true,
-    publicationIds: ['pub21', 'pub22'],
+    publicationTopic: 'left atrial appendage occlusion',
+    publicationIds: ['pub24', 'pub21', 'pub38', 'pub39', 'pub9', 'pub40', 'pub41', 'pub22', 'pub5'],
     milestone: {
       label: "India's first combined PFA and LAAO, 14 August 2026",
       href: '/conditions#india-first',
@@ -139,6 +152,7 @@ export const conditions: Condition[] = [
       'ECG comparison showing a regular heartbeat rhythm alongside a prolonged pause, the pattern cardioneuroablation is used to prevent in cardioinhibitory syncope.',
     isProcedure: true,
     indiaExpertise: true,
-    publicationIds: ['pub23'],
+    publicationTopic: 'cardioneuroablation',
+    publicationIds: ['pub33', 'pub23', 'pub35', 'pub34'],
   },
 ];
