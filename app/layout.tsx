@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Newsreader, Archivo } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import { Nav } from '@/components/Nav';
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <WhatsAppFab />
+        <Analytics />
       </body>
     </html>
   );
