@@ -57,9 +57,9 @@ front end and have since been removed as dead code.
 
 - `links.json`: 3 of 9 `press` entries have no `url`, so those cards render
   without a "Read article" link.
-- `locations.json`: 83 entries, realistic but unverified. 17 deliberately carry
+- `locations.json`: 87 entries, realistic but unverified. 17 deliberately carry
   no `url` because no single official page exists. The `images` field is typed
-  on every entry, empty on all 83, and read by nothing; `readMore` is read by
+  on every entry, empty on all 87, and read by nothing; `readMore` is read by
   `components/map/LocationsMap.tsx` and set on 1 entry.
 
 Full detail and the blocking items live in `docs/outstanding-items.md`.

@@ -26,7 +26,34 @@ test('locations: procedure cities and India training cities present', () => {
   const cities = locations.map((l) => l.city);
   expect(names).toContain('Liverpool Heart and Chest Hospital');
   expect(names.some((n) => n.includes('Mumbai'))).toBe(true);
-  expect(cities).toEqual(expect.arrayContaining(['London', 'Liverpool', 'Mumbai', 'Delhi', 'Pondicherry', 'Kolkata']));
+  expect(cities).toEqual(
+    expect.arrayContaining([
+      'London',
+      'Liverpool',
+      'Mumbai',
+      'Delhi',
+      'Kolkata',
+      'Chennai',
+      'Tiruchirappalli',
+      'Thiruvananthapuram',
+    ]),
+  );
+  expect(cities).not.toContain('Pondicherry');
+  const byId = Object.fromEntries(locations.map((l) => [l.id, l]));
+  expect(byId['kauvery-chennai'].years).toBe('22 Aug 2026');
+  expect(byId['apollo-chennai'].years).toBe('26 Aug 2026');
+  expect(byId['apollo-tiruchirappalli'].years).toBe('24 Aug 2026');
+  expect(byId['sctimst-thiruvananthapuram'].years).toBe('1 Oct 2026');
+  expect(byId['kims-thiruvananthapuram'].years).toBe('2 Oct 2026');
+  for (const id of [
+    'kauvery-chennai',
+    'apollo-chennai',
+    'apollo-tiruchirappalli',
+    'sctimst-thiruvananthapuram',
+    'kims-thiruvananthapuram',
+  ]) {
+    expect(byId[id].url).toMatch(/^https:\/\//);
+  }
   expect(locations.filter((l) => l.role === 'operated')).toHaveLength(4);
   expect(locations.filter((l) => l.country === 'United Kingdom').length).toBeGreaterThanOrEqual(7);
   expect(names).toContain('All India Institute of Medical Sciences');
