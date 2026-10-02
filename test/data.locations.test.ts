@@ -45,12 +45,22 @@ test('locations: procedure cities and India training cities present', () => {
   expect(byId['apollo-tiruchirappalli'].years).toBe('24 Aug 2026');
   expect(byId['sctimst-thiruvananthapuram'].years).toBe('1 Oct 2026');
   expect(byId['kims-thiruvananthapuram'].years).toBe('2 Oct 2026');
+  expect(byId['narayana-kolkata'].years).toBe('17-18 Aug 2026');
+  expect(byId['sri-sri-hyderabad'].years).toBe('19 Aug 2026');
+  expect(byId['apollo-hyderabad'].years).toBe('20 Aug 2026');
+  expect(byId['lilavati-mumbai'].years).toContain('12-14 Aug 2026');
+  expect(byId['lilavati-mumbai'].years).toContain('28-29 Sep 2026');
+  expect(byId['holy-family-mumbai'].years).toBe('29 Aug 2026; 30 Sep 2026');
   for (const id of [
     'kauvery-chennai',
     'apollo-chennai',
     'apollo-tiruchirappalli',
     'sctimst-thiruvananthapuram',
     'kims-thiruvananthapuram',
+    'narayana-kolkata',
+    'sri-sri-hyderabad',
+    'apollo-hyderabad',
+    'holy-family-mumbai',
   ]) {
     expect(byId[id].url).toMatch(/^https:\/\//);
   }

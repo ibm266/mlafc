@@ -32,6 +32,15 @@ test('the first stop is selected on arrival, with its hospital', () => {
   expect(screen.getByRole('tabpanel')).toHaveTextContent('Lilavati Hospital and Research Centre');
 });
 
+test('choosing Hyderabad shows Sri Sri and Apollo', () => {
+  render(<TripCard trip={latestTrip} />);
+  fireEvent.click(screen.getByRole('tab', { name: /Hyderabad/ }));
+
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('Sri Sri Holistic Hospitals');
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('Apollo Hospitals');
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('AIG Hospitals');
+});
+
 test('choosing Kolkata shows its hospital', () => {
   render(<TripCard trip={latestTrip} />);
   fireEvent.click(screen.getByRole('tab', { name: /Kolkata/ }));

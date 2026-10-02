@@ -89,7 +89,7 @@ hardest.
 
 ### B3. Map locations left linkless on purpose
 
-17 of the 87 entries in `data/locations.json` have no `url`. This is deliberate
+17 of the 91 entries in `data/locations.json` have no `url`. This is deliberate
 and was decided on 25 July 2026: they are one-off meetings with no surviving
 site, multi-meeting city entries that cannot resolve to a single URL, or private
 lecture tours. A location with no `url` renders no link, which is the intended
@@ -146,8 +146,8 @@ Referenced only by tests, mounted on no page:
 - `components/home/ComparisonCards.tsx`
 
 Also dead in the data: `Location.images` is typed `string[]` in `data/types.ts`
-and is empty on all 87 entries, and nothing reads it. `Location.readMore` is
-read by `components/map/LocationsMap.tsx` and is set on 1 of 87.
+and is empty on all 91 entries, and nothing reads it. `Location.readMore` is
+read by `components/map/LocationsMap.tsx` and is set on 1 of 91.
 
 Every profile in `data/links.json` has `featured: false`, so
 `VerifyIndependentlyStrip` would render an empty strip even if it were mounted.
@@ -202,12 +202,14 @@ Recorded here because each of these has been wrongly reported as missing before.
   `academicPhotos` and `proctoringPhotos` lists.
 - No empty fields in `data/certifications.ts`, `data/gallery.ts` or
   `data/milestones.ts`. Current counts: 8 conditions, 2 team members, 6 FAQs,
-  16 certifications, 11 milestones, 87 map locations. On 2 October 2026
-  Pondicherry was removed and five India hospitals were added: Kauvery Hospital
+  16 certifications, 11 milestones, 91 map locations. On 2 October 2026
+  Pondicherry was removed and eight India hospitals were added: Kauvery Hospital
   and Apollo Hospitals in Chennai, Apollo Speciality Hospitals in
-  Tiruchirappalli, and Sree Chitra Tirunal Institute and KIMSHEALTH in
-  Thiruvananthapuram. Each new pin has a hospital website. The 17 linkless
-  entries are unchanged.
+  Tiruchirappalli, Sree Chitra Tirunal Institute and KIMSHEALTH in
+  Thiruvananthapuram, Narayana Health in Kolkata, Sri Sri Holistic Hospitals
+  and Apollo Hospitals in Hyderabad, and Holy Family Hospital in Mumbai.
+  Lilavati's dates now include 12-14 Aug and 28-29 Sep 2026. Each new pin has a
+  hospital website. The 17 linkless entries are unchanged.
 
 ## E. Resolved on 12 August 2026
 

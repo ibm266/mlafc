@@ -103,13 +103,13 @@ export const trips: Trip[] = [
     id: 'india-aug-2026',
     label: 'August 2026 India visit',
     dates: '12 to 27 August 2026',
-    title: 'Sixteen days, six cities, nine hospitals. And a first for India.',
+    title: 'Sixteen days, six cities, ten hospitals. And a first for India.',
     summary:
       'Proctoring pulsed field ablation cases alongside local cardiologists from Mumbai to Kolkata, Hyderabad, Chennai, Trichy and Bengaluru, and lecturing in between.',
     stats: [
       { value: 16, label: 'days' },
       { value: 6, label: 'cities' },
-      { value: 9, label: 'hospitals' },
+      { value: 10, label: 'hospitals' },
       { value: 1, label: 'first for India' },
     ],
     cities: [
@@ -140,8 +140,8 @@ export const trips: Trip[] = [
         lat: 17.385,
         lng: 78.4867,
         dates: '19 to 21 August',
-        hospitals: ['AIG Hospitals', 'Apollo Hospitals', 'KIMS Hospitals'],
-        note: 'Three hospitals in three days: cases with the teams at AIG, Apollo and KIMS.',
+        hospitals: ['Sri Sri Holistic Hospitals', 'Apollo Hospitals', 'AIG Hospitals', 'KIMS Hospitals'],
+        note: 'Sri Sri Holistic Hospitals on 19 August, Apollo Hospitals on 20 August, and cases with the teams at AIG and KIMS.',
         labelSide: 'left',
       },
       {
