@@ -64,7 +64,14 @@ test('locations: procedure cities and India training cities present', () => {
   ]) {
     expect(byId[id].url).toMatch(/^https:\/\//);
   }
-  expect(locations.filter((l) => l.role === 'operated')).toHaveLength(4);
+  expect(locations.filter((l) => l.role === 'operated')).toHaveLength(86);
+  expect(locations.filter((l) => l.role === 'taught').map((l) => l.id).sort()).toEqual([
+    'ihrs-new-delhi',
+    'ihrs-vizag',
+    'kolkata-training',
+  ]);
+  expect(byId['pgimer-chandigarh'].years).toBe('4 Feb 2025; 24 Mar 2026');
+  expect(byId['pgimer-chandigarh'].role).toBe('operated');
   expect(locations.filter((l) => l.country === 'United Kingdom').length).toBeGreaterThanOrEqual(7);
   expect(names).toContain('All India Institute of Medical Sciences');
   expect(names).toContain('Lilavati Hospital');

@@ -305,9 +305,10 @@ function htmlDocument({ groups, geometry, generated }) {
       margin: 0;
       font-size: 6.4pt;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: #6E5826;
+      white-space: nowrap;
     }
     .dates {
       font-weight: 400;
